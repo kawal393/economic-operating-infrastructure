@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CitizenshipRouteImport } from './routes/citizenship'
 import { Route as ConstitutionRouteImport } from './routes/constitution'
 import { Route as GovernmentRouteImport } from './routes/government'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CitizenshipRoute = CitizenshipRouteImport.update({
+  id: '/citizenship',
+  path: '/citizenship',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConstitutionRoute = ConstitutionRouteImport.update({
@@ -31,30 +37,34 @@ const GovernmentRoute = GovernmentRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
   '/government': typeof GovernmentRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
   '/government': typeof GovernmentRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
   '/government': typeof GovernmentRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/constitution' | '/government'
+  fullPaths: '/' | '/citizenship' | '/constitution' | '/government'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/constitution' | '/government'
-  id: '__root__' | '/' | '/constitution' | '/government'
+  to: '/' | '/citizenship' | '/constitution' | '/government'
+  id: '__root__' | '/' | '/citizenship' | '/constitution' | '/government'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CitizenshipRoute: typeof CitizenshipRoute
   ConstitutionRoute: typeof ConstitutionRoute
   GovernmentRoute: typeof GovernmentRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/citizenship': {
+      id: '/citizenship'
+      path: '/citizenship'
+      fullPath: '/citizenship'
+      preLoaderRoute: typeof CitizenshipRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/constitution': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CitizenshipRoute: CitizenshipRoute,
   ConstitutionRoute: ConstitutionRoute,
   GovernmentRoute: GovernmentRoute,
 }
