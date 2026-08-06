@@ -6,6 +6,7 @@ import { PageHeader, Panel, Section } from "@/components/primitives";
 import { FieldRow, HonestyNote } from "@/components/seal-ui";
 import { useAuth } from "@/hooks/useAuth";
 import { attest, getEntityProfile } from "@/lib/entities.functions";
+import type { EntityAsset } from "@/lib/entity-types";
 
 export const Route = createFileRoute("/entities/$slug")({
   loader: async ({ params }) => {
