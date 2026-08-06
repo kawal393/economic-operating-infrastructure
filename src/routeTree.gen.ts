@@ -17,17 +17,20 @@ import { Route as ContractsRouteImport } from './routes/contracts'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DeployRouteImport } from './routes/deploy'
 import { Route as DocsRouteImport } from './routes/docs'
+import { Route as FeedDotxmlRouteImport } from './routes/feed[.]xml'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as GovernmentRouteImport } from './routes/government'
 import { Route as LedgerRouteImport } from './routes/ledger'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
 import { Route as SealRouteImport } from './routes/seal'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as RReceiptIdRouteImport } from './routes/r.$receiptId'
 import { Route as RegistryIndexRouteImport } from './routes/registry.index'
 import { Route as RegistrySlugRouteImport } from './routes/registry.$slug'
+import { Route as ApiPublicBadgeDigestRouteImport } from './routes/api/public/badge.$digest'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -69,6 +72,11 @@ const DocsRoute = DocsRouteImport.update({
   path: '/docs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FeedDotxmlRoute = FeedDotxmlRouteImport.update({
+  id: '/feed.xml',
+  path: '/feed.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GovernanceRoute = GovernanceRouteImport.update({
   id: '/governance',
   path: '/governance',
@@ -99,6 +107,11 @@ const SealRoute = SealRouteImport.update({
   path: '/seal',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TransactionsRoute = TransactionsRouteImport.update({
   id: '/transactions',
   path: '/transactions',
@@ -124,6 +137,11 @@ const RegistrySlugRoute = RegistrySlugRouteImport.update({
   path: '/registry/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicBadgeDigestRoute = ApiPublicBadgeDigestRouteImport.update({
+  id: '/api/public/badge/$digest',
+  path: '/api/public/badge/$digest',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -134,17 +152,20 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
   '/docs': typeof DocsRoute
+  '/feed.xml': typeof FeedDotxmlRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/ledger': typeof LedgerRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
   '/r/$receiptId': typeof RReceiptIdRoute
   '/registry/$slug': typeof RegistrySlugRoute
   '/registry/': typeof RegistryIndexRoute
+  '/api/public/badge/$digest': typeof ApiPublicBadgeDigestRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -155,17 +176,20 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
   '/docs': typeof DocsRoute
+  '/feed.xml': typeof FeedDotxmlRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/ledger': typeof LedgerRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
   '/r/$receiptId': typeof RReceiptIdRoute
   '/registry/$slug': typeof RegistrySlugRoute
   '/registry': typeof RegistryIndexRoute
+  '/api/public/badge/$digest': typeof ApiPublicBadgeDigestRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -177,17 +201,20 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
   '/docs': typeof DocsRoute
+  '/feed.xml': typeof FeedDotxmlRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/ledger': typeof LedgerRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
   '/r/$receiptId': typeof RReceiptIdRoute
   '/registry/$slug': typeof RegistrySlugRoute
   '/registry/': typeof RegistryIndexRoute
+  '/api/public/badge/$digest': typeof ApiPublicBadgeDigestRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -200,17 +227,20 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/deploy'
     | '/docs'
+    | '/feed.xml'
     | '/governance'
     | '/government'
     | '/ledger'
     | '/pricing'
     | '/protocols'
     | '/seal'
+    | '/sitemap.xml'
     | '/transactions'
     | '/verify'
     | '/r/$receiptId'
     | '/registry/$slug'
     | '/registry/'
+    | '/api/public/badge/$digest'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -221,17 +251,20 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/deploy'
     | '/docs'
+    | '/feed.xml'
     | '/governance'
     | '/government'
     | '/ledger'
     | '/pricing'
     | '/protocols'
     | '/seal'
+    | '/sitemap.xml'
     | '/transactions'
     | '/verify'
     | '/r/$receiptId'
     | '/registry/$slug'
     | '/registry'
+    | '/api/public/badge/$digest'
   id:
     | '__root__'
     | '/'
@@ -242,17 +275,20 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/deploy'
     | '/docs'
+    | '/feed.xml'
     | '/governance'
     | '/government'
     | '/ledger'
     | '/pricing'
     | '/protocols'
     | '/seal'
+    | '/sitemap.xml'
     | '/transactions'
     | '/verify'
     | '/r/$receiptId'
     | '/registry/$slug'
     | '/registry/'
+    | '/api/public/badge/$digest'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -264,17 +300,20 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   DeployRoute: typeof DeployRoute
   DocsRoute: typeof DocsRoute
+  FeedDotxmlRoute: typeof FeedDotxmlRoute
   GovernanceRoute: typeof GovernanceRoute
   GovernmentRoute: typeof GovernmentRoute
   LedgerRoute: typeof LedgerRoute
   PricingRoute: typeof PricingRoute
   ProtocolsRoute: typeof ProtocolsRoute
   SealRoute: typeof SealRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TransactionsRoute: typeof TransactionsRoute
   VerifyRoute: typeof VerifyRoute
   RReceiptIdRoute: typeof RReceiptIdRoute
   RegistrySlugRoute: typeof RegistrySlugRoute
   RegistryIndexRoute: typeof RegistryIndexRoute
+  ApiPublicBadgeDigestRoute: typeof ApiPublicBadgeDigestRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -335,6 +374,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/feed.xml': {
+      id: '/feed.xml'
+      path: '/feed.xml'
+      fullPath: '/feed.xml'
+      preLoaderRoute: typeof FeedDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/governance': {
       id: '/governance'
       path: '/governance'
@@ -377,6 +423,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SealRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/transactions': {
       id: '/transactions'
       path: '/transactions'
@@ -412,6 +465,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegistrySlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/badge/$digest': {
+      id: '/api/public/badge/$digest'
+      path: '/api/public/badge/$digest'
+      fullPath: '/api/public/badge/$digest'
+      preLoaderRoute: typeof ApiPublicBadgeDigestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -424,17 +484,20 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   DeployRoute: DeployRoute,
   DocsRoute: DocsRoute,
+  FeedDotxmlRoute: FeedDotxmlRoute,
   GovernanceRoute: GovernanceRoute,
   GovernmentRoute: GovernmentRoute,
   LedgerRoute: LedgerRoute,
   PricingRoute: PricingRoute,
   ProtocolsRoute: ProtocolsRoute,
   SealRoute: SealRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TransactionsRoute: TransactionsRoute,
   VerifyRoute: VerifyRoute,
   RReceiptIdRoute: RReceiptIdRoute,
   RegistrySlugRoute: RegistrySlugRoute,
   RegistryIndexRoute: RegistryIndexRoute,
+  ApiPublicBadgeDigestRoute: ApiPublicBadgeDigestRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

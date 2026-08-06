@@ -13,7 +13,7 @@ function esc(value: string) {
  * The Proof Feed. Every seal is published as a syndicatable item, so
  * aggregators, newsrooms, bots and blogs can carry the chain automatically.
  */
-export const Route = createFileRoute("/feed[.]xml")({
+export const Route = createFileRoute("/feed.xml")({
   server: {
     handlers: {
       GET: async ({ request }) => {
