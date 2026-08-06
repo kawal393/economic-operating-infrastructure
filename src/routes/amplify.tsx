@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
-import { Copy, Download, Newspaper, Rss, Shield, Sitemap as SitemapIcon } from "lucide-react";
+import { Copy, Download, Newspaper, Rss, Shield, Network as SitemapIcon } from "lucide-react";
 import { PageHeader, Panel, Section, SectionHeading } from "@/components/primitives";
 import { downloadText } from "@/lib/apex-psi";
 import { getLedgerStats } from "@/lib/ledger.functions";

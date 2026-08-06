@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AmplifyRouteImport } from './routes/amplify'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CitizenshipRouteImport } from './routes/citizenship'
 import { Route as ConstitutionRouteImport } from './routes/constitution'
@@ -35,6 +36,11 @@ import { Route as ApiPublicBadgeDigestRouteImport } from './routes/api/public/ba
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AmplifyRoute = AmplifyRouteImport.update({
+  id: '/amplify',
+  path: '/amplify',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -145,6 +151,7 @@ const ApiPublicBadgeDigestRoute = ApiPublicBadgeDigestRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
@@ -169,6 +176,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
@@ -194,6 +202,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
@@ -220,6 +229,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/amplify'
     | '/auth'
     | '/citizenship'
     | '/constitution'
@@ -244,6 +254,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/amplify'
     | '/auth'
     | '/citizenship'
     | '/constitution'
@@ -268,6 +279,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/amplify'
     | '/auth'
     | '/citizenship'
     | '/constitution'
@@ -293,6 +305,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AmplifyRoute: typeof AmplifyRoute
   AuthRoute: typeof AuthRoute
   CitizenshipRoute: typeof CitizenshipRoute
   ConstitutionRoute: typeof ConstitutionRoute
@@ -323,6 +336,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/amplify': {
+      id: '/amplify'
+      path: '/amplify'
+      fullPath: '/amplify'
+      preLoaderRoute: typeof AmplifyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -477,6 +497,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AmplifyRoute: AmplifyRoute,
   AuthRoute: AuthRoute,
   CitizenshipRoute: CitizenshipRoute,
   ConstitutionRoute: ConstitutionRoute,
