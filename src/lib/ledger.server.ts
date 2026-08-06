@@ -128,7 +128,6 @@ export async function publishToLedger(rawReceipt: string): Promise<PublishResult
     _signature: receipt.signatures.ed25519,
     _public_key: receipt.public_key,
     _receipt: JSON.parse(JSON.stringify(receipt)) as Database["public"]["Tables"]["notarizations"]["Row"]["receipt_json"],
-    _citizen_id: undefined,
   });
   if (error) return { ok: false, reason: error.message };
 
