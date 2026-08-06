@@ -15,6 +15,7 @@ import { Route as ConstitutionRouteImport } from './routes/constitution'
 import { Route as ContractsRouteImport } from './routes/contracts'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DeployRouteImport } from './routes/deploy'
+import { Route as DocsRouteImport } from './routes/docs'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as GovernmentRouteImport } from './routes/government'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
@@ -50,6 +51,11 @@ const DeployRoute = DeployRouteImport.update({
   path: '/deploy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocsRoute = DocsRouteImport.update({
+  id: '/docs',
+  path: '/docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GovernanceRoute = GovernanceRouteImport.update({
   id: '/governance',
   path: '/governance',
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/contracts': typeof ContractsRoute
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
+  '/docs': typeof DocsRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/protocols': typeof ProtocolsRoute
@@ -90,6 +97,7 @@ export interface FileRoutesByTo {
   '/contracts': typeof ContractsRoute
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
+  '/docs': typeof DocsRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/protocols': typeof ProtocolsRoute
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/contracts': typeof ContractsRoute
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
+  '/docs': typeof DocsRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/protocols': typeof ProtocolsRoute
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
     | '/contracts'
     | '/dashboard'
     | '/deploy'
+    | '/docs'
     | '/governance'
     | '/government'
     | '/protocols'
@@ -129,6 +139,7 @@ export interface FileRouteTypes {
     | '/contracts'
     | '/dashboard'
     | '/deploy'
+    | '/docs'
     | '/governance'
     | '/government'
     | '/protocols'
@@ -141,6 +152,7 @@ export interface FileRouteTypes {
     | '/contracts'
     | '/dashboard'
     | '/deploy'
+    | '/docs'
     | '/governance'
     | '/government'
     | '/protocols'
@@ -154,6 +166,7 @@ export interface RootRouteChildren {
   ContractsRoute: typeof ContractsRoute
   DashboardRoute: typeof DashboardRoute
   DeployRoute: typeof DeployRoute
+  DocsRoute: typeof DocsRoute
   GovernanceRoute: typeof GovernanceRoute
   GovernmentRoute: typeof GovernmentRoute
   ProtocolsRoute: typeof ProtocolsRoute
@@ -204,6 +217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DeployRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docs': {
+      id: '/docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof DocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/governance': {
       id: '/governance'
       path: '/governance'
@@ -242,6 +262,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContractsRoute: ContractsRoute,
   DashboardRoute: DashboardRoute,
   DeployRoute: DeployRoute,
+  DocsRoute: DocsRoute,
   GovernanceRoute: GovernanceRoute,
   GovernmentRoute: GovernmentRoute,
   ProtocolsRoute: ProtocolsRoute,
