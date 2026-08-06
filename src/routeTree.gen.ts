@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CitizenshipRouteImport } from './routes/citizenship'
 import { Route as ConstitutionRouteImport } from './routes/constitution'
+import { Route as ContractsRouteImport } from './routes/contracts'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DeployRouteImport } from './routes/deploy'
 import { Route as GovernanceRouteImport } from './routes/governance'
@@ -31,6 +32,11 @@ const CitizenshipRoute = CitizenshipRouteImport.update({
 const ConstitutionRoute = ConstitutionRouteImport.update({
   id: '/constitution',
   path: '/constitution',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContractsRoute = ContractsRouteImport.update({
+  id: '/contracts',
+  path: '/contracts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -63,6 +69,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
+  '/contracts': typeof ContractsRoute
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
   '/governance': typeof GovernanceRoute
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
+  '/contracts': typeof ContractsRoute
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
   '/governance': typeof GovernanceRoute
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
+  '/contracts': typeof ContractsRoute
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
   '/governance': typeof GovernanceRoute
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/citizenship'
     | '/constitution'
+    | '/contracts'
     | '/dashboard'
     | '/deploy'
     | '/governance'
@@ -106,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/citizenship'
     | '/constitution'
+    | '/contracts'
     | '/dashboard'
     | '/deploy'
     | '/governance'
@@ -116,6 +127,7 @@ export interface FileRouteTypes {
     | '/'
     | '/citizenship'
     | '/constitution'
+    | '/contracts'
     | '/dashboard'
     | '/deploy'
     | '/governance'
@@ -127,6 +139,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CitizenshipRoute: typeof CitizenshipRoute
   ConstitutionRoute: typeof ConstitutionRoute
+  ContractsRoute: typeof ContractsRoute
   DashboardRoute: typeof DashboardRoute
   DeployRoute: typeof DeployRoute
   GovernanceRoute: typeof GovernanceRoute
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/constitution'
       fullPath: '/constitution'
       preLoaderRoute: typeof ConstitutionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contracts': {
+      id: '/contracts'
+      path: '/contracts'
+      fullPath: '/contracts'
+      preLoaderRoute: typeof ContractsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -199,6 +219,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CitizenshipRoute: CitizenshipRoute,
   ConstitutionRoute: ConstitutionRoute,
+  ContractsRoute: ContractsRoute,
   DashboardRoute: DashboardRoute,
   DeployRoute: DeployRoute,
   GovernanceRoute: GovernanceRoute,
