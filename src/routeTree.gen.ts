@@ -14,6 +14,7 @@ import { Route as CitizenshipRouteImport } from './routes/citizenship'
 import { Route as ConstitutionRouteImport } from './routes/constitution'
 import { Route as DeployRouteImport } from './routes/deploy'
 import { Route as GovernmentRouteImport } from './routes/government'
+import { Route as ProtocolsRouteImport } from './routes/protocols'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +41,11 @@ const GovernmentRoute = GovernmentRouteImport.update({
   path: '/government',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProtocolsRoute = ProtocolsRouteImport.update({
+  id: '/protocols',
+  path: '/protocols',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/constitution': typeof ConstitutionRoute
   '/deploy': typeof DeployRoute
   '/government': typeof GovernmentRoute
+  '/protocols': typeof ProtocolsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/constitution': typeof ConstitutionRoute
   '/deploy': typeof DeployRoute
   '/government': typeof GovernmentRoute
+  '/protocols': typeof ProtocolsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,12 +70,25 @@ export interface FileRoutesById {
   '/constitution': typeof ConstitutionRoute
   '/deploy': typeof DeployRoute
   '/government': typeof GovernmentRoute
+  '/protocols': typeof ProtocolsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/citizenship' | '/constitution' | '/deploy' | '/government'
+  fullPaths:
+    | '/'
+    | '/citizenship'
+    | '/constitution'
+    | '/deploy'
+    | '/government'
+    | '/protocols'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/citizenship' | '/constitution' | '/deploy' | '/government'
+  to:
+    | '/'
+    | '/citizenship'
+    | '/constitution'
+    | '/deploy'
+    | '/government'
+    | '/protocols'
   id:
     | '__root__'
     | '/'
@@ -75,6 +96,7 @@ export interface FileRouteTypes {
     | '/constitution'
     | '/deploy'
     | '/government'
+    | '/protocols'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -83,6 +105,7 @@ export interface RootRouteChildren {
   ConstitutionRoute: typeof ConstitutionRoute
   DeployRoute: typeof DeployRoute
   GovernmentRoute: typeof GovernmentRoute
+  ProtocolsRoute: typeof ProtocolsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -122,6 +145,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GovernmentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/protocols': {
+      id: '/protocols'
+      path: '/protocols'
+      fullPath: '/protocols'
+      preLoaderRoute: typeof ProtocolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -131,6 +161,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConstitutionRoute: ConstitutionRoute,
   DeployRoute: DeployRoute,
   GovernmentRoute: GovernmentRoute,
+  ProtocolsRoute: ProtocolsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
