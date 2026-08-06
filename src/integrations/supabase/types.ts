@@ -20,6 +20,7 @@ export type Database = {
           claim: string
           counter_attestation_id: string | null
           created_at: string
+          entity_id: string | null
           id: string
           is_active: boolean
           notarization_id: string | null
@@ -30,6 +31,7 @@ export type Database = {
           claim: string
           counter_attestation_id?: string | null
           created_at?: string
+          entity_id?: string | null
           id?: string
           is_active?: boolean
           notarization_id?: string | null
@@ -40,6 +42,7 @@ export type Database = {
           claim?: string
           counter_attestation_id?: string | null
           created_at?: string
+          entity_id?: string | null
           id?: string
           is_active?: boolean
           notarization_id?: string | null
@@ -58,6 +61,13 @@ export type Database = {
             columns: ["counter_attestation_id"]
             isOneToOne: false
             referencedRelation: "attestations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attestations_entity_id_fkey"
+            columns: ["entity_id"]
+            isOneToOne: false
+            referencedRelation: "entities"
             referencedColumns: ["id"]
           },
           {
@@ -112,6 +122,135 @@ export type Database = {
             columns: ["nation_state_id"]
             isOneToOne: false
             referencedRelation: "nation_states"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      entities: {
+        Row: {
+          content_hash: string | null
+          created_at: string
+          description: string | null
+          domain: string | null
+          domain_verified_at: string | null
+          id: string
+          is_active: boolean
+          is_claimed: boolean
+          kind: string
+          name: string
+          owner_id: string | null
+          receipt_id: string | null
+          seal_status: string
+          slug: string
+          submitted_by: string | null
+          updated_at: string
+          verification_token: string
+        }
+        Insert: {
+          content_hash?: string | null
+          created_at?: string
+          description?: string | null
+          domain?: string | null
+          domain_verified_at?: string | null
+          id?: string
+          is_active?: boolean
+          is_claimed?: boolean
+          kind?: string
+          name: string
+          owner_id?: string | null
+          receipt_id?: string | null
+          seal_status?: string
+          slug: string
+          submitted_by?: string | null
+          updated_at?: string
+          verification_token?: string
+        }
+        Update: {
+          content_hash?: string | null
+          created_at?: string
+          description?: string | null
+          domain?: string | null
+          domain_verified_at?: string | null
+          id?: string
+          is_active?: boolean
+          is_claimed?: boolean
+          kind?: string
+          name?: string
+          owner_id?: string | null
+          receipt_id?: string | null
+          seal_status?: string
+          slug?: string
+          submitted_by?: string | null
+          updated_at?: string
+          verification_token?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "entities_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "citizens"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "entities_submitted_by_fkey"
+            columns: ["submitted_by"]
+            isOneToOne: false
+            referencedRelation: "citizens"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      entity_assets: {
+        Row: {
+          asset_kind: string
+          citizen_id: string | null
+          content_hash: string | null
+          created_at: string
+          entity_id: string
+          id: string
+          label: string
+          receipt_id: string | null
+          seal_status: string
+          url: string | null
+        }
+        Insert: {
+          asset_kind?: string
+          citizen_id?: string | null
+          content_hash?: string | null
+          created_at?: string
+          entity_id: string
+          id?: string
+          label: string
+          receipt_id?: string | null
+          seal_status?: string
+          url?: string | null
+        }
+        Update: {
+          asset_kind?: string
+          citizen_id?: string | null
+          content_hash?: string | null
+          created_at?: string
+          entity_id?: string
+          id?: string
+          label?: string
+          receipt_id?: string | null
+          seal_status?: string
+          url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "entity_assets_citizen_id_fkey"
+            columns: ["citizen_id"]
+            isOneToOne: false
+            referencedRelation: "citizens"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "entity_assets_entity_id_fkey"
+            columns: ["entity_id"]
+            isOneToOne: false
+            referencedRelation: "entities"
             referencedColumns: ["id"]
           },
         ]
