@@ -1,133 +1,65 @@
-# Verifiable AI Observatory — Build Plan
+# Sovereign AI Services — From Thesis to Substrate
 
-## 1. Strategic Foundation: Why Provenance Is the Next Public Utility
+Twelve pages exist and are visually complete, but nothing persists and no receipt can leave the site. This plan turns the thesis into a working nation-state, ordered so the self-propagating features land first.
 
-AI is becoming the dominant industrial layer. The EU AI Act, deepfake exposure, and the collapse of trust in synthetic content have created a single missing public utility: **machine-checkable truth receipts**. APEX PSI/PRAMAAN provides the cryptographic substrate. The product turns that substrate into a usable civic and commercial tool.
+## Phase 1 — The receipt becomes real
 
-A default canon of 20 books was used to ground the design. The synthesis is based on their publicly known arguments, not fresh close-reading of every page. The canon spans economics, technology, AI, protocols, and business:
+The single highest-leverage change: a visitor can produce an artefact that survives without us.
 
-- Economics: *The Wealth of Nations* (Smith), *Capital in the Twenty-First Century* (Piketty), *The Theory of Moral Sentiments* (Smith), *Doughnut Economics* (Raworth), *The Black Swan* (Taleb), *The Ascent of Money* (Ferguson), *Freakonomics* (Levitt & Dubner), *Debt: The First 5,000 Years* (Graeber)
-- Technology: *The Innovator's Dilemma* (Christensen), *The Second Machine Age* (Brynjolfsson & McAfee), *The Singularity Is Near* (Kurzweil), *The Master Algorithm* (Domingos), *The Stack* (Bratton), *Platform Revolution* (Parker, Van Alstyne & Choudary)
-- AI: *Superintelligence* (Bostrom), *Human Compatible* (Russell), *The Alignment Problem* (Christian), *Life 3.0* (Tegmark), *The Coming Wave* (Suleyman), *Power and Progress* (Acemoglu & Johnson)
-- Protocols: *The Bitcoin Standard* (Ammous), *The Internet of Money* (Antonopoulos), *Mastering Bitcoin* (Antonopoulos), *Attack of the 50 Foot Blockchain* (Gerard), *The Token Economy* (Voshmgir)
-- Business: *Zero to One* (Thiel), *The Lean Startup* (Ries), *The Hard Thing About Hard Things* (Horowitz), *Crossing the Chasm* (Moore), *Blitzscaling* (Hoffman & Yeh)
+- **Seal**: client-side streaming SHA-256 of any file or pasted text. No upload, no account. Canonical JSON (RFC 8785) before hashing.
+- **Receipt writer**: downloadable `.praman` sidecar containing digest, canonicalisation method, timestamp, issuer, predicates, and a verification URL.
+- **Offline verifier**: a self-contained single-file HTML verifier, downloadable from `/verify`, that works with no network and no dependency on this site.
+- **Verify page**: paste a receipt or re-upload the original; deterministic pass/fail with the reason shown.
+- **Honesty layer**: every result states plainly that integrity is proven and truth is not.
 
-### Core themes extracted
+## Phase 2 — Persistence and identity
 
-1. **Trust as infrastructure, not as brand.** Smith, Taleb, and Ferguson converge on the same point: markets collapse when trust is centralized in a single actor. Piketty and Acemoglu add that institutional design determines who captures value. A verifiable ledger must be a commons, not a monopoly.
-2. **The protocol beats the platform.** The Internet, Bitcoin, and early web architecture show that thin protocols with broad participation outlast fat platforms. The observatory must be a public-good interface, not a rent-seeking gatekeeper.
-3. **The AI transition creates a liability stack.** Bostrom, Russell, Christian, and Suleyman all point to the same commercial risk: opacity in AI systems becomes a liability. Suleyman calls it the "containment problem for business." The observatory turns compliance into a public signal.
-4. **Crypto-graphy, not crypto-currency.** Antonopoulos and Gerard together teach the difference: the useful part is the auditability, not the speculation. The business model must be transparent, low-margin, and anchored to real value (countersignatures, not tokens).
-5. **Cross the chasm with a single clear use case.** Moore and Ries agree that general-purpose technology fails until it solves one painful job for one beachhead user. The first beachhead is the EU AI Act Article 50 compliance receipt.
+Enable Lovable Cloud (database, auth, server functions, storage — no external accounts needed).
 
-These principles shape every product and technical decision below.
+- Tables: `nation_states`, `notarizations`, `attestations`, `protocols`, `governance_proposals`, `votes`, `transactions`.
+- Roles in a separate `user_roles` table with a security-definer `has_role` function. Admin checks are server-side only.
+- Explicit grants on every public table; RLS on everything. Registry and explorer are public read; all writes are owner-scoped.
+- Auth: email plus wallet-address binding. Wallet signature proves control; the session is server-issued.
+- Dashboard, deploy, governance and transactions switch from static content to live data.
 
-## 2. Product Vision: Verifiable AI Observatory
+## Phase 3 — Chain, anchor, ledger
 
-A public-good web application that lets anyone seal, verify, and inspect AI-generated content and human witnessed media. It has two public faces and one operator dashboard.
+- Append-only notarization chain carrying the prior digest forward.
+- Merkle root per settlement window; OpenTimestamps commitment to Bitcoin.
+- Inclusion proofs downloadable per receipt.
+- `/explorer`: live anonymised feed of digests with anchor status.
+- `/mirror`: full ledger export so anyone can replicate it in its entirety.
 
-### Public portal
+## Phase 4 — The propagation features
 
-- **Seal** (`/seal`): drop any file or paste text; get a client-side SHA-256 hash and a `.praman` receipt. No upload. No account.
-- **Verify** (`/verify`): paste a receipt or upload the original file; get a deterministic yes/no plus predicate details.
-- **Registry** (`/registry`): a public, searchable list of verified AI systems and suppliers with their public trust anchors, compliance predicates, and transparency scores.
-- **Explorer** (`/explorer`): a live, anonymized feed of recent notarizations (hashes only) with Merkle root and Bitcoin/Polygon anchor status.
+- **Public badge embed**: a live-status script the sealed party hosts on their own site.
+- **Registry with absence**: sealed and unsealed entities listed side by side, with transparency scores.
+- **Counter-attestation**: symmetric rebuttal on any attestation; no takedowns, ever.
+- **Territory claim**: subdomain binding to a signed constitution hash, published at a well-known path.
+- **Compliance receipt PDF**: EU AI Act Article 50 format, countersigned.
 
-### Operator dashboard (authenticated)
+## Phase 5 — Revenue and ecosystem
 
-- Connect an AI system via API key or SDK adapter.
-- Batch-notarize decisions (up to 100 per call, matching the APEX PSI Prover plan).
-- Download EU AI Act Article 50 compliance receipts as PDFs.
-- View audit trails, risk-classification predicates, and webhook deliveries.
-- Pay per countersignature or subscribe to Prover tier.
+- Metered API verification, anchoring, and compliance checks at the published fee schedule; free permissionless verification stays free forever.
+- Stripe for countersignatures and the Prover tier; webhook at `/api/public/stripe`.
+- One-call SDK adapter and documented public API endpoints.
+- Optional Solidity deployment for on-chain nation-state registration, kept strictly non-load-bearing so receipts verify without it.
 
-### Commercial model
+## Technical notes
 
-- Free: seal, verify, public registry, explorer.
-- Paid: $29 per Article 50 countersigned receipt, $49/mo Prover API (mirroring APEX pricing), or white-label enterprise.
-- No token. No speculation. Revenue is tied to a real service (institutional countersignature and API volume).
+- Stack stays TanStack Start, React 19, Tailwind v4, Lovable Cloud. Server logic uses `createServerFn`; external callers use routes under `/api/public/*` with signature verification.
+- Hashing uses `hash-wasm` for streaming; signatures use `@noble/ed25519` in the browser and a hybrid classical plus post-quantum suite server-side.
+- Post-quantum signing runs server-side only; the browser path stays Ed25519 to keep bundle size sane.
+- All colours remain semantic tokens in `src/styles.css`. No hardcoded utilities.
+- Numbers currently shown as platform stats are relabelled as a projection model until real data exists.
 
-## 3. Technical Architecture
+## Risk posture carried into the build
 
-Stack: TanStack Start (already scaffolded), React 19, Tailwind v4, Lovable Cloud (Supabase) for auth and persistence, Vite 7.
+- Anchoring proves existence at or before a block; the UI must never claim a lower bound.
+- Attestations against named parties are a legal surface. The symmetric rebuttal right is enforced structurally, and jurisdictional exposure is reviewed before launch.
+- APEX PSI is an individual IETF draft. Every deployment is presented as an implementation, never as conformance to an adopted standard.
+- Receipts must verify with the platform switched off. Any feature that breaks this is rejected regardless of revenue.
 
-### Client-side provenance
+## Suggested starting point
 
-- Use `hash-wasm` for streaming SHA-256 of large files in the browser.
-- Use `@noble/ed25519` for ephemeral key generation and signing (ephemeral mode).
-- Build a `.praman` receipt JSON writer matching the APEX PSI draft spec.
-- Implement C2PA-compatible in-band embedding only if a server-side adapter is later added; for MVP use sidecar receipts.
-
-### Server functions
-
-- `notarize`: accept a digest + context + predicates, return a signed receipt with inclusion proof.
-- `notarizeBatch`: accept up to 100 records, return a Merkle receipt.
-- `verify`: accept a receipt or digest, return `{ valid, issuer, predicates, anchored }`.
-- `listRegistry`: paginated, searchable supplier registry.
-- `getExplorerFeed`: recent public notarizations with anchor status.
-
-### Database (Lovable Cloud)
-
-- `public.notarizations`: id, digest, merkle_root, receipt_json, predicates, anchored_at, created_at.
-- `public.systems`: id, name, owner_id, trust_anchor_url, predicates, verified, transparency_score.
-- `public.users`: standard auth users.
-- `public.user_roles`: admin, operator, viewer (roles stored in separate table per security rules).
-- RLS policies: users read their own records; admins read all; registry is public read.
-
-### Payments
-
-- Stripe for one-off countersignatures and subscriptions.
-- Webhook endpoint at `/api/public/stripe` for receipt fulfillment.
-
-### AI integration
-
-- Optional: a `Compliance-Receipt` header adapter for OpenAI, Anthropic, and Vercel AI SDK to show in documentation.
-- Server-side notarization function for any LLM output that passes through the app.
-
-## 4. Build Phases
-
-### Phase 0 — Foundation (this plan)
-
-- Confirm the product direction and default canon.
-- Set up Lovable Cloud, Stripe, and the APEX trust anchor integration.
-- Define the receipt schema, database schema, and RLS policies.
-
-### Phase 1 — Public Seal & Verify
-
-- Replace the placeholder index with the observatory landing page.
-- Build `/seal` and `/verify` routes.
-- Implement client-side hashing and receipt generation.
-- Implement server-side verification against the APEX trust anchor.
-- Add public registry skeleton and explorer feed.
-
-### Phase 2 — Operator Dashboard & Compliance
-
-- Add authentication (Lovable Cloud auth).
-- Build operator dashboard for system registration, batch notarization, and audit trail.
-- Integrate Stripe for countersignatures and Prover subscription.
-- Add PDF receipt generation for Article 50.
-
-### Phase 3 — Scale & Ecosystem
-
-- Add SDK adapter documentation and open API endpoints.
-- Add white-label/custom-domain institutional tier.
-- Add ZK fraud proof demonstrator (as per APEX spec).
-- Add analytics and transparency scoring.
-
-## 5. Honest Risks & Limitations
-
-- APEX PSI is an individual IETF draft, not an adopted standard.
-- The APEX foundation is described as "in formation." The observatory must be designed to survive if any single trust anchor disappears (offline verification, trust-anchor rotation).
-- Bitcoin anchoring gives an upper bound on time, not a lower bound.
-- The protocol proves integrity, not truth. The UI must be explicit that sealing a false statement produces a verifiable false statement.
-- Roles are stored in a separate `user_roles` table; admin checks are server-side only.
-
-## 6. Immediate Next Steps
-
-If you approve this plan, I will:
-
-1. Enable Lovable Cloud and set up the database schema with proper RLS and grants.
-2. Build the public seal/verify experience as the new home page.
-3. Seed the registry with a few example systems so the first screen is not empty.
-
-This is a public-good product with a clear, paid upgrade path. It matches the APEX technology and the EU AI Act timing. No tokens, no hype — just receipts that survive regulation.
+Phase 1 alone changes the nature of the project: it is the smallest slice that produces an artefact which markets itself and cannot be killed.
