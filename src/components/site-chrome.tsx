@@ -7,6 +7,7 @@ import { FOOTER_CREED } from "@/content/nation";
 const NAV = [
   { to: "/seal", label: "Seal" },
   { to: "/verify", label: "Verify" },
+  { to: "/ledger", label: "Ledger" },
   { to: "/constitution", label: "Constitution" },
   { to: "/government", label: "Government" },
   { to: "/protocols", label: "Protocols" },
@@ -32,6 +33,7 @@ const FOOTER_GROUPS = [
     links: [
       { to: "/seal", label: "Seal" },
       { to: "/verify", label: "Verify" },
+      { to: "/ledger", label: "Public Ledger" },
       { to: "/protocols", label: "Protocol Explorer" },
       { to: "/deploy", label: "Nation-State Deployer" },
       { to: "/contracts", label: "Smart Contracts" },
