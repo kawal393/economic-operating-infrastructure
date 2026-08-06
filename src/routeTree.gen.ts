@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConstitutionRouteImport } from './routes/constitution'
+import { Route as GovernmentRouteImport } from './routes/government'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const ConstitutionRoute = ConstitutionRouteImport.update({
   path: '/constitution',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GovernmentRoute = GovernmentRouteImport.update({
+  id: '/government',
+  path: '/government',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/constitution': typeof ConstitutionRoute
+  '/government': typeof GovernmentRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/constitution': typeof ConstitutionRoute
+  '/government': typeof GovernmentRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/constitution': typeof ConstitutionRoute
+  '/government': typeof GovernmentRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/constitution'
+  fullPaths: '/' | '/constitution' | '/government'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/constitution'
-  id: '__root__' | '/' | '/constitution'
+  to: '/' | '/constitution' | '/government'
+  id: '__root__' | '/' | '/constitution' | '/government'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ConstitutionRoute: typeof ConstitutionRoute
+  GovernmentRoute: typeof GovernmentRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConstitutionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/government': {
+      id: '/government'
+      path: '/government'
+      fullPath: '/government'
+      preLoaderRoute: typeof GovernmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ConstitutionRoute: ConstitutionRoute,
+  GovernmentRoute: GovernmentRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
