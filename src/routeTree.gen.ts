@@ -18,6 +18,7 @@ import { Route as DeployRouteImport } from './routes/deploy'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as GovernmentRouteImport } from './routes/government'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
+import { Route as TransactionsRouteImport } from './routes/transactions'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +65,11 @@ const ProtocolsRoute = ProtocolsRouteImport.update({
   path: '/protocols',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TransactionsRoute = TransactionsRouteImport.update({
+  id: '/transactions',
+  path: '/transactions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/protocols': typeof ProtocolsRoute
+  '/transactions': typeof TransactionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/protocols': typeof ProtocolsRoute
+  '/transactions': typeof TransactionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/protocols': typeof ProtocolsRoute
+  '/transactions': typeof TransactionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/governance'
     | '/government'
     | '/protocols'
+    | '/transactions'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/governance'
     | '/government'
     | '/protocols'
+    | '/transactions'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/governance'
     | '/government'
     | '/protocols'
+    | '/transactions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   GovernanceRoute: typeof GovernanceRoute
   GovernmentRoute: typeof GovernmentRoute
   ProtocolsRoute: typeof ProtocolsRoute
+  TransactionsRoute: typeof TransactionsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtocolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/transactions': {
+      id: '/transactions'
+      path: '/transactions'
+      fullPath: '/transactions'
+      preLoaderRoute: typeof TransactionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   GovernanceRoute: GovernanceRoute,
   GovernmentRoute: GovernmentRoute,
   ProtocolsRoute: ProtocolsRoute,
+  TransactionsRoute: TransactionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
