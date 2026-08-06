@@ -79,14 +79,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Sovereign AI Services — The Government of the Digital Nation-State" },
+      {
+        name: "description",
+        content:
+          "A digital nation-state at the protocol layer: constitutional AI protocols, post-quantum sealing, Bitcoin anchoring and verifiable governance.",
+      },
+      { name: "author", content: "Sovereign AI Services" },
+      { property: "og:site_name", content: "Sovereign AI Services" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
