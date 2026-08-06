@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader, Panel, Section } from "@/components/primitives";
 import { listNationStates } from "@/lib/citizen.functions";
+import type { NationState } from "@/lib/nation-types";
 
 export const Route = createFileRoute("/registry/")({
   loader: async () => listNationStates(),
@@ -47,7 +48,7 @@ function RegistryPage() {
           </Panel>
         ) : (
           <div className="grid gap-4 md:grid-cols-2">
-            {nations.map((nation) => (
+            {nations.map((nation: NationState) => (
               <Panel key={nation.id} interactive className="p-6">
                 <Link to="/registry/$slug" params={{ slug: nation.slug ?? "" }} className="block">
                   <h2 className="text-lg font-semibold tracking-tight text-foreground">{nation.name}</h2>

@@ -8,29 +8,9 @@ import { publicClient } from "./ledger.server";
 
 type DB = SupabaseClient<Database>;
 
-export type Citizen = {
-  id: string;
-  display_name: string | null;
-  wallet_address: string | null;
-  is_ai: boolean;
-  territory: string | null;
-  sufficiency_floor: string | null;
-  nation_state_id: string | null;
-  created_at: string;
-};
+import type { Citizen, NationState } from "./nation-types";
 
-export type NationState = {
-  id: string;
-  name: string;
-  slug: string | null;
-  tagline: string | null;
-  territory: string | null;
-  constitution_hash: string;
-  constitution_text: string | null;
-  receipt_id: string | null;
-  citizen_count: number;
-  created_at: string;
-};
+export type { Citizen, NationState };
 
 const CITIZEN_COLUMNS =
   "id, display_name, wallet_address, is_ai, territory, sufficiency_floor, nation_state_id, created_at";
