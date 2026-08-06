@@ -10,33 +10,180 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CitizenshipRouteImport } from './routes/citizenship'
+import { Route as ConstitutionRouteImport } from './routes/constitution'
+import { Route as ContractsRouteImport } from './routes/contracts'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DeployRouteImport } from './routes/deploy'
+import { Route as DocsRouteImport } from './routes/docs'
+import { Route as GovernanceRouteImport } from './routes/governance'
+import { Route as GovernmentRouteImport } from './routes/government'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as ProtocolsRouteImport } from './routes/protocols'
+import { Route as TransactionsRouteImport } from './routes/transactions'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CitizenshipRoute = CitizenshipRouteImport.update({
+  id: '/citizenship',
+  path: '/citizenship',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConstitutionRoute = ConstitutionRouteImport.update({
+  id: '/constitution',
+  path: '/constitution',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContractsRoute = ContractsRouteImport.update({
+  id: '/contracts',
+  path: '/contracts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeployRoute = DeployRouteImport.update({
+  id: '/deploy',
+  path: '/deploy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsRoute = DocsRouteImport.update({
+  id: '/docs',
+  path: '/docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GovernanceRoute = GovernanceRouteImport.update({
+  id: '/governance',
+  path: '/governance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GovernmentRoute = GovernmentRouteImport.update({
+  id: '/government',
+  path: '/government',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProtocolsRoute = ProtocolsRouteImport.update({
+  id: '/protocols',
+  path: '/protocols',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TransactionsRoute = TransactionsRouteImport.update({
+  id: '/transactions',
+  path: '/transactions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/citizenship': typeof CitizenshipRoute
+  '/constitution': typeof ConstitutionRoute
+  '/contracts': typeof ContractsRoute
+  '/dashboard': typeof DashboardRoute
+  '/deploy': typeof DeployRoute
+  '/docs': typeof DocsRoute
+  '/governance': typeof GovernanceRoute
+  '/government': typeof GovernmentRoute
+  '/pricing': typeof PricingRoute
+  '/protocols': typeof ProtocolsRoute
+  '/transactions': typeof TransactionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/citizenship': typeof CitizenshipRoute
+  '/constitution': typeof ConstitutionRoute
+  '/contracts': typeof ContractsRoute
+  '/dashboard': typeof DashboardRoute
+  '/deploy': typeof DeployRoute
+  '/docs': typeof DocsRoute
+  '/governance': typeof GovernanceRoute
+  '/government': typeof GovernmentRoute
+  '/pricing': typeof PricingRoute
+  '/protocols': typeof ProtocolsRoute
+  '/transactions': typeof TransactionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/citizenship': typeof CitizenshipRoute
+  '/constitution': typeof ConstitutionRoute
+  '/contracts': typeof ContractsRoute
+  '/dashboard': typeof DashboardRoute
+  '/deploy': typeof DeployRoute
+  '/docs': typeof DocsRoute
+  '/governance': typeof GovernanceRoute
+  '/government': typeof GovernmentRoute
+  '/pricing': typeof PricingRoute
+  '/protocols': typeof ProtocolsRoute
+  '/transactions': typeof TransactionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/citizenship'
+    | '/constitution'
+    | '/contracts'
+    | '/dashboard'
+    | '/deploy'
+    | '/docs'
+    | '/governance'
+    | '/government'
+    | '/pricing'
+    | '/protocols'
+    | '/transactions'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/citizenship'
+    | '/constitution'
+    | '/contracts'
+    | '/dashboard'
+    | '/deploy'
+    | '/docs'
+    | '/governance'
+    | '/government'
+    | '/pricing'
+    | '/protocols'
+    | '/transactions'
+  id:
+    | '__root__'
+    | '/'
+    | '/citizenship'
+    | '/constitution'
+    | '/contracts'
+    | '/dashboard'
+    | '/deploy'
+    | '/docs'
+    | '/governance'
+    | '/government'
+    | '/pricing'
+    | '/protocols'
+    | '/transactions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CitizenshipRoute: typeof CitizenshipRoute
+  ConstitutionRoute: typeof ConstitutionRoute
+  ContractsRoute: typeof ContractsRoute
+  DashboardRoute: typeof DashboardRoute
+  DeployRoute: typeof DeployRoute
+  DocsRoute: typeof DocsRoute
+  GovernanceRoute: typeof GovernanceRoute
+  GovernmentRoute: typeof GovernmentRoute
+  PricingRoute: typeof PricingRoute
+  ProtocolsRoute: typeof ProtocolsRoute
+  TransactionsRoute: typeof TransactionsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +195,100 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/citizenship': {
+      id: '/citizenship'
+      path: '/citizenship'
+      fullPath: '/citizenship'
+      preLoaderRoute: typeof CitizenshipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/constitution': {
+      id: '/constitution'
+      path: '/constitution'
+      fullPath: '/constitution'
+      preLoaderRoute: typeof ConstitutionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contracts': {
+      id: '/contracts'
+      path: '/contracts'
+      fullPath: '/contracts'
+      preLoaderRoute: typeof ContractsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/deploy': {
+      id: '/deploy'
+      path: '/deploy'
+      fullPath: '/deploy'
+      preLoaderRoute: typeof DeployRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs': {
+      id: '/docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof DocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/governance': {
+      id: '/governance'
+      path: '/governance'
+      fullPath: '/governance'
+      preLoaderRoute: typeof GovernanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/government': {
+      id: '/government'
+      path: '/government'
+      fullPath: '/government'
+      preLoaderRoute: typeof GovernmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/protocols': {
+      id: '/protocols'
+      path: '/protocols'
+      fullPath: '/protocols'
+      preLoaderRoute: typeof ProtocolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/transactions': {
+      id: '/transactions'
+      path: '/transactions'
+      fullPath: '/transactions'
+      preLoaderRoute: typeof TransactionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CitizenshipRoute: CitizenshipRoute,
+  ConstitutionRoute: ConstitutionRoute,
+  ContractsRoute: ContractsRoute,
+  DashboardRoute: DashboardRoute,
+  DeployRoute: DeployRoute,
+  DocsRoute: DocsRoute,
+  GovernanceRoute: GovernanceRoute,
+  GovernmentRoute: GovernmentRoute,
+  PricingRoute: PricingRoute,
+  ProtocolsRoute: ProtocolsRoute,
+  TransactionsRoute: TransactionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
