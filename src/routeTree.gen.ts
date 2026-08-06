@@ -18,6 +18,7 @@ import { Route as DeployRouteImport } from './routes/deploy'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as GovernmentRouteImport } from './routes/government'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 
@@ -66,6 +67,11 @@ const GovernmentRoute = GovernmentRouteImport.update({
   path: '/government',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProtocolsRoute = ProtocolsRouteImport.update({
   id: '/protocols',
   path: '/protocols',
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/docs': typeof DocsRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
+  '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/transactions': typeof TransactionsRoute
 }
@@ -100,6 +107,7 @@ export interface FileRoutesByTo {
   '/docs': typeof DocsRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
+  '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/transactions': typeof TransactionsRoute
 }
@@ -114,6 +122,7 @@ export interface FileRoutesById {
   '/docs': typeof DocsRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
+  '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/transactions': typeof TransactionsRoute
 }
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
     | '/docs'
     | '/governance'
     | '/government'
+    | '/pricing'
     | '/protocols'
     | '/transactions'
   fileRoutesByTo: FileRoutesByTo
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
     | '/docs'
     | '/governance'
     | '/government'
+    | '/pricing'
     | '/protocols'
     | '/transactions'
   id:
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/docs'
     | '/governance'
     | '/government'
+    | '/pricing'
     | '/protocols'
     | '/transactions'
   fileRoutesById: FileRoutesById
@@ -169,6 +181,7 @@ export interface RootRouteChildren {
   DocsRoute: typeof DocsRoute
   GovernanceRoute: typeof GovernanceRoute
   GovernmentRoute: typeof GovernmentRoute
+  PricingRoute: typeof PricingRoute
   ProtocolsRoute: typeof ProtocolsRoute
   TransactionsRoute: typeof TransactionsRoute
 }
@@ -238,6 +251,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GovernmentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/protocols': {
       id: '/protocols'
       path: '/protocols'
@@ -265,6 +285,7 @@ const rootRouteChildren: RootRouteChildren = {
   DocsRoute: DocsRoute,
   GovernanceRoute: GovernanceRoute,
   GovernmentRoute: GovernmentRoute,
+  PricingRoute: PricingRoute,
   ProtocolsRoute: ProtocolsRoute,
   TransactionsRoute: TransactionsRoute,
 }
