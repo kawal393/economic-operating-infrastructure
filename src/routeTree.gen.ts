@@ -22,6 +22,7 @@ import { Route as FeedDotxmlRouteImport } from './routes/feed[.]xml'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as GovernmentRouteImport } from './routes/government'
 import { Route as LedgerRouteImport } from './routes/ledger'
+import { Route as OnboardRouteImport } from './routes/onboard'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
 import { Route as SealRouteImport } from './routes/seal'
@@ -98,6 +99,11 @@ const LedgerRoute = LedgerRouteImport.update({
   path: '/ledger',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OnboardRoute = OnboardRouteImport.update({
+  id: '/onboard',
+  path: '/onboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
@@ -163,6 +169,7 @@ export interface FileRoutesByFullPath {
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/ledger': typeof LedgerRoute
+  '/onboard': typeof OnboardRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
@@ -188,6 +195,7 @@ export interface FileRoutesByTo {
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/ledger': typeof LedgerRoute
+  '/onboard': typeof OnboardRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
@@ -214,6 +222,7 @@ export interface FileRoutesById {
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/ledger': typeof LedgerRoute
+  '/onboard': typeof OnboardRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
@@ -241,6 +250,7 @@ export interface FileRouteTypes {
     | '/governance'
     | '/government'
     | '/ledger'
+    | '/onboard'
     | '/pricing'
     | '/protocols'
     | '/seal'
@@ -266,6 +276,7 @@ export interface FileRouteTypes {
     | '/governance'
     | '/government'
     | '/ledger'
+    | '/onboard'
     | '/pricing'
     | '/protocols'
     | '/seal'
@@ -291,6 +302,7 @@ export interface FileRouteTypes {
     | '/governance'
     | '/government'
     | '/ledger'
+    | '/onboard'
     | '/pricing'
     | '/protocols'
     | '/seal'
@@ -317,6 +329,7 @@ export interface RootRouteChildren {
   GovernanceRoute: typeof GovernanceRoute
   GovernmentRoute: typeof GovernmentRoute
   LedgerRoute: typeof LedgerRoute
+  OnboardRoute: typeof OnboardRoute
   PricingRoute: typeof PricingRoute
   ProtocolsRoute: typeof ProtocolsRoute
   SealRoute: typeof SealRoute
@@ -422,6 +435,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LedgerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/onboard': {
+      id: '/onboard'
+      path: '/onboard'
+      fullPath: '/onboard'
+      preLoaderRoute: typeof OnboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pricing': {
       id: '/pricing'
       path: '/pricing'
@@ -509,6 +529,7 @@ const rootRouteChildren: RootRouteChildren = {
   GovernanceRoute: GovernanceRoute,
   GovernmentRoute: GovernmentRoute,
   LedgerRoute: LedgerRoute,
+  OnboardRoute: OnboardRoute,
   PricingRoute: PricingRoute,
   ProtocolsRoute: ProtocolsRoute,
   SealRoute: SealRoute,
