@@ -93,6 +93,7 @@ function SealPage() {
     setWorking(true);
     setProgress(0);
     setReceipt(null);
+    setPublished(false);
     try {
       const digest =
         mode === "file" && file
