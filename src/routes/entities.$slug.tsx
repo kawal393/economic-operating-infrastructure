@@ -94,7 +94,7 @@ function EntityPage() {
                 </p>
               ) : (
                 <div className="mt-3">
-                  {assets.map((a) => (
+                  {assets.map((a: EntityAsset) => (
                     <FieldRow
                       key={a.id}
                       label={`${a.asset_kind} · ${a.label}`}
