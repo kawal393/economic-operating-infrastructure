@@ -22,12 +22,15 @@ import { Route as FeedDotxmlRouteImport } from './routes/feed[.]xml'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as GovernmentRouteImport } from './routes/government'
 import { Route as LedgerRouteImport } from './routes/ledger'
+import { Route as OnboardRouteImport } from './routes/onboard'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
 import { Route as SealRouteImport } from './routes/seal'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as VerifyRouteImport } from './routes/verify'
+import { Route as EntitiesIndexRouteImport } from './routes/entities.index'
+import { Route as EntitiesSlugRouteImport } from './routes/entities.$slug'
 import { Route as RReceiptIdRouteImport } from './routes/r.$receiptId'
 import { Route as RegistryIndexRouteImport } from './routes/registry.index'
 import { Route as RegistrySlugRouteImport } from './routes/registry.$slug'
@@ -98,6 +101,11 @@ const LedgerRoute = LedgerRouteImport.update({
   path: '/ledger',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OnboardRoute = OnboardRouteImport.update({
+  id: '/onboard',
+  path: '/onboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
@@ -126,6 +134,16 @@ const TransactionsRoute = TransactionsRouteImport.update({
 const VerifyRoute = VerifyRouteImport.update({
   id: '/verify',
   path: '/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EntitiesIndexRoute = EntitiesIndexRouteImport.update({
+  id: '/entities/',
+  path: '/entities/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EntitiesSlugRoute = EntitiesSlugRouteImport.update({
+  id: '/entities/$slug',
+  path: '/entities/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RReceiptIdRoute = RReceiptIdRouteImport.update({
@@ -163,14 +181,17 @@ export interface FileRoutesByFullPath {
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/ledger': typeof LedgerRoute
+  '/onboard': typeof OnboardRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
+  '/entities/$slug': typeof EntitiesSlugRoute
   '/r/$receiptId': typeof RReceiptIdRoute
   '/registry/$slug': typeof RegistrySlugRoute
+  '/entities/': typeof EntitiesIndexRoute
   '/registry/': typeof RegistryIndexRoute
   '/api/public/badge/$digest': typeof ApiPublicBadgeDigestRoute
 }
@@ -188,14 +209,17 @@ export interface FileRoutesByTo {
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/ledger': typeof LedgerRoute
+  '/onboard': typeof OnboardRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
+  '/entities/$slug': typeof EntitiesSlugRoute
   '/r/$receiptId': typeof RReceiptIdRoute
   '/registry/$slug': typeof RegistrySlugRoute
+  '/entities': typeof EntitiesIndexRoute
   '/registry': typeof RegistryIndexRoute
   '/api/public/badge/$digest': typeof ApiPublicBadgeDigestRoute
 }
@@ -214,14 +238,17 @@ export interface FileRoutesById {
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/ledger': typeof LedgerRoute
+  '/onboard': typeof OnboardRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
+  '/entities/$slug': typeof EntitiesSlugRoute
   '/r/$receiptId': typeof RReceiptIdRoute
   '/registry/$slug': typeof RegistrySlugRoute
+  '/entities/': typeof EntitiesIndexRoute
   '/registry/': typeof RegistryIndexRoute
   '/api/public/badge/$digest': typeof ApiPublicBadgeDigestRoute
 }
@@ -241,14 +268,17 @@ export interface FileRouteTypes {
     | '/governance'
     | '/government'
     | '/ledger'
+    | '/onboard'
     | '/pricing'
     | '/protocols'
     | '/seal'
     | '/sitemap.xml'
     | '/transactions'
     | '/verify'
+    | '/entities/$slug'
     | '/r/$receiptId'
     | '/registry/$slug'
+    | '/entities/'
     | '/registry/'
     | '/api/public/badge/$digest'
   fileRoutesByTo: FileRoutesByTo
@@ -266,14 +296,17 @@ export interface FileRouteTypes {
     | '/governance'
     | '/government'
     | '/ledger'
+    | '/onboard'
     | '/pricing'
     | '/protocols'
     | '/seal'
     | '/sitemap.xml'
     | '/transactions'
     | '/verify'
+    | '/entities/$slug'
     | '/r/$receiptId'
     | '/registry/$slug'
+    | '/entities'
     | '/registry'
     | '/api/public/badge/$digest'
   id:
@@ -291,14 +324,17 @@ export interface FileRouteTypes {
     | '/governance'
     | '/government'
     | '/ledger'
+    | '/onboard'
     | '/pricing'
     | '/protocols'
     | '/seal'
     | '/sitemap.xml'
     | '/transactions'
     | '/verify'
+    | '/entities/$slug'
     | '/r/$receiptId'
     | '/registry/$slug'
+    | '/entities/'
     | '/registry/'
     | '/api/public/badge/$digest'
   fileRoutesById: FileRoutesById
@@ -317,14 +353,17 @@ export interface RootRouteChildren {
   GovernanceRoute: typeof GovernanceRoute
   GovernmentRoute: typeof GovernmentRoute
   LedgerRoute: typeof LedgerRoute
+  OnboardRoute: typeof OnboardRoute
   PricingRoute: typeof PricingRoute
   ProtocolsRoute: typeof ProtocolsRoute
   SealRoute: typeof SealRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TransactionsRoute: typeof TransactionsRoute
   VerifyRoute: typeof VerifyRoute
+  EntitiesSlugRoute: typeof EntitiesSlugRoute
   RReceiptIdRoute: typeof RReceiptIdRoute
   RegistrySlugRoute: typeof RegistrySlugRoute
+  EntitiesIndexRoute: typeof EntitiesIndexRoute
   RegistryIndexRoute: typeof RegistryIndexRoute
   ApiPublicBadgeDigestRoute: typeof ApiPublicBadgeDigestRoute
 }
@@ -422,6 +461,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LedgerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/onboard': {
+      id: '/onboard'
+      path: '/onboard'
+      fullPath: '/onboard'
+      preLoaderRoute: typeof OnboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pricing': {
       id: '/pricing'
       path: '/pricing'
@@ -462,6 +508,20 @@ declare module '@tanstack/react-router' {
       path: '/verify'
       fullPath: '/verify'
       preLoaderRoute: typeof VerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/entities/': {
+      id: '/entities/'
+      path: '/entities'
+      fullPath: '/entities/'
+      preLoaderRoute: typeof EntitiesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/entities/$slug': {
+      id: '/entities/$slug'
+      path: '/entities/$slug'
+      fullPath: '/entities/$slug'
+      preLoaderRoute: typeof EntitiesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/r/$receiptId': {
@@ -509,14 +569,17 @@ const rootRouteChildren: RootRouteChildren = {
   GovernanceRoute: GovernanceRoute,
   GovernmentRoute: GovernmentRoute,
   LedgerRoute: LedgerRoute,
+  OnboardRoute: OnboardRoute,
   PricingRoute: PricingRoute,
   ProtocolsRoute: ProtocolsRoute,
   SealRoute: SealRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TransactionsRoute: TransactionsRoute,
   VerifyRoute: VerifyRoute,
+  EntitiesSlugRoute: EntitiesSlugRoute,
   RReceiptIdRoute: RReceiptIdRoute,
   RegistrySlugRoute: RegistrySlugRoute,
+  EntitiesIndexRoute: EntitiesIndexRoute,
   RegistryIndexRoute: RegistryIndexRoute,
   ApiPublicBadgeDigestRoute: ApiPublicBadgeDigestRoute,
 }
