@@ -209,6 +209,19 @@ function SealPage() {
                   </button>
                   <button
                     type="button"
+                    disabled={publishing || published}
+                    onClick={() => void publish(receipt)}
+                    className="rounded-md border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground disabled:opacity-50"
+                  >
+                    {published
+                      ? "Published to the ledger"
+                      : publishing
+                        ? "Publishing…"
+                        : "Publish to the public ledger"}
+                  </button>
+
+                  <button
+                    type="button"
                     onClick={() => {
                       void navigator.clipboard.writeText(canonicalise(receipt));
                       toast.success("Canonical receipt copied");
