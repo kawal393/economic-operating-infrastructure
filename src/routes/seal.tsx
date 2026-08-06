@@ -53,6 +53,30 @@ function SealPage() {
   const [working, setWorking] = useState(false);
   const [receipt, setReceipt] = useState<Receipt | null>(null);
   const [secretKeyHex, setSecretKeyHex] = useState<string | null>(null);
+  const [publishing, setPublishing] = useState(false);
+  const [published, setPublished] = useState(false);
+  const publishFn = useServerFn(publishReceipt);
+
+  async function publish(current: Receipt) {
+    setPublishing(true);
+    try {
+      const result = await publishFn({ data: { receipt: JSON.stringify(current) } });
+      if (!result.ok) {
+        toast.error("Not published", { description: result.reason });
+        return;
+      }
+      setPublished(true);
+      toast.success(
+        result.alreadyPresent ? "Already on the chain" : "Published to the public ledger",
+        { description: `Chain position #${result.entry.sequence}` },
+      );
+    } catch {
+      toast.error("Publishing failed", { description: "The ledger did not accept the receipt." });
+    } finally {
+      setPublishing(false);
+    }
+  }
+
 
   async function seal() {
     if (mode === "file" && !file) {
