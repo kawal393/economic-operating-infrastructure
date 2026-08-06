@@ -1,8 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { Activity, Anchor, BadgeCheck, Rocket, Wallet } from "lucide-react";
 import { toast } from "sonner";
 import { PageHeader, Panel, Section, StatBlock } from "@/components/primitives";
 import { shortAddress, useWallet } from "@/lib/wallet";
+import { useAuth } from "@/hooks/useAuth";
+import { getMyCitizen } from "@/lib/citizen.functions";
+import { getLedgerStats } from "@/lib/ledger.functions";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
