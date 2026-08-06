@@ -108,6 +108,15 @@ function Hero() {
         </p>
 
         <p
+          className="animate-rise mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground"
+          style={{ animationDelay: "180ms" }}
+        >
+          Powered by <span className="text-gold">Apex PSI</span> — in partnership with the world's
+          first cryptographic provenance protocol. Sovereign AI Services is an independent
+          nation-state built on that technology, not part of the Apex empire.
+        </p>
+
+        <p
           className="animate-rise mt-6 max-w-3xl text-base leading-relaxed text-muted-foreground"
           style={{ animationDelay: "210ms" }}
         >
@@ -123,19 +132,26 @@ function Hero() {
           style={{ animationDelay: "270ms" }}
         >
           <Link
-            to="/citizenship"
+            to="/seal"
             className="glow-ring group inline-flex items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5"
           >
-            Become a Citizen
+            Seal something now
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
           <Link
-            to="/constitution"
+            to="/verify"
             className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold"
           >
-            Read the Constitution
+            Verify a receipt
+          </Link>
+          <Link
+            to="/citizenship"
+            className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold"
+          >
+            Become a Citizen
           </Link>
         </div>
+
 
         <dl className="mt-16 grid grid-cols-2 gap-4 lg:grid-cols-4">
           {PLATFORM_STATS.map((stat, i) => (

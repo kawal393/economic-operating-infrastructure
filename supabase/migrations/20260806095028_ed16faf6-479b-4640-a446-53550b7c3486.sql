@@ -1,0 +1,3 @@
+REVOKE EXECUTE ON FUNCTION public.append_notarization(text, text, text, text, jsonb, uuid) FROM PUBLIC, anon, authenticated;
+GRANT EXECUTE ON FUNCTION public.append_notarization(text, text, text, text, jsonb, uuid) TO service_role;
+REVOKE EXECUTE ON FUNCTION public.has_role(uuid, public.app_role) FROM PUBLIC, anon;

@@ -20,7 +20,9 @@ import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as GovernmentRouteImport } from './routes/government'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
+import { Route as SealRouteImport } from './routes/seal'
 import { Route as TransactionsRouteImport } from './routes/transactions'
+import { Route as VerifyRouteImport } from './routes/verify'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -77,9 +79,19 @@ const ProtocolsRoute = ProtocolsRouteImport.update({
   path: '/protocols',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SealRoute = SealRouteImport.update({
+  id: '/seal',
+  path: '/seal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TransactionsRoute = TransactionsRouteImport.update({
   id: '/transactions',
   path: '/transactions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifyRoute = VerifyRouteImport.update({
+  id: '/verify',
+  path: '/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -95,7 +107,9 @@ export interface FileRoutesByFullPath {
   '/government': typeof GovernmentRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
+  '/seal': typeof SealRoute
   '/transactions': typeof TransactionsRoute
+  '/verify': typeof VerifyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -109,7 +123,9 @@ export interface FileRoutesByTo {
   '/government': typeof GovernmentRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
+  '/seal': typeof SealRoute
   '/transactions': typeof TransactionsRoute
+  '/verify': typeof VerifyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -124,7 +140,9 @@ export interface FileRoutesById {
   '/government': typeof GovernmentRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
+  '/seal': typeof SealRoute
   '/transactions': typeof TransactionsRoute
+  '/verify': typeof VerifyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -140,7 +158,9 @@ export interface FileRouteTypes {
     | '/government'
     | '/pricing'
     | '/protocols'
+    | '/seal'
     | '/transactions'
+    | '/verify'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -154,7 +174,9 @@ export interface FileRouteTypes {
     | '/government'
     | '/pricing'
     | '/protocols'
+    | '/seal'
     | '/transactions'
+    | '/verify'
   id:
     | '__root__'
     | '/'
@@ -168,7 +190,9 @@ export interface FileRouteTypes {
     | '/government'
     | '/pricing'
     | '/protocols'
+    | '/seal'
     | '/transactions'
+    | '/verify'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -183,7 +207,9 @@ export interface RootRouteChildren {
   GovernmentRoute: typeof GovernmentRoute
   PricingRoute: typeof PricingRoute
   ProtocolsRoute: typeof ProtocolsRoute
+  SealRoute: typeof SealRoute
   TransactionsRoute: typeof TransactionsRoute
+  VerifyRoute: typeof VerifyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -265,11 +291,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtocolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/seal': {
+      id: '/seal'
+      path: '/seal'
+      fullPath: '/seal'
+      preLoaderRoute: typeof SealRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/transactions': {
       id: '/transactions'
       path: '/transactions'
       fullPath: '/transactions'
       preLoaderRoute: typeof TransactionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verify': {
+      id: '/verify'
+      path: '/verify'
+      fullPath: '/verify'
+      preLoaderRoute: typeof VerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -287,18 +327,10 @@ const rootRouteChildren: RootRouteChildren = {
   GovernmentRoute: GovernmentRoute,
   PricingRoute: PricingRoute,
   ProtocolsRoute: ProtocolsRoute,
+  SealRoute: SealRoute,
   TransactionsRoute: TransactionsRoute,
+  VerifyRoute: VerifyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
