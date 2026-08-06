@@ -77,6 +77,8 @@ export type Database = {
           is_active: boolean
           is_ai: boolean
           nation_state_id: string | null
+          sufficiency_floor: string | null
+          territory: string | null
           user_id: string | null
           wallet_address: string | null
         }
@@ -87,6 +89,8 @@ export type Database = {
           is_active?: boolean
           is_ai?: boolean
           nation_state_id?: string | null
+          sufficiency_floor?: string | null
+          territory?: string | null
           user_id?: string | null
           wallet_address?: string | null
         }
@@ -97,6 +101,8 @@ export type Database = {
           is_active?: boolean
           is_ai?: boolean
           nation_state_id?: string | null
+          sufficiency_floor?: string | null
+          territory?: string | null
           user_id?: string | null
           wallet_address?: string | null
         }
@@ -161,32 +167,44 @@ export type Database = {
         Row: {
           citizen_count: number
           constitution_hash: string
+          constitution_text: string | null
           created_at: string
           id: string
           is_active: boolean
           name: string
           owner_id: string | null
+          receipt_id: string | null
           slug: string | null
+          tagline: string | null
+          territory: string | null
         }
         Insert: {
           citizen_count?: number
           constitution_hash: string
+          constitution_text?: string | null
           created_at?: string
           id?: string
           is_active?: boolean
           name: string
           owner_id?: string | null
+          receipt_id?: string | null
           slug?: string | null
+          tagline?: string | null
+          territory?: string | null
         }
         Update: {
           citizen_count?: number
           constitution_hash?: string
+          constitution_text?: string | null
           created_at?: string
           id?: string
           is_active?: boolean
           name?: string
           owner_id?: string | null
+          receipt_id?: string | null
           slug?: string | null
+          tagline?: string | null
+          territory?: string | null
         }
         Relationships: [
           {
@@ -200,7 +218,10 @@ export type Database = {
       }
       notarizations: {
         Row: {
+          anchor_calendar: string | null
+          anchor_confirmed_at: string | null
           anchor_status: string
+          anchor_submitted_at: string | null
           bitcoin_anchor: Json | null
           chain_hash: string
           citizen_id: string | null
@@ -209,6 +230,7 @@ export type Database = {
           ed25519_signature: string
           id: string
           merkle_root: string | null
+          ots_proof: string | null
           prior_hash: string | null
           public_key: string
           receipt_id: string
@@ -216,7 +238,10 @@ export type Database = {
           sequence: number
         }
         Insert: {
+          anchor_calendar?: string | null
+          anchor_confirmed_at?: string | null
           anchor_status?: string
+          anchor_submitted_at?: string | null
           bitcoin_anchor?: Json | null
           chain_hash: string
           citizen_id?: string | null
@@ -225,6 +250,7 @@ export type Database = {
           ed25519_signature: string
           id?: string
           merkle_root?: string | null
+          ots_proof?: string | null
           prior_hash?: string | null
           public_key: string
           receipt_id: string
@@ -232,7 +258,10 @@ export type Database = {
           sequence?: never
         }
         Update: {
+          anchor_calendar?: string | null
+          anchor_confirmed_at?: string | null
           anchor_status?: string
+          anchor_submitted_at?: string | null
           bitcoin_anchor?: Json | null
           chain_hash?: string
           citizen_id?: string | null
@@ -241,6 +270,7 @@ export type Database = {
           ed25519_signature?: string
           id?: string
           merkle_root?: string | null
+          ots_proof?: string | null
           prior_hash?: string | null
           public_key?: string
           receipt_id?: string
@@ -367,7 +397,10 @@ export type Database = {
           _signature: string
         }
         Returns: {
+          anchor_calendar: string | null
+          anchor_confirmed_at: string | null
           anchor_status: string
+          anchor_submitted_at: string | null
           bitcoin_anchor: Json | null
           chain_hash: string
           citizen_id: string | null
@@ -376,6 +409,7 @@ export type Database = {
           ed25519_signature: string
           id: string
           merkle_root: string | null
+          ots_proof: string | null
           prior_hash: string | null
           public_key: string
           receipt_id: string
