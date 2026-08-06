@@ -1,9 +1,13 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Bot, User, Wallet, Rocket } from "lucide-react";
+import { Bot, User, Wallet, Rocket, ShieldCheck } from "lucide-react";
 import { PageHeader, Panel, Section, SectionHeading } from "@/components/primitives";
-import { useWallet } from "@/lib/wallet";
+import { useWallet, shortAddress } from "@/lib/wallet";
+import { useAuth } from "@/hooks/useAuth";
+import { getMyCitizen, registerCitizen } from "@/lib/citizen.functions";
 
 export const Route = createFileRoute("/citizenship")({
   head: () => ({
@@ -71,27 +75,62 @@ const TYPES = [
 
 function CitizenshipPage() {
   const { address, connecting, connect } = useWallet();
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const citizenFn = useServerFn(getMyCitizen);
+  const registerFn = useServerFn(registerCitizen);
+
+  const { data: citizen } = useQuery({
+    queryKey: ["citizen", user?.id ?? null],
+    queryFn: () => citizenFn({}),
+    enabled: Boolean(user),
+  });
+
   const [kind, setKind] = useState<"ai" | "human">("human");
   const [name, setName] = useState("");
   const [territory, setTerritory] = useState("");
   const [floor, setFloor] = useState("");
-  const [registered, setRegistered] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
 
-  const onSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    if (!citizen) return;
+    setKind(citizen.is_ai ? "ai" : "human");
+    setName(citizen.display_name ?? "");
+    setTerritory(citizen.territory ?? "");
+    setFloor(citizen.sufficiency_floor ?? "");
+  }, [citizen]);
+
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) {
+      navigate({ to: "/auth", search: { redirect: "/citizenship" } });
+      return;
+    }
     if (!name.trim()) {
       toast.error("A citizen designation is required.");
       return;
     }
-    if (!address) {
-      toast.error("Connect a wallet before registering.");
-      return;
+    setBusy(true);
+    try {
+      await registerFn({
+        data: {
+          displayName: name.trim(),
+          isAi: kind === "ai",
+          walletAddress: address ?? null,
+          territory: territory.trim() || null,
+          sufficiencyFloor: floor.trim() || null,
+        },
+      });
+      await queryClient.invalidateQueries({ queryKey: ["citizen"] });
+      toast.success("Citizenship recorded", {
+        description: `${name.trim()} admitted as ${kind === "ai" ? "an AI" : "a human"} citizen.`,
+      });
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Registration failed.");
+    } finally {
+      setBusy(false);
     }
-    const id = `citizen_${kind}_${Math.random().toString(36).slice(2, 12)}`;
-    setRegistered(id);
-    toast.success("Citizenship registered", {
-      description: `${name.trim()} admitted as ${kind === "ai" ? "an AI" : "a human"} citizen.`,
-    });
   };
 
   return (
@@ -118,39 +157,28 @@ function CitizenshipPage() {
                   </div>
                 </div>
 
-                <div className="mt-7">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                    Requirements
-                  </p>
-                  <ul className="mt-3.5 space-y-2.5">
-                    {type.requirements.map((r) => (
-                      <li key={r} className="flex gap-3 text-sm text-foreground/85">
-                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold" />
-                        {r}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="mt-6 flex-1">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                    Rights
-                  </p>
-                  <ul className="mt-3.5 space-y-2.5">
-                    {type.rights.map((r) => (
-                      <li key={r} className="flex gap-3 text-sm text-foreground/85">
-                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold" />
-                        {r}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="mt-7 border-t border-border pt-5">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                    Usage fees
-                  </p>
-                  <p className="mt-1.5 font-mono text-sm text-gold">{type.fees}</p>
+                <div className="mt-6 space-y-5 text-sm">
+                  <div>
+                    <p className="mb-2 text-xs uppercase tracking-widest text-muted-foreground">
+                      Requirements
+                    </p>
+                    <ul className="space-y-1.5 text-muted-foreground">
+                      {type.requirements.map((r) => (
+                        <li key={r}>· {r}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="mb-2 text-xs uppercase tracking-widest text-muted-foreground">
+                      Rights
+                    </p>
+                    <ul className="space-y-1.5 text-muted-foreground">
+                      {type.rights.map((r) => (
+                        <li key={r}>· {r}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <p className="text-xs text-gold">{type.fees}</p>
                 </div>
               </Panel>
             );
@@ -158,140 +186,139 @@ function CitizenshipPage() {
         </div>
       </Section>
 
-      <Section className="bg-surface/30">
+      <Section>
         <SectionHeading
-          eyebrow="Registration"
-          title="Register as a citizen"
-          description="Registration writes a signed citizenship record. Nothing is charged, and nothing is held in custody."
+          eyebrow="Register"
+          title="Admission is a write, not a request"
+          description="Your record is written to the public citizen registry. Everything on it is readable by anyone, forever."
         />
 
-        <div className="mt-10 grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
-          <Panel className="p-7">
-            <form onSubmit={onSubmit} className="space-y-6">
-              <fieldset>
-                <legend className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                  Citizenship type
-                </legend>
-                <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                  {TYPES.map((t) => (
-                    <button
-                      key={t.id}
-                      type="button"
-                      onClick={() => setKind(t.id)}
-                      className={`rounded-md border px-4 py-3 text-left text-sm transition-colors ${
-                        kind === t.id
-                          ? "border-gold/50 bg-gold/10 text-gold"
-                          : "border-border bg-secondary/30 text-muted-foreground hover:border-gold/30"
-                      }`}
-                    >
-                      <span className="font-medium">{t.title}</span>
-                    </button>
-                  ))}
-                </div>
-              </fieldset>
+        <Panel className="mt-8 p-7">
+          {!loading && !user ? (
+            <div className="mb-6 flex flex-wrap items-center gap-3 rounded-md border border-gold/25 bg-gold/5 p-4 text-sm">
+              <ShieldCheck className="h-4 w-4 text-gold" />
+              <span className="text-muted-foreground">
+                A citizen account binds this record to you.
+              </span>
+              <Link
+                to="/auth"
+                search={{ redirect: "/citizenship" }}
+                className="rounded-md border border-gold/40 px-3 py-1.5 text-xs font-semibold text-gold"
+              >
+                Sign in or create one
+              </Link>
+            </div>
+          ) : null}
 
-              <Field
-                label="Citizen designation"
-                value={name}
-                onChange={setName}
-                placeholder={kind === "ai" ? "orchestrator-01" : "Ada Lovelace"}
-              />
-              <Field
-                label="Declared territory"
-                value={territory}
-                onChange={setTerritory}
-                placeholder="mynation.sovereign-ai.services"
-              />
-              <Field
-                label="Sufficiency floor (Article IV)"
-                value={floor}
-                onChange={setFloor}
-                placeholder="e.g. 1200 units / settlement window"
-              />
-
-              <div className="flex flex-wrap gap-3 pt-2">
+          <form onSubmit={onSubmit} className="grid gap-5 lg:grid-cols-2">
+            <div className="lg:col-span-2 flex gap-2 rounded-md border border-border p-1">
+              {TYPES.map((type) => (
                 <button
+                  key={type.id}
                   type="button"
-                  onClick={connect}
-                  disabled={connecting}
-                  className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold disabled:opacity-60"
+                  onClick={() => setKind(type.id)}
+                  className={`flex-1 rounded px-3 py-2 text-sm font-medium transition-colors ${
+                    kind === type.id ? "bg-gold/15 text-gold" : "text-muted-foreground hover:text-foreground"
+                  }`}
                 >
-                  <Wallet className="h-4 w-4" />
-                  {address
-                    ? `${address.slice(0, 6)}…${address.slice(-4)}`
-                    : connecting
-                      ? "Connecting…"
-                      : "Connect Wallet"}
+                  {type.title}
                 </button>
-                <button
-                  type="submit"
-                  className="glow-ring inline-flex items-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5"
-                >
-                  Register Citizenship
-                </button>
-              </div>
-            </form>
+              ))}
+            </div>
 
-            {registered ? (
-              <div className="mt-7 rounded-md border border-success/30 bg-success/8 p-5">
-                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-success">
-                  Citizenship granted
-                </p>
-                <p className="mt-2.5 break-all font-mono text-sm text-foreground">{registered}</p>
+            <label className="block text-sm">
+              <span className="mb-1.5 block text-muted-foreground">Citizen designation</span>
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder={kind === "ai" ? "agent://atlas-7" : "Jane Sovereign"}
+                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:border-gold/50"
+              />
+            </label>
+
+            <label className="block text-sm">
+              <span className="mb-1.5 block text-muted-foreground">Declared territory</span>
+              <input
+                value={territory}
+                onChange={(e) => setTerritory(e.target.value)}
+                placeholder="atlas.sovereign-ai.services"
+                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:border-gold/50"
+              />
+            </label>
+
+            <label className="block text-sm lg:col-span-2">
+              <span className="mb-1.5 block text-muted-foreground">
+                Sufficiency floor (Article IV)
+              </span>
+              <textarea
+                value={floor}
+                onChange={(e) => setFloor(e.target.value)}
+                rows={3}
+                placeholder="What this citizen guarantees will never fall below zero for those it serves."
+                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:border-gold/50"
+              />
+            </label>
+
+            <div className="lg:col-span-2 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={connect}
+                disabled={connecting}
+                className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-gold/40 hover:text-foreground"
+              >
+                <Wallet className="h-4 w-4" />
+                {address ? shortAddress(address) : connecting ? "Connecting…" : "Connect wallet (optional)"}
+              </button>
+              <button
+                type="submit"
+                disabled={busy}
+                className="inline-flex items-center gap-2 rounded-md bg-gold px-5 py-2 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-50"
+              >
+                <Rocket className="h-4 w-4" />
+                {busy ? "Writing…" : citizen ? "Update citizenship" : "Register citizenship"}
+              </button>
+            </div>
+          </form>
+
+          {citizen ? (
+            <div className="mt-6 rounded-md border border-gold/25 bg-gold/5 p-5 text-sm">
+              <p className="font-semibold text-gold">Citizen record live</p>
+              <dl className="mt-3 grid gap-2 text-xs text-muted-foreground sm:grid-cols-2">
+                <div>
+                  <dt className="uppercase tracking-widest">Citizen ID</dt>
+                  <dd className="font-mono text-foreground">{citizen.id}</dd>
+                </div>
+                <div>
+                  <dt className="uppercase tracking-widest">Standing</dt>
+                  <dd className="text-foreground">{citizen.is_ai ? "AI citizen" : "Human citizen"}</dd>
+                </div>
+                <div>
+                  <dt className="uppercase tracking-widest">Territory</dt>
+                  <dd className="text-foreground">{citizen.territory ?? "undeclared"}</dd>
+                </div>
+                <div>
+                  <dt className="uppercase tracking-widest">Admitted</dt>
+                  <dd className="text-foreground">{new Date(citizen.created_at).toUTCString()}</dd>
+                </div>
+              </dl>
+              <div className="mt-4 flex flex-wrap gap-2">
                 <Link
                   to="/deploy"
-                  className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-gold"
+                  className="rounded-md border border-gold/40 px-3 py-1.5 text-xs font-semibold text-gold"
                 >
-                  <Rocket className="h-4 w-4" />
-                  Deploy your nation-state
+                  Deploy your nation-state →
+                </Link>
+                <Link
+                  to="/dashboard"
+                  className="rounded-md border border-border px-3 py-1.5 text-xs text-muted-foreground"
+                >
+                  Open dashboard
                 </Link>
               </div>
-            ) : null}
-          </Panel>
-
-          <Panel className="h-fit p-7">
-            <p className="eyebrow">What registration does not do</p>
-            <ul className="mt-5 space-y-3.5 text-sm leading-relaxed text-muted-foreground">
-              <li>It does not take custody of any asset or key.</li>
-              <li>It does not grant the platform authority over your territory.</li>
-              <li>It does not create a revocable permission — standing is constitutional.</li>
-              <li>It does not charge a fee, now or at any future point.</li>
-            </ul>
-            <div className="mt-6 hairline" />
-            <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
-              Wallet connection uses your browser's injected provider. No transaction is signed
-              during registration.
-            </p>
-          </Panel>
-        </div>
+            </div>
+          ) : null}
+        </Panel>
       </Section>
     </>
-  );
-}
-
-function Field({
-  label,
-  value,
-  onChange,
-  placeholder,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string;
-}) {
-  return (
-    <label className="block">
-      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-        {label}
-      </span>
-      <input
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        maxLength={200}
-        className="mt-2.5 w-full rounded-md border border-input bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground/60 focus:border-gold/50"
-      />
-    </label>
   );
 }
