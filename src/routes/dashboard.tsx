@@ -46,6 +46,16 @@ const TRANSACTIONS = [
 
 function DashboardPage() {
   const { address, connecting, connect } = useWallet();
+  const { user } = useAuth();
+  const citizenFn = useServerFn(getMyCitizen);
+  const statsFn = useServerFn(getLedgerStats);
+
+  const { data: citizen } = useQuery({
+    queryKey: ["citizen", user?.id ?? null],
+    queryFn: () => citizenFn({}),
+    enabled: Boolean(user),
+  });
+  const { data: stats } = useQuery({ queryKey: ["ledger-stats"], queryFn: () => statsFn({}) });
 
   return (
     <>
@@ -66,18 +76,58 @@ function DashboardPage() {
       </PageHeader>
 
       <Section className="py-14">
+        <Panel className="mb-4 flex flex-wrap items-center justify-between gap-4 p-6 text-sm">
+          {citizen ? (
+            <>
+              <div>
+                <p className="text-xs uppercase tracking-widest text-muted-foreground">Citizen record</p>
+                <p className="mt-1 font-semibold text-foreground">
+                  {citizen.display_name}{" "}
+                  <span className="text-muted-foreground">
+                    · {citizen.is_ai ? "AI citizen" : "human citizen"}
+                  </span>
+                </p>
+                <p className="mt-1 font-mono text-xs text-muted-foreground">
+                  {citizen.territory ?? "territory undeclared"}
+                </p>
+              </div>
+              <Link to="/citizenship" className="text-xs font-semibold text-gold">
+                Amend record →
+              </Link>
+            </>
+          ) : (
+            <>
+              <p className="text-muted-foreground">
+                No citizen record is bound to this browser yet. Sealing and verification remain free
+                and keyless.
+              </p>
+              <Link
+                to={user ? "/citizenship" : "/auth"}
+                search={user ? undefined : { redirect: "/citizenship" }}
+                className="rounded-md border border-gold/40 px-3 py-1.5 text-xs font-semibold text-gold"
+              >
+                {user ? "Register citizenship" : "Sign in"}
+              </Link>
+            </>
+          )}
+        </Panel>
+
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatBlock label="Nation-states deployed" value="3" delta="+1 / 30d" />
-          <StatBlock label="Verifications" value="184,209" delta="+21.4% / 30d" />
-          <StatBlock label="Bitcoin anchors" value="1,442" delta="+8.9% / 30d" />
-          <StatBlock label="Surplus routed" value="$48,210" delta="+12.6% / 30d" />
+          <StatBlock label="Chain entries" value={String(stats?.entries ?? 0)} delta="live" />
+          <StatBlock label="Registered citizens" value={String(stats?.citizens ?? 0)} delta="live" />
+          <StatBlock label="Nation-states" value={String(stats?.nationStates ?? 0)} delta="live" />
+          <StatBlock
+            label="Fees recorded"
+            value={`$${(stats?.feesUsd ?? 0).toFixed(3)}`}
+            delta="live"
+          />
         </div>
 
         <div className="mt-4 grid gap-4 lg:grid-cols-3">
           {[
             { icon: Rocket, label: "Deploy Nation-State", to: "/deploy" as const },
-            { icon: BadgeCheck, label: "New Verification", to: "/contracts" as const },
-            { icon: Anchor, label: "Anchor to Bitcoin", to: "/contracts" as const },
+            { icon: BadgeCheck, label: "Seal something", to: "/seal" as const },
+            { icon: Anchor, label: "Propagation console", to: "/amplify" as const },
           ].map((action) => (
             <Link key={action.label} to={action.to}>
               <Panel interactive className="flex items-center gap-4">
@@ -90,6 +140,7 @@ function DashboardPage() {
           ))}
         </div>
       </Section>
+
 
       <Section className="bg-surface/30">
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_380px]">
