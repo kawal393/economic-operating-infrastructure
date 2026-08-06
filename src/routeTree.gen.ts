@@ -25,6 +25,9 @@ import { Route as ProtocolsRouteImport } from './routes/protocols'
 import { Route as SealRouteImport } from './routes/seal'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as VerifyRouteImport } from './routes/verify'
+import { Route as RReceiptIdRouteImport } from './routes/r.$receiptId'
+import { Route as RegistryIndexRouteImport } from './routes/registry.index'
+import { Route as RegistrySlugRouteImport } from './routes/registry.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -106,6 +109,21 @@ const VerifyRoute = VerifyRouteImport.update({
   path: '/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RReceiptIdRoute = RReceiptIdRouteImport.update({
+  id: '/r/$receiptId',
+  path: '/r/$receiptId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistryIndexRoute = RegistryIndexRouteImport.update({
+  id: '/registry/',
+  path: '/registry/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistrySlugRoute = RegistrySlugRouteImport.update({
+  id: '/registry/$slug',
+  path: '/registry/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -124,6 +142,9 @@ export interface FileRoutesByFullPath {
   '/seal': typeof SealRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
+  '/r/$receiptId': typeof RReceiptIdRoute
+  '/registry/$slug': typeof RegistrySlugRoute
+  '/registry/': typeof RegistryIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -142,6 +163,9 @@ export interface FileRoutesByTo {
   '/seal': typeof SealRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
+  '/r/$receiptId': typeof RReceiptIdRoute
+  '/registry/$slug': typeof RegistrySlugRoute
+  '/registry': typeof RegistryIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -161,6 +185,9 @@ export interface FileRoutesById {
   '/seal': typeof SealRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
+  '/r/$receiptId': typeof RReceiptIdRoute
+  '/registry/$slug': typeof RegistrySlugRoute
+  '/registry/': typeof RegistryIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -181,6 +208,9 @@ export interface FileRouteTypes {
     | '/seal'
     | '/transactions'
     | '/verify'
+    | '/r/$receiptId'
+    | '/registry/$slug'
+    | '/registry/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -199,6 +229,9 @@ export interface FileRouteTypes {
     | '/seal'
     | '/transactions'
     | '/verify'
+    | '/r/$receiptId'
+    | '/registry/$slug'
+    | '/registry'
   id:
     | '__root__'
     | '/'
@@ -217,6 +250,9 @@ export interface FileRouteTypes {
     | '/seal'
     | '/transactions'
     | '/verify'
+    | '/r/$receiptId'
+    | '/registry/$slug'
+    | '/registry/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -236,6 +272,9 @@ export interface RootRouteChildren {
   SealRoute: typeof SealRoute
   TransactionsRoute: typeof TransactionsRoute
   VerifyRoute: typeof VerifyRoute
+  RReceiptIdRoute: typeof RReceiptIdRoute
+  RegistrySlugRoute: typeof RegistrySlugRoute
+  RegistryIndexRoute: typeof RegistryIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -352,6 +391,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/r/$receiptId': {
+      id: '/r/$receiptId'
+      path: '/r/$receiptId'
+      fullPath: '/r/$receiptId'
+      preLoaderRoute: typeof RReceiptIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registry/': {
+      id: '/registry/'
+      path: '/registry'
+      fullPath: '/registry/'
+      preLoaderRoute: typeof RegistryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registry/$slug': {
+      id: '/registry/$slug'
+      path: '/registry/$slug'
+      fullPath: '/registry/$slug'
+      preLoaderRoute: typeof RegistrySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -372,6 +432,9 @@ const rootRouteChildren: RootRouteChildren = {
   SealRoute: SealRoute,
   TransactionsRoute: TransactionsRoute,
   VerifyRoute: VerifyRoute,
+  RReceiptIdRoute: RReceiptIdRoute,
+  RegistrySlugRoute: RegistrySlugRoute,
+  RegistryIndexRoute: RegistryIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
