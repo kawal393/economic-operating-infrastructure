@@ -5,15 +5,18 @@ import { cn } from "@/lib/utils";
 import { FOOTER_CREED } from "@/content/nation";
 
 const NAV = [
+  { to: "/seal", label: "Seal" },
+  { to: "/verify", label: "Verify" },
+  { to: "/ledger", label: "Ledger" },
   { to: "/constitution", label: "Constitution" },
   { to: "/government", label: "Government" },
   { to: "/protocols", label: "Protocols" },
   { to: "/citizenship", label: "Citizenship" },
   { to: "/governance", label: "Governance" },
   { to: "/dashboard", label: "Dashboard" },
-  { to: "/pricing", label: "Pricing" },
   { to: "/docs", label: "Docs" },
 ] as const;
+
 
 const FOOTER_GROUPS = [
   {
@@ -28,12 +31,16 @@ const FOOTER_GROUPS = [
   {
     title: "Infrastructure",
     links: [
+      { to: "/seal", label: "Seal" },
+      { to: "/verify", label: "Verify" },
+      { to: "/ledger", label: "Public Ledger" },
       { to: "/protocols", label: "Protocol Explorer" },
       { to: "/deploy", label: "Nation-State Deployer" },
       { to: "/contracts", label: "Smart Contracts" },
       { to: "/transactions", label: "Transactions" },
     ],
   },
+
   {
     title: "Builders",
     links: [
@@ -167,10 +174,16 @@ export function SiteFooter() {
               layer — verification, anchoring, post-quantum defence, governance and surplus routing
               — is the product.
             </p>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              Powered by <span className="text-gold">Apex PSI</span> — in partnership with the
+              world's first cryptographic provenance protocol. Sovereign AI Services is an
+              independent nation-state, not part of the Apex empire.
+            </p>
             <p className="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-gold">
               sovereign-ai.services
             </p>
           </div>
+
 
           {FOOTER_GROUPS.map((group) => (
             <div key={group.title}>

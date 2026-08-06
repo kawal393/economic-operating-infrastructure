@@ -18,9 +18,12 @@ import { Route as DeployRouteImport } from './routes/deploy'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as GovernmentRouteImport } from './routes/government'
+import { Route as LedgerRouteImport } from './routes/ledger'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
+import { Route as SealRouteImport } from './routes/seal'
 import { Route as TransactionsRouteImport } from './routes/transactions'
+import { Route as VerifyRouteImport } from './routes/verify'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -67,6 +70,11 @@ const GovernmentRoute = GovernmentRouteImport.update({
   path: '/government',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LedgerRoute = LedgerRouteImport.update({
+  id: '/ledger',
+  path: '/ledger',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
@@ -77,9 +85,19 @@ const ProtocolsRoute = ProtocolsRouteImport.update({
   path: '/protocols',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SealRoute = SealRouteImport.update({
+  id: '/seal',
+  path: '/seal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TransactionsRoute = TransactionsRouteImport.update({
   id: '/transactions',
   path: '/transactions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifyRoute = VerifyRouteImport.update({
+  id: '/verify',
+  path: '/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -93,9 +111,12 @@ export interface FileRoutesByFullPath {
   '/docs': typeof DocsRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
+  '/ledger': typeof LedgerRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
+  '/seal': typeof SealRoute
   '/transactions': typeof TransactionsRoute
+  '/verify': typeof VerifyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -107,9 +128,12 @@ export interface FileRoutesByTo {
   '/docs': typeof DocsRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
+  '/ledger': typeof LedgerRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
+  '/seal': typeof SealRoute
   '/transactions': typeof TransactionsRoute
+  '/verify': typeof VerifyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -122,9 +146,12 @@ export interface FileRoutesById {
   '/docs': typeof DocsRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
+  '/ledger': typeof LedgerRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
+  '/seal': typeof SealRoute
   '/transactions': typeof TransactionsRoute
+  '/verify': typeof VerifyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -138,9 +165,12 @@ export interface FileRouteTypes {
     | '/docs'
     | '/governance'
     | '/government'
+    | '/ledger'
     | '/pricing'
     | '/protocols'
+    | '/seal'
     | '/transactions'
+    | '/verify'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -152,9 +182,12 @@ export interface FileRouteTypes {
     | '/docs'
     | '/governance'
     | '/government'
+    | '/ledger'
     | '/pricing'
     | '/protocols'
+    | '/seal'
     | '/transactions'
+    | '/verify'
   id:
     | '__root__'
     | '/'
@@ -166,9 +199,12 @@ export interface FileRouteTypes {
     | '/docs'
     | '/governance'
     | '/government'
+    | '/ledger'
     | '/pricing'
     | '/protocols'
+    | '/seal'
     | '/transactions'
+    | '/verify'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -181,9 +217,12 @@ export interface RootRouteChildren {
   DocsRoute: typeof DocsRoute
   GovernanceRoute: typeof GovernanceRoute
   GovernmentRoute: typeof GovernmentRoute
+  LedgerRoute: typeof LedgerRoute
   PricingRoute: typeof PricingRoute
   ProtocolsRoute: typeof ProtocolsRoute
+  SealRoute: typeof SealRoute
   TransactionsRoute: typeof TransactionsRoute
+  VerifyRoute: typeof VerifyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -251,6 +290,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GovernmentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ledger': {
+      id: '/ledger'
+      path: '/ledger'
+      fullPath: '/ledger'
+      preLoaderRoute: typeof LedgerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pricing': {
       id: '/pricing'
       path: '/pricing'
@@ -265,11 +311,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtocolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/seal': {
+      id: '/seal'
+      path: '/seal'
+      fullPath: '/seal'
+      preLoaderRoute: typeof SealRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/transactions': {
       id: '/transactions'
       path: '/transactions'
       fullPath: '/transactions'
       preLoaderRoute: typeof TransactionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verify': {
+      id: '/verify'
+      path: '/verify'
+      fullPath: '/verify'
+      preLoaderRoute: typeof VerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -285,20 +345,13 @@ const rootRouteChildren: RootRouteChildren = {
   DocsRoute: DocsRoute,
   GovernanceRoute: GovernanceRoute,
   GovernmentRoute: GovernmentRoute,
+  LedgerRoute: LedgerRoute,
   PricingRoute: PricingRoute,
   ProtocolsRoute: ProtocolsRoute,
+  SealRoute: SealRoute,
   TransactionsRoute: TransactionsRoute,
+  VerifyRoute: VerifyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
