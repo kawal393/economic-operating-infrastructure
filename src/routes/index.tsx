@@ -152,14 +152,69 @@ function Hero() {
           </Link>
         </div>
 
+        <div className="animate-rise mt-8 flex flex-wrap items-center gap-x-2 gap-y-1.5" style={{ animationDelay: "300ms" }}>
+          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            Integrates with:
+          </span>
+          {HOMEPAGE_INTEGRATION_LINKS.map((item, i) => (
+            <span key={item.hash} className="flex items-center gap-2">
+              <Link
+                to="/integrations"
+                hash={item.hash}
+                className="text-xs text-muted-foreground transition-colors hover:text-gold"
+              >
+                {item.label}
+              </Link>
+              {i < HOMEPAGE_INTEGRATION_LINKS.length - 1 ? (
+                <span className="text-xs text-border">·</span>
+              ) : null}
+            </span>
+          ))}
+        </div>
 
-        <dl className="mt-16 grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <div
+          className="animate-rise mt-6 inline-flex max-w-xl flex-wrap items-center gap-x-4 gap-y-2 rounded-md border border-border bg-secondary/30 px-4 py-3"
+          style={{ animationDelay: "315ms" }}
+        >
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold">
+              Powered by APEX PSI
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Cryptographic provenance protocol — IETF draft-singh-psi-00
+            </p>
+          </div>
+          <a
+            href="https://www.ai-governance-standard.com"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="inline-flex items-center gap-1.5 rounded-md border border-gold/35 bg-gold/10 px-3.5 py-2 text-xs font-medium text-gold transition-colors hover:bg-gold/20"
+          >
+            Learn about the protocol
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        </div>
+
+        <dl className="mt-16 grid grid-cols-2 gap-4 lg:grid-cols-5">
           {PLATFORM_STATS.map((stat, i) => (
             <div key={stat.label} className="animate-rise" style={{ animationDelay: `${330 + i * 60}ms` }}>
               <StatBlock label={stat.label} value={stat.value} delta={stat.delta} />
             </div>
           ))}
+          <Link to="/integrations" className="animate-rise block" style={{ animationDelay: "570ms" }}>
+            <Panel className="h-full p-5 lift">
+              <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                <Plug className="h-3.5 w-3.5 text-gold" />
+                Apps integrated
+              </p>
+              <p className="mt-3 font-mono text-2xl font-semibold tracking-tight text-foreground lg:text-3xl">
+                12+
+              </p>
+              <p className="mt-1.5 font-mono text-[10px] text-muted-foreground">(updated weekly)</p>
+            </Panel>
+          </Link>
         </dl>
+
       </div>
     </section>
   );
