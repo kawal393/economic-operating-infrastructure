@@ -1,6 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Scale, Bitcoin, ShieldCheck, Boxes, Users, Globe } from "lucide-react";
+import {
+  ArrowRight,
+  Scale,
+  Bitcoin,
+  ShieldCheck,
+  Boxes,
+  Users,
+  Globe,
+  Plug,
+  ExternalLink,
+} from "lucide-react";
 import { Panel, Section, SectionHeading, StatBlock } from "@/components/primitives";
+import { HOMEPAGE_INTEGRATION_LINKS } from "@/content/integrations";
 import {
   ARTICLES,
   BRANCHES,
@@ -9,6 +20,7 @@ import {
   POWER_CHAIN,
   SCALE_MODEL,
 } from "@/content/nation";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
