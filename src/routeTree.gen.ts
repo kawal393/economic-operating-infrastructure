@@ -21,7 +21,9 @@ import { Route as DocsRouteImport } from './routes/docs'
 import { Route as FeedDotxmlRouteImport } from './routes/feed[.]xml'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as GovernmentRouteImport } from './routes/government'
+import { Route as IntegrationsRouteImport } from './routes/integrations'
 import { Route as LedgerRouteImport } from './routes/ledger'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as OnboardRouteImport } from './routes/onboard'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
@@ -96,9 +98,19 @@ const GovernmentRoute = GovernmentRouteImport.update({
   path: '/government',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IntegrationsRoute = IntegrationsRouteImport.update({
+  id: '/integrations',
+  path: '/integrations',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LedgerRoute = LedgerRouteImport.update({
   id: '/ledger',
   path: '/ledger',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardRoute = OnboardRouteImport.update({
@@ -180,7 +192,9 @@ export interface FileRoutesByFullPath {
   '/feed.xml': typeof FeedDotxmlRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
+  '/integrations': typeof IntegrationsRoute
   '/ledger': typeof LedgerRoute
+  '/mcp': typeof McpRoute
   '/onboard': typeof OnboardRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
@@ -208,7 +222,9 @@ export interface FileRoutesByTo {
   '/feed.xml': typeof FeedDotxmlRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
+  '/integrations': typeof IntegrationsRoute
   '/ledger': typeof LedgerRoute
+  '/mcp': typeof McpRoute
   '/onboard': typeof OnboardRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
@@ -237,7 +253,9 @@ export interface FileRoutesById {
   '/feed.xml': typeof FeedDotxmlRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
+  '/integrations': typeof IntegrationsRoute
   '/ledger': typeof LedgerRoute
+  '/mcp': typeof McpRoute
   '/onboard': typeof OnboardRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
@@ -267,7 +285,9 @@ export interface FileRouteTypes {
     | '/feed.xml'
     | '/governance'
     | '/government'
+    | '/integrations'
     | '/ledger'
+    | '/mcp'
     | '/onboard'
     | '/pricing'
     | '/protocols'
@@ -295,7 +315,9 @@ export interface FileRouteTypes {
     | '/feed.xml'
     | '/governance'
     | '/government'
+    | '/integrations'
     | '/ledger'
+    | '/mcp'
     | '/onboard'
     | '/pricing'
     | '/protocols'
@@ -323,7 +345,9 @@ export interface FileRouteTypes {
     | '/feed.xml'
     | '/governance'
     | '/government'
+    | '/integrations'
     | '/ledger'
+    | '/mcp'
     | '/onboard'
     | '/pricing'
     | '/protocols'
@@ -352,7 +376,9 @@ export interface RootRouteChildren {
   FeedDotxmlRoute: typeof FeedDotxmlRoute
   GovernanceRoute: typeof GovernanceRoute
   GovernmentRoute: typeof GovernmentRoute
+  IntegrationsRoute: typeof IntegrationsRoute
   LedgerRoute: typeof LedgerRoute
+  McpRoute: typeof McpRoute
   OnboardRoute: typeof OnboardRoute
   PricingRoute: typeof PricingRoute
   ProtocolsRoute: typeof ProtocolsRoute
@@ -454,11 +480,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GovernmentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/integrations': {
+      id: '/integrations'
+      path: '/integrations'
+      fullPath: '/integrations'
+      preLoaderRoute: typeof IntegrationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ledger': {
       id: '/ledger'
       path: '/ledger'
       fullPath: '/ledger'
       preLoaderRoute: typeof LedgerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboard': {
@@ -568,7 +608,9 @@ const rootRouteChildren: RootRouteChildren = {
   FeedDotxmlRoute: FeedDotxmlRoute,
   GovernanceRoute: GovernanceRoute,
   GovernmentRoute: GovernmentRoute,
+  IntegrationsRoute: IntegrationsRoute,
   LedgerRoute: LedgerRoute,
+  McpRoute: McpRoute,
   OnboardRoute: OnboardRoute,
   PricingRoute: PricingRoute,
   ProtocolsRoute: ProtocolsRoute,
@@ -586,13 +628,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -13,7 +13,9 @@ const NAV = [
   { to: "/government", label: "Government" },
   { to: "/protocols", label: "Protocols" },
   { to: "/citizenship", label: "Citizenship" },
+  { to: "/integrations", label: "Integrations" },
   { to: "/amplify", label: "Amplify" },
+
   { to: "/dashboard", label: "Dashboard" },
   { to: "/docs", label: "Docs" },
 ] as const;
@@ -46,7 +48,10 @@ const FOOTER_GROUPS = [
     title: "Builders",
     links: [
       { to: "/docs", label: "API Documentation" },
+      { to: "/integrations", label: "Integrations" },
+      { to: "/mcp", label: "MCP Server" },
       { to: "/pricing", label: "Pricing" },
+
       { to: "/dashboard", label: "Dashboard" },
     ],
   },
