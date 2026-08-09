@@ -27,8 +27,11 @@ const FOOTER_GROUPS = [
     links: [
       { to: "/constitution", label: "Constitution" },
       { to: "/government", label: "Government" },
+      { to: "/minister", label: "Minister of State" },
+      { to: "/security", label: "The Sentinel" },
       { to: "/citizenship", label: "Citizenship" },
       { to: "/governance", label: "Governance" },
+      { to: "/amplify", label: "Amplify" },
     ],
   },
   {
