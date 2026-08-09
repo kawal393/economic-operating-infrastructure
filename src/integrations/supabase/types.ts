@@ -14,6 +14,80 @@ export type Database = {
   }
   public: {
     Tables: {
+      agent_actions: {
+        Row: {
+          created_at: string
+          id: string
+          input: Json
+          requires_approval: boolean
+          session_id: string | null
+          status: string
+          summary: string | null
+          tool: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          input?: Json
+          requires_approval?: boolean
+          session_id?: string | null
+          status?: string
+          summary?: string | null
+          tool: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          input?: Json
+          requires_approval?: boolean
+          session_id?: string | null
+          status?: string
+          summary?: string | null
+          tool?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agent_actions_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "agent_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agent_sessions: {
+        Row: {
+          channel: string
+          ended_at: string | null
+          id: string
+          provider_conversation_id: string | null
+          started_at: string
+          turns: number
+          user_id: string | null
+        }
+        Insert: {
+          channel?: string
+          ended_at?: string | null
+          id?: string
+          provider_conversation_id?: string | null
+          started_at?: string
+          turns?: number
+          user_id?: string | null
+        }
+        Update: {
+          channel?: string
+          ended_at?: string | null
+          id?: string
+          provider_conversation_id?: string | null
+          started_at?: string
+          turns?: number
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       attestations: {
         Row: {
           citizen_id: string | null
@@ -426,6 +500,84 @@ export type Database = {
           },
         ]
       }
+      rate_limits: {
+        Row: {
+          bucket: string
+          hits: number
+          window_start: string
+        }
+        Insert: {
+          bucket: string
+          hits?: number
+          window_start: string
+        }
+        Update: {
+          bucket?: string
+          hits?: number
+          window_start?: string
+        }
+        Relationships: []
+      }
+      security_events: {
+        Row: {
+          actor: string | null
+          blocked: boolean
+          created_at: string
+          detail: Json
+          fingerprint: string | null
+          id: string
+          kind: string
+          severity: string
+          source: string
+        }
+        Insert: {
+          actor?: string | null
+          blocked?: boolean
+          created_at?: string
+          detail?: Json
+          fingerprint?: string | null
+          id?: string
+          kind: string
+          severity?: string
+          source?: string
+        }
+        Update: {
+          actor?: string | null
+          blocked?: boolean
+          created_at?: string
+          detail?: Json
+          fingerprint?: string | null
+          id?: string
+          kind?: string
+          severity?: string
+          source?: string
+        }
+        Relationships: []
+      }
+      system_flags: {
+        Row: {
+          description: string | null
+          key: string
+          updated_at: string
+          updated_by: string | null
+          value: Json
+        }
+        Insert: {
+          description?: string | null
+          key: string
+          updated_at?: string
+          updated_by?: string | null
+          value?: Json
+        }
+        Update: {
+          description?: string | null
+          key?: string
+          updated_at?: string
+          updated_by?: string | null
+          value?: Json
+        }
+        Relationships: []
+      }
       transactions: {
         Row: {
           amount_usd: number
@@ -561,6 +713,10 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      consume_rate_limit: {
+        Args: { _bucket: string; _limit: number; _window_seconds: number }
+        Returns: boolean
       }
       has_role: {
         Args: {
