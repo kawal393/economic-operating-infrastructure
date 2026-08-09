@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { FOOTER_CREED } from "@/content/nation";
 
 const NAV = [
+  { to: "/minister", label: "Minister" },
   { to: "/seal", label: "Seal" },
   { to: "/verify", label: "Verify" },
   { to: "/ledger", label: "Ledger" },
@@ -14,8 +15,7 @@ const NAV = [
   { to: "/protocols", label: "Protocols" },
   { to: "/citizenship", label: "Citizenship" },
   { to: "/integrations", label: "Integrations" },
-  { to: "/amplify", label: "Amplify" },
-
+  { to: "/security", label: "Sentinel" },
   { to: "/dashboard", label: "Dashboard" },
   { to: "/docs", label: "Docs" },
 ] as const;
@@ -27,8 +27,11 @@ const FOOTER_GROUPS = [
     links: [
       { to: "/constitution", label: "Constitution" },
       { to: "/government", label: "Government" },
+      { to: "/minister", label: "Minister of State" },
+      { to: "/security", label: "The Sentinel" },
       { to: "/citizenship", label: "Citizenship" },
       { to: "/governance", label: "Governance" },
+      { to: "/amplify", label: "Amplify" },
     ],
   },
   {

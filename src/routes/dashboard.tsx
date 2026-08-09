@@ -108,7 +108,7 @@ function DashboardPage() {
               </p>
               <Link
                 to={user ? "/citizenship" : "/auth"}
-                search={user ? undefined : { redirect: "/citizenship" }}
+                search={user ? {} : { redirect: "/citizenship" }}
                 className="rounded-md border border-gold/40 px-3 py-1.5 text-xs font-semibold text-gold"
               >
                 {user ? "Register citizenship" : "Sign in"}

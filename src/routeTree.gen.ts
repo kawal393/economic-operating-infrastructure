@@ -24,10 +24,12 @@ import { Route as GovernmentRouteImport } from './routes/government'
 import { Route as IntegrationsRouteImport } from './routes/integrations'
 import { Route as LedgerRouteImport } from './routes/ledger'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as MinisterRouteImport } from './routes/minister'
 import { Route as OnboardRouteImport } from './routes/onboard'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
 import { Route as SealRouteImport } from './routes/seal'
+import { Route as SecurityRouteImport } from './routes/security'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as VerifyRouteImport } from './routes/verify'
@@ -113,6 +115,11 @@ const McpRoute = McpRouteImport.update({
   path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MinisterRoute = MinisterRouteImport.update({
+  id: '/minister',
+  path: '/minister',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OnboardRoute = OnboardRouteImport.update({
   id: '/onboard',
   path: '/onboard',
@@ -131,6 +138,11 @@ const ProtocolsRoute = ProtocolsRouteImport.update({
 const SealRoute = SealRouteImport.update({
   id: '/seal',
   path: '/seal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecurityRoute = SecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -195,10 +207,12 @@ export interface FileRoutesByFullPath {
   '/integrations': typeof IntegrationsRoute
   '/ledger': typeof LedgerRoute
   '/mcp': typeof McpRoute
+  '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
+  '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
@@ -225,10 +239,12 @@ export interface FileRoutesByTo {
   '/integrations': typeof IntegrationsRoute
   '/ledger': typeof LedgerRoute
   '/mcp': typeof McpRoute
+  '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
+  '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
@@ -256,10 +272,12 @@ export interface FileRoutesById {
   '/integrations': typeof IntegrationsRoute
   '/ledger': typeof LedgerRoute
   '/mcp': typeof McpRoute
+  '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
+  '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
@@ -288,10 +306,12 @@ export interface FileRouteTypes {
     | '/integrations'
     | '/ledger'
     | '/mcp'
+    | '/minister'
     | '/onboard'
     | '/pricing'
     | '/protocols'
     | '/seal'
+    | '/security'
     | '/sitemap.xml'
     | '/transactions'
     | '/verify'
@@ -318,10 +338,12 @@ export interface FileRouteTypes {
     | '/integrations'
     | '/ledger'
     | '/mcp'
+    | '/minister'
     | '/onboard'
     | '/pricing'
     | '/protocols'
     | '/seal'
+    | '/security'
     | '/sitemap.xml'
     | '/transactions'
     | '/verify'
@@ -348,10 +370,12 @@ export interface FileRouteTypes {
     | '/integrations'
     | '/ledger'
     | '/mcp'
+    | '/minister'
     | '/onboard'
     | '/pricing'
     | '/protocols'
     | '/seal'
+    | '/security'
     | '/sitemap.xml'
     | '/transactions'
     | '/verify'
@@ -379,10 +403,12 @@ export interface RootRouteChildren {
   IntegrationsRoute: typeof IntegrationsRoute
   LedgerRoute: typeof LedgerRoute
   McpRoute: typeof McpRoute
+  MinisterRoute: typeof MinisterRoute
   OnboardRoute: typeof OnboardRoute
   PricingRoute: typeof PricingRoute
   ProtocolsRoute: typeof ProtocolsRoute
   SealRoute: typeof SealRoute
+  SecurityRoute: typeof SecurityRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TransactionsRoute: typeof TransactionsRoute
   VerifyRoute: typeof VerifyRoute
@@ -501,6 +527,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/minister': {
+      id: '/minister'
+      path: '/minister'
+      fullPath: '/minister'
+      preLoaderRoute: typeof MinisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/onboard': {
       id: '/onboard'
       path: '/onboard'
@@ -527,6 +560,13 @@ declare module '@tanstack/react-router' {
       path: '/seal'
       fullPath: '/seal'
       preLoaderRoute: typeof SealRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/security': {
+      id: '/security'
+      path: '/security'
+      fullPath: '/security'
+      preLoaderRoute: typeof SecurityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -611,10 +651,12 @@ const rootRouteChildren: RootRouteChildren = {
   IntegrationsRoute: IntegrationsRoute,
   LedgerRoute: LedgerRoute,
   McpRoute: McpRoute,
+  MinisterRoute: MinisterRoute,
   OnboardRoute: OnboardRoute,
   PricingRoute: PricingRoute,
   ProtocolsRoute: ProtocolsRoute,
   SealRoute: SealRoute,
+  SecurityRoute: SecurityRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TransactionsRoute: TransactionsRoute,
   VerifyRoute: VerifyRoute,
@@ -628,13 +670,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
