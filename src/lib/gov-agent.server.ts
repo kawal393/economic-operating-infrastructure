@@ -48,17 +48,17 @@ function conversationConfig() {
           description: tool.description,
           expects_response: true,
           response_timeout_secs: 15,
-          parameters: tool.params.map((p) => ({
-            id: p.name,
-            type: "string",
-            description: p.description,
-            required: p.required,
-            value_type: "llm_prompt",
-          })),
+          parameters: {
+            type: "object",
+            properties: Object.fromEntries(
+              tool.params.map((p) => [p.name, { type: "string", description: p.description }]),
+            ),
+            required: tool.params.filter((p) => p.required).map((p) => p.name),
+          },
         })),
       },
     },
-    tts: { model_id: "eleven_turbo_v2_5" },
+    tts: { model_id: "eleven_turbo_v2" },
     turn: { turn_timeout: 10 },
   };
 }
