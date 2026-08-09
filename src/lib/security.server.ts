@@ -39,7 +39,7 @@ export async function writeFlag(key: string, value: Record<string, unknown>, act
   const db = await admin();
   const { error } = await db
     .from("system_flags")
-    .upsert({ key, value, updated_at: new Date().toISOString(), updated_by: actor ?? null });
+    .upsert({ key, value: value as Json, updated_at: new Date().toISOString(), updated_by: actor ?? null });
   if (error) throw new Error(error.message);
 }
 
@@ -72,7 +72,7 @@ export async function logSecurityEvent(input: {
       source: input.source ?? "edge",
       actor: input.actor ?? null,
       fingerprint: input.fingerprint ?? null,
-      detail: input.detail ?? {},
+      detail: (input.detail ?? {}) as Json,
       blocked: input.blocked ?? true,
     });
   } catch (error) {
