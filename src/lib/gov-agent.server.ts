@@ -141,8 +141,13 @@ export async function mintVoiceGrant(input: {
 export type ToolOutcome = {
   status: "ok" | "denied" | "needs_approval" | "error";
   message: string;
-  data?: unknown;
+  data?: Json;
 };
+
+/** All tool payloads cross the RPC boundary as JSON. */
+function payload(value: unknown): Json {
+  return JSON.parse(JSON.stringify(value ?? null)) as Json;
+}
 
 const TOOL_MAP = new Map(GOV_TOOLS.map((t) => [t.name, t]));
 
@@ -255,7 +260,7 @@ export async function executeGovTool(input: {
       return {
         status: "needs_approval",
         message: `${tool.label} requires your explicit approval before it is recorded.`,
-        data: { tool: tool.name, args },
+        data: payload({ tool: tool.name, args }),
       };
     }
   }
@@ -293,18 +298,18 @@ async function runTool(
         pub.from("entities").select("id", { count: "exact", head: true }),
       ]);
       const data = {
-        notarizations: stats.total,
-        anchored: stats.anchored,
+        notarizations: stats.entries,
         chain_head: stats.head?.slice(0, 12) ?? null,
-        citizens: citizens.count ?? 0,
-        nation_states: states.count ?? 0,
+        citizens: citizens.count ?? stats.citizens,
+        nation_states: states.count ?? stats.nationStates,
         registered_entities: entities.count ?? 0,
+        fees_usd: stats.feesUsd,
         fee_schedule: FEES,
       };
       return {
         status: "ok",
-        message: `${data.notarizations} ledger entries, ${data.anchored} anchored, ${data.citizens} citizens, ${data.registered_entities} entities.`,
-        data,
+        message: `${data.notarizations} ledger entries, ${data.citizens} citizens, ${data.nation_states} nation-states, ${data.registered_entities} registered entities.`,
+        data: payload(data),
       };
     }
 
@@ -321,7 +326,7 @@ async function runTool(
       return {
         status: "ok",
         message: `${data.length} matching ledger ${data.length === 1 ? "entry" : "entries"} found.`,
-        data,
+        data: payload(data),
       };
     }
 
@@ -337,7 +342,7 @@ async function runTool(
         message: data?.length
           ? `${data.length} registry ${data.length === 1 ? "match" : "matches"}.`
           : "No entity in the registry matches. Absence is itself a signal.",
-        data: data ?? [],
+        data: payload(data ?? []),
       };
     }
 
@@ -353,7 +358,7 @@ async function runTool(
         message: data?.length
           ? `${data.length} active ${data.length === 1 ? "proposal" : "proposals"} before the legislature.`
           : "No proposals are currently active.",
-        data: data ?? [],
+        data: payload(data ?? []),
       };
     }
 
@@ -369,7 +374,7 @@ async function runTool(
       return {
         status: "ok",
         message: `Article ${article.numeral} — ${article.name}: ${article.right}. ${article.thesis}`,
-        data: article,
+        data: payload(article),
       };
     }
 
@@ -378,13 +383,13 @@ async function runTool(
       return {
         status: "ok",
         message: `Posture ${summary.posture}. ${summary.blocked24h} attempts blocked in the last 24 hours. Agent ${summary.agentEnabled ? "online" : "offline"}, writes ${summary.agentWriteEnabled ? "enabled" : "suspended"}.`,
-        data: summary,
+        data: payload(summary),
       };
     }
 
     case "open_console": {
       const path = args["path"] ?? "/";
-      return { status: "ok", message: `Opening ${path}.`, data: { path } };
+      return { status: "ok", message: `Opening ${path}.`, data: payload({ path }) };
     }
 
     case "file_proposal": {
@@ -401,7 +406,7 @@ async function runTool(
         .select("id, title")
         .single();
       if (error) return { status: "error", message: error.message };
-      return { status: "ok", message: `Proposal filed: "${data.title}".`, data };
+      return { status: "ok", message: `Proposal filed: "${data.title}".`, data: payload(data) };
     }
 
     case "cast_vote": {
@@ -415,7 +420,7 @@ async function runTool(
         .from("votes")
         .insert({ proposal_id: args["proposal_id"] ?? "", vote, voter_id: citizenId });
       if (error) return { status: "error", message: error.message };
-      return { status: "ok", message: `Vote recorded: ${vote}.`, data: { vote } };
+      return { status: "ok", message: `Vote recorded: ${vote}.`, data: payload({ vote }) };
     }
 
     case "register_entity": {
@@ -432,7 +437,7 @@ async function runTool(
         description: null,
         claimAsMine: true,
       });
-      return { status: "ok", message: `Entity registered in the public registry.`, data: result };
+      return { status: "ok", message: `Entity registered in the public registry.`, data: payload(result) };
     }
 
     default:
