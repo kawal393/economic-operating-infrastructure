@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useRef, useState } from "react";
-import { useConversation } from "@elevenlabs/react";
+import { ConversationProvider, useConversation } from "@elevenlabs/react";
 import { useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
@@ -18,6 +18,14 @@ type Line = { who: "citizen" | "minister" | "sentinel"; text: string; at: number
 type Pending = { id: string; tool: string; args: Record<string, string>; label: string };
 
 export default function MinisterVoice({ online }: { online: boolean }) {
+  return (
+    <ConversationProvider>
+      <MinisterConsole online={online} />
+    </ConversationProvider>
+  );
+}
+
+function MinisterConsole({ online }: { online: boolean }) {
   const { user } = useAuth();
   const navigate = useNavigate();
   const grantAuthed = useServerFn(grantVoiceSession);
@@ -114,7 +122,7 @@ export default function MinisterVoice({ online }: { online: boolean }) {
         return;
       }
       sessionRef.current = grant.sessionId || null;
-      await conversation.startSession({
+      conversation.startSession({
         conversationToken: grant.token,
         connectionType: "webrtc",
       });
