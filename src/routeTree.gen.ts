@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AmplifyRouteImport } from './routes/amplify'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CapitalRouteImport } from './routes/capital'
 import { Route as CitizenshipRouteImport } from './routes/citizenship'
 import { Route as ConstitutionRouteImport } from './routes/constitution'
 import { Route as ContractsRouteImport } from './routes/contracts'
@@ -53,6 +54,11 @@ const AmplifyRoute = AmplifyRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CapitalRoute = CapitalRouteImport.update({
+  id: '/capital',
+  path: '/capital',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CitizenshipRoute = CitizenshipRouteImport.update({
@@ -195,6 +201,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
+  '/capital': typeof CapitalRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
   '/contracts': typeof ContractsRoute
@@ -227,6 +234,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
+  '/capital': typeof CapitalRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
   '/contracts': typeof ContractsRoute
@@ -260,6 +268,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
+  '/capital': typeof CapitalRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
   '/contracts': typeof ContractsRoute
@@ -294,6 +303,7 @@ export interface FileRouteTypes {
     | '/'
     | '/amplify'
     | '/auth'
+    | '/capital'
     | '/citizenship'
     | '/constitution'
     | '/contracts'
@@ -326,6 +336,7 @@ export interface FileRouteTypes {
     | '/'
     | '/amplify'
     | '/auth'
+    | '/capital'
     | '/citizenship'
     | '/constitution'
     | '/contracts'
@@ -358,6 +369,7 @@ export interface FileRouteTypes {
     | '/'
     | '/amplify'
     | '/auth'
+    | '/capital'
     | '/citizenship'
     | '/constitution'
     | '/contracts'
@@ -391,6 +403,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AmplifyRoute: typeof AmplifyRoute
   AuthRoute: typeof AuthRoute
+  CapitalRoute: typeof CapitalRoute
   CitizenshipRoute: typeof CitizenshipRoute
   ConstitutionRoute: typeof ConstitutionRoute
   ContractsRoute: typeof ContractsRoute
@@ -441,6 +454,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/capital': {
+      id: '/capital'
+      path: '/capital'
+      fullPath: '/capital'
+      preLoaderRoute: typeof CapitalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/citizenship': {
@@ -639,6 +659,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AmplifyRoute: AmplifyRoute,
   AuthRoute: AuthRoute,
+  CapitalRoute: CapitalRoute,
   CitizenshipRoute: CitizenshipRoute,
   ConstitutionRoute: ConstitutionRoute,
   ContractsRoute: ContractsRoute,
