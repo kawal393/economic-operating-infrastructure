@@ -24,6 +24,7 @@ import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as GovernmentRouteImport } from './routes/government'
 import { Route as IntegrationsRouteImport } from './routes/integrations'
 import { Route as LedgerRouteImport } from './routes/ledger'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MinisterRouteImport } from './routes/minister'
 import { Route as OnboardRouteImport } from './routes/onboard'
@@ -34,6 +35,8 @@ import { Route as SecurityRouteImport } from './routes/security'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as VerifyRouteImport } from './routes/verify'
+import { Route as DotwellKnownDidDotjsonRouteImport } from './routes/[.]well-known.did[.]json'
+import { Route as DotwellKnownSovereignAiDotjsonRouteImport } from './routes/[.]well-known.sovereign-ai[.]json'
 import { Route as EntitiesIndexRouteImport } from './routes/entities.index'
 import { Route as EntitiesSlugRouteImport } from './routes/entities.$slug'
 import { Route as RReceiptIdRouteImport } from './routes/r.$receiptId'
@@ -122,6 +125,11 @@ const LedgerRoute = LedgerRouteImport.update({
   path: '/ledger',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
@@ -172,6 +180,17 @@ const VerifyRoute = VerifyRouteImport.update({
   path: '/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DotwellKnownDidDotjsonRoute = DotwellKnownDidDotjsonRouteImport.update({
+  id: '/.well-known/did.json',
+  path: '/.well-known/did.json',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DotwellKnownSovereignAiDotjsonRoute =
+  DotwellKnownSovereignAiDotjsonRouteImport.update({
+    id: '/.well-known/sovereign-ai.json',
+    path: '/.well-known/sovereign-ai.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const EntitiesIndexRoute = EntitiesIndexRouteImport.update({
   id: '/entities/',
   path: '/entities/',
@@ -251,6 +270,7 @@ export interface FileRoutesByFullPath {
   '/government': typeof GovernmentRoute
   '/integrations': typeof IntegrationsRoute
   '/ledger': typeof LedgerRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/mcp': typeof McpRoute
   '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
@@ -261,6 +281,8 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
+  '/.well-known/did.json': typeof DotwellKnownDidDotjsonRoute
+  '/.well-known/sovereign-ai.json': typeof DotwellKnownSovereignAiDotjsonRoute
   '/entities/$slug': typeof EntitiesSlugRoute
   '/r/$receiptId': typeof RReceiptIdRoute
   '/registry/$slug': typeof RegistrySlugRoute
@@ -290,6 +312,7 @@ export interface FileRoutesByTo {
   '/government': typeof GovernmentRoute
   '/integrations': typeof IntegrationsRoute
   '/ledger': typeof LedgerRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/mcp': typeof McpRoute
   '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
@@ -300,6 +323,8 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
+  '/.well-known/did.json': typeof DotwellKnownDidDotjsonRoute
+  '/.well-known/sovereign-ai.json': typeof DotwellKnownSovereignAiDotjsonRoute
   '/entities/$slug': typeof EntitiesSlugRoute
   '/r/$receiptId': typeof RReceiptIdRoute
   '/registry/$slug': typeof RegistrySlugRoute
@@ -330,6 +355,7 @@ export interface FileRoutesById {
   '/government': typeof GovernmentRoute
   '/integrations': typeof IntegrationsRoute
   '/ledger': typeof LedgerRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/mcp': typeof McpRoute
   '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
@@ -340,6 +366,8 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
+  '/.well-known/did.json': typeof DotwellKnownDidDotjsonRoute
+  '/.well-known/sovereign-ai.json': typeof DotwellKnownSovereignAiDotjsonRoute
   '/entities/$slug': typeof EntitiesSlugRoute
   '/r/$receiptId': typeof RReceiptIdRoute
   '/registry/$slug': typeof RegistrySlugRoute
@@ -371,6 +399,7 @@ export interface FileRouteTypes {
     | '/government'
     | '/integrations'
     | '/ledger'
+    | '/llms.txt'
     | '/mcp'
     | '/minister'
     | '/onboard'
@@ -381,6 +410,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/transactions'
     | '/verify'
+    | '/.well-known/did.json'
+    | '/.well-known/sovereign-ai.json'
     | '/entities/$slug'
     | '/r/$receiptId'
     | '/registry/$slug'
@@ -410,6 +441,7 @@ export interface FileRouteTypes {
     | '/government'
     | '/integrations'
     | '/ledger'
+    | '/llms.txt'
     | '/mcp'
     | '/minister'
     | '/onboard'
@@ -420,6 +452,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/transactions'
     | '/verify'
+    | '/.well-known/did.json'
+    | '/.well-known/sovereign-ai.json'
     | '/entities/$slug'
     | '/r/$receiptId'
     | '/registry/$slug'
@@ -449,6 +483,7 @@ export interface FileRouteTypes {
     | '/government'
     | '/integrations'
     | '/ledger'
+    | '/llms.txt'
     | '/mcp'
     | '/minister'
     | '/onboard'
@@ -459,6 +494,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/transactions'
     | '/verify'
+    | '/.well-known/did.json'
+    | '/.well-known/sovereign-ai.json'
     | '/entities/$slug'
     | '/r/$receiptId'
     | '/registry/$slug'
@@ -489,6 +526,7 @@ export interface RootRouteChildren {
   GovernmentRoute: typeof GovernmentRoute
   IntegrationsRoute: typeof IntegrationsRoute
   LedgerRoute: typeof LedgerRoute
+  LlmsDottxtRoute: typeof LlmsDottxtRoute
   McpRoute: typeof McpRoute
   MinisterRoute: typeof MinisterRoute
   OnboardRoute: typeof OnboardRoute
@@ -499,6 +537,8 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TransactionsRoute: typeof TransactionsRoute
   VerifyRoute: typeof VerifyRoute
+  DotwellKnownDidDotjsonRoute: typeof DotwellKnownDidDotjsonRoute
+  DotwellKnownSovereignAiDotjsonRoute: typeof DotwellKnownSovereignAiDotjsonRoute
   EntitiesSlugRoute: typeof EntitiesSlugRoute
   RReceiptIdRoute: typeof RReceiptIdRoute
   RegistrySlugRoute: typeof RegistrySlugRoute
@@ -620,6 +660,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LedgerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/mcp': {
       id: '/mcp'
       path: '/mcp'
@@ -688,6 +735,20 @@ declare module '@tanstack/react-router' {
       path: '/verify'
       fullPath: '/verify'
       preLoaderRoute: typeof VerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.well-known/did.json': {
+      id: '/.well-known/did.json'
+      path: '/.well-known/did.json'
+      fullPath: '/.well-known/did.json'
+      preLoaderRoute: typeof DotwellKnownDidDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.well-known/sovereign-ai.json': {
+      id: '/.well-known/sovereign-ai.json'
+      path: '/.well-known/sovereign-ai.json'
+      fullPath: '/.well-known/sovereign-ai.json'
+      preLoaderRoute: typeof DotwellKnownSovereignAiDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/entities/': {
@@ -793,6 +854,7 @@ const rootRouteChildren: RootRouteChildren = {
   GovernmentRoute: GovernmentRoute,
   IntegrationsRoute: IntegrationsRoute,
   LedgerRoute: LedgerRoute,
+  LlmsDottxtRoute: LlmsDottxtRoute,
   McpRoute: McpRoute,
   MinisterRoute: MinisterRoute,
   OnboardRoute: OnboardRoute,
@@ -803,6 +865,8 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TransactionsRoute: TransactionsRoute,
   VerifyRoute: VerifyRoute,
+  DotwellKnownDidDotjsonRoute: DotwellKnownDidDotjsonRoute,
+  DotwellKnownSovereignAiDotjsonRoute: DotwellKnownSovereignAiDotjsonRoute,
   EntitiesSlugRoute: EntitiesSlugRoute,
   RReceiptIdRoute: RReceiptIdRoute,
   RegistrySlugRoute: RegistrySlugRoute,
