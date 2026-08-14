@@ -40,6 +40,7 @@ import { Route as RReceiptIdRouteImport } from './routes/r.$receiptId'
 import { Route as RegistryIndexRouteImport } from './routes/registry.index'
 import { Route as RegistrySlugRouteImport } from './routes/registry.$slug'
 import { Route as ApiPublicBadgeDigestRouteImport } from './routes/api/public/badge.$digest'
+import { Route as ApiPublicV1CheckpointRouteImport } from './routes/api/public/v1/checkpoint'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -196,6 +197,11 @@ const ApiPublicBadgeDigestRoute = ApiPublicBadgeDigestRouteImport.update({
   path: '/api/public/badge/$digest',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicV1CheckpointRoute = ApiPublicV1CheckpointRouteImport.update({
+  id: '/api/public/v1/checkpoint',
+  path: '/api/public/v1/checkpoint',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -229,6 +235,7 @@ export interface FileRoutesByFullPath {
   '/entities/': typeof EntitiesIndexRoute
   '/registry/': typeof RegistryIndexRoute
   '/api/public/badge/$digest': typeof ApiPublicBadgeDigestRoute
+  '/api/public/v1/checkpoint': typeof ApiPublicV1CheckpointRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -262,6 +269,7 @@ export interface FileRoutesByTo {
   '/entities': typeof EntitiesIndexRoute
   '/registry': typeof RegistryIndexRoute
   '/api/public/badge/$digest': typeof ApiPublicBadgeDigestRoute
+  '/api/public/v1/checkpoint': typeof ApiPublicV1CheckpointRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -296,6 +304,7 @@ export interface FileRoutesById {
   '/entities/': typeof EntitiesIndexRoute
   '/registry/': typeof RegistryIndexRoute
   '/api/public/badge/$digest': typeof ApiPublicBadgeDigestRoute
+  '/api/public/v1/checkpoint': typeof ApiPublicV1CheckpointRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -331,6 +340,7 @@ export interface FileRouteTypes {
     | '/entities/'
     | '/registry/'
     | '/api/public/badge/$digest'
+    | '/api/public/v1/checkpoint'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -364,6 +374,7 @@ export interface FileRouteTypes {
     | '/entities'
     | '/registry'
     | '/api/public/badge/$digest'
+    | '/api/public/v1/checkpoint'
   id:
     | '__root__'
     | '/'
@@ -397,6 +408,7 @@ export interface FileRouteTypes {
     | '/entities/'
     | '/registry/'
     | '/api/public/badge/$digest'
+    | '/api/public/v1/checkpoint'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -431,6 +443,7 @@ export interface RootRouteChildren {
   EntitiesIndexRoute: typeof EntitiesIndexRoute
   RegistryIndexRoute: typeof RegistryIndexRoute
   ApiPublicBadgeDigestRoute: typeof ApiPublicBadgeDigestRoute
+  ApiPublicV1CheckpointRoute: typeof ApiPublicV1CheckpointRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -652,6 +665,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicBadgeDigestRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/checkpoint': {
+      id: '/api/public/v1/checkpoint'
+      path: '/api/public/v1/checkpoint'
+      fullPath: '/api/public/v1/checkpoint'
+      preLoaderRoute: typeof ApiPublicV1CheckpointRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -687,6 +707,7 @@ const rootRouteChildren: RootRouteChildren = {
   EntitiesIndexRoute: EntitiesIndexRoute,
   RegistryIndexRoute: RegistryIndexRoute,
   ApiPublicBadgeDigestRoute: ApiPublicBadgeDigestRoute,
+  ApiPublicV1CheckpointRoute: ApiPublicV1CheckpointRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
