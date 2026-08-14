@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AgentsDotjsonRouteImport } from './routes/agents[.]json'
 import { Route as AmplifyRouteImport } from './routes/amplify'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CapitalRouteImport } from './routes/capital'
@@ -24,9 +25,11 @@ import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as GovernmentRouteImport } from './routes/government'
 import { Route as IntegrationsRouteImport } from './routes/integrations'
 import { Route as LedgerRouteImport } from './routes/ledger'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MinisterRouteImport } from './routes/minister'
 import { Route as OnboardRouteImport } from './routes/onboard'
+import { Route as OpenapiDotjsonRouteImport } from './routes/openapi[.]json'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
 import { Route as SealRouteImport } from './routes/seal'
@@ -34,16 +37,29 @@ import { Route as SecurityRouteImport } from './routes/security'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as VerifyRouteImport } from './routes/verify'
+import { Route as DotwellKnownDidDotjsonRouteImport } from './routes/[.]well-known.did[.]json'
+import { Route as DotwellKnownSovereignAiDotjsonRouteImport } from './routes/[.]well-known.sovereign-ai[.]json'
 import { Route as EntitiesIndexRouteImport } from './routes/entities.index'
 import { Route as EntitiesSlugRouteImport } from './routes/entities.$slug'
 import { Route as RReceiptIdRouteImport } from './routes/r.$receiptId'
 import { Route as RegistryIndexRouteImport } from './routes/registry.index'
 import { Route as RegistrySlugRouteImport } from './routes/registry.$slug'
 import { Route as ApiPublicBadgeDigestRouteImport } from './routes/api/public/badge.$digest'
+import { Route as ApiPublicV1CheckpointRouteImport } from './routes/api/public/v1/checkpoint'
+import { Route as ApiPublicV1JwksDotjsonRouteImport } from './routes/api/public/v1/jwks[.]json'
+import { Route as ApiPublicV1LedgerRouteImport } from './routes/api/public/v1/ledger'
+import { Route as ApiPublicV1VerifyRouteImport } from './routes/api/public/v1/verify'
+import { Route as ApiPublicV1ProofReceiptIdRouteImport } from './routes/api/public/v1/proof.$receiptId'
+import { Route as ApiPublicV1ReceiptReceiptIdRouteImport } from './routes/api/public/v1/receipt.$receiptId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgentsDotjsonRoute = AgentsDotjsonRouteImport.update({
+  id: '/agents.json',
+  path: '/agents.json',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AmplifyRoute = AmplifyRouteImport.update({
@@ -116,6 +132,11 @@ const LedgerRoute = LedgerRouteImport.update({
   path: '/ledger',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
@@ -129,6 +150,11 @@ const MinisterRoute = MinisterRouteImport.update({
 const OnboardRoute = OnboardRouteImport.update({
   id: '/onboard',
   path: '/onboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpenapiDotjsonRoute = OpenapiDotjsonRouteImport.update({
+  id: '/openapi.json',
+  path: '/openapi.json',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricingRoute = PricingRouteImport.update({
@@ -166,6 +192,17 @@ const VerifyRoute = VerifyRouteImport.update({
   path: '/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DotwellKnownDidDotjsonRoute = DotwellKnownDidDotjsonRouteImport.update({
+  id: '/.well-known/did.json',
+  path: '/.well-known/did.json',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DotwellKnownSovereignAiDotjsonRoute =
+  DotwellKnownSovereignAiDotjsonRouteImport.update({
+    id: '/.well-known/sovereign-ai.json',
+    path: '/.well-known/sovereign-ai.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const EntitiesIndexRoute = EntitiesIndexRouteImport.update({
   id: '/entities/',
   path: '/entities/',
@@ -196,9 +233,42 @@ const ApiPublicBadgeDigestRoute = ApiPublicBadgeDigestRouteImport.update({
   path: '/api/public/badge/$digest',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicV1CheckpointRoute = ApiPublicV1CheckpointRouteImport.update({
+  id: '/api/public/v1/checkpoint',
+  path: '/api/public/v1/checkpoint',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1JwksDotjsonRoute = ApiPublicV1JwksDotjsonRouteImport.update({
+  id: '/api/public/v1/jwks.json',
+  path: '/api/public/v1/jwks.json',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1LedgerRoute = ApiPublicV1LedgerRouteImport.update({
+  id: '/api/public/v1/ledger',
+  path: '/api/public/v1/ledger',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1VerifyRoute = ApiPublicV1VerifyRouteImport.update({
+  id: '/api/public/v1/verify',
+  path: '/api/public/v1/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1ProofReceiptIdRoute =
+  ApiPublicV1ProofReceiptIdRouteImport.update({
+    id: '/api/public/v1/proof/$receiptId',
+    path: '/api/public/v1/proof/$receiptId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicV1ReceiptReceiptIdRoute =
+  ApiPublicV1ReceiptReceiptIdRouteImport.update({
+    id: '/api/public/v1/receipt/$receiptId',
+    path: '/api/public/v1/receipt/$receiptId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agents.json': typeof AgentsDotjsonRoute
   '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
@@ -213,9 +283,11 @@ export interface FileRoutesByFullPath {
   '/government': typeof GovernmentRoute
   '/integrations': typeof IntegrationsRoute
   '/ledger': typeof LedgerRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/mcp': typeof McpRoute
   '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
+  '/openapi.json': typeof OpenapiDotjsonRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
@@ -223,15 +295,24 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
+  '/.well-known/did.json': typeof DotwellKnownDidDotjsonRoute
+  '/.well-known/sovereign-ai.json': typeof DotwellKnownSovereignAiDotjsonRoute
   '/entities/$slug': typeof EntitiesSlugRoute
   '/r/$receiptId': typeof RReceiptIdRoute
   '/registry/$slug': typeof RegistrySlugRoute
   '/entities/': typeof EntitiesIndexRoute
   '/registry/': typeof RegistryIndexRoute
   '/api/public/badge/$digest': typeof ApiPublicBadgeDigestRoute
+  '/api/public/v1/checkpoint': typeof ApiPublicV1CheckpointRoute
+  '/api/public/v1/jwks.json': typeof ApiPublicV1JwksDotjsonRoute
+  '/api/public/v1/ledger': typeof ApiPublicV1LedgerRoute
+  '/api/public/v1/verify': typeof ApiPublicV1VerifyRoute
+  '/api/public/v1/proof/$receiptId': typeof ApiPublicV1ProofReceiptIdRoute
+  '/api/public/v1/receipt/$receiptId': typeof ApiPublicV1ReceiptReceiptIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agents.json': typeof AgentsDotjsonRoute
   '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
@@ -246,9 +327,11 @@ export interface FileRoutesByTo {
   '/government': typeof GovernmentRoute
   '/integrations': typeof IntegrationsRoute
   '/ledger': typeof LedgerRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/mcp': typeof McpRoute
   '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
+  '/openapi.json': typeof OpenapiDotjsonRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
@@ -256,16 +339,25 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
+  '/.well-known/did.json': typeof DotwellKnownDidDotjsonRoute
+  '/.well-known/sovereign-ai.json': typeof DotwellKnownSovereignAiDotjsonRoute
   '/entities/$slug': typeof EntitiesSlugRoute
   '/r/$receiptId': typeof RReceiptIdRoute
   '/registry/$slug': typeof RegistrySlugRoute
   '/entities': typeof EntitiesIndexRoute
   '/registry': typeof RegistryIndexRoute
   '/api/public/badge/$digest': typeof ApiPublicBadgeDigestRoute
+  '/api/public/v1/checkpoint': typeof ApiPublicV1CheckpointRoute
+  '/api/public/v1/jwks.json': typeof ApiPublicV1JwksDotjsonRoute
+  '/api/public/v1/ledger': typeof ApiPublicV1LedgerRoute
+  '/api/public/v1/verify': typeof ApiPublicV1VerifyRoute
+  '/api/public/v1/proof/$receiptId': typeof ApiPublicV1ProofReceiptIdRoute
+  '/api/public/v1/receipt/$receiptId': typeof ApiPublicV1ReceiptReceiptIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agents.json': typeof AgentsDotjsonRoute
   '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
@@ -280,9 +372,11 @@ export interface FileRoutesById {
   '/government': typeof GovernmentRoute
   '/integrations': typeof IntegrationsRoute
   '/ledger': typeof LedgerRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/mcp': typeof McpRoute
   '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
+  '/openapi.json': typeof OpenapiDotjsonRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
@@ -290,17 +384,26 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
+  '/.well-known/did.json': typeof DotwellKnownDidDotjsonRoute
+  '/.well-known/sovereign-ai.json': typeof DotwellKnownSovereignAiDotjsonRoute
   '/entities/$slug': typeof EntitiesSlugRoute
   '/r/$receiptId': typeof RReceiptIdRoute
   '/registry/$slug': typeof RegistrySlugRoute
   '/entities/': typeof EntitiesIndexRoute
   '/registry/': typeof RegistryIndexRoute
   '/api/public/badge/$digest': typeof ApiPublicBadgeDigestRoute
+  '/api/public/v1/checkpoint': typeof ApiPublicV1CheckpointRoute
+  '/api/public/v1/jwks.json': typeof ApiPublicV1JwksDotjsonRoute
+  '/api/public/v1/ledger': typeof ApiPublicV1LedgerRoute
+  '/api/public/v1/verify': typeof ApiPublicV1VerifyRoute
+  '/api/public/v1/proof/$receiptId': typeof ApiPublicV1ProofReceiptIdRoute
+  '/api/public/v1/receipt/$receiptId': typeof ApiPublicV1ReceiptReceiptIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/agents.json'
     | '/amplify'
     | '/auth'
     | '/capital'
@@ -315,9 +418,11 @@ export interface FileRouteTypes {
     | '/government'
     | '/integrations'
     | '/ledger'
+    | '/llms.txt'
     | '/mcp'
     | '/minister'
     | '/onboard'
+    | '/openapi.json'
     | '/pricing'
     | '/protocols'
     | '/seal'
@@ -325,15 +430,24 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/transactions'
     | '/verify'
+    | '/.well-known/did.json'
+    | '/.well-known/sovereign-ai.json'
     | '/entities/$slug'
     | '/r/$receiptId'
     | '/registry/$slug'
     | '/entities/'
     | '/registry/'
     | '/api/public/badge/$digest'
+    | '/api/public/v1/checkpoint'
+    | '/api/public/v1/jwks.json'
+    | '/api/public/v1/ledger'
+    | '/api/public/v1/verify'
+    | '/api/public/v1/proof/$receiptId'
+    | '/api/public/v1/receipt/$receiptId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/agents.json'
     | '/amplify'
     | '/auth'
     | '/capital'
@@ -348,9 +462,11 @@ export interface FileRouteTypes {
     | '/government'
     | '/integrations'
     | '/ledger'
+    | '/llms.txt'
     | '/mcp'
     | '/minister'
     | '/onboard'
+    | '/openapi.json'
     | '/pricing'
     | '/protocols'
     | '/seal'
@@ -358,15 +474,24 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/transactions'
     | '/verify'
+    | '/.well-known/did.json'
+    | '/.well-known/sovereign-ai.json'
     | '/entities/$slug'
     | '/r/$receiptId'
     | '/registry/$slug'
     | '/entities'
     | '/registry'
     | '/api/public/badge/$digest'
+    | '/api/public/v1/checkpoint'
+    | '/api/public/v1/jwks.json'
+    | '/api/public/v1/ledger'
+    | '/api/public/v1/verify'
+    | '/api/public/v1/proof/$receiptId'
+    | '/api/public/v1/receipt/$receiptId'
   id:
     | '__root__'
     | '/'
+    | '/agents.json'
     | '/amplify'
     | '/auth'
     | '/capital'
@@ -381,9 +506,11 @@ export interface FileRouteTypes {
     | '/government'
     | '/integrations'
     | '/ledger'
+    | '/llms.txt'
     | '/mcp'
     | '/minister'
     | '/onboard'
+    | '/openapi.json'
     | '/pricing'
     | '/protocols'
     | '/seal'
@@ -391,16 +518,25 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/transactions'
     | '/verify'
+    | '/.well-known/did.json'
+    | '/.well-known/sovereign-ai.json'
     | '/entities/$slug'
     | '/r/$receiptId'
     | '/registry/$slug'
     | '/entities/'
     | '/registry/'
     | '/api/public/badge/$digest'
+    | '/api/public/v1/checkpoint'
+    | '/api/public/v1/jwks.json'
+    | '/api/public/v1/ledger'
+    | '/api/public/v1/verify'
+    | '/api/public/v1/proof/$receiptId'
+    | '/api/public/v1/receipt/$receiptId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgentsDotjsonRoute: typeof AgentsDotjsonRoute
   AmplifyRoute: typeof AmplifyRoute
   AuthRoute: typeof AuthRoute
   CapitalRoute: typeof CapitalRoute
@@ -415,9 +551,11 @@ export interface RootRouteChildren {
   GovernmentRoute: typeof GovernmentRoute
   IntegrationsRoute: typeof IntegrationsRoute
   LedgerRoute: typeof LedgerRoute
+  LlmsDottxtRoute: typeof LlmsDottxtRoute
   McpRoute: typeof McpRoute
   MinisterRoute: typeof MinisterRoute
   OnboardRoute: typeof OnboardRoute
+  OpenapiDotjsonRoute: typeof OpenapiDotjsonRoute
   PricingRoute: typeof PricingRoute
   ProtocolsRoute: typeof ProtocolsRoute
   SealRoute: typeof SealRoute
@@ -425,12 +563,20 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TransactionsRoute: typeof TransactionsRoute
   VerifyRoute: typeof VerifyRoute
+  DotwellKnownDidDotjsonRoute: typeof DotwellKnownDidDotjsonRoute
+  DotwellKnownSovereignAiDotjsonRoute: typeof DotwellKnownSovereignAiDotjsonRoute
   EntitiesSlugRoute: typeof EntitiesSlugRoute
   RReceiptIdRoute: typeof RReceiptIdRoute
   RegistrySlugRoute: typeof RegistrySlugRoute
   EntitiesIndexRoute: typeof EntitiesIndexRoute
   RegistryIndexRoute: typeof RegistryIndexRoute
   ApiPublicBadgeDigestRoute: typeof ApiPublicBadgeDigestRoute
+  ApiPublicV1CheckpointRoute: typeof ApiPublicV1CheckpointRoute
+  ApiPublicV1JwksDotjsonRoute: typeof ApiPublicV1JwksDotjsonRoute
+  ApiPublicV1LedgerRoute: typeof ApiPublicV1LedgerRoute
+  ApiPublicV1VerifyRoute: typeof ApiPublicV1VerifyRoute
+  ApiPublicV1ProofReceiptIdRoute: typeof ApiPublicV1ProofReceiptIdRoute
+  ApiPublicV1ReceiptReceiptIdRoute: typeof ApiPublicV1ReceiptReceiptIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -440,6 +586,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agents.json': {
+      id: '/agents.json'
+      path: '/agents.json'
+      fullPath: '/agents.json'
+      preLoaderRoute: typeof AgentsDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/amplify': {
@@ -540,6 +693,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LedgerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/mcp': {
       id: '/mcp'
       path: '/mcp'
@@ -559,6 +719,13 @@ declare module '@tanstack/react-router' {
       path: '/onboard'
       fullPath: '/onboard'
       preLoaderRoute: typeof OnboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/openapi.json': {
+      id: '/openapi.json'
+      path: '/openapi.json'
+      fullPath: '/openapi.json'
+      preLoaderRoute: typeof OpenapiDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pricing': {
@@ -610,6 +777,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.well-known/did.json': {
+      id: '/.well-known/did.json'
+      path: '/.well-known/did.json'
+      fullPath: '/.well-known/did.json'
+      preLoaderRoute: typeof DotwellKnownDidDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.well-known/sovereign-ai.json': {
+      id: '/.well-known/sovereign-ai.json'
+      path: '/.well-known/sovereign-ai.json'
+      fullPath: '/.well-known/sovereign-ai.json'
+      preLoaderRoute: typeof DotwellKnownSovereignAiDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/entities/': {
       id: '/entities/'
       path: '/entities'
@@ -652,11 +833,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicBadgeDigestRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/checkpoint': {
+      id: '/api/public/v1/checkpoint'
+      path: '/api/public/v1/checkpoint'
+      fullPath: '/api/public/v1/checkpoint'
+      preLoaderRoute: typeof ApiPublicV1CheckpointRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/jwks.json': {
+      id: '/api/public/v1/jwks.json'
+      path: '/api/public/v1/jwks.json'
+      fullPath: '/api/public/v1/jwks.json'
+      preLoaderRoute: typeof ApiPublicV1JwksDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/ledger': {
+      id: '/api/public/v1/ledger'
+      path: '/api/public/v1/ledger'
+      fullPath: '/api/public/v1/ledger'
+      preLoaderRoute: typeof ApiPublicV1LedgerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/verify': {
+      id: '/api/public/v1/verify'
+      path: '/api/public/v1/verify'
+      fullPath: '/api/public/v1/verify'
+      preLoaderRoute: typeof ApiPublicV1VerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/proof/$receiptId': {
+      id: '/api/public/v1/proof/$receiptId'
+      path: '/api/public/v1/proof/$receiptId'
+      fullPath: '/api/public/v1/proof/$receiptId'
+      preLoaderRoute: typeof ApiPublicV1ProofReceiptIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/receipt/$receiptId': {
+      id: '/api/public/v1/receipt/$receiptId'
+      path: '/api/public/v1/receipt/$receiptId'
+      fullPath: '/api/public/v1/receipt/$receiptId'
+      preLoaderRoute: typeof ApiPublicV1ReceiptReceiptIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgentsDotjsonRoute: AgentsDotjsonRoute,
   AmplifyRoute: AmplifyRoute,
   AuthRoute: AuthRoute,
   CapitalRoute: CapitalRoute,
@@ -671,9 +895,11 @@ const rootRouteChildren: RootRouteChildren = {
   GovernmentRoute: GovernmentRoute,
   IntegrationsRoute: IntegrationsRoute,
   LedgerRoute: LedgerRoute,
+  LlmsDottxtRoute: LlmsDottxtRoute,
   McpRoute: McpRoute,
   MinisterRoute: MinisterRoute,
   OnboardRoute: OnboardRoute,
+  OpenapiDotjsonRoute: OpenapiDotjsonRoute,
   PricingRoute: PricingRoute,
   ProtocolsRoute: ProtocolsRoute,
   SealRoute: SealRoute,
@@ -681,12 +907,20 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TransactionsRoute: TransactionsRoute,
   VerifyRoute: VerifyRoute,
+  DotwellKnownDidDotjsonRoute: DotwellKnownDidDotjsonRoute,
+  DotwellKnownSovereignAiDotjsonRoute: DotwellKnownSovereignAiDotjsonRoute,
   EntitiesSlugRoute: EntitiesSlugRoute,
   RReceiptIdRoute: RReceiptIdRoute,
   RegistrySlugRoute: RegistrySlugRoute,
   EntitiesIndexRoute: EntitiesIndexRoute,
   RegistryIndexRoute: RegistryIndexRoute,
   ApiPublicBadgeDigestRoute: ApiPublicBadgeDigestRoute,
+  ApiPublicV1CheckpointRoute: ApiPublicV1CheckpointRoute,
+  ApiPublicV1JwksDotjsonRoute: ApiPublicV1JwksDotjsonRoute,
+  ApiPublicV1LedgerRoute: ApiPublicV1LedgerRoute,
+  ApiPublicV1VerifyRoute: ApiPublicV1VerifyRoute,
+  ApiPublicV1ProofReceiptIdRoute: ApiPublicV1ProofReceiptIdRoute,
+  ApiPublicV1ReceiptReceiptIdRoute: ApiPublicV1ReceiptReceiptIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
