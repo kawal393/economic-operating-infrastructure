@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CORS_PREFLIGHT, nationJwks } from "@/lib/nation-key.server";
 
-export const Route = createFileRoute("/api/public/v1/jwks/json")({
+export const Route = createFileRoute("/api/public/v1/jwks.json")({
   server: {
     handlers: {
       OPTIONS: () => CORS_PREFLIGHT.clone(),

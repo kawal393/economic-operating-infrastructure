@@ -41,6 +41,11 @@ import { Route as RegistryIndexRouteImport } from './routes/registry.index'
 import { Route as RegistrySlugRouteImport } from './routes/registry.$slug'
 import { Route as ApiPublicBadgeDigestRouteImport } from './routes/api/public/badge.$digest'
 import { Route as ApiPublicV1CheckpointRouteImport } from './routes/api/public/v1/checkpoint'
+import { Route as ApiPublicV1JwksDotjsonRouteImport } from './routes/api/public/v1/jwks[.]json'
+import { Route as ApiPublicV1LedgerRouteImport } from './routes/api/public/v1/ledger'
+import { Route as ApiPublicV1VerifyRouteImport } from './routes/api/public/v1/verify'
+import { Route as ApiPublicV1ProofReceiptIdRouteImport } from './routes/api/public/v1/proof.$receiptId'
+import { Route as ApiPublicV1ReceiptReceiptIdRouteImport } from './routes/api/public/v1/receipt.$receiptId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -202,6 +207,33 @@ const ApiPublicV1CheckpointRoute = ApiPublicV1CheckpointRouteImport.update({
   path: '/api/public/v1/checkpoint',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicV1JwksDotjsonRoute = ApiPublicV1JwksDotjsonRouteImport.update({
+  id: '/api/public/v1/jwks.json',
+  path: '/api/public/v1/jwks.json',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1LedgerRoute = ApiPublicV1LedgerRouteImport.update({
+  id: '/api/public/v1/ledger',
+  path: '/api/public/v1/ledger',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1VerifyRoute = ApiPublicV1VerifyRouteImport.update({
+  id: '/api/public/v1/verify',
+  path: '/api/public/v1/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1ProofReceiptIdRoute =
+  ApiPublicV1ProofReceiptIdRouteImport.update({
+    id: '/api/public/v1/proof/$receiptId',
+    path: '/api/public/v1/proof/$receiptId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicV1ReceiptReceiptIdRoute =
+  ApiPublicV1ReceiptReceiptIdRouteImport.update({
+    id: '/api/public/v1/receipt/$receiptId',
+    path: '/api/public/v1/receipt/$receiptId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -236,6 +268,11 @@ export interface FileRoutesByFullPath {
   '/registry/': typeof RegistryIndexRoute
   '/api/public/badge/$digest': typeof ApiPublicBadgeDigestRoute
   '/api/public/v1/checkpoint': typeof ApiPublicV1CheckpointRoute
+  '/api/public/v1/jwks.json': typeof ApiPublicV1JwksDotjsonRoute
+  '/api/public/v1/ledger': typeof ApiPublicV1LedgerRoute
+  '/api/public/v1/verify': typeof ApiPublicV1VerifyRoute
+  '/api/public/v1/proof/$receiptId': typeof ApiPublicV1ProofReceiptIdRoute
+  '/api/public/v1/receipt/$receiptId': typeof ApiPublicV1ReceiptReceiptIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -270,6 +307,11 @@ export interface FileRoutesByTo {
   '/registry': typeof RegistryIndexRoute
   '/api/public/badge/$digest': typeof ApiPublicBadgeDigestRoute
   '/api/public/v1/checkpoint': typeof ApiPublicV1CheckpointRoute
+  '/api/public/v1/jwks.json': typeof ApiPublicV1JwksDotjsonRoute
+  '/api/public/v1/ledger': typeof ApiPublicV1LedgerRoute
+  '/api/public/v1/verify': typeof ApiPublicV1VerifyRoute
+  '/api/public/v1/proof/$receiptId': typeof ApiPublicV1ProofReceiptIdRoute
+  '/api/public/v1/receipt/$receiptId': typeof ApiPublicV1ReceiptReceiptIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -305,6 +347,11 @@ export interface FileRoutesById {
   '/registry/': typeof RegistryIndexRoute
   '/api/public/badge/$digest': typeof ApiPublicBadgeDigestRoute
   '/api/public/v1/checkpoint': typeof ApiPublicV1CheckpointRoute
+  '/api/public/v1/jwks.json': typeof ApiPublicV1JwksDotjsonRoute
+  '/api/public/v1/ledger': typeof ApiPublicV1LedgerRoute
+  '/api/public/v1/verify': typeof ApiPublicV1VerifyRoute
+  '/api/public/v1/proof/$receiptId': typeof ApiPublicV1ProofReceiptIdRoute
+  '/api/public/v1/receipt/$receiptId': typeof ApiPublicV1ReceiptReceiptIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -341,6 +388,11 @@ export interface FileRouteTypes {
     | '/registry/'
     | '/api/public/badge/$digest'
     | '/api/public/v1/checkpoint'
+    | '/api/public/v1/jwks.json'
+    | '/api/public/v1/ledger'
+    | '/api/public/v1/verify'
+    | '/api/public/v1/proof/$receiptId'
+    | '/api/public/v1/receipt/$receiptId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -375,6 +427,11 @@ export interface FileRouteTypes {
     | '/registry'
     | '/api/public/badge/$digest'
     | '/api/public/v1/checkpoint'
+    | '/api/public/v1/jwks.json'
+    | '/api/public/v1/ledger'
+    | '/api/public/v1/verify'
+    | '/api/public/v1/proof/$receiptId'
+    | '/api/public/v1/receipt/$receiptId'
   id:
     | '__root__'
     | '/'
@@ -409,6 +466,11 @@ export interface FileRouteTypes {
     | '/registry/'
     | '/api/public/badge/$digest'
     | '/api/public/v1/checkpoint'
+    | '/api/public/v1/jwks.json'
+    | '/api/public/v1/ledger'
+    | '/api/public/v1/verify'
+    | '/api/public/v1/proof/$receiptId'
+    | '/api/public/v1/receipt/$receiptId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -444,6 +506,11 @@ export interface RootRouteChildren {
   RegistryIndexRoute: typeof RegistryIndexRoute
   ApiPublicBadgeDigestRoute: typeof ApiPublicBadgeDigestRoute
   ApiPublicV1CheckpointRoute: typeof ApiPublicV1CheckpointRoute
+  ApiPublicV1JwksDotjsonRoute: typeof ApiPublicV1JwksDotjsonRoute
+  ApiPublicV1LedgerRoute: typeof ApiPublicV1LedgerRoute
+  ApiPublicV1VerifyRoute: typeof ApiPublicV1VerifyRoute
+  ApiPublicV1ProofReceiptIdRoute: typeof ApiPublicV1ProofReceiptIdRoute
+  ApiPublicV1ReceiptReceiptIdRoute: typeof ApiPublicV1ReceiptReceiptIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -672,6 +739,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicV1CheckpointRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/jwks.json': {
+      id: '/api/public/v1/jwks.json'
+      path: '/api/public/v1/jwks.json'
+      fullPath: '/api/public/v1/jwks.json'
+      preLoaderRoute: typeof ApiPublicV1JwksDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/ledger': {
+      id: '/api/public/v1/ledger'
+      path: '/api/public/v1/ledger'
+      fullPath: '/api/public/v1/ledger'
+      preLoaderRoute: typeof ApiPublicV1LedgerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/verify': {
+      id: '/api/public/v1/verify'
+      path: '/api/public/v1/verify'
+      fullPath: '/api/public/v1/verify'
+      preLoaderRoute: typeof ApiPublicV1VerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/proof/$receiptId': {
+      id: '/api/public/v1/proof/$receiptId'
+      path: '/api/public/v1/proof/$receiptId'
+      fullPath: '/api/public/v1/proof/$receiptId'
+      preLoaderRoute: typeof ApiPublicV1ProofReceiptIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/receipt/$receiptId': {
+      id: '/api/public/v1/receipt/$receiptId'
+      path: '/api/public/v1/receipt/$receiptId'
+      fullPath: '/api/public/v1/receipt/$receiptId'
+      preLoaderRoute: typeof ApiPublicV1ReceiptReceiptIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -708,6 +810,11 @@ const rootRouteChildren: RootRouteChildren = {
   RegistryIndexRoute: RegistryIndexRoute,
   ApiPublicBadgeDigestRoute: ApiPublicBadgeDigestRoute,
   ApiPublicV1CheckpointRoute: ApiPublicV1CheckpointRoute,
+  ApiPublicV1JwksDotjsonRoute: ApiPublicV1JwksDotjsonRoute,
+  ApiPublicV1LedgerRoute: ApiPublicV1LedgerRoute,
+  ApiPublicV1VerifyRoute: ApiPublicV1VerifyRoute,
+  ApiPublicV1ProofReceiptIdRoute: ApiPublicV1ProofReceiptIdRoute,
+  ApiPublicV1ReceiptReceiptIdRoute: ApiPublicV1ReceiptReceiptIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
