@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AgentsDotjsonRouteImport } from './routes/agents[.]json'
 import { Route as AmplifyRouteImport } from './routes/amplify'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CapitalRouteImport } from './routes/capital'
@@ -28,6 +29,7 @@ import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MinisterRouteImport } from './routes/minister'
 import { Route as OnboardRouteImport } from './routes/onboard'
+import { Route as OpenapiDotjsonRouteImport } from './routes/openapi[.]json'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
 import { Route as SealRouteImport } from './routes/seal'
@@ -53,6 +55,11 @@ import { Route as ApiPublicV1ReceiptReceiptIdRouteImport } from './routes/api/pu
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgentsDotjsonRoute = AgentsDotjsonRouteImport.update({
+  id: '/agents.json',
+  path: '/agents.json',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AmplifyRoute = AmplifyRouteImport.update({
@@ -143,6 +150,11 @@ const MinisterRoute = MinisterRouteImport.update({
 const OnboardRoute = OnboardRouteImport.update({
   id: '/onboard',
   path: '/onboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpenapiDotjsonRoute = OpenapiDotjsonRouteImport.update({
+  id: '/openapi.json',
+  path: '/openapi.json',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricingRoute = PricingRouteImport.update({
@@ -256,6 +268,7 @@ const ApiPublicV1ReceiptReceiptIdRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agents.json': typeof AgentsDotjsonRoute
   '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
@@ -274,6 +287,7 @@ export interface FileRoutesByFullPath {
   '/mcp': typeof McpRoute
   '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
+  '/openapi.json': typeof OpenapiDotjsonRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
@@ -298,6 +312,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agents.json': typeof AgentsDotjsonRoute
   '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
@@ -316,6 +331,7 @@ export interface FileRoutesByTo {
   '/mcp': typeof McpRoute
   '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
+  '/openapi.json': typeof OpenapiDotjsonRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
@@ -341,6 +357,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agents.json': typeof AgentsDotjsonRoute
   '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
@@ -359,6 +376,7 @@ export interface FileRoutesById {
   '/mcp': typeof McpRoute
   '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
+  '/openapi.json': typeof OpenapiDotjsonRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
@@ -385,6 +403,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/agents.json'
     | '/amplify'
     | '/auth'
     | '/capital'
@@ -403,6 +422,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/minister'
     | '/onboard'
+    | '/openapi.json'
     | '/pricing'
     | '/protocols'
     | '/seal'
@@ -427,6 +447,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/agents.json'
     | '/amplify'
     | '/auth'
     | '/capital'
@@ -445,6 +466,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/minister'
     | '/onboard'
+    | '/openapi.json'
     | '/pricing'
     | '/protocols'
     | '/seal'
@@ -469,6 +491,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/agents.json'
     | '/amplify'
     | '/auth'
     | '/capital'
@@ -487,6 +510,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/minister'
     | '/onboard'
+    | '/openapi.json'
     | '/pricing'
     | '/protocols'
     | '/seal'
@@ -512,6 +536,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgentsDotjsonRoute: typeof AgentsDotjsonRoute
   AmplifyRoute: typeof AmplifyRoute
   AuthRoute: typeof AuthRoute
   CapitalRoute: typeof CapitalRoute
@@ -530,6 +555,7 @@ export interface RootRouteChildren {
   McpRoute: typeof McpRoute
   MinisterRoute: typeof MinisterRoute
   OnboardRoute: typeof OnboardRoute
+  OpenapiDotjsonRoute: typeof OpenapiDotjsonRoute
   PricingRoute: typeof PricingRoute
   ProtocolsRoute: typeof ProtocolsRoute
   SealRoute: typeof SealRoute
@@ -560,6 +586,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agents.json': {
+      id: '/agents.json'
+      path: '/agents.json'
+      fullPath: '/agents.json'
+      preLoaderRoute: typeof AgentsDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/amplify': {
@@ -686,6 +719,13 @@ declare module '@tanstack/react-router' {
       path: '/onboard'
       fullPath: '/onboard'
       preLoaderRoute: typeof OnboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/openapi.json': {
+      id: '/openapi.json'
+      path: '/openapi.json'
+      fullPath: '/openapi.json'
+      preLoaderRoute: typeof OpenapiDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pricing': {
@@ -840,6 +880,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgentsDotjsonRoute: AgentsDotjsonRoute,
   AmplifyRoute: AmplifyRoute,
   AuthRoute: AuthRoute,
   CapitalRoute: CapitalRoute,
@@ -858,6 +899,7 @@ const rootRouteChildren: RootRouteChildren = {
   McpRoute: McpRoute,
   MinisterRoute: MinisterRoute,
   OnboardRoute: OnboardRoute,
+  OpenapiDotjsonRoute: OpenapiDotjsonRoute,
   PricingRoute: PricingRoute,
   ProtocolsRoute: ProtocolsRoute,
   SealRoute: SealRoute,
