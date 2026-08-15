@@ -24,18 +24,21 @@ import { Route as FeedDotxmlRouteImport } from './routes/feed[.]xml'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as GovernmentRouteImport } from './routes/government'
 import { Route as IntegrationsRouteImport } from './routes/integrations'
+import { Route as InteropRouteImport } from './routes/interop'
 import { Route as LedgerRouteImport } from './routes/ledger'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MinisterRouteImport } from './routes/minister'
 import { Route as OnboardRouteImport } from './routes/onboard'
 import { Route as OpenapiDotjsonRouteImport } from './routes/openapi[.]json'
+import { Route as PassportRouteImport } from './routes/passport'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
 import { Route as SealRouteImport } from './routes/seal'
 import { Route as SecurityRouteImport } from './routes/security'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TransactionsRouteImport } from './routes/transactions'
+import { Route as TransparencyRouteImport } from './routes/transparency'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as DotwellKnownDidDotjsonRouteImport } from './routes/[.]well-known.did[.]json'
 import { Route as DotwellKnownSovereignAiDotjsonRouteImport } from './routes/[.]well-known.sovereign-ai[.]json'
@@ -127,6 +130,11 @@ const IntegrationsRoute = IntegrationsRouteImport.update({
   path: '/integrations',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InteropRoute = InteropRouteImport.update({
+  id: '/interop',
+  path: '/interop',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LedgerRoute = LedgerRouteImport.update({
   id: '/ledger',
   path: '/ledger',
@@ -157,6 +165,11 @@ const OpenapiDotjsonRoute = OpenapiDotjsonRouteImport.update({
   path: '/openapi.json',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PassportRoute = PassportRouteImport.update({
+  id: '/passport',
+  path: '/passport',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
@@ -185,6 +198,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const TransactionsRoute = TransactionsRouteImport.update({
   id: '/transactions',
   path: '/transactions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TransparencyRoute = TransparencyRouteImport.update({
+  id: '/transparency',
+  path: '/transparency',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VerifyRoute = VerifyRouteImport.update({
@@ -282,18 +300,21 @@ export interface FileRoutesByFullPath {
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/integrations': typeof IntegrationsRoute
+  '/interop': typeof InteropRoute
   '/ledger': typeof LedgerRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/mcp': typeof McpRoute
   '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
+  '/passport': typeof PassportRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
+  '/transparency': typeof TransparencyRoute
   '/verify': typeof VerifyRoute
   '/.well-known/did.json': typeof DotwellKnownDidDotjsonRoute
   '/.well-known/sovereign-ai.json': typeof DotwellKnownSovereignAiDotjsonRoute
@@ -326,18 +347,21 @@ export interface FileRoutesByTo {
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/integrations': typeof IntegrationsRoute
+  '/interop': typeof InteropRoute
   '/ledger': typeof LedgerRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/mcp': typeof McpRoute
   '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
+  '/passport': typeof PassportRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
+  '/transparency': typeof TransparencyRoute
   '/verify': typeof VerifyRoute
   '/.well-known/did.json': typeof DotwellKnownDidDotjsonRoute
   '/.well-known/sovereign-ai.json': typeof DotwellKnownSovereignAiDotjsonRoute
@@ -371,18 +395,21 @@ export interface FileRoutesById {
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
   '/integrations': typeof IntegrationsRoute
+  '/interop': typeof InteropRoute
   '/ledger': typeof LedgerRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/mcp': typeof McpRoute
   '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
+  '/passport': typeof PassportRoute
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
+  '/transparency': typeof TransparencyRoute
   '/verify': typeof VerifyRoute
   '/.well-known/did.json': typeof DotwellKnownDidDotjsonRoute
   '/.well-known/sovereign-ai.json': typeof DotwellKnownSovereignAiDotjsonRoute
@@ -417,18 +444,21 @@ export interface FileRouteTypes {
     | '/governance'
     | '/government'
     | '/integrations'
+    | '/interop'
     | '/ledger'
     | '/llms.txt'
     | '/mcp'
     | '/minister'
     | '/onboard'
     | '/openapi.json'
+    | '/passport'
     | '/pricing'
     | '/protocols'
     | '/seal'
     | '/security'
     | '/sitemap.xml'
     | '/transactions'
+    | '/transparency'
     | '/verify'
     | '/.well-known/did.json'
     | '/.well-known/sovereign-ai.json'
@@ -461,18 +491,21 @@ export interface FileRouteTypes {
     | '/governance'
     | '/government'
     | '/integrations'
+    | '/interop'
     | '/ledger'
     | '/llms.txt'
     | '/mcp'
     | '/minister'
     | '/onboard'
     | '/openapi.json'
+    | '/passport'
     | '/pricing'
     | '/protocols'
     | '/seal'
     | '/security'
     | '/sitemap.xml'
     | '/transactions'
+    | '/transparency'
     | '/verify'
     | '/.well-known/did.json'
     | '/.well-known/sovereign-ai.json'
@@ -505,18 +538,21 @@ export interface FileRouteTypes {
     | '/governance'
     | '/government'
     | '/integrations'
+    | '/interop'
     | '/ledger'
     | '/llms.txt'
     | '/mcp'
     | '/minister'
     | '/onboard'
     | '/openapi.json'
+    | '/passport'
     | '/pricing'
     | '/protocols'
     | '/seal'
     | '/security'
     | '/sitemap.xml'
     | '/transactions'
+    | '/transparency'
     | '/verify'
     | '/.well-known/did.json'
     | '/.well-known/sovereign-ai.json'
@@ -550,18 +586,21 @@ export interface RootRouteChildren {
   GovernanceRoute: typeof GovernanceRoute
   GovernmentRoute: typeof GovernmentRoute
   IntegrationsRoute: typeof IntegrationsRoute
+  InteropRoute: typeof InteropRoute
   LedgerRoute: typeof LedgerRoute
   LlmsDottxtRoute: typeof LlmsDottxtRoute
   McpRoute: typeof McpRoute
   MinisterRoute: typeof MinisterRoute
   OnboardRoute: typeof OnboardRoute
   OpenapiDotjsonRoute: typeof OpenapiDotjsonRoute
+  PassportRoute: typeof PassportRoute
   PricingRoute: typeof PricingRoute
   ProtocolsRoute: typeof ProtocolsRoute
   SealRoute: typeof SealRoute
   SecurityRoute: typeof SecurityRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TransactionsRoute: typeof TransactionsRoute
+  TransparencyRoute: typeof TransparencyRoute
   VerifyRoute: typeof VerifyRoute
   DotwellKnownDidDotjsonRoute: typeof DotwellKnownDidDotjsonRoute
   DotwellKnownSovereignAiDotjsonRoute: typeof DotwellKnownSovereignAiDotjsonRoute
@@ -686,6 +725,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IntegrationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/interop': {
+      id: '/interop'
+      path: '/interop'
+      fullPath: '/interop'
+      preLoaderRoute: typeof InteropRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ledger': {
       id: '/ledger'
       path: '/ledger'
@@ -728,6 +774,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OpenapiDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/passport': {
+      id: '/passport'
+      path: '/passport'
+      fullPath: '/passport'
+      preLoaderRoute: typeof PassportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pricing': {
       id: '/pricing'
       path: '/pricing'
@@ -768,6 +821,13 @@ declare module '@tanstack/react-router' {
       path: '/transactions'
       fullPath: '/transactions'
       preLoaderRoute: typeof TransactionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/transparency': {
+      id: '/transparency'
+      path: '/transparency'
+      fullPath: '/transparency'
+      preLoaderRoute: typeof TransparencyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/verify': {
@@ -894,18 +954,21 @@ const rootRouteChildren: RootRouteChildren = {
   GovernanceRoute: GovernanceRoute,
   GovernmentRoute: GovernmentRoute,
   IntegrationsRoute: IntegrationsRoute,
+  InteropRoute: InteropRoute,
   LedgerRoute: LedgerRoute,
   LlmsDottxtRoute: LlmsDottxtRoute,
   McpRoute: McpRoute,
   MinisterRoute: MinisterRoute,
   OnboardRoute: OnboardRoute,
   OpenapiDotjsonRoute: OpenapiDotjsonRoute,
+  PassportRoute: PassportRoute,
   PricingRoute: PricingRoute,
   ProtocolsRoute: ProtocolsRoute,
   SealRoute: SealRoute,
   SecurityRoute: SecurityRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TransactionsRoute: TransactionsRoute,
+  TransparencyRoute: TransparencyRoute,
   VerifyRoute: VerifyRoute,
   DotwellKnownDidDotjsonRoute: DotwellKnownDidDotjsonRoute,
   DotwellKnownSovereignAiDotjsonRoute: DotwellKnownSovereignAiDotjsonRoute,
