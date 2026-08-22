@@ -109,7 +109,7 @@ export function articleUri(slug: string) {
 export const AMENDMENT_THRESHOLDS: Record<string, { rule: string; detail: string }> = {
   I: {
     rule: "Unanimity",
-    detail: "Article I may only change with the unanimous ratification of all active nation-states.",
+    detail: "Article I may only change with the unanimous ratification of all active workspaces.",
   },
   II: { rule: "Two-thirds", detail: "Two-thirds of ratifying citizens, fourteen-day deliberation." },
   III: {
@@ -119,7 +119,7 @@ export const AMENDMENT_THRESHOLDS: Record<string, { rule: string; detail: string
   IV: { rule: "Two-thirds", detail: "Two-thirds of ratifying citizens, fourteen-day deliberation." },
   V: {
     rule: "Unanimity",
-    detail: "Article V may only change with the unanimous ratification of all active nation-states.",
+    detail: "Article V may only change with the unanimous ratification of all active workspaces.",
   },
 };
 

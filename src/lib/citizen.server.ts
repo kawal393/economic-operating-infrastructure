@@ -1,5 +1,5 @@
 /**
- * Server-only citizenship + nation-state registry logic.
+ * Server-only registry membership + workspace registry logic.
  * Never imported from client modules — only from *.functions.ts handlers.
  */
 import type { SupabaseClient } from "@supabase/supabase-js";
@@ -106,7 +106,7 @@ export async function deployNationState(
 ): Promise<DeployResult> {
   const citizen = await readMyCitizen(db, userId);
   if (!citizen) {
-    return { ok: false, reason: "Register as a citizen before deploying a nation-state." };
+    return { ok: false, reason: "Join the registry before deploying a workspace." };
   }
 
   const base = slugify(input.name);
