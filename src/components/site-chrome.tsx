@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FOOTER_CREED } from "@/content/nation";
+import sovereignMark from "@/assets/sovereign-mark.png";
 
 const NAV = [
   { to: "/minister", label: "Minister" },
@@ -170,8 +171,13 @@ export function SovereignMark({ className }: { className?: string }) {
       )}
       aria-hidden="true"
     >
-      <span className="absolute inset-[3px] rounded-[3px] border border-gold/25" />
-      <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-node" />
+      <img
+        src={sovereignMark}
+        alt=""
+        width={1024}
+        height={1024}
+        className="h-6 w-6 object-contain"
+      />
     </span>
   );
 }
