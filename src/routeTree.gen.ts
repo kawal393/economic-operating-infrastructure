@@ -22,6 +22,7 @@ import { Route as ContractsRouteImport } from './routes/contracts'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DeployRouteImport } from './routes/deploy'
 import { Route as DocsRouteImport } from './routes/docs'
+import { Route as EnforcementWatchRouteImport } from './routes/enforcement-watch'
 import { Route as FeedDotxmlRouteImport } from './routes/feed[.]xml'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as GovernmentRouteImport } from './routes/government'
@@ -37,6 +38,7 @@ import { Route as PassportRouteImport } from './routes/passport'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
 import { Route as SealRouteImport } from './routes/seal'
+import { Route as SealedMemoryRouteImport } from './routes/sealed-memory'
 import { Route as SecurityRouteImport } from './routes/security'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TransactionsRouteImport } from './routes/transactions'
@@ -122,6 +124,11 @@ const DocsRoute = DocsRouteImport.update({
   path: '/docs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnforcementWatchRoute = EnforcementWatchRouteImport.update({
+  id: '/enforcement-watch',
+  path: '/enforcement-watch',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FeedDotxmlRoute = FeedDotxmlRouteImport.update({
   id: '/feed.xml',
   path: '/feed.xml',
@@ -195,6 +202,11 @@ const ProtocolsRoute = ProtocolsRouteImport.update({
 const SealRoute = SealRouteImport.update({
   id: '/seal',
   path: '/seal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SealedMemoryRoute = SealedMemoryRouteImport.update({
+  id: '/sealed-memory',
+  path: '/sealed-memory',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SecurityRoute = SecurityRouteImport.update({
@@ -310,6 +322,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
   '/docs': typeof DocsRoute
+  '/enforcement-watch': typeof EnforcementWatchRoute
   '/feed.xml': typeof FeedDotxmlRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
@@ -325,6 +338,7 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
+  '/sealed-memory': typeof SealedMemoryRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
@@ -359,6 +373,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
   '/docs': typeof DocsRoute
+  '/enforcement-watch': typeof EnforcementWatchRoute
   '/feed.xml': typeof FeedDotxmlRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
@@ -374,6 +389,7 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
+  '/sealed-memory': typeof SealedMemoryRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
@@ -409,6 +425,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
   '/docs': typeof DocsRoute
+  '/enforcement-watch': typeof EnforcementWatchRoute
   '/feed.xml': typeof FeedDotxmlRoute
   '/governance': typeof GovernanceRoute
   '/government': typeof GovernmentRoute
@@ -424,6 +441,7 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
+  '/sealed-memory': typeof SealedMemoryRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transactions': typeof TransactionsRoute
@@ -460,6 +478,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/deploy'
     | '/docs'
+    | '/enforcement-watch'
     | '/feed.xml'
     | '/governance'
     | '/government'
@@ -475,6 +494,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/protocols'
     | '/seal'
+    | '/sealed-memory'
     | '/security'
     | '/sitemap.xml'
     | '/transactions'
@@ -509,6 +529,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/deploy'
     | '/docs'
+    | '/enforcement-watch'
     | '/feed.xml'
     | '/governance'
     | '/government'
@@ -524,6 +545,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/protocols'
     | '/seal'
+    | '/sealed-memory'
     | '/security'
     | '/sitemap.xml'
     | '/transactions'
@@ -558,6 +580,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/deploy'
     | '/docs'
+    | '/enforcement-watch'
     | '/feed.xml'
     | '/governance'
     | '/government'
@@ -573,6 +596,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/protocols'
     | '/seal'
+    | '/sealed-memory'
     | '/security'
     | '/sitemap.xml'
     | '/transactions'
@@ -608,6 +632,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   DeployRoute: typeof DeployRoute
   DocsRoute: typeof DocsRoute
+  EnforcementWatchRoute: typeof EnforcementWatchRoute
   FeedDotxmlRoute: typeof FeedDotxmlRoute
   GovernanceRoute: typeof GovernanceRoute
   GovernmentRoute: typeof GovernmentRoute
@@ -623,6 +648,7 @@ export interface RootRouteChildren {
   PricingRoute: typeof PricingRoute
   ProtocolsRoute: typeof ProtocolsRoute
   SealRoute: typeof SealRoute
+  SealedMemoryRoute: typeof SealedMemoryRoute
   SecurityRoute: typeof SecurityRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TransactionsRoute: typeof TransactionsRoute
@@ -737,6 +763,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/enforcement-watch': {
+      id: '/enforcement-watch'
+      path: '/enforcement-watch'
+      fullPath: '/enforcement-watch'
+      preLoaderRoute: typeof EnforcementWatchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/feed.xml': {
       id: '/feed.xml'
       path: '/feed.xml'
@@ -840,6 +873,13 @@ declare module '@tanstack/react-router' {
       path: '/seal'
       fullPath: '/seal'
       preLoaderRoute: typeof SealRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sealed-memory': {
+      id: '/sealed-memory'
+      path: '/sealed-memory'
+      fullPath: '/sealed-memory'
+      preLoaderRoute: typeof SealedMemoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/security': {
@@ -992,6 +1032,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   DeployRoute: DeployRoute,
   DocsRoute: DocsRoute,
+  EnforcementWatchRoute: EnforcementWatchRoute,
   FeedDotxmlRoute: FeedDotxmlRoute,
   GovernanceRoute: GovernanceRoute,
   GovernmentRoute: GovernmentRoute,
@@ -1007,6 +1048,7 @@ const rootRouteChildren: RootRouteChildren = {
   PricingRoute: PricingRoute,
   ProtocolsRoute: ProtocolsRoute,
   SealRoute: SealRoute,
+  SealedMemoryRoute: SealedMemoryRoute,
   SecurityRoute: SecurityRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TransactionsRoute: TransactionsRoute,
