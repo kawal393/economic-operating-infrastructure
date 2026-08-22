@@ -6,19 +6,19 @@ import { FOOTER_CREED } from "@/content/nation";
 import sovereignMark from "@/assets/sovereign-mark.png";
 
 const NAV = [
-  { to: "/minister", label: "Minister" },
+  { to: "/minister", label: "Steward" },
   { to: "/seal", label: "Seal" },
   { to: "/verify", label: "Verify" },
   { to: "/ledger", label: "Ledger" },
   { to: "/registry", label: "Registry" },
   { to: "/transparency", label: "Transparency" },
-  { to: "/constitution", label: "Constitution" },
-  { to: "/government", label: "Government" },
+  { to: "/constitution", label: "Charter" },
+  { to: "/government", label: "Architecture" },
   { to: "/protocols", label: "Protocols" },
-  { to: "/citizenship", label: "Citizenship" },
+  { to: "/citizenship", label: "Registry membership" },
   { to: "/capital", label: "Capital" },
   { to: "/integrations", label: "Integrations" },
-  { to: "/passport", label: "Passports" },
+  { to: "/passport", label: "Agent credentials" },
   { to: "/security", label: "Sentinel" },
   { to: "/dashboard", label: "Dashboard" },
   { to: "/docs", label: "Docs" },
@@ -27,13 +27,13 @@ const NAV = [
 
 const FOOTER_GROUPS = [
   {
-    title: "The Nation-State",
+    title: "The Platform",
     links: [
-      { to: "/constitution", label: "Constitution" },
-      { to: "/government", label: "Government" },
-      { to: "/minister", label: "Minister of State" },
-      { to: "/security", label: "The Sentinel" },
-      { to: "/citizenship", label: "Citizenship" },
+      { to: "/constitution", label: "Protocol Charter" },
+      { to: "/government", label: "System architecture" },
+      { to: "/minister", label: "Platform steward" },
+      { to: "/security", label: "Cryptographic defence layer" },
+      { to: "/citizenship", label: "Registry membership (free)" },
       { to: "/amendments", label: "Amendments" },
       { to: "/governance", label: "Governance" },
       { to: "/amplify", label: "Amplify" },
@@ -44,10 +44,10 @@ const FOOTER_GROUPS = [
     links: [
       { to: "/seal", label: "Seal" },
       { to: "/verify", label: "Verify" },
-      { to: "/ledger", label: "Public Ledger" },
+      { to: "/ledger", label: "Public record layer" },
       { to: "/transparency", label: "Transparency Log" },
       { to: "/protocols", label: "Protocol Explorer" },
-      { to: "/deploy", label: "Nation-State Deployer" },
+      { to: "/deploy", label: "Workspace deployer" },
       { to: "/contracts", label: "Smart Contracts" },
       { to: "/transactions", label: "Transactions" },
     ],
@@ -60,7 +60,7 @@ const FOOTER_GROUPS = [
       { to: "/integrations", label: "Integrations" },
       { to: "/mcp", label: "MCP Server" },
       { to: "/interop", label: "Standards Bridge" },
-      { to: "/passport", label: "Agent Passports" },
+      { to: "/passport", label: "Agent credentials" },
       { to: "/capital", label: "Sovereign Capital" },
       { to: "/pricing", label: "Pricing" },
 
@@ -97,7 +97,7 @@ export function SiteHeader() {
               Sovereign AI Services
             </span>
             <span className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-              Digital Nation-State
+              Verification & settlement layer
             </span>
           </span>
         </Link>
@@ -120,7 +120,7 @@ export function SiteHeader() {
             to="/citizenship"
             className="rounded-md border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-medium text-gold transition-colors hover:bg-gold/20"
           >
-            Become a Citizen
+            Join the registry
           </Link>
         </div>
 
@@ -153,7 +153,7 @@ export function SiteHeader() {
               onClick={() => setOpen(false)}
               className="mt-2 rounded-md border border-gold/40 bg-gold/10 px-3 py-2.5 text-center text-sm font-medium text-gold"
             >
-              Become a Citizen
+              Join the registry
             </Link>
           </nav>
         </div>
