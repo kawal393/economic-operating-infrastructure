@@ -68,6 +68,7 @@ function LandingPage() {
   return (
     <>
       <Hero />
+      <GenesisSection />
       <FoundingSeals />
       <CharterPreview />
       <ArchitecturePreview />
