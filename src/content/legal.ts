@@ -1,0 +1,48 @@
+/**
+ * Legal identity and mandatory disclosures.
+ * Sovereign AI Services is COMMERCIAL SOFTWARE INFRASTRUCTURE — never a state.
+ */
+
+export const OPERATOR = {
+  name: "Apex Intelligence Empire",
+  abn: "71 672 237 795",
+  jurisdiction: "Victoria, Australia",
+  platform: "Sovereign AI Services",
+  domain: "sovereign-ai.services",
+} as const;
+
+export const DISCLAIMER = `Sovereign AI Services is a commercial software platform operated by Apex Intelligence Empire (ABN 71 672 237 795, registered in Victoria, Australia). It is not a nation, state, government or sovereign entity and confers no citizenship, nationality, legal status or rights. "Charter", "credential", "workspace" and similar terms describe software features only. The platform provides cryptographic verification, timestamping and record-keeping tools; it does not provide legal, financial, immigration or investment advice. Use is governed by the Terms of Service.`;
+
+/** The single approved independence sentence. Do not paraphrase. */
+export const INDEPENDENCE_LINE =
+  "Sovereign AI Services is a separate commercial platform, operated by Apex Intelligence Empire (ABN 71 672 237 795), built on the neutral APEX PSI protocol.";
+
+/** The single approved technical claim. Precise, checkable, not superlative. */
+export const PRECISION_CLAIM =
+  "the first hybrid post-quantum PSI sealing protocol with regulator-shaped public receipts (Ed25519 + ML-DSA-65 + LMS, RFC 8785 canonicalisation, Bitcoin-anchored)";
+
+export const APEX_PORTAL = "https://www.ai-governance-standard.com";
+
+export const FOUNDING_SEALS = [
+  {
+    receiptId: "APEX-NTR-7F4E5CC21099A0E1",
+    title: "Article 50 Enforcement Watch — founding record",
+    hash: "36bcebd3109ada79ba1e2fb08e9d939d3693e8bf1ef5053c8a3b3e62aeba0b9b",
+    timestamp: "2026-08-22T10:43:09Z",
+  },
+  {
+    receiptId: "APEX-NTR-D6B08044149ADE0D",
+    title: "Dutch AP v Uber — €825M equivalence note",
+    hash: "a884b187ee345206aeb2d2923a6655246f2713965e772fc899bcc2a27c2913c6",
+    timestamp: "2026-08-22T10:43:12Z",
+  },
+  {
+    receiptId: "APEX-NTR-F77F6C2198938410",
+    title: "Sealed AI memory demo",
+    hash: "2300fb5b6e08c480ec067b3c97fa7c55db0251afca753644a00a2d558894a3ff",
+    timestamp: "2026-08-22T10:43:14Z",
+  },
+] as const;
+
+export const FOUNDING_RECORDS_COUNT = 3;
+export const ENFORCEMENT_ACTIONS_RECORDED = 0;
