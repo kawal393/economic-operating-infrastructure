@@ -47,7 +47,7 @@ export const Route = createFileRoute("/.well-known/sovereign-ai.json")({
             identity: "did:web + did:key",
           },
           ledger: stats
-            ? { entries: stats.entries, head: stats.head, members: stats.members }
+            ? { entries: stats.entries, head: stats.head, members: stats.citizens }
             : null,
           checkpoint: checkpoint
             ? { size: checkpoint.size, root: checkpoint.rootHash, signature: checkpoint.signature }

@@ -93,7 +93,7 @@ function DashboardPage() {
                   </span>
                 </p>
                 <p className="mt-1 font-mono text-xs text-muted-foreground">
-                  {member.namespace ?? "namespace undeclared"}
+                  {member.territory ?? "namespace undeclared"}
                 </p>
               </div>
               <Link to="/citizenship" className="text-xs font-semibold text-gold">
@@ -119,7 +119,7 @@ function DashboardPage() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatBlock label="Chain entries" value={String(stats?.entries ?? 0)} delta="live" />
-          <StatBlock label="Registered members" value={String(stats?.members ?? 0)} delta="live" />
+          <StatBlock label="Registered members" value={String(stats?.citizens ?? 0)} delta="live" />
           <StatBlock label="Nation-states" value={String(stats?.nationStates ?? 0)} delta="live" />
           <StatBlock
             label="Fees recorded"

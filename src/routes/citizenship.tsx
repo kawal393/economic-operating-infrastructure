@@ -97,7 +97,7 @@ function CitizenshipPage() {
     if (!member) return;
     setKind(member.is_ai ? "ai" : "human");
     setName(member.display_name ?? "");
-    setNamespace(member.namespace ?? "");
+    setNamespace(member.territory ?? "");
     setFloor(member.sufficiency_floor ?? "");
   }, [member]);
 
@@ -294,7 +294,7 @@ function CitizenshipPage() {
                 </div>
                 <div>
                   <dt className="uppercase tracking-widest">Namespace</dt>
-                  <dd className="text-foreground">{member.namespace ?? "undeclared"}</dd>
+                  <dd className="text-foreground">{member.territory ?? "undeclared"}</dd>
                 </div>
                 <div>
                   <dt className="uppercase tracking-widest">Admitted</dt>

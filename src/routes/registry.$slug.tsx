@@ -86,7 +86,7 @@ function NationPage() {
                 </div>
                 <div>
                   <dt className="uppercase tracking-widest text-muted-foreground">Namespace</dt>
-                  <dd className="mt-1 text-foreground">{nation.namespace ?? "undeclared"}</dd>
+                  <dd className="mt-1 text-foreground">{nation.territory ?? "undeclared"}</dd>
                 </div>
                 <div>
                   <dt className="uppercase tracking-widest text-muted-foreground">Deployed</dt>

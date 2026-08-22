@@ -59,7 +59,7 @@ function RegistryPage() {
                     sha256:{nation.constitution_hash.slice(0, 32)}…
                   </p>
                   <p className="mt-2 text-xs text-muted-foreground">
-                    {nation.namespace ?? "namespace undeclared"} ·{" "}
+                    {nation.territory ?? "namespace undeclared"} ·{" "}
                     {new Date(nation.created_at).toUTCString()}
                   </p>
                 </Link>

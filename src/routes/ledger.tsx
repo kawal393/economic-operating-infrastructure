@@ -79,7 +79,7 @@ function LedgerPage() {
       <Section>
         <dl className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           <StatBlock label="Chain entries" value={String(stats.data?.entries ?? "—")} />
-          <StatBlock label="Members" value={String(stats.data?.members ?? "—")} />
+          <StatBlock label="Members" value={String(stats.data?.citizens ?? "—")} />
           <StatBlock label="Nation-states" value={String(stats.data?.nationStates ?? "—")} />
           <StatBlock
             label="Protocol fees"
