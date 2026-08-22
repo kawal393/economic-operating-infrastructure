@@ -44,7 +44,11 @@ headers signed by the nation's Ed25519 seal of state. Pin the key from
 - /passport — mint an agent identity and delegate scoped, revocable authority
 - /ledger — the public chain
 - /registry — sealed entities and the absence signal
-- /constitution — the five unification articles
+- /constitution — The Constitution of the AI Era; five unification articles,
+  sealed version history, public ratification and live conformance
+- /constitution.json — the same text, machine-readable and signed, with a
+  digest per article so an agent can cite the exact clause it operates under
+- /amendments — propose, deliberate and vote on changes to the constitution
 - /capital — Sovereign Capital, 0% equity founder funding
 - /minister — the live voice officer of the government
 

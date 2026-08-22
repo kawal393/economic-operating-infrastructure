@@ -5,6 +5,7 @@ import { readNationStates } from "@/lib/citizen.server";
 const STATIC = [
   "/",
   "/constitution",
+  "/amendments",
   "/government",
   "/citizenship",
   "/governance",
