@@ -9,50 +9,50 @@ import { didKeyFromEd25519Hex } from "@/lib/interop";
 import {
   CAPABILITIES,
   generateAgentKeypair,
-  issueAgent credential,
+  issuePassport,
   toBearerToken,
-  verifyAgent credential,
-  type Agent credential,
-  type Agent credentialCheck,
+  verifyPassport,
+  type Passport,
+  type PassportCheck,
 } from "@/lib/passport";
 
 export const Route = createFileRoute("/passport")({
   head: () => ({
     meta: [
-      { title: "Agent Agent credentials — Bounded Delegation | Sovereign AI Services" },
+      { title: "Agent credentials — Bounded Delegation | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "Issue UCAN-style capability agent credentials so autonomous agents can act for a member within strict bounds — signed in your browser, verifiable offline, revocable on the ledger.",
+          "Issue UCAN-style capability passports so autonomous agents can act for a member within strict bounds — signed in your browser, verifiable offline, revocable on the ledger.",
       },
-      { property: "og:title", content: "Agent Agent credentials — Bounded Delegation" },
+      { property: "og:title", content: "Agent credentials — Bounded Delegation" },
       {
         property: "og:description",
         content:
-          "Delegate named powers to an AI agent with an expiry, an invocation cap and an Ed25519 signature the nation never holds.",
+          "Delegate named powers to an AI agent with an expiry, an invocation cap and an Ed25519 signature the platform never holds.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/passport" }],
   }),
-  component: Agent credentialPage,
+  component: PassportPage,
 });
 
 type Identity = { secretKey: Uint8Array; publicKey: string };
 
-function Agent credentialPage() {
+function PassportPage() {
   const [member, setCitizen] = useState<Identity | null>(null);
   const [agent, setAgent] = useState<Identity | null>(null);
   const [selected, setSelected] = useState<string[]>(["verify", "read-ledger"]);
   const [ttlHours, setTtlHours] = useState(24);
   const [maxInvocations, setMaxInvocations] = useState<number | "">(100);
   const [delegable, setDelegable] = useState(false);
-  const [agent credential, setAgent credential] = useState<Agent credential | null>(null);
+  const [passport, setPassport] = useState<Passport | null>(null);
 
   const [checkRaw, setCheckRaw] = useState("");
   const [checkKey, setCheckKey] = useState("");
-  const [check, setCheck] = useState<Agent credentialCheck | null>(null);
+  const [check, setCheck] = useState<PassportCheck | null>(null);
 
   const toggle = (id: string) =>
     setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
@@ -63,7 +63,7 @@ function Agent credentialPage() {
       return;
     }
     try {
-      const issued = await issueAgent credential({
+      const issued = await issuePassport({
         issuerSecretKey: member.secretKey,
         issuerPublicKey: member.publicKey,
         agentPublicKey: agent.publicKey,
@@ -72,24 +72,24 @@ function Agent credentialPage() {
         maxInvocations: maxInvocations === "" ? null : Number(maxInvocations),
         delegable,
       });
-      setAgent credential(issued);
-      toast.success("Agent credential issued and signed locally.");
+      setPassport(issued);
+      toast.success("Passport issued and signed locally.");
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Could not issue the agent credential.");
+      toast.error(error instanceof Error ? error.message : "Could not issue the passport.");
     }
   };
 
   const runCheck = async () => {
     try {
-      const parsed = JSON.parse(checkRaw) as Agent credential;
+      const parsed = JSON.parse(checkRaw) as Passport;
       const key = checkKey.trim();
       if (!/^[0-9a-f]{64}$/i.test(key)) {
         toast.error("Paste the issuer's 64-character hex public key.");
         return;
       }
-      setCheck(await verifyAgent credential(parsed, key.toLowerCase()));
+      setCheck(await verifyPassport(parsed, key.toLowerCase()));
     } catch {
-      toast.error("That is not a agent credential document.");
+      toast.error("That is not a passport document.");
     }
   };
 
@@ -97,8 +97,8 @@ function Agent credentialPage() {
     <>
       <PageHeader
         eyebrow="Article III · Delegated Authority"
-        title="Agent Agent credentials"
-        description="An autonomous agent should never hold a member's key. It should hold a signed, expiring, itemised licence to do a few specific things. Agent credentials are issued in your browser, verify against your public key alone, and expire whether or not this nation still exists."
+        title="Agent Passports"
+        description="An autonomous agent should never hold a member's key. It should hold a signed, expiring, itemised licence to do a few specific things. Passports are issued in your browser, verify against your public key alone, and expire whether or not this nation still exists."
       />
 
       <Section>
@@ -221,44 +221,44 @@ function Agent credentialPage() {
               onClick={issue}
               className="mt-6 w-full rounded-md border border-gold/40 bg-gold/10 px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.16em] text-gold transition-colors hover:bg-gold/20"
             >
-              Issue agent credential
+              Issue passport
             </button>
           </Panel>
         </div>
 
-        {agent credential ? (
+        {passport ? (
           <Panel className="mt-6">
-            <SectionHeading eyebrow="Issued" title={agent credential.agent credential_id} />
+            <SectionHeading eyebrow="Issued" title={passport.passport_id} />
             <div className="mt-6">
-              <FieldRow label="Audience" value={agent credential.audience} />
-              <FieldRow label="Capabilities" value={agent credential.capabilities.map((c) => c.action).join(", ")} />
-              <FieldRow label="Not before" value={agent credential.not_before} />
-              <FieldRow label="Expires" value={agent credential.expires_at} tone="warning" />
+              <FieldRow label="Audience" value={passport.audience} />
+              <FieldRow label="Capabilities" value={passport.capabilities.map((c) => c.action).join(", ")} />
+              <FieldRow label="Not before" value={passport.not_before} />
+              <FieldRow label="Expires" value={passport.expires_at} tone="warning" />
             </div>
             <CopyBlock
               className="mt-6"
-              label={`${agent credential.agent credential_id}.agent credential.json`}
-              value={JSON.stringify(agent credential, null, 2)}
+              label={`${passport.passport_id}.passport.json`}
+              value={JSON.stringify(passport, null, 2)}
             />
             <CopyBlock
               className="mt-4"
               label="Bearer token (Authorization header)"
-              value={`Authorization: Agent credential ${toBearerToken(agent credential)}`}
+              value={`Authorization: Passport ${toBearerToken(passport)}`}
             />
             <button
               type="button"
               onClick={() =>
-                downloadText(`${agent credential.agent credential_id}.agent credential.json`, JSON.stringify(agent credential, null, 2))
+                downloadText(`${passport.passport_id}.passport.json`, JSON.stringify(passport, null, 2))
               }
               className="mt-4 rounded-md border border-border px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-foreground"
             >
-              Download agent credential
+              Download passport
             </button>
           </Panel>
         ) : null}
 
         <HonestyNote>
-          A agent credential is a licence, not a leash. It proves the member authorised those powers; it
+          A passport is a licence, not a leash. It proves the member authorised those powers; it
           cannot force the agent to behave. Bound the window, cap the invocations, and revoke by
           sealing a revocation notice to the ledger.
         </HonestyNote>
@@ -267,8 +267,8 @@ function Agent credentialPage() {
       <Section>
         <SectionHeading
           eyebrow="Verification"
-          title="Check a agent credential"
-          description="Anyone holding the issuer's public key can validate a agent credential offline. No account, no call to us."
+          title="Check a passport"
+          description="Anyone holding the issuer's public key can validate a passport offline. No account, no call to us."
         />
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
           <Panel>
@@ -276,7 +276,7 @@ function Agent credentialPage() {
               value={checkRaw}
               onChange={(e) => setCheckRaw(e.target.value)}
               rows={10}
-              placeholder="Paste agent credential JSON"
+              placeholder="Paste passport JSON"
               className="w-full rounded-md border border-border bg-secondary/40 p-3 font-mono text-[11px] text-foreground outline-none focus:border-gold/50"
             />
             <input
@@ -290,7 +290,7 @@ function Agent credentialPage() {
               onClick={runCheck}
               className="mt-4 rounded-md border border-gold/40 bg-gold/10 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-gold transition-colors hover:bg-gold/20"
             >
-              Verify agent credential
+              Verify passport
             </button>
           </Panel>
           <Panel>
@@ -308,7 +308,7 @@ function Agent credentialPage() {
               </div>
             ) : (
               <p className="font-mono text-xs text-muted-foreground">
-                No agent credential checked yet.
+                No passport checked yet.
               </p>
             )}
           </Panel>
