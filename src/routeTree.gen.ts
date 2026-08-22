@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgentsDotjsonRouteImport } from './routes/agents[.]json'
+import { Route as AmendmentsRouteImport } from './routes/amendments'
 import { Route as AmplifyRouteImport } from './routes/amplify'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CapitalRouteImport } from './routes/capital'
@@ -64,6 +65,11 @@ const IndexRoute = IndexRouteImport.update({
 const AgentsDotjsonRoute = AgentsDotjsonRouteImport.update({
   id: '/agents.json',
   path: '/agents.json',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AmendmentsRoute = AmendmentsRouteImport.update({
+  id: '/amendments',
+  path: '/amendments',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AmplifyRoute = AmplifyRouteImport.update({
@@ -293,6 +299,7 @@ const ApiPublicV1ReceiptReceiptIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agents.json': typeof AgentsDotjsonRoute
+  '/amendments': typeof AmendmentsRoute
   '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
@@ -341,6 +348,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agents.json': typeof AgentsDotjsonRoute
+  '/amendments': typeof AmendmentsRoute
   '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
@@ -390,6 +398,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/agents.json': typeof AgentsDotjsonRoute
+  '/amendments': typeof AmendmentsRoute
   '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
@@ -440,6 +449,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/agents.json'
+    | '/amendments'
     | '/amplify'
     | '/auth'
     | '/capital'
@@ -488,6 +498,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/agents.json'
+    | '/amendments'
     | '/amplify'
     | '/auth'
     | '/capital'
@@ -536,6 +547,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/agents.json'
+    | '/amendments'
     | '/amplify'
     | '/auth'
     | '/capital'
@@ -585,6 +597,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgentsDotjsonRoute: typeof AgentsDotjsonRoute
+  AmendmentsRoute: typeof AmendmentsRoute
   AmplifyRoute: typeof AmplifyRoute
   AuthRoute: typeof AuthRoute
   CapitalRoute: typeof CapitalRoute
@@ -645,6 +658,13 @@ declare module '@tanstack/react-router' {
       path: '/agents.json'
       fullPath: '/agents.json'
       preLoaderRoute: typeof AgentsDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/amendments': {
+      id: '/amendments'
+      path: '/amendments'
+      fullPath: '/amendments'
+      preLoaderRoute: typeof AmendmentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/amplify': {
@@ -961,6 +981,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgentsDotjsonRoute: AgentsDotjsonRoute,
+  AmendmentsRoute: AmendmentsRoute,
   AmplifyRoute: AmplifyRoute,
   AuthRoute: AuthRoute,
   CapitalRoute: CapitalRoute,
