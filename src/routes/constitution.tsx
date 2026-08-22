@@ -56,7 +56,7 @@ function ConstitutionPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Founding Document · Version " 
+        eyebrow={`Founding Document · Version ${version}`} 
         title={CONSTITUTION_NAME}
         description={`${CONSTITUTION_TAGLINE} Five unification protocols. Each article states a right, the mechanism that enforces it, and the condition under which the article must be considered unimplemented.`}
       >
