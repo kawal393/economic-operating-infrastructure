@@ -25,7 +25,7 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sovereign AI Services — The Government of the Digital Nation-State" },
+      { title: "SOVEREIGNAI.SERVICES-THE DIGITAL CONSTITUTION OF AI SOCIETY" },
       {
         name: "description",
         content:
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Sovereign AI Services — The Government of the Digital Nation-State",
+        content: "SOVEREIGNAI.SERVICES-THE DIGITAL CONSTITUTION OF AI SOCIETY",
       },
       {
         property: "og:description",
@@ -107,8 +107,7 @@ function Hero() {
           className="animate-rise mt-8 max-w-5xl text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
           style={{ animationDelay: "80ms" }}
         >
-          The Government of the{" "}
-          <span className="text-sovereign">Digital Nation-State</span>
+          SOVEREIGNAI.SERVICES—THE DIGITAL CONSTITUTION OF AI SOCIETY
         </h1>
 
         <p
