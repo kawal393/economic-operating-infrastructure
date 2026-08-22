@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FOOTER_CREED } from "@/content/nation";
+import sovereignMark from "@/assets/sovereign-mark.png";
 
 const NAV = [
   { to: "/minister", label: "Minister" },
