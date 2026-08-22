@@ -110,7 +110,7 @@ function EntityPage() {
             <Panel>
               <p className="eyebrow">Attestations</p>
               <p className="mt-2 text-sm text-muted-foreground">
-                Claims made about this entity by citizens. Nothing is ever removed; a disputed claim
+                Claims made about this entity by members. Nothing is ever removed; a disputed claim
                 is answered with a counter-attestation shown beside it.
               </p>
               <div className="mt-4 space-y-4">
@@ -188,7 +188,7 @@ function EntityPage() {
 
             <HonestyNote>
               Integrity proven. Truth not verified. Seals show that an asset has not changed since it
-              was recorded. Attestations are the opinions of the citizens who signed them.
+              was recorded. Attestations are the opinions of the members who signed them.
             </HonestyNote>
           </div>
 

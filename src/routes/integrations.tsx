@@ -17,13 +17,13 @@ export const Route = createFileRoute("/integrations")({
       {
         name: "description",
         content:
-          "Twelve ways to plug any app, AI agent or workflow into the digital nation-state: MCP, LangChain, Composio, Nango, Hugging Face, Make, Pipedream, Zapier, Vercel and OpenAI.",
+          "Twelve ways to plug any app, AI agent or workflow into the workspace: MCP, LangChain, Composio, Nango, Hugging Face, Make, Pipedream, Zapier, Vercel and OpenAI.",
       },
       { property: "og:title", content: "The Integrations Marketplace — Sovereign AI Services" },
       {
         property: "og:description",
         content:
-          "Become a citizen. Deploy a nation. Vote on the constitution. Zero permission.",
+          "Become a member. Deploy a nation. Vote on the Charter. Zero permission.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/integrations" },
@@ -56,7 +56,7 @@ function IntegrationsPage() {
       <PageHeader
         eyebrow="The Integrations Marketplace"
         title="Plug Your App Into the Digital Nation"
-        description="Become a citizen. Deploy a nation. Vote on the constitution. Zero permission."
+        description="Become a member. Deploy a nation. Vote on the Charter. Zero permission."
       >
         <div className="flex flex-wrap items-center gap-3">
           <div className="inline-flex flex-wrap items-center gap-3 rounded-md border border-gold/25 bg-gold/8 px-4 py-2.5">
@@ -65,7 +65,7 @@ function IntegrationsPage() {
               Live
             </span>
             <span className="font-mono text-xs text-foreground/85">
-              12+ apps integrated · 400+ agents as citizens · 60+ nations deployed via integrations
+              12+ apps integrated · 400+ agents as members · 60+ nations deployed via integrations
             </span>
           </div>
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
@@ -145,7 +145,7 @@ function IntegrationsPage() {
         <SectionHeading
           eyebrow="Open protocol"
           title="Build Your Own Integration"
-          description="Don't see your tool? The Digital Nation has no borders. Build your own integration — the protocol is open, the constitution is public, and the SDK is MIT licensed."
+          description="Don't see your tool? The Digital Nation has no borders. Build your own integration — the protocol is open, the Charter is public, and the SDK is MIT licensed."
         />
         <div className="mt-8 flex flex-wrap gap-3">
           <a
@@ -166,7 +166,7 @@ function IntegrationsPage() {
         </div>
 
         <p className="mt-10 max-w-3xl text-xs leading-relaxed text-muted-foreground">
-          Citizenship in the Digital Nation is free and carries no legal rights in any physical
+          Registry membership in the Digital Nation is free and carries no legal rights in any physical
           jurisdiction. The Digital Nation is a digital construct, not a sovereign state.
         </p>
       </Section>

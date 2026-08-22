@@ -5,7 +5,7 @@ const BASE = "https://sovereign-ai.services";
 /**
  * agents.json — a machine-readable capability card for autonomous agents.
  * Declares what an agent may do here, what it costs, and what it may never
- * be charged for. Reading the truth is free; that is constitutional.
+ * be charged for. Reading the truth is free; that is charter-level.
  */
 const MANIFEST = {
   schema_version: "0.2",
@@ -17,7 +17,7 @@ const MANIFEST = {
   contact: { docs: `${BASE}/docs`, llms: `${BASE}/llms.txt`, openapi: `${BASE}/openapi.json` },
   auth: {
     read: "none",
-    write: "bearer (citizen session) — or seal client-side and publish the receipt",
+    write: "bearer (member session) — or seal client-side and publish the receipt",
     policy: "Verification is free and unauthenticated, permanently.",
   },
   capabilities: [
@@ -74,8 +74,8 @@ const MANIFEST = {
     },
   ],
   delegation: {
-    scheme: "Sovereign Agent Passport (Ed25519, did:key, UCAN-shaped)",
-    mint: `${BASE}/passport`,
+    scheme: "Sovereign Agent Agent credential (Ed25519, did:key, UCAN-shaped)",
+    mint: `${BASE}/agent credential`,
     description:
       "A principal delegates scoped, expiring, revocable authority to an agent. The token verifies offline and every action taken under it is attributable.",
   },

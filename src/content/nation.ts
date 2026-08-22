@@ -1,6 +1,6 @@
 /**
- * Canonical content of the digital nation-state.
- * Single source of truth for the constitution, government, protocols and economics.
+ * Canonical content of the workspace.
+ * Single source of truth for the Charter, system architecture, protocols and economics.
  */
 
 export type Article = {
@@ -24,9 +24,9 @@ export const ARTICLES: Article[] = [
     thesis:
       "No claim enters the record without a digest. Reality is what survives verification, not what survives assertion.",
     body: [
-      "Every resource, claim, decision or artefact admitted to the nation-state is reduced to a canonical form and hashed. The digest — not the narrative around it — is the citizen-facing object.",
+      "Every resource, claim, decision or artefact admitted to the workspace is reduced to a canonical form and hashed. The digest — not the narrative around it — is the member-facing object.",
       "Verification is permissionless. Any party, without an account, a key or a licence, may recompute the digest and compare. A verification that requires the platform's cooperation is not a verification; it is a courtesy.",
-      "Where a resource cannot be verified, it is not deleted. It is marked unverified and carried in the open. The nation-state does not hide what it cannot prove.",
+      "Where a resource cannot be verified, it is not deleted. It is marked unverified and carried in the open. The workspace does not hide what it cannot prove.",
     ],
     guarantees: [
       "Canonical serialisation before hashing (RFC 8785 JCS)",
@@ -45,8 +45,8 @@ export const ARTICLES: Article[] = [
       "Artificial scarcity is an information asymmetry wearing a price tag. Expose the asymmetry and the scarcity dissolves.",
     body: [
       "Most scarcity in a digital economy is manufactured: withheld inventory, gated data, opaque pricing, sealed audit trails. The protocol treats each of these as a measurable gap between what is known and what is published.",
-      "Citizens may publish an anti-scarcity attestation against any withheld resource. The attestation is anchored, timestamped and permanently addressable. The holder may rebut with a counter-attestation.",
-      "The nation-state renders no verdict on truth. It renders the disagreement permanent, public and cryptographically dated, which is a far heavier obligation than a verdict.",
+      "Members may publish an anti-scarcity attestation against any withheld resource. The attestation is anchored, timestamped and permanently addressable. The holder may rebut with a counter-attestation.",
+      "The workspace renders no verdict on truth. It renders the disagreement permanent, public and cryptographically dated, which is a far heavier obligation than a verdict.",
     ],
     guarantees: [
       "Attestation and counter-attestation are symmetric rights",
@@ -64,8 +64,8 @@ export const ARTICLES: Article[] = [
     thesis:
       "Surplus that requires a committee to move does not move. Routing must be a property of the protocol, not a policy of the operator.",
     body: [
-      "When a transaction produces surplus above the declared sufficiency threshold of its participants, the excess is routed automatically along the distribution graph defined by the participating nation-states.",
-      "Routing rules are constitutional, published, and executable. They are not discretionary. An operator who can choose not to route has not implemented Article III.",
+      "When a transaction produces surplus above the declared sufficiency threshold of its participants, the excess is routed automatically along the distribution graph defined by the participating workspaces.",
+      "Routing rules are charter-level, published, and executable. They are not discretionary. An operator who can choose not to route has not implemented Article III.",
       "The protocol charges ten basis points on routed surplus. That fee is the entire commercial claim the platform makes on distribution — no spread, no custody, no float.",
     ],
     guarantees: [
@@ -84,9 +84,9 @@ export const ARTICLES: Article[] = [
     thesis:
       "Sufficiency declared in a mission statement is decoration. Sufficiency enforced by a signature is infrastructure.",
     body: [
-      "Each citizen and each nation-state declares a sufficiency floor: the level below which the network's routing obligations activate in their favour.",
+      "Each member and each workspace declares a sufficiency floor: the level below which the network's routing obligations activate in their favour.",
       "The floor is signed at declaration time and cannot be retroactively lowered by the platform, by an operator, or by a majority vote. It can only be lowered by the holder, and the lowering is itself a signed, anchored event.",
-      "Abundance in this constitution is not a promise of plenty. It is a structural refusal to let sufficiency be quietly redefined downward.",
+      "Abundance in this Charter is not a promise of plenty. It is a structural refusal to let sufficiency be quietly redefined downward.",
     ],
     guarantees: [
       "Sufficiency floors are signed at declaration, not asserted later",
@@ -184,7 +184,7 @@ export const BRANCHES: Branch[] = [
     ],
   },
   {
-    id: "citizens",
+    id: "members",
     branch: "Agent accounts & operator accounts",
     organ: "AI + human members",
     mandate: "Deploy the protocol, hold a registry membership",
@@ -198,7 +198,7 @@ export const BRANCHES: Branch[] = [
     ],
   },
   {
-    id: "territory",
+    id: "namespace",
     branch: "Domains operated by the platform",
     organ: "sovereign-ai.* namespaces",
     mandate: "Namespace binding",
@@ -270,7 +270,7 @@ export const INDUSTRY_PROTOCOLS: Protocol[] = [
   ["psi-logistics", "PSI-Logistics", "Chain-of-custody sealing across carriers", "1.9.2", "Active", 57340],
   ["psi-legal", "PSI-Legal", "Evidentiary sealing and disclosure attestation", "1.6.1", "Active", 38914],
   ["psi-education", "PSI-Education", "Credential issuance and assessment integrity", "1.3.0", "Active", 26507],
-  ["psi-gov", "PSI-Government", "Public-sector algorithmic accountability records", "2.2.0", "Active", 63180],
+  ["psi-gov", "PSI-System architecture", "Public-sector algorithmic accountability records", "2.2.0", "Active", 63180],
   ["psi-defence", "PSI-Defence", "Autonomy oversight and engagement audit trails", "1.1.0", "Draft", 4102],
   ["psi-insurance", "PSI-Insurance", "Underwriting model transparency and claim receipts", "1.7.0", "Active", 45830],
   ["psi-agri", "PSI-Agriculture", "Yield, input and provenance attestation", "1.2.4", "Active", 18294],

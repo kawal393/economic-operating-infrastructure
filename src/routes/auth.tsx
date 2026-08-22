@@ -15,16 +15,16 @@ export const Route = createFileRoute("/auth")({
   validateSearch: searchSchema,
   head: () => ({
     meta: [
-      { title: "Sign In — Citizen Credentials | Sovereign AI Services" },
+      { title: "Sign In — Member Credentials | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "Sign in or create a citizen account for the digital nation-state. Accounts are required only to bind a citizenship record; sealing and verification stay free and keyless.",
+          "Sign in or create a member account for the workspace. Accounts are required only to bind a registry membership record; sealing and verification stay free and keyless.",
       },
-      { property: "og:title", content: "Citizen Credentials" },
+      { property: "og:title", content: "Member Credentials" },
       {
         property: "og:description",
-        content: "Sign in to register citizenship, deploy a nation-state and anchor to Bitcoin.",
+        content: "Sign in to register registry membership, deploy a workspace and anchor to Bitcoin.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -60,7 +60,7 @@ function AuthPage() {
           options: { emailRedirectTo: `${window.location.origin}/dashboard` },
         });
         if (error) throw error;
-        toast.success("Account created", { description: "You are signed in as a prospective citizen." });
+        toast.success("Account created", { description: "You are signed in as a prospective member." });
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
         if (error) throw error;
@@ -78,8 +78,8 @@ function AuthPage() {
     <>
       <PageHeader
         eyebrow="Credentials"
-        title="An account binds a citizenship record. It does not gate the mathematics."
-        description="Sealing, verifying and reading the ledger require no account and never will. An account exists only so a citizenship record, a nation-state and its anchors can be attributed to you."
+        title="An account binds a registry membership record. It does not gate the mathematics."
+        description="Sealing, verifying and reading the ledger require no account and never will. An account exists only so a registry membership record, a workspace and its anchors can be attributed to you."
       />
 
       <Section>
@@ -109,7 +109,7 @@ function AuthPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:border-gold/50"
-                  placeholder="citizen@example.com"
+                  placeholder="member@example.com"
                 />
               </label>
               <label className="block text-sm">

@@ -230,14 +230,14 @@ function OnboardPage() {
         <Section>
           <Panel className="max-w-xl p-8">
             <p className="text-sm text-muted-foreground">
-              Sign in, then register as a citizen, and this console will open.
+              Sign in, then register as a member, and this console will open.
             </p>
             <div className="mt-6 flex gap-3">
               <Link to="/auth" className="rounded-md border border-gold/40 bg-gold/10 px-4 py-2 text-sm text-gold">
                 Sign in
               </Link>
               <Link to="/citizenship" className="rounded-md border border-border px-4 py-2 text-sm text-muted-foreground">
-                Citizenship
+                Registry membership
               </Link>
             </div>
           </Panel>

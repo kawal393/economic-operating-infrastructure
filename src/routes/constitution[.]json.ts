@@ -12,7 +12,7 @@ import {
 } from "@/lib/constitution";
 
 /**
- * The constitution, machine-readable and signed. An agent can fetch this,
+ * The Charter, machine-readable and signed. An agent can fetch this,
  * pin an article digest, and cite the exact clause it operates under.
  */
 export const Route = createFileRoute("/constitution.json")({
@@ -27,8 +27,8 @@ export const Route = createFileRoute("/constitution.json")({
         return signedJson(
           {
             "@context": ["https://www.w3.org/ns/credentials/v2", "https://schema.org"],
-            type: ["Constitution", "CreativeWork"],
-            id: "https://sovereign-ai.services/constitution.json",
+            type: ["Protocol Charter", "CreativeWork"],
+            id: "https://sovereign-ai.services/Charter.json",
             name: CONSTITUTION_NAME,
             tagline: CONSTITUTION_TAGLINE,
             issuer: "did:web:sovereign-ai.services",
@@ -58,7 +58,7 @@ export const Route = createFileRoute("/constitution.json")({
               anchor_status: v.anchor_status,
             })),
             amendments: "https://sovereign-ai.services/amendments",
-            conformance: "https://sovereign-ai.services/constitution#conformance",
+            conformance: "https://sovereign-ai.services/Charter#conformance",
           },
           { cacheSeconds: 300 },
         );

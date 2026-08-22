@@ -10,13 +10,13 @@ const MinisterVoice = lazy(() => import("@/components/minister-voice"));
 export const Route = createFileRoute("/minister")({
   head: () => ({
     meta: [
-      { title: "Minister of State — The Live Voice of the Nation | Sovereign AI Services" },
+      { title: "Platform steward — The Live Voice of the Nation | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "Hold a live voice audience with the Minister of State. A realtime government agent that reads the public ledger, cites the constitution and cannot act without your authority.",
+          "Hold a live voice audience with the Platform steward. A realtime system architecture agent that reads the public ledger, cites the Charter and cannot act without your authority.",
       },
-      { property: "og:title", content: "Minister of State — the live voice of the digital nation" },
+      { property: "og:title", content: "Platform steward — the live voice of the digital nation" },
       {
         property: "og:description",
         content:
@@ -33,11 +33,11 @@ export const Route = createFileRoute("/minister")({
 const DOCTRINE = [
   {
     title: "It cannot invent",
-    body: "Every number, digest, proposal and entity the Minister states is fetched live from the public ledger through an audited tool call. There is no free-form recall of facts about the nation.",
+    body: "Every number, digest, proposal and entity the Platform steward states is fetched live from the public ledger through an audited tool call. There is no free-form recall of facts about the nation.",
   },
   {
     title: "It cannot act alone",
-    body: "Read powers are open. Write powers require a signed-in citizen and an explicit on-screen authorisation. Article III makes authority delegated, revocable and logged — including the government's own.",
+    body: "Read powers are open. Write powers require a signed-in member and an explicit on-screen authorisation. Article III makes authority delegated, revocable and logged — including the system architecture's own.",
   },
   {
     title: "It cannot be talked out of this",
@@ -45,13 +45,13 @@ const DOCTRINE = [
   },
   {
     title: "It can be switched off",
-    body: "A constitutional kill switch suspends the Minister, or its write powers alone, from the Sentinel console. A government that cannot be stopped is not a government — it is an archon.",
+    body: "A charter-level kill switch suspends the Platform steward, or its write powers alone, from the Sentinel console. A system architecture that cannot be stopped is not a system architecture — it is an archon.",
   },
 ];
 
 function MinisterPage() {
   const statusFn = useServerFn(getMinisterStatus);
-  const status = useQuery({ queryKey: ["minister-status"], queryFn: () => statusFn() });
+  const status = useQuery({ queryKey: ["platform steward-status"], queryFn: () => statusFn() });
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
@@ -61,8 +61,8 @@ function MinisterPage() {
     <>
       <PageHeader
         eyebrow="Executive branch · live"
-        title="The Minister of State"
-        description="A realtime voice officer of the digital nation-state. It reads the chain, cites the constitution, briefs you on the legislature and files your instruments — and it holds no power you have not granted in the same breath."
+        title="The Platform steward"
+        description="A realtime voice officer of the workspace. It reads the chain, cites the Charter, briefs you on the legislature and files your instruments — and it holds no power you have not granted in the same breath."
       >
         <div className="flex flex-wrap gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
           <span className="rounded border border-border px-2.5 py-1">
@@ -99,9 +99,9 @@ function MinisterPage() {
 
       <Section>
         <SectionHeading
-          eyebrow="Constitutional constraints"
+          eyebrow="Charter-level constraints"
           title="Four things this agent cannot do"
-          description="A government agent with unbounded power is the exact failure mode Article V exists to prevent. The Minister is built so that its limits are structural, not promised."
+          description="A system architecture agent with unbounded power is the exact failure mode Article V exists to prevent. The Platform steward is built so that its limits are structural, not promised."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {DOCTRINE.map((item) => (

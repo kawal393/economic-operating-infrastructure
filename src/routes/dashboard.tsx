@@ -12,13 +12,13 @@ import { getLedgerStats } from "@/lib/ledger.functions";
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
-      { title: "Citizen Dashboard | Sovereign AI Services" },
+      { title: "Member Dashboard | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "Track deployed nation-states, verifications, Bitcoin anchors, surplus routing and governance participation from your citizen dashboard.",
+          "Track deployed workspaces, verifications, Bitcoin anchors, surplus routing and governance participation from your member dashboard.",
       },
-      { property: "og:title", content: "Citizen Dashboard" },
+      { property: "og:title", content: "Member Dashboard" },
       {
         property: "og:description",
         content: "Nation-states, verifications, anchors, surplus routing and governance in one view.",
@@ -55,8 +55,8 @@ function DashboardPage() {
   const citizenFn = useServerFn(getMyCitizen);
   const statsFn = useServerFn(getLedgerStats);
 
-  const { data: citizen } = useQuery({
-    queryKey: ["citizen", user?.id ?? null],
+  const { data: member } = useQuery({
+    queryKey: ["member", user?.id ?? null],
     queryFn: () => citizenFn({}),
     enabled: Boolean(user),
   });
@@ -65,8 +65,8 @@ function DashboardPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Citizen Dashboard"
-        title="Your standing in the nation-state"
+        eyebrow="Member Dashboard"
+        title="Your standing in the workspace"
         description="Deployment, verification, anchoring, surplus routing and governance participation — measured, not narrated."
       >
         <button
@@ -82,18 +82,18 @@ function DashboardPage() {
 
       <Section className="py-14">
         <Panel className="mb-4 flex flex-wrap items-center justify-between gap-4 p-6 text-sm">
-          {citizen ? (
+          {member ? (
             <>
               <div>
-                <p className="text-xs uppercase tracking-widest text-muted-foreground">Citizen record</p>
+                <p className="text-xs uppercase tracking-widest text-muted-foreground">Member record</p>
                 <p className="mt-1 font-semibold text-foreground">
-                  {citizen.display_name}{" "}
+                  {member.display_name}{" "}
                   <span className="text-muted-foreground">
-                    · {citizen.is_ai ? "AI citizen" : "human citizen"}
+                    · {member.is_ai ? "AI member" : "human member"}
                   </span>
                 </p>
                 <p className="mt-1 font-mono text-xs text-muted-foreground">
-                  {citizen.territory ?? "territory undeclared"}
+                  {member.namespace ?? "namespace undeclared"}
                 </p>
               </div>
               <Link to="/citizenship" className="text-xs font-semibold text-gold">
@@ -103,7 +103,7 @@ function DashboardPage() {
           ) : (
             <>
               <p className="text-muted-foreground">
-                No citizen record is bound to this browser yet. Sealing and verification remain free
+                No member record is bound to this browser yet. Sealing and verification remain free
                 and keyless.
               </p>
               <Link
@@ -111,7 +111,7 @@ function DashboardPage() {
                 search={user ? {} : { redirect: "/citizenship" }}
                 className="rounded-md border border-gold/40 px-3 py-1.5 text-xs font-semibold text-gold"
               >
-                {user ? "Register citizenship" : "Sign in"}
+                {user ? "Register registry membership" : "Sign in"}
               </Link>
             </>
           )}
@@ -119,7 +119,7 @@ function DashboardPage() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatBlock label="Chain entries" value={String(stats?.entries ?? 0)} delta="live" />
-          <StatBlock label="Registered citizens" value={String(stats?.citizens ?? 0)} delta="live" />
+          <StatBlock label="Registered members" value={String(stats?.members ?? 0)} delta="live" />
           <StatBlock label="Nation-states" value={String(stats?.nationStates ?? 0)} delta="live" />
           <StatBlock
             label="Fees recorded"
@@ -130,7 +130,7 @@ function DashboardPage() {
 
         <div className="mt-4 grid gap-4 lg:grid-cols-3">
           {[
-            { icon: Rocket, label: "Deploy Nation-State", to: "/deploy" as const },
+            { icon: Rocket, label: "Deploy Workspace", to: "/deploy" as const },
             { icon: BadgeCheck, label: "Seal something", to: "/seal" as const },
             { icon: Anchor, label: "Propagation console", to: "/amplify" as const },
           ].map((action) => (
@@ -214,8 +214,8 @@ function DashboardPage() {
             <p className="eyebrow">Governance</p>
             <h2 className="mt-3 text-xl font-semibold tracking-tight">Open proposals</h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Two proposals are within their deliberation window. Your vote carries full citizen
-              weight regardless of citizenship type.
+              Two proposals are within their deliberation window. Your vote carries full member
+              weight regardless of registry membership type.
             </p>
             <Link
               to="/governance"

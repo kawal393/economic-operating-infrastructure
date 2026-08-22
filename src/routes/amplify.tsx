@@ -52,7 +52,7 @@ const ENGINES = [
   {
     icon: Newspaper,
     title: "3 · Public registry pages",
-    body: "Each deployed nation-state gets an SEO landing page carrying its constitution, hash and founding proof. The directory grows without us writing a word.",
+    body: "Each deployed workspace gets an SEO landing page carrying its Charter, hash and founding proof. The directory grows without us writing a word.",
     to: "/registry",
     cta: "Open the registry",
   },
@@ -98,7 +98,7 @@ Verify independently:
 · Public ledger — ${ORIGIN}/ledger
 
 About Sovereign AI Services
-Sovereign AI Services operates the public notarisation infrastructure of the digital nation-state: free sealing and verification for humans, metered access for machines, and a constitution that denies its own operator the power to revoke, rewrite or reorder anything on the chain. Powered by Apex PSI.
+Sovereign AI Services operates the public notarisation infrastructure of the workspace: free sealing and verification for humans, metered access for machines, and a Charter that denies its own operator the power to revoke, rewrite or reorder anything on the chain. Powered by Apex PSI.
 
 ###`;
 }
@@ -133,7 +133,7 @@ If the digests match, the claim stands on mathematics rather than on ${input.org
 
 ---
 
-*Sealed with [Apex PSI](${ORIGIN}) · Sovereign AI Services — the public notarisation infrastructure of the digital nation-state.*`;
+*Sealed with [Apex PSI](${ORIGIN}) · Sovereign AI Services — the public notarisation infrastructure of the workspace.*`;
 }
 
 function AmplifyPage() {

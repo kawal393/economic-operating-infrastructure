@@ -92,7 +92,7 @@ export const INSTRUMENTS: Instrument[] = [
       "Not a fund: no outside capital is raised, no units are issued, no management fee is charged.",
     mechanics: [
       "0.1% of routed surplus flows in automatically; the balance is public and anchored.",
-      "Allocation by citizen vote on sealed applications — one citizen, one vote, published tallies.",
+      "Allocation by member vote on sealed applications — one member, one vote, published tallies.",
       "Recipients owe the commons a recycling covenant, not a return: repay if you can, at your discretion.",
     ],
   },
@@ -223,7 +223,7 @@ export const CAPITAL_FAQ: [string, string][] = [
   ],
   [
     "What stops the protocol from becoming the new gatekeeper?",
-    "Article V. The protocol cannot select recipients of the Commons Yield Pool — citizens vote. The protocol cannot move escrowed funds — it holds no key. Every rule here is amendable only by vote and anchored to Bitcoin.",
+    "Article V. The protocol cannot select recipients of the Commons Yield Pool — members vote. The protocol cannot move escrowed funds — it holds no key. Every rule here is amendable only by vote and anchored to Bitcoin.",
   ],
   [
     "How do you verify revenue without trusting the founder?",

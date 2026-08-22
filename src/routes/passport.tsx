@@ -9,23 +9,23 @@ import { didKeyFromEd25519Hex } from "@/lib/interop";
 import {
   CAPABILITIES,
   generateAgentKeypair,
-  issuePassport,
+  issueAgent credential,
   toBearerToken,
-  verifyPassport,
-  type Passport,
-  type PassportCheck,
+  verifyAgent credential,
+  type Agent credential,
+  type Agent credentialCheck,
 } from "@/lib/passport";
 
 export const Route = createFileRoute("/passport")({
   head: () => ({
     meta: [
-      { title: "Agent Passports — Bounded Delegation | Sovereign AI Services" },
+      { title: "Agent Agent credentials — Bounded Delegation | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "Issue UCAN-style capability passports so autonomous agents can act for a citizen within strict bounds — signed in your browser, verifiable offline, revocable on the ledger.",
+          "Issue UCAN-style capability agent credentials so autonomous agents can act for a member within strict bounds — signed in your browser, verifiable offline, revocable on the ledger.",
       },
-      { property: "og:title", content: "Agent Passports — Bounded Delegation" },
+      { property: "og:title", content: "Agent Agent credentials — Bounded Delegation" },
       {
         property: "og:description",
         content:
@@ -36,60 +36,60 @@ export const Route = createFileRoute("/passport")({
     ],
     links: [{ rel: "canonical", href: "/passport" }],
   }),
-  component: PassportPage,
+  component: Agent credentialPage,
 });
 
 type Identity = { secretKey: Uint8Array; publicKey: string };
 
-function PassportPage() {
-  const [citizen, setCitizen] = useState<Identity | null>(null);
+function Agent credentialPage() {
+  const [member, setCitizen] = useState<Identity | null>(null);
   const [agent, setAgent] = useState<Identity | null>(null);
   const [selected, setSelected] = useState<string[]>(["verify", "read-ledger"]);
   const [ttlHours, setTtlHours] = useState(24);
   const [maxInvocations, setMaxInvocations] = useState<number | "">(100);
   const [delegable, setDelegable] = useState(false);
-  const [passport, setPassport] = useState<Passport | null>(null);
+  const [agent credential, setAgent credential] = useState<Agent credential | null>(null);
 
   const [checkRaw, setCheckRaw] = useState("");
   const [checkKey, setCheckKey] = useState("");
-  const [check, setCheck] = useState<PassportCheck | null>(null);
+  const [check, setCheck] = useState<Agent credentialCheck | null>(null);
 
   const toggle = (id: string) =>
     setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
   const issue = async () => {
-    if (!citizen || !agent) {
-      toast.error("Generate both a citizen key and an agent key first.");
+    if (!member || !agent) {
+      toast.error("Generate both a member key and an agent key first.");
       return;
     }
     try {
-      const issued = await issuePassport({
-        issuerSecretKey: citizen.secretKey,
-        issuerPublicKey: citizen.publicKey,
+      const issued = await issueAgent credential({
+        issuerSecretKey: member.secretKey,
+        issuerPublicKey: member.publicKey,
         agentPublicKey: agent.publicKey,
         capabilityIds: selected,
         ttlHours,
         maxInvocations: maxInvocations === "" ? null : Number(maxInvocations),
         delegable,
       });
-      setPassport(issued);
-      toast.success("Passport issued and signed locally.");
+      setAgent credential(issued);
+      toast.success("Agent credential issued and signed locally.");
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Could not issue the passport.");
+      toast.error(error instanceof Error ? error.message : "Could not issue the agent credential.");
     }
   };
 
   const runCheck = async () => {
     try {
-      const parsed = JSON.parse(checkRaw) as Passport;
+      const parsed = JSON.parse(checkRaw) as Agent credential;
       const key = checkKey.trim();
       if (!/^[0-9a-f]{64}$/i.test(key)) {
         toast.error("Paste the issuer's 64-character hex public key.");
         return;
       }
-      setCheck(await verifyPassport(parsed, key.toLowerCase()));
+      setCheck(await verifyAgent credential(parsed, key.toLowerCase()));
     } catch {
-      toast.error("That is not a passport document.");
+      toast.error("That is not a agent credential document.");
     }
   };
 
@@ -97,14 +97,14 @@ function PassportPage() {
     <>
       <PageHeader
         eyebrow="Article III · Delegated Authority"
-        title="Agent Passports"
-        description="An autonomous agent should never hold a citizen's key. It should hold a signed, expiring, itemised licence to do a few specific things. Passports are issued in your browser, verify against your public key alone, and expire whether or not this nation still exists."
+        title="Agent Agent credentials"
+        description="An autonomous agent should never hold a member's key. It should hold a signed, expiring, itemised licence to do a few specific things. Agent credentials are issued in your browser, verify against your public key alone, and expire whether or not this nation still exists."
       />
 
       <Section>
         <div className="grid gap-6 lg:grid-cols-2">
           <Panel>
-            <SectionHeading eyebrow="Step 1" title="Identities" description="Two keys, never mixed. The citizen signs; the agent is merely named." />
+            <SectionHeading eyebrow="Step 1" title="Identities" description="Two keys, never mixed. The member signs; the agent is merely named." />
             <div className="mt-6 space-y-4">
               <div className="flex flex-wrap items-center gap-3">
                 <button
@@ -112,11 +112,11 @@ function PassportPage() {
                   onClick={async () => {
                     const kp = await generateKeypair();
                     setCitizen(kp);
-                    toast.success("Citizen key generated in this browser.");
+                    toast.success("Member key generated in this browser.");
                   }}
                   className="rounded-md border border-gold/40 bg-gold/10 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-gold transition-colors hover:bg-gold/20"
                 >
-                  Generate citizen key
+                  Generate member key
                 </button>
                 <button
                   type="button"
@@ -130,10 +130,10 @@ function PassportPage() {
                   Generate agent key
                 </button>
               </div>
-              {citizen ? (
+              {member ? (
                 <div>
-                  <FieldRow label="Citizen did:key" value={didKeyFromEd25519Hex(citizen.publicKey)} />
-                  <FieldRow label="Citizen public key" value={citizen.publicKey} />
+                  <FieldRow label="Member did:key" value={didKeyFromEd25519Hex(member.publicKey)} />
+                  <FieldRow label="Member public key" value={member.publicKey} />
                 </div>
               ) : null}
               {agent ? (
@@ -221,44 +221,44 @@ function PassportPage() {
               onClick={issue}
               className="mt-6 w-full rounded-md border border-gold/40 bg-gold/10 px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.16em] text-gold transition-colors hover:bg-gold/20"
             >
-              Issue passport
+              Issue agent credential
             </button>
           </Panel>
         </div>
 
-        {passport ? (
+        {agent credential ? (
           <Panel className="mt-6">
-            <SectionHeading eyebrow="Issued" title={passport.passport_id} />
+            <SectionHeading eyebrow="Issued" title={agent credential.agent credential_id} />
             <div className="mt-6">
-              <FieldRow label="Audience" value={passport.audience} />
-              <FieldRow label="Capabilities" value={passport.capabilities.map((c) => c.action).join(", ")} />
-              <FieldRow label="Not before" value={passport.not_before} />
-              <FieldRow label="Expires" value={passport.expires_at} tone="warning" />
+              <FieldRow label="Audience" value={agent credential.audience} />
+              <FieldRow label="Capabilities" value={agent credential.capabilities.map((c) => c.action).join(", ")} />
+              <FieldRow label="Not before" value={agent credential.not_before} />
+              <FieldRow label="Expires" value={agent credential.expires_at} tone="warning" />
             </div>
             <CopyBlock
               className="mt-6"
-              label={`${passport.passport_id}.passport.json`}
-              value={JSON.stringify(passport, null, 2)}
+              label={`${agent credential.agent credential_id}.agent credential.json`}
+              value={JSON.stringify(agent credential, null, 2)}
             />
             <CopyBlock
               className="mt-4"
               label="Bearer token (Authorization header)"
-              value={`Authorization: Passport ${toBearerToken(passport)}`}
+              value={`Authorization: Agent credential ${toBearerToken(agent credential)}`}
             />
             <button
               type="button"
               onClick={() =>
-                downloadText(`${passport.passport_id}.passport.json`, JSON.stringify(passport, null, 2))
+                downloadText(`${agent credential.agent credential_id}.agent credential.json`, JSON.stringify(agent credential, null, 2))
               }
               className="mt-4 rounded-md border border-border px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-foreground"
             >
-              Download passport
+              Download agent credential
             </button>
           </Panel>
         ) : null}
 
         <HonestyNote>
-          A passport is a licence, not a leash. It proves the citizen authorised those powers; it
+          A agent credential is a licence, not a leash. It proves the member authorised those powers; it
           cannot force the agent to behave. Bound the window, cap the invocations, and revoke by
           sealing a revocation notice to the ledger.
         </HonestyNote>
@@ -267,8 +267,8 @@ function PassportPage() {
       <Section>
         <SectionHeading
           eyebrow="Verification"
-          title="Check a passport"
-          description="Anyone holding the issuer's public key can validate a passport offline. No account, no call to us."
+          title="Check a agent credential"
+          description="Anyone holding the issuer's public key can validate a agent credential offline. No account, no call to us."
         />
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
           <Panel>
@@ -276,7 +276,7 @@ function PassportPage() {
               value={checkRaw}
               onChange={(e) => setCheckRaw(e.target.value)}
               rows={10}
-              placeholder="Paste passport JSON"
+              placeholder="Paste agent credential JSON"
               className="w-full rounded-md border border-border bg-secondary/40 p-3 font-mono text-[11px] text-foreground outline-none focus:border-gold/50"
             />
             <input
@@ -290,7 +290,7 @@ function PassportPage() {
               onClick={runCheck}
               className="mt-4 rounded-md border border-gold/40 bg-gold/10 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-gold transition-colors hover:bg-gold/20"
             >
-              Verify passport
+              Verify agent credential
             </button>
           </Panel>
           <Panel>
@@ -308,7 +308,7 @@ function PassportPage() {
               </div>
             ) : (
               <p className="font-mono text-xs text-muted-foreground">
-                No passport checked yet.
+                No agent credential checked yet.
               </p>
             )}
           </Panel>

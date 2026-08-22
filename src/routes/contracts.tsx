@@ -12,12 +12,12 @@ export const Route = createFileRoute("/contracts")({
       {
         name: "description",
         content:
-          "Interact with the SovereignAI contract: register citizens, deploy nation-states, record verifications and anchor Merkle roots on-chain.",
+          "Interact with the SovereignAI contract: register members, deploy workspaces, record verifications and anchor Merkle roots on-chain.",
       },
       { property: "og:title", content: "Smart Contracts — SovereignAI.sol" },
       {
         property: "og:description",
-        content: "On-chain citizen registry, nation-state deployment and verification anchoring.",
+        content: "On-chain member registry, workspace deployment and verification anchoring.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/contracts" },
@@ -35,14 +35,14 @@ const METHODS = [
     name: "registerCitizen",
     signature: "registerCitizen(string publicKey, uint8 citizenType)",
     description:
-      "Binds a wallet to a verified citizen record. citizenType 0 = human, 1 = AI system, 2 = institution.",
+      "Binds a wallet to a verified member record. citizenType 0 = human, 1 = AI system, 2 = institution.",
     mutating: true,
   },
   {
     name: "deployNationState",
     signature: "deployNationState(string name, bytes32 constitutionHash)",
     description:
-      "Registers sovereign territory against a sealed constitution hash. Emits NationStateDeployed.",
+      "Registers sovereign namespace against a sealed Charter hash. Emits NationStateDeployed.",
     mutating: true,
   },
   {
@@ -61,8 +61,8 @@ const METHODS = [
   },
   {
     name: "getCitizen",
-    signature: "getCitizen(address citizen) view returns (Citizen)",
-    description: "Reads the citizen record: type, public key, registration block and standing.",
+    signature: "getCitizen(address member) view returns (Member)",
+    description: "Reads the member record: type, public key, registration block and standing.",
     mutating: false,
   },
   {
@@ -74,7 +74,7 @@ const METHODS = [
 ];
 
 const EVENTS = [
-  ["CitizenRegistered", "address indexed citizen, uint8 citizenType"],
+  ["CitizenRegistered", "address indexed member, uint8 citizenType"],
   ["NationStateDeployed", "uint256 indexed id, address indexed founder, bytes32 constitutionHash"],
   ["VerificationRecorded", "bytes32 indexed contentHash, bytes32 indexed protocolId"],
   ["MerkleRootAnchored", "bytes32 indexed root, uint256 window"],
@@ -106,8 +106,8 @@ function ContractsPage() {
     <>
       <PageHeader
         eyebrow="Smart Contracts"
-        title="SovereignAI.sol — the executable half of the constitution"
-        description="Citizenship, territory, verification and anchoring are contract state. What the constitution declares, the contract enforces."
+        title="SovereignAI.sol — the executable half of the Charter"
+        description="Registry membership, namespace, verification and anchoring are contract state. What the Charter declares, the contract enforces."
       >
         <div className="flex flex-wrap items-center gap-3">
           <button

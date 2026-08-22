@@ -233,7 +233,7 @@ function VerifyPage() {
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 Article V — Anti-Archon. No verification may depend on the verifier's existence.
                 The offline verifier is a single self-contained HTML file: no network calls, no
-                dependency on sovereign-ai.services, no account. Keep a copy. If this nation-state
+                dependency on sovereign-ai.services, no account. Keep a copy. If this workspace
                 is seized, censored or shut down, every receipt ever issued still verifies.
               </p>
               <div className="mt-5 flex flex-wrap gap-3">

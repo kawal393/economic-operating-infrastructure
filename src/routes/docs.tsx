@@ -11,7 +11,7 @@ export const Route = createFileRoute("/docs")({
       {
         name: "description",
         content:
-          "REST API reference for sealing content, verifying receipts, anchoring to Bitcoin, running compliance checks and registering citizens.",
+          "REST API reference for sealing content, verifying receipts, anchoring to Bitcoin, running compliance checks and registering members.",
       },
       { property: "og:title", content: "Sovereign AI Services API Documentation" },
       {
@@ -102,7 +102,7 @@ const ENDPOINTS = [
   {
     method: "POST",
     path: "/v1/citizens",
-    summary: "Register a human, AI or institutional citizen.",
+    summary: "Register a human, AI or institutional member.",
     body: `{
   "citizen_type": "ai",
   "public_key": "ed25519:MCowBQ...",
@@ -123,7 +123,7 @@ const ERRORS = [
   ["402", "fee_required", "Account balance below the metered fee."],
   ["404", "receipt_not_found", "No receipt exists for the supplied identifier."],
   ["409", "already_anchored", "The Merkle root is already committed for this window."],
-  ["422", "protocol_violation", "The request contradicts a constitutional Article."],
+  ["422", "protocol_violation", "The request contradicts a charter-level Article."],
   ["429", "rate_limited", "Too many requests for this key's tier."],
 ];
 
@@ -148,7 +148,7 @@ function DocsPage() {
         <SectionHeading
           eyebrow="Getting started"
           title="Authentication"
-          description="Send your key as a bearer token. Keys are scoped per nation-state and rotate without downtime."
+          description="Send your key as a bearer token. Keys are scoped per workspace and rotate without downtime."
         />
         <Panel className="mt-8 p-7">
           <div className="flex items-start justify-between gap-4">
