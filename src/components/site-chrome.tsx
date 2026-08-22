@@ -193,15 +193,15 @@ export function SiteFooter() {
               <span className="text-sm font-semibold tracking-tight">Sovereign AI Services</span>
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              The government of the digital nation-state. Citizenship is free. The infrastructure
-              layer — verification, anchoring, post-quantum defence, governance and surplus routing
-              — is the product.
+              The verification &amp; settlement layer for the AI economy. Registry membership is
+              free. The infrastructure — verification, anchoring, post-quantum defence, protocol
+              evolution and surplus routing — is the product.
             </p>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Powered by <span className="text-gold">Apex PSI</span> — in partnership with the
-              world's first cryptographic provenance protocol. Sovereign AI Services is an
-              independent nation-state, not part of the Apex empire.
+              Powered by <span className="text-gold">Apex PSI</span> — {PRECISION_CLAIM}.{" "}
+              {INDEPENDENCE_LINE}
             </p>
+
             <p className="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-gold">
               sovereign-ai.services
             </p>
