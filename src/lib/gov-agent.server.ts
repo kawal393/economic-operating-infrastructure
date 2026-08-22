@@ -308,7 +308,7 @@ async function runTool(
       };
       return {
         status: "ok",
-        message: `${data.notarizations} ledger entries, ${data.citizens} citizens, ${data.nation_states} nation-states, ${data.registered_entities} registered entities.`,
+        message: `${data.notarizations} ledger entries, ${data.citizens} members, ${data.nation_states} workspaces, ${data.registered_entities} registered entities.`,
         data: payload(data),
       };
     }

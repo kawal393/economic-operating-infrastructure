@@ -11,13 +11,13 @@ export const Route = createFileRoute("/registry/$slug")({
   head: ({ loaderData, params }) => {
     const name = loaderData?.name ?? params.slug;
     const description = loaderData
-      ? `${name} is a sovereign digital nation-state deployed on ${new Date(loaderData.created_at).toUTCString()}. Its constitution is sealed under SHA-256 ${loaderData.constitution_hash.slice(0, 24)}… and chained on the public Apex PSI ledger.`
-      : `${name} on the registry of digital nation-states.`;
+      ? `${name} is a sovereign workspace deployed on ${new Date(loaderData.created_at).toUTCString()}. Its Charter is sealed under SHA-256 ${loaderData.constitution_hash.slice(0, 24)}… and chained on the public Apex PSI ledger.`
+      : `${name} on the registry of workspaces.`;
     return {
       meta: [
-        { title: `${name} — Digital Nation-State | Sovereign AI Services` },
+        { title: `${name} — Workspace | Sovereign AI Services` },
         { name: "description", content: description },
-        { property: "og:title", content: `${name} — a sovereign digital nation-state` },
+        { property: "og:title", content: `${name} — a sovereign workspace` },
         { property: "og:description", content: description },
         { property: "og:type", content: "article" },
         { property: "og:url", content: `/registry/${params.slug}` },
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/registry/$slug")({
   notFoundComponent: () => (
     <Section>
       <Panel className="p-8 text-sm text-muted-foreground">
-        No nation-state holds that territory.{" "}
+        No workspace holds that namespace.{" "}
         <Link to="/registry" className="text-gold">
           Back to the registry →
         </Link>
@@ -61,17 +61,17 @@ function NationPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Nation-state"
+        eyebrow="Workspace"
         title={nation.name}
-        description={nation.tagline ?? "A sovereign digital nation-state on the Apex PSI protocol."}
+        description={nation.tagline ?? "A sovereign workspace on the Apex PSI protocol."}
       />
 
       <Section>
         <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
           <Panel className="p-7">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground">Constitution</p>
+            <p className="text-xs uppercase tracking-widest text-muted-foreground">Protocol Charter</p>
             <pre className="mt-4 whitespace-pre-wrap font-mono text-xs leading-relaxed text-muted-foreground">
-              {nation.constitution_text ?? "Constitution text not published."}
+              {nation.constitution_text ?? "Protocol Charter text not published."}
             </pre>
           </Panel>
 
@@ -79,13 +79,13 @@ function NationPage() {
             <Panel className="p-6 text-sm">
               <dl className="space-y-3 text-xs">
                 <div>
-                  <dt className="uppercase tracking-widest text-muted-foreground">Constitution hash</dt>
+                  <dt className="uppercase tracking-widest text-muted-foreground">Protocol Charter hash</dt>
                   <dd className="mt-1 break-all font-mono text-foreground">
                     sha256:{nation.constitution_hash}
                   </dd>
                 </div>
                 <div>
-                  <dt className="uppercase tracking-widest text-muted-foreground">Territory</dt>
+                  <dt className="uppercase tracking-widest text-muted-foreground">Namespace</dt>
                   <dd className="mt-1 text-foreground">{nation.territory ?? "undeclared"}</dd>
                 </div>
                 <div>
@@ -93,7 +93,7 @@ function NationPage() {
                   <dd className="mt-1 text-foreground">{new Date(nation.created_at).toUTCString()}</dd>
                 </div>
                 <div>
-                  <dt className="uppercase tracking-widest text-muted-foreground">Citizens</dt>
+                  <dt className="uppercase tracking-widest text-muted-foreground">Members</dt>
                   <dd className="mt-1 text-foreground">{nation.citizen_count}</dd>
                 </div>
               </dl>
@@ -109,7 +109,7 @@ function NationPage() {
             </Panel>
 
             <Panel className="p-6 text-sm text-muted-foreground">
-              Anyone may recompute this constitution's digest and check it against the chain. Nothing here
+              Anyone may recompute this Charter's digest and check it against the chain. Nothing here
               asks for trust.
             </Panel>
           </div>

@@ -158,7 +158,7 @@ function CapitalPage() {
           <p className="eyebrow">Escrow contract shape</p>
           <p className="mt-3 mb-5 text-sm leading-relaxed text-muted-foreground">
             Non-upgradeable by design. There is no admin key, no pause function, and no address
-            belonging to this nation-state with authority over your money.
+            belonging to this workspace with authority over your money.
           </p>
           <CopyBlock value={ESCROW_SOL} label="SovereignEscrow.sol — interface" />
         </Panel>
@@ -313,7 +313,7 @@ function CapitalPage() {
               to="/citizenship"
               className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-5 py-3 text-sm font-semibold transition-colors hover:border-gold/40 hover:text-gold"
             >
-              Register as a citizen
+              Register as a member
             </Link>
           </div>
           <p className="mx-auto mt-8 max-w-3xl text-xs leading-relaxed text-muted-foreground">

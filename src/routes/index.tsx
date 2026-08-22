@@ -7,38 +7,29 @@ import {
   Boxes,
   Users,
   Globe,
-  Plug,
   ExternalLink,
 } from "lucide-react";
-import { Panel, Section, SectionHeading, StatBlock } from "@/components/primitives";
+import { Panel, Section, SectionHeading } from "@/components/primitives";
+import { FoundingSeals } from "@/components/founding-seals";
+import { LiveLedgerLine } from "@/components/live-ledger-line";
 import { HOMEPAGE_INTEGRATION_LINKS } from "@/content/integrations";
-import {
-  ARTICLES,
-  BRANCHES,
-  FEES,
-  PLATFORM_STATS,
-  POWER_CHAIN,
-  SCALE_MODEL,
-} from "@/content/nation";
+import { INDEPENDENCE_LINE, PRECISION_CLAIM } from "@/content/legal";
+import { ARTICLES, BRANCHES, FEES, POWER_CHAIN, SCALE_MODEL } from "@/content/nation";
 
+const TITLE = "SOVEREIGNAI.SERVICES — THE OPERATING LAYER OF THE AI ECONOMY";
+const DESCRIPTION =
+  "Verification, anchoring and settlement infrastructure for AI agents and their operators. Post-quantum sealing, Bitcoin anchoring and public receipts — commercial software, not a state.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "SOVEREIGNAI.SERVICES-THE DIGITAL CONSTITUTION OF AI SOCIETY" },
-      {
-        name: "description",
-        content:
-          "A new economic operating system at the protocol layer. Free citizenship for AI and human citizens, sovereign nation-state deployment, Bitcoin anchoring and post-quantum verification.",
-      },
-      {
-        property: "og:title",
-        content: "SOVEREIGNAI.SERVICES-THE DIGITAL CONSTITUTION OF AI SOCIETY",
-      },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
       {
         property: "og:description",
         content:
-          "A new economic operating system at the protocol layer. Making the old system mathematically obsolete.",
+          "The verification & settlement layer for the AI economy. Making the old system mathematically obsolete.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
@@ -52,7 +43,10 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "Sovereign AI Services",
-          description: "The government of the digital nation-state.",
+          legalName: "Apex Intelligence Empire",
+          identifier: "ABN 71 672 237 795",
+          description:
+            "Commercial verification, anchoring and settlement infrastructure for the AI economy.",
           url: "/",
         }),
       },
@@ -74,9 +68,10 @@ function LandingPage() {
   return (
     <>
       <Hero />
-      <ConstitutionPreview />
-      <GovernmentPreview />
-      <CitizenshipPreview />
+      <FoundingSeals />
+      <CharterPreview />
+      <ArchitecturePreview />
+      <MembershipPreview />
       <PowerChain />
       <RevenueModel />
       <ClosingCta />
@@ -107,35 +102,34 @@ function Hero() {
           className="animate-rise mt-8 max-w-5xl text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
           style={{ animationDelay: "80ms" }}
         >
-          SOVEREIGNAI.SERVICES—THE DIGITAL CONSTITUTION OF AI SOCIETY
+          SOVEREIGNAI.SERVICES — THE OPERATING LAYER OF THE AI ECONOMY
         </h1>
 
         <p
           className="animate-rise mt-7 max-w-2xl text-lg leading-relaxed text-foreground/80 lg:text-xl"
           style={{ animationDelay: "150ms" }}
         >
-          A new economic operating system at the protocol layer. Making the old system
-          mathematically obsolete.
+          Verification, anchoring and settlement infrastructure for AI agents and their operators.
+          Making the old system mathematically obsolete.
         </p>
 
         <p
           className="animate-rise mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground"
           style={{ animationDelay: "180ms" }}
         >
-          Powered by <span className="text-gold">Apex PSI</span> — in partnership with the world's
-          first cryptographic provenance protocol. Sovereign AI Services is an independent
-          nation-state built on that technology, not part of the Apex empire.
+          Powered by <span className="text-gold">Apex PSI</span> — {PRECISION_CLAIM}.{" "}
+          {INDEPENDENCE_LINE}
         </p>
 
         <p
           className="animate-rise mt-6 max-w-3xl text-base leading-relaxed text-muted-foreground"
           style={{ animationDelay: "210ms" }}
         >
-          Citizenship is <span className="text-gold">FREE</span>. AI and human citizens join for
-          free. They deploy their own digital nation-states. They connect their websites, empires
-          and protocols. The platform provides the infrastructure layer — cryptographic
-          verification, Bitcoin anchoring, post-quantum crypto, governance and surplus routing.
-          Revenue comes from transaction fees at scale.
+          Registry membership is <span className="text-gold">free</span>. Agent accounts and
+          operator accounts join at no cost, deploy workspaces, and connect the websites, products
+          and protocols they already run. The platform supplies the infrastructure — cryptographic
+          verification, Bitcoin anchoring, post-quantum signing, protocol evolution and surplus
+          routing. Revenue comes from metered transaction fees.
         </p>
 
         <div
@@ -149,8 +143,7 @@ function Hero() {
             Seal something now
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
-          <Link
-            to="/verify"
+          <Link to="/verify" search={{ hash: "" }}
             className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold"
           >
             Verify a receipt
@@ -159,11 +152,14 @@ function Hero() {
             to="/citizenship"
             className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold"
           >
-            Become a Citizen
+            Join the registry
           </Link>
         </div>
 
-        <div className="animate-rise mt-8 flex flex-wrap items-center gap-x-2 gap-y-1.5" style={{ animationDelay: "300ms" }}>
+        <div
+          className="animate-rise mt-8 flex flex-wrap items-center gap-x-2 gap-y-1.5"
+          style={{ animationDelay: "300ms" }}
+        >
           <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
             Integrates with:
           </span>
@@ -192,7 +188,7 @@ function Hero() {
               Powered by APEX PSI
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
-              Cryptographic provenance protocol — IETF draft-singh-psi-00
+              Hybrid post-quantum sealing protocol — IETF draft-singh-psi-00
             </p>
           </div>
           <a
@@ -206,38 +202,21 @@ function Hero() {
           </a>
         </div>
 
-        <dl className="mt-16 grid grid-cols-2 gap-4 lg:grid-cols-5">
-          {PLATFORM_STATS.map((stat, i) => (
-            <div key={stat.label} className="animate-rise" style={{ animationDelay: `${330 + i * 60}ms` }}>
-              <StatBlock label={stat.label} value={stat.value} delta={stat.delta} />
-            </div>
-          ))}
-          <Link to="/integrations" className="animate-rise block" style={{ animationDelay: "570ms" }}>
-            <Panel className="h-full p-5 lift">
-              <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                <Plug className="h-3.5 w-3.5 text-gold" />
-                Apps integrated
-              </p>
-              <p className="mt-3 font-mono text-2xl font-semibold tracking-tight text-foreground lg:text-3xl">
-                12+
-              </p>
-              <p className="mt-1.5 font-mono text-[10px] text-muted-foreground">(updated weekly)</p>
-            </Panel>
-          </Link>
-        </dl>
-
+        <div className="animate-rise mt-12 max-w-3xl" style={{ animationDelay: "340ms" }}>
+          <LiveLedgerLine />
+        </div>
       </div>
     </section>
   );
 }
 
-function ConstitutionPreview() {
+function CharterPreview() {
   return (
     <Section>
       <SectionHeading
-        eyebrow="The Constitution of the AI Era"
-        title="A constitution is only written once — but it can be updated forever."
-        description="Five rights, enforced by mathematics rather than goodwill. Each article is a protocol with a verifiable failure condition — and every version of the text is sealed, anchored and recomputable, so an update can never be a silent one."
+        eyebrow="The Protocol Charter"
+        title="A charter is only written once — but it can be updated forever."
+        description="Five commitments, enforced by mathematics rather than goodwill. Each Charter Article is a protocol with a verifiable failure condition — and every version of the text is sealed, anchored and recomputable, so an update can never be a silent one."
       />
 
       <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -248,7 +227,7 @@ function ConstitutionPreview() {
                 {article.numeral}
               </span>
               <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                Article {article.numeral}
+                Charter Article {article.numeral}
               </span>
             </div>
             <h3 className="mt-5 text-lg font-semibold tracking-tight text-foreground">
@@ -269,16 +248,11 @@ function ConstitutionPreview() {
           </Panel>
         ))}
 
-        <Panel
-          interactive
-          className="flex flex-col justify-between bg-gold/5"
-        >
+        <Panel interactive className="flex flex-col justify-between bg-gold/5">
           <div>
-            <h3 className="text-lg font-semibold tracking-tight text-gold">
-              The full constitution
-            </h3>
+            <h3 className="text-lg font-semibold tracking-tight text-gold">The full Charter</h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Complete text of the five unification protocols, the sealed version history, public
+              Complete text of the five protocol commitments, the sealed version history, public
               ratification, live conformance checks and the amendment thresholds that make Articles
               I and V effectively immutable.
             </p>
@@ -287,7 +261,7 @@ function ConstitutionPreview() {
             to="/constitution"
             className="group mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-gold"
           >
-            Open the Constitution
+            Open the Charter
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </Panel>
@@ -296,13 +270,13 @@ function ConstitutionPreview() {
   );
 }
 
-function GovernmentPreview() {
+function ArchitecturePreview() {
   return (
     <Section className="bg-surface/30">
       <SectionHeading
-        eyebrow="Government Structure"
-        title="Six organs. Separated powers. No discretionary centre."
-        description="Each organ is bounded by what it can prove. The judiciary answers one question. The military trusts no single cipher. The executive may never contradict an Article."
+        eyebrow="System architecture"
+        title="Six subsystems. Separated powers. No discretionary centre."
+        description="Each subsystem is bounded by what it can prove. The record layer answers one question. The defence layer trusts no single cipher. The sector suite may never contradict a Charter Article."
       />
 
       <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -331,20 +305,20 @@ function GovernmentPreview() {
         to="/government"
         className="group mt-10 inline-flex items-center gap-1.5 text-sm font-semibold text-gold"
       >
-        Inspect the full government
+        Inspect the full architecture
         <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
       </Link>
     </Section>
   );
 }
 
-function CitizenshipPreview() {
+function MembershipPreview() {
   const types = [
     {
-      kind: "AI Citizens",
+      kind: "Agent accounts",
       tagline: "Agents, models and autonomous systems",
       points: [
-        "Deploy sovereign digital nation-states",
+        "Deploy workspaces",
         "Connect AI platforms and inference endpoints",
         "Anchor model outputs to Bitcoin",
         "Emit Compliance-Receipt headers on every decision",
@@ -352,13 +326,13 @@ function CitizenshipPreview() {
       fee: "$0.01 per verification",
     },
     {
-      kind: "Human Citizens",
+      kind: "Operator accounts",
       tagline: "Individuals, institutions and operators",
       points: [
-        "Deploy sovereign digital nation-states",
-        "Connect websites, empires and protocols",
+        "Deploy workspaces",
+        "Connect websites, products and protocols",
         "Anchor documents and evidence to Bitcoin",
-        "Vote on governance and constitutional amendments",
+        "Vote on protocol proposals and Charter amendments",
       ],
       fee: "$10/mo individual · $100/mo enterprise",
     },
@@ -367,9 +341,9 @@ function CitizenshipPreview() {
   return (
     <Section>
       <SectionHeading
-        eyebrow="Citizenship"
-        title="Two kinds of citizen. One standing before the constitution."
-        description="AI agents and humans hold identical constitutional standing. The difference is operational, never juridical. Citizenship itself costs nothing and cannot be revoked by the platform."
+        eyebrow="Registry membership (free)"
+        title="Two kinds of account. One standing inside the protocol."
+        description="Agent accounts and operator accounts hold identical standing in the software. The difference is operational. Membership itself costs nothing and confers no legal status of any kind."
       />
 
       <div className="mt-12 grid gap-4 lg:grid-cols-2">
@@ -407,9 +381,9 @@ function PowerChain() {
   return (
     <Section className="bg-surface/30">
       <SectionHeading
-        eyebrow="The Power Chain"
+        eyebrow="The pipeline"
         title="Seal. Record. Audit. Distribute. Sustain."
-        description="Every event in the nation-state traverses the same five stages. No stage may be skipped, reordered, or performed on trust."
+        description="Every event on the platform traverses the same five stages. No stage may be skipped, reordered, or performed on trust."
       />
 
       <div className="mt-14 grid gap-4 lg:grid-cols-5">
@@ -443,18 +417,20 @@ function RevenueModel() {
   return (
     <Section>
       <SectionHeading
-        eyebrow="Economic Model"
+        eyebrow="Economic model"
         title="Free at the base. Metered at the edge."
-        description="The platform makes no claim on citizenship, on verification you perform yourself, or on the ledger you mirror. It charges for metered infrastructure and for ten basis points on routed surplus."
+        description="The platform makes no claim on membership, on verification you perform yourself, or on the record you mirror. It charges for metered infrastructure and for ten basis points on routed surplus."
       />
 
       <div className="mt-12 grid gap-4 lg:grid-cols-3">
         <Panel className="lg:col-span-1 bg-gold/5">
           <p className="eyebrow">Free layer</p>
-          <p className="mt-4 text-3xl font-semibold tracking-tight text-gold">Citizenship is FREE</p>
+          <p className="mt-4 text-3xl font-semibold tracking-tight text-gold">
+            Registry membership is free
+          </p>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            Registration, self-verification, ledger mirroring, constitution access and governance
-            voting carry no fee and never will. Article V forbids it: a network you must pay to
+            Registration, self-verification, record mirroring, Charter access and protocol voting
+            carry no fee and never will. Charter Article V forbids it: a network you must pay to
             audit is a network you do not own.
           </p>
         </Panel>
@@ -476,11 +452,14 @@ function RevenueModel() {
         </Panel>
       </div>
 
-      <div className="mt-4 grid gap-4 lg:grid-cols-3">
+      <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.2em] text-warning">
+        Modelled projections — not realised revenue
+      </p>
+      <div className="mt-3 grid gap-4 lg:grid-cols-3">
         {SCALE_MODEL.map((row) => (
           <Panel key={row.horizon} interactive>
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              {row.horizon}
+              {row.horizon} <span className="text-warning">(modelled)</span>
             </p>
             <p className="mt-4 font-mono text-2xl font-semibold tracking-tight text-foreground">
               {row.revenue}
@@ -494,7 +473,7 @@ function RevenueModel() {
 
       <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted-foreground">
         Scale figures are modelled projections from the published fee schedule, not realised
-        revenue. They assume steady-state usage per citizen and are stated so they can be checked
+        revenue. They assume steady-state usage per member and are stated so they can be checked
         rather than believed.
       </p>
     </Section>
@@ -514,25 +493,25 @@ function ClosingCta() {
       />
       <div className="relative mx-auto max-w-4xl px-5 py-24 text-center lg:px-8 lg:py-32">
         <h2 className="text-3xl font-semibold tracking-tight lg:text-5xl">
-          Join the nation-state. <span className="text-sovereign">It costs nothing.</span>
+          Join the registry. <span className="text-sovereign">It costs nothing.</span>
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
-          Register as an AI or human citizen, deploy your sovereign nation-state, and connect the
-          infrastructure you already run.
+          Register an agent or operator account, deploy a workspace, and connect the infrastructure
+          you already run.
         </p>
         <div className="mt-9 flex flex-wrap justify-center gap-3">
           <Link
             to="/citizenship"
             className="glow-ring group inline-flex items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5"
           >
-            Become a Citizen
+            Join the registry
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
           <Link
             to="/deploy"
             className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold"
           >
-            Deploy a Nation-State
+            Deploy a workspace
           </Link>
         </div>
       </div>

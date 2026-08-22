@@ -26,17 +26,17 @@ import { useAuth } from "@/hooks/useAuth";
 export const Route = createFileRoute("/constitution")({
   head: () => ({
     meta: [
-      { title: "The Constitution of the AI Era | Sovereign AI Services" },
+      { title: "The Protocol Charter of the AI Era | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "A constitution is only written once — but it can be updated forever. Five unification articles, a sealed version history, public ratification and live conformance checks.",
+          "A Charter is only written once — but it can be updated forever. Five unification articles, a sealed version history, public ratification and live conformance checks.",
       },
-      { property: "og:title", content: "The Constitution of the AI Era" },
+      { property: "og:title", content: "The Protocol Charter of the AI Era" },
       {
         property: "og:description",
         content:
-          "A constitution is only written once — but it can be updated forever. Every version sealed, anchored and independently verifiable.",
+          "A Charter is only written once — but it can be updated forever. Every version sealed, anchored and independently verifiable.",
       },
       { property: "og:type", content: "article" },
       { property: "og:url", content: "/constitution" },
@@ -49,7 +49,7 @@ export const Route = createFileRoute("/constitution")({
 
 function ConstitutionPage() {
   const stateFn = useServerFn(getConstitutionState);
-  const state = useQuery({ queryKey: ["constitution-state"], queryFn: () => stateFn() });
+  const state = useQuery({ queryKey: ["Charter-state"], queryFn: () => stateFn() });
   const version = state.data?.current?.version ?? 1;
   const articles = canonicalArticles();
 
@@ -67,7 +67,7 @@ function ConstitutionPage() {
             className="inline-flex items-center gap-2 rounded-md border border-gold/40 bg-gold/10 px-5 py-2.5 text-sm font-medium text-gold transition-colors hover:bg-gold/20"
           >
             <Download className="h-4 w-4" />
-            Download the Constitution (PDF)
+            Download the Protocol Charter (PDF)
           </button>
           <a
             href="/constitution.json"
@@ -204,14 +204,14 @@ function ConstitutionPage() {
             <div>
               <p className="text-sm font-semibold text-foreground">Articles II, III, IV</p>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Amendable on a two-thirds vote of ratifying citizens, with a fourteen-day
+                Amendable on a two-thirds vote of ratifying members, with a fourteen-day
                 deliberation window and a signed, anchored record of every ballot.
               </p>
             </div>
             <div>
               <p className="text-sm font-semibold text-foreground">Articles I and V</p>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Require unanimity of all active nation-states. This is deliberately close to
+                Require unanimity of all active workspaces. This is deliberately close to
                 impossible. The right to verified reality and the right to an uncapturable network
                 are not subject to majority preference.
               </p>
@@ -232,7 +232,7 @@ function ConstitutionPage() {
 function VersionLedger() {
   const stateFn = useServerFn(getConstitutionState);
   const { data, isLoading } = useQuery({
-    queryKey: ["constitution-state"],
+    queryKey: ["Charter-state"],
     queryFn: () => stateFn(),
   });
 
@@ -241,7 +241,7 @@ function VersionLedger() {
       <SectionHeading
         eyebrow="Living amendment ledger"
         title="Every version sealed. Every change provable."
-        description="The text you are reading has a digest. That digest is stored, anchored and recomputable from the published JSON — so anyone can prove what the constitution said on any date, and detect a silent edit."
+        description="The text you are reading has a digest. That digest is stored, anchored and recomputable from the published JSON — so anyone can prove what the Charter said on any date, and detect a silent edit."
       />
 
       <div className="mt-10 grid gap-4 md:grid-cols-4">
@@ -293,6 +293,12 @@ function VersionLedger() {
         <p className="eyebrow">Current digest (SHA-256 over the canonical text)</p>
         <p className="mt-3 break-all font-mono text-xs text-gold/80">
           {data?.current?.digest ?? data?.liveDigest ?? "…"}
+        </p>
+        <p className="mt-3 text-xs text-muted-foreground">
+          This text, this hash — any divergence is visible.{" "}
+          <Link to="/seal" className="text-gold underline-offset-4 hover:underline">
+            Seal it into the ledger →
+          </Link>
         </p>
       </Panel>
 
@@ -371,7 +377,7 @@ function Ratify() {
   const queryClient = useQueryClient();
   const stateFn = useServerFn(getConstitutionState);
   const ratifyFn = useServerFn(ratifyConstitution);
-  const { data } = useQuery({ queryKey: ["constitution-state"], queryFn: () => stateFn() });
+  const { data } = useQuery({ queryKey: ["Charter-state"], queryFn: () => stateFn() });
 
   const [label, setLabel] = useState("");
   const [kind, setKind] = useState<"human" | "ai" | "organisation">("human");
@@ -379,7 +385,7 @@ function Ratify() {
   const sign = useMutation({
     mutationFn: async () => {
       const digest = data?.current?.digest ?? data?.liveDigest;
-      if (!digest) throw new Error("No constitution version is available yet.");
+      if (!digest) throw new Error("No Charter version is available yet.");
       const secretKey = ed.utils.randomSecretKey();
       const publicKey = toHex(await ed.getPublicKeyAsync(secretKey));
       const signature = toHex(
@@ -400,7 +406,7 @@ function Ratify() {
         description: "Your signature is on the public record against this exact digest.",
       });
       setLabel("");
-      queryClient.invalidateQueries({ queryKey: ["constitution-state"] });
+      queryClient.invalidateQueries({ queryKey: ["Charter-state"] });
     },
     onError: (error: Error) => toast.error(error.message),
   });
@@ -456,7 +462,7 @@ function Ratify() {
               <Link to="/auth" className="text-gold hover:underline">
                 Sign in
               </Link>{" "}
-              as a citizen to ratify. Citizenship is free.
+              as a member to ratify. Registry membership is free.
             </p>
           ) : null}
         </Panel>

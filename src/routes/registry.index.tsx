@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader, Panel, Section } from "@/components/primitives";
+import { DisclaimerGate } from "@/components/legal";
 import { listNationStates } from "@/lib/citizen.functions";
 import type { NationState } from "@/lib/nation-types";
 
@@ -7,16 +8,16 @@ export const Route = createFileRoute("/registry/")({
   loader: async () => listNationStates(),
   head: () => ({
     meta: [
-      { title: "Registry of Digital Nation-States | Sovereign AI Services" },
+      { title: "Registry of Workspaces | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "The open registry of sovereign digital nation-states. Every entry carries a sealed constitution hash, a ledger receipt and a Bitcoin anchor. Public to read, impossible to forge.",
+          "The open registry of workspaces. Every entry carries a sealed Charter hash, a ledger receipt and a Bitcoin anchor. Public to read, impossible to forge.",
       },
-      { property: "og:title", content: "The Registry of Digital Nation-States" },
+      { property: "og:title", content: "The Registry of Workspaces" },
       {
         property: "og:description",
-        content: "Every sovereign nation-state deployed on the protocol, with its constitution hash.",
+        content: "Every workspace deployed on the protocol, with its Charter hash.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/registry" },
@@ -32,16 +33,17 @@ function RegistryPage() {
 
   return (
     <>
+      <DisclaimerGate />
       <PageHeader
         eyebrow="Registry"
-        title="Every nation-state ever deployed, listed forever."
+        title="Every workspace ever deployed, listed forever."
         description="A registry no one can be delisted from and no one can buy their way up. Ordering is chronological; standing is cryptographic."
       />
 
       <Section>
         {nations.length === 0 ? (
           <Panel className="p-8 text-sm text-muted-foreground">
-            No nation-state has been deployed yet.{" "}
+            No workspace has been deployed yet.{" "}
             <Link to="/deploy" className="text-gold">
               Be the first →
             </Link>
@@ -59,7 +61,7 @@ function RegistryPage() {
                     sha256:{nation.constitution_hash.slice(0, 32)}…
                   </p>
                   <p className="mt-2 text-xs text-muted-foreground">
-                    {nation.territory ?? "territory undeclared"} ·{" "}
+                    {nation.territory ?? "namespace undeclared"} ·{" "}
                     {new Date(nation.created_at).toUTCString()}
                   </p>
                 </Link>

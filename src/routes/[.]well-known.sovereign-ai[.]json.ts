@@ -20,7 +20,7 @@ export const Route = createFileRoute("/.well-known/sovereign-ai.json")({
         const manifest = {
           protocol: "Apex PSI",
           nation: "Sovereign AI Services",
-          tagline: "The Government of the Digital Nation-State",
+          tagline: "The System architecture of the Workspace",
           version: "1.0",
           did: "did:web:sovereign-ai.services",
           key: { alg: "Ed25519", did: key.did, jwks: `${base}/api/public/v1/jwks.json` },
@@ -47,7 +47,7 @@ export const Route = createFileRoute("/.well-known/sovereign-ai.json")({
             identity: "did:web + did:key",
           },
           ledger: stats
-            ? { entries: stats.entries, head: stats.head, citizens: stats.citizens }
+            ? { entries: stats.entries, head: stats.head, members: stats.citizens }
             : null,
           checkpoint: checkpoint
             ? { size: checkpoint.size, root: checkpoint.rootHash, signature: checkpoint.signature }

@@ -13,11 +13,11 @@ import { ARTICLES } from "@/content/nation";
 export const Route = createFileRoute("/amendments")({
   head: () => ({
     meta: [
-      { title: "Amendments — Updating the Constitution of the AI Era | Sovereign AI Services" },
+      { title: "Amendments — Updating the Protocol Charter of the AI Era | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "Propose, deliberate and vote on amendments to the Constitution of the AI Era. Every proposal is sealed on submission and stays on the record, whether it passes or fails.",
+          "Propose, deliberate and vote on amendments to the Protocol Charter of the AI Era. Every proposal is sealed on submission and stays on the record, whether it passes or fails.",
       },
       { property: "og:title", content: "Amendments — The door marked 'updated forever'" },
       {
@@ -67,7 +67,7 @@ function AmendmentsPage() {
       voteFn({
         data: {
           ...input,
-          voterLabel: user?.email?.split("@")[0] ?? "Citizen",
+          voterLabel: user?.email?.split("@")[0] ?? "Member",
         },
       }),
     onSuccess: () => {
@@ -83,7 +83,7 @@ function AmendmentsPage() {
     <>
       <PageHeader
         eyebrow="Article VII · Amendment"
-        title="A constitution is only written once — but it can be updated forever."
+        title="A Charter is only written once — but it can be updated forever."
         description={`Anyone may draft an amendment. It is sealed the moment it is submitted, deliberated for ${DELIBERATION_DAYS} days, and either merged into a new sealed version or recorded as failed. Failed amendments are never deleted.`}
       >
         <Link
@@ -105,7 +105,7 @@ function AmendmentsPage() {
             {
               label: "Articles II, III, IV",
               value: "Two-thirds",
-              note: "Amendable by two-thirds of ratifying citizens.",
+              note: "Amendable by two-thirds of ratifying members.",
             },
             {
               label: "Articles I and V",
@@ -210,7 +210,7 @@ function AmendmentsPage() {
                           <Link to="/auth" className="text-gold hover:underline">
                             Sign in
                           </Link>{" "}
-                          as a citizen to vote.
+                          as a member to vote.
                         </p>
                       ) : null}
                     </div>

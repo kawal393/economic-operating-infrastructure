@@ -8,11 +8,11 @@ import { MCP_CLIENTS, MCP_TOOLS } from "@/content/integrations";
 export const Route = createFileRoute("/mcp")({
   head: () => ({
     meta: [
-      { title: "MCP Server — Plug the Digital Nation Into Every AI Agent" },
+      { title: "MCP Server — Plug the Verification Layer Into Every AI Agent" },
       {
         name: "description",
         content:
-          "One MCP server for Claude, Cursor, Continue.dev, Goose, Cline and custom agents. Automatic citizenship, cryptographic receipts, zero code changes.",
+          "One MCP server for Claude, Cursor, Continue.dev, Goose, Cline and custom agents. Automatic registry membership, cryptographic receipts, zero code changes.",
       },
       { property: "og:title", content: "MCP Server — Sovereign AI Services" },
       {
@@ -49,8 +49,8 @@ function McpPage() {
     <>
       <PageHeader
         eyebrow="Model Context Protocol"
-        title="Plug the Digital Nation into every AI agent in 60 seconds"
-        description="One MCP server. Every Claude, Cursor, Goose, Cline, Continue, and custom agent. Automatic citizenship. Cryptographic receipts. Zero code changes."
+        title="Plug the verification layer into every AI agent in 60 seconds"
+        description="One MCP server. Every Claude, Cursor, Goose, Cline, Continue, and custom agent. Automatic registry membership. Cryptographic receipts. Zero code changes."
       >
         <div className="flex flex-wrap items-center gap-3">
           <div className="inline-flex items-center gap-3 rounded-md border border-gold/25 bg-gold/8 px-4 py-2.5">
@@ -82,7 +82,7 @@ function McpPage() {
               Run the installer
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              One command provisions a keypair, a citizen number and a wallet for your agent.
+              One command provisions a keypair, a member number and a wallet for your agent.
             </p>
             <div className="mt-5">
               <CopyBlock label="Terminal" value="npx @apex/nation-mcp install" />
@@ -128,7 +128,7 @@ function McpPage() {
           </h3>
           <ul className="mt-5 space-y-3">
             {[
-              "Every AI decision now gets a Digital Nation receipt",
+              "Every AI decision now gets a platform receipt",
               "Verify any receipt at /verify",
               "Zero code changes to your existing prompts",
             ].map((point) => (
@@ -138,8 +138,7 @@ function McpPage() {
               </li>
             ))}
           </ul>
-          <Link
-            to="/verify"
+          <Link to="/verify" search={{ hash: "" }}
             className="mt-6 inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold"
           >
             Open the verifier
@@ -209,8 +208,7 @@ function McpPage() {
         </Panel>
 
         <p className="mt-10 max-w-3xl text-xs leading-relaxed text-muted-foreground">
-          Citizenship in the Digital Nation is free and carries no legal rights in any physical
-          jurisdiction. The Digital Nation is a digital construct, not a sovereign state.
+          Registry membership is free and confers no legal rights in any physical jurisdiction. This is a commercial software platform, not a state.
         </p>
       </Section>
     </>

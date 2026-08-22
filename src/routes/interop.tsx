@@ -61,7 +61,7 @@ function InteropPage() {
       <PageHeader
         eyebrow="Article II · Symmetry of Standards"
         title="The Standards Bridge"
-        description="One signed fact, expressed in every language the internet already trusts. Nothing is re-signed and nothing is invented — each export is derived deterministically from the bytes the citizen signed."
+        description="One signed fact, expressed in every language the internet already trusts. Nothing is re-signed and nothing is invented — each export is derived deterministically from the bytes the member signed."
       />
 
       <Section>

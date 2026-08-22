@@ -6,13 +6,13 @@ import { BRANCHES } from "@/content/nation";
 export const Route = createFileRoute("/government")({
   head: () => ({
     meta: [
-      { title: "Government Structure — Six Organs of the Nation-State | Sovereign AI Services" },
+      { title: "System architecture — Six Organs of the Workspace | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "Legislative Protocol Engine, Judicial Bitcoin anchoring, post-quantum Military, 21 Executive industry protocols, AI and human Citizens, and sovereign-ai.* Territory.",
+          "Legislative Protocol Engine, Judicial Bitcoin anchoring, post-quantum Military, 21 Executive industry protocols, AI and human Members, and sovereign-ai.* Namespace.",
       },
-      { property: "og:title", content: "Government Structure of the Digital Nation-State" },
+      { property: "og:title", content: "System architecture of the Workspace" },
       {
         property: "og:description",
         content: "Six organs. Separated powers. Each bounded by what it can prove.",
@@ -31,17 +31,17 @@ const ICONS: Record<string, typeof Scale> = {
   judicial: Bitcoin,
   military: ShieldCheck,
   executive: Boxes,
-  citizens: Users,
-  territory: Globe,
+  members: Users,
+  namespace: Globe,
 };
 
 function GovernmentPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Government"
+        eyebrow="System architecture"
         title="Six organs. Separated powers. No discretionary centre."
-        description="The government is designed around a single assumption: whoever ends up holding the keys will eventually misuse them. Every organ is therefore bounded by what it can cryptographically prove, and by nothing softer."
+        description="The system architecture is designed around a single assumption: whoever ends up holding the keys will eventually misuse them. Every organ is therefore bounded by what it can cryptographically prove, and by nothing softer."
       />
 
       <Section>
@@ -114,8 +114,8 @@ function GovernmentPage() {
               {[
                 [
                   "Protocol Engine",
-                  "Amend Articles I or V without unanimity of active nation-states",
-                  "Citizens",
+                  "Amend Articles I or V without unanimity of active workspaces",
+                  "Members",
                 ],
                 [
                   "Bitcoin Anchoring",
@@ -129,17 +129,17 @@ function GovernmentPage() {
                 ],
                 [
                   "21 Industry Protocols",
-                  "Issue a statutory rule that contradicts a constitutional Article",
+                  "Issue a statutory rule that contradicts a charter-level Article",
                   "Protocol Engine",
                 ],
                 [
-                  "Citizens",
-                  "Vote away another citizen's Article I or Article V standing",
-                  "The Constitution",
+                  "Members",
+                  "Vote away another member's Article I or Article V standing",
+                  "The Protocol Charter",
                 ],
                 [
-                  "Territory",
-                  "Invalidate receipts issued under a previously bound constitution hash",
+                  "Namespace",
+                  "Invalidate receipts issued under a previously bound Charter hash",
                   "Offline verification",
                 ],
               ].map(([organ, prohibition, check]) => (

@@ -15,7 +15,7 @@ export const Route = createFileRoute("/transactions")({
       { property: "og:title", content: "Transaction Dashboard" },
       {
         property: "og:description",
-        content: "Microtransaction volume and protocol revenue at nation-state scale.",
+        content: "Microtransaction volume and protocol revenue at workspace scale.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/transactions" },
@@ -180,7 +180,7 @@ function TransactionsPage() {
         <SectionHeading
           eyebrow="Schedule"
           title="What each action costs"
-          description="Published, uniform, and identical for every citizen."
+          description="Published, uniform, and identical for every member."
         />
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {FEES.map((fee) => (

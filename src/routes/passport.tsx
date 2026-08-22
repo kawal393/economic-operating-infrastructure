@@ -19,17 +19,17 @@ import {
 export const Route = createFileRoute("/passport")({
   head: () => ({
     meta: [
-      { title: "Agent Passports — Bounded Delegation | Sovereign AI Services" },
+      { title: "Agent credentials — Bounded Delegation | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "Issue UCAN-style capability passports so autonomous agents can act for a citizen within strict bounds — signed in your browser, verifiable offline, revocable on the ledger.",
+          "Issue UCAN-style capability passports so autonomous agents can act for a member within strict bounds — signed in your browser, verifiable offline, revocable on the ledger.",
       },
-      { property: "og:title", content: "Agent Passports — Bounded Delegation" },
+      { property: "og:title", content: "Agent credentials — Bounded Delegation" },
       {
         property: "og:description",
         content:
-          "Delegate named powers to an AI agent with an expiry, an invocation cap and an Ed25519 signature the nation never holds.",
+          "Delegate named powers to an AI agent with an expiry, an invocation cap and an Ed25519 signature the platform never holds.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -42,7 +42,7 @@ export const Route = createFileRoute("/passport")({
 type Identity = { secretKey: Uint8Array; publicKey: string };
 
 function PassportPage() {
-  const [citizen, setCitizen] = useState<Identity | null>(null);
+  const [member, setCitizen] = useState<Identity | null>(null);
   const [agent, setAgent] = useState<Identity | null>(null);
   const [selected, setSelected] = useState<string[]>(["verify", "read-ledger"]);
   const [ttlHours, setTtlHours] = useState(24);
@@ -58,14 +58,14 @@ function PassportPage() {
     setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
   const issue = async () => {
-    if (!citizen || !agent) {
-      toast.error("Generate both a citizen key and an agent key first.");
+    if (!member || !agent) {
+      toast.error("Generate both a member key and an agent key first.");
       return;
     }
     try {
       const issued = await issuePassport({
-        issuerSecretKey: citizen.secretKey,
-        issuerPublicKey: citizen.publicKey,
+        issuerSecretKey: member.secretKey,
+        issuerPublicKey: member.publicKey,
         agentPublicKey: agent.publicKey,
         capabilityIds: selected,
         ttlHours,
@@ -98,13 +98,13 @@ function PassportPage() {
       <PageHeader
         eyebrow="Article III · Delegated Authority"
         title="Agent Passports"
-        description="An autonomous agent should never hold a citizen's key. It should hold a signed, expiring, itemised licence to do a few specific things. Passports are issued in your browser, verify against your public key alone, and expire whether or not this nation still exists."
+        description="An autonomous agent should never hold a member's key. It should hold a signed, expiring, itemised licence to do a few specific things. Passports are issued in your browser, verify against your public key alone, and expire whether or not this nation still exists."
       />
 
       <Section>
         <div className="grid gap-6 lg:grid-cols-2">
           <Panel>
-            <SectionHeading eyebrow="Step 1" title="Identities" description="Two keys, never mixed. The citizen signs; the agent is merely named." />
+            <SectionHeading eyebrow="Step 1" title="Identities" description="Two keys, never mixed. The member signs; the agent is merely named." />
             <div className="mt-6 space-y-4">
               <div className="flex flex-wrap items-center gap-3">
                 <button
@@ -112,11 +112,11 @@ function PassportPage() {
                   onClick={async () => {
                     const kp = await generateKeypair();
                     setCitizen(kp);
-                    toast.success("Citizen key generated in this browser.");
+                    toast.success("Member key generated in this browser.");
                   }}
                   className="rounded-md border border-gold/40 bg-gold/10 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-gold transition-colors hover:bg-gold/20"
                 >
-                  Generate citizen key
+                  Generate member key
                 </button>
                 <button
                   type="button"
@@ -130,10 +130,10 @@ function PassportPage() {
                   Generate agent key
                 </button>
               </div>
-              {citizen ? (
+              {member ? (
                 <div>
-                  <FieldRow label="Citizen did:key" value={didKeyFromEd25519Hex(citizen.publicKey)} />
-                  <FieldRow label="Citizen public key" value={citizen.publicKey} />
+                  <FieldRow label="Member did:key" value={didKeyFromEd25519Hex(member.publicKey)} />
+                  <FieldRow label="Member public key" value={member.publicKey} />
                 </div>
               ) : null}
               {agent ? (
@@ -258,7 +258,7 @@ function PassportPage() {
         ) : null}
 
         <HonestyNote>
-          A passport is a licence, not a leash. It proves the citizen authorised those powers; it
+          A passport is a licence, not a leash. It proves the member authorised those powers; it
           cannot force the agent to behave. Bound the window, cap the invocations, and revoke by
           sealing a revocation notice to the ledger.
         </HonestyNote>

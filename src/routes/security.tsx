@@ -7,13 +7,13 @@ import { getThreatSummary } from "@/lib/security.functions";
 export const Route = createFileRoute("/security")({
   head: () => ({
     meta: [
-      { title: "The Sentinel — Live Defence of the Digital Nation | Sovereign AI Services" },
+      { title: "The Sentinel — Live Defence of the Platform | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "The Sentinel is the defence layer of sovereign-ai.services: prompt-injection walls, rate limiting, row-level isolation, an append-only threat log and a constitutional kill switch.",
+          "The Sentinel is the defence layer of sovereign-ai.services: prompt-injection walls, rate limiting, row-level isolation, an append-only threat log and a charter-level kill switch.",
       },
-      { property: "og:title", content: "The Sentinel — live defence of the digital nation-state" },
+      { property: "og:title", content: "The Sentinel — live defence of the workspace" },
       {
         property: "og:description",
         content:
@@ -37,7 +37,7 @@ const WALLS = [
   {
     layer: "02",
     name: "Atomic rate limiting",
-    body: "A single-statement PostgreSQL function consumes a token bucket inside one transaction, so concurrent requests cannot race past the ceiling. Buckets are keyed per citizen or per hashed caller fingerprint; raw addresses are never stored.",
+    body: "A single-statement PostgreSQL function consumes a token bucket inside one transaction, so concurrent requests cannot race past the ceiling. Buckets are keyed per member or per hashed caller fingerprint; raw addresses are never stored.",
     posture: "8 voice audiences/hour, 120 reads and 20 writes per 5 minutes.",
   },
   {
@@ -60,8 +60,8 @@ const WALLS = [
   },
   {
     layer: "06",
-    name: "Constitutional kill switch",
-    body: "Global flags can take the Minister offline, suspend its write powers, or raise the nation to lockdown, in which no agent-mediated governance action is accepted regardless of authority.",
+    name: "Charter-level kill switch",
+    body: "Global flags can take the Platform steward offline, suspend its write powers, or raise the nation to lockdown, in which no agent-mediated governance action is accepted regardless of authority.",
     posture: "Article V: the protocol refuses power it could abuse.",
   },
 ];
@@ -103,7 +103,7 @@ function SecurityPage() {
             to="/minister"
             className="rounded-md border border-gold/40 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-gold"
           >
-            Minister · {data?.agentEnabled === false ? "offline" : "online"}
+            Platform steward · {data?.agentEnabled === false ? "offline" : "online"}
           </Link>
         </div>
       </PageHeader>

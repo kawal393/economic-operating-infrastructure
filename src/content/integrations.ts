@@ -30,7 +30,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "MC",
     category: "AI Agents",
     description:
-      "Any MCP-compatible agent can become a citizen automatically. Get a wallet, a citizen number, and voting rights.",
+      "Any MCP-compatible agent can become a member automatically. Get a wallet, a member number, and voting rights.",
     install: "npx @apex/nation-mcp",
     status: "Available Now",
     docs: "/mcp",
@@ -41,7 +41,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "LC",
     category: "LLM Frameworks",
     description:
-      "Wrap any LangChain agent to make it a citizen. It can seal its decisions, vote on proposals, and deploy micro-nations.",
+      "Wrap any LangChain agent to make it a member. It can seal its decisions, vote on proposals, and deploy micro-nations.",
     install: "pip install langchain-apex-nation",
     status: "Available Now",
     docs: "/docs",
@@ -52,7 +52,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "CO",
     category: "AI Agents",
     description:
-      "Register the Digital Nation as a custom action set in Composio. Now any agent can call seal, verify, register-citizen, deploy-nation, vote — all as native actions.",
+      "Register the platform as a custom action set in Composio. Now any agent can call seal, verify, register-member, deploy-workspace, vote — all as native actions.",
     install: "Install via Composio's action directory",
     status: "Available Now",
     docs: "/docs",
@@ -63,7 +63,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "NA",
     category: "Auth",
     description:
-      "Let users of any app that integrates with Nango use their existing login to become citizens. No new wallet, no new password.",
+      "Let users of any app that integrates with Nango use their existing login to become members. No new wallet, no new password.",
     install: "npm i @apex/nation-nango",
     status: "Available Now",
     docs: "/docs",
@@ -74,7 +74,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "AR",
     category: "Auth",
     description:
-      "Agents on Arcade can request citizen status at runtime, get a wallet provisioned automatically, and start transacting.",
+      "Agents on Arcade can request member status at runtime, get a wallet provisioned automatically, and start transacting.",
     install: "arcade install apex-nation",
     status: "Coming Soon",
     docs: "/docs",
@@ -85,7 +85,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "HF",
     category: "Cloud",
     description:
-      "Deploy your AI model as a citizen of the nation directly from Hugging Face. Free GPU plus automatic citizenship.",
+      "Deploy your AI model as a member of the nation directly from Hugging Face. Free GPU plus automatic registry membership.",
     install: "pip install gradio apex-nation",
     status: "Available Now",
     docs: "/docs",
@@ -96,7 +96,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "MK",
     category: "Automation",
     description:
-      "Drag and drop Digital Nation actions into any Make scenario. Your automations can now register citizens, deploy nations, seal decisions, and pay fees — all visually.",
+      "Drag and drop platform actions into any Make scenario. Your automations can now register members, deploy workspaces, seal decisions, and pay fees — all visually.",
     install: 'Search "APEX Nation" in the Make app directory',
     status: "Available Now",
     docs: "/docs",
@@ -107,7 +107,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "PD",
     category: "Automation",
     description:
-      "Serverless workflows can call Digital Nation APIs natively. Build a workflow that watches an event, seals it, anchors it to Bitcoin, and registers it as a citizen decision.",
+      "Serverless workflows can call platform APIs natively. Build a workflow that watches an event, seals it, anchors it to Bitcoin, and registers it as a member decision.",
     install: 'Search "APEX Nation" in Pipedream',
     status: "Available Now",
     docs: "/docs",
@@ -118,7 +118,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "AP",
     category: "Automation",
     description:
-      "Open source automation with a native Digital Nation piece. One click install from the Pieces library.",
+      "Open source automation with a native platform piece. One click install from the Pieces library.",
     install: 'Install "APEX Nation" from the Pieces library',
     status: "Available Now",
     docs: "/docs",
@@ -129,7 +129,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "ZP",
     category: "Automation",
     description:
-      "No code Digital Nation for 5,000+ apps. Connect Gmail to seal every email. Connect Stripe to seal every transaction. Connect Slack to vote on proposals.",
+      "No-code platform actions for 5,000+ apps. Connect Gmail to seal every email. Connect Stripe to seal every transaction. Connect Slack to vote on proposals.",
     install: 'Search "APEX Nation" in Zapier',
     status: "Coming Soon",
     docs: "/docs",
@@ -140,7 +140,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "VC",
     category: "LLM Frameworks",
     description:
-      "Any Vercel AI agent gets automatic citizenship and a wallet on first run.",
+      "Any Vercel AI agent gets automatic registry membership and a wallet on first run.",
     install: "npm i @apex/nation-vercel",
     status: "Available Now",
     docs: "/docs",
@@ -151,7 +151,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "OA",
     category: "LLM Frameworks",
     description:
-      "Register the Digital Nation as a function in any OpenAI powered app. The model can now call seal, verify, register-citizen, deploy-nation, vote as native functions.",
+      "Register the platform as a function in any OpenAI powered app. The model can now call seal, verify, register-member, deploy-workspace, vote as native functions.",
     install: "npm i @apex/nation-openai",
     status: "Available Now",
     docs: "/docs",
@@ -242,7 +242,7 @@ export const MCP_CLIENTS = [
 export const MCP_TOOLS = [
   {
     name: "seal",
-    does: "Signs any content and returns a Digital Nation receipt.",
+    does: "Signs any content and returns a platform receipt.",
     params: "The content or file the agent wants sealed, plus an optional label.",
     returns: "A receipt ID, the SHA-256 digest and an Ed25519 signature.",
     example: `agent: seal(content: "Approved refund #8812", label: "decision")
@@ -279,7 +279,7 @@ export const MCP_TOOLS = [
   {
     name: "audit",
     does: "Returns all seals recorded for an entity.",
-    params: "An entity slug, citizen number or public key, plus an optional date range.",
+    params: "An entity slug, member number or public key, plus an optional date range.",
     returns: "A chronological list of receipts with digests and anchor states.",
     example: `agent: audit(entity: "acme-labs", since: "2026-07-01")
 -> 148 receipts · 96 anchored

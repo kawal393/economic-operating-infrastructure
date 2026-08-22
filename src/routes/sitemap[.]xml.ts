@@ -35,7 +35,7 @@ function esc(value: string) {
 }
 
 /**
- * Self-expanding sitemap: every seal and every nation-state becomes an
+ * Self-expanding sitemap: every seal and every workspace becomes an
  * indexable URL the moment it is written. The index surface grows with usage.
  */
 export const Route = createFileRoute("/sitemap.xml")({

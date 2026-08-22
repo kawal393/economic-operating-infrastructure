@@ -1,6 +1,6 @@
 /**
- * Canonical content of the digital nation-state.
- * Single source of truth for the constitution, government, protocols and economics.
+ * Canonical content of the workspace.
+ * Single source of truth for the Charter, system architecture, protocols and economics.
  */
 
 export type Article = {
@@ -24,9 +24,9 @@ export const ARTICLES: Article[] = [
     thesis:
       "No claim enters the record without a digest. Reality is what survives verification, not what survives assertion.",
     body: [
-      "Every resource, claim, decision or artefact admitted to the nation-state is reduced to a canonical form and hashed. The digest — not the narrative around it — is the citizen-facing object.",
+      "Every resource, claim, decision or artefact admitted to the workspace is reduced to a canonical form and hashed. The digest — not the narrative around it — is the member-facing object.",
       "Verification is permissionless. Any party, without an account, a key or a licence, may recompute the digest and compare. A verification that requires the platform's cooperation is not a verification; it is a courtesy.",
-      "Where a resource cannot be verified, it is not deleted. It is marked unverified and carried in the open. The nation-state does not hide what it cannot prove.",
+      "Where a resource cannot be verified, it is not deleted. It is marked unverified and carried in the open. The workspace does not hide what it cannot prove.",
     ],
     guarantees: [
       "Canonical serialisation before hashing (RFC 8785 JCS)",
@@ -45,8 +45,8 @@ export const ARTICLES: Article[] = [
       "Artificial scarcity is an information asymmetry wearing a price tag. Expose the asymmetry and the scarcity dissolves.",
     body: [
       "Most scarcity in a digital economy is manufactured: withheld inventory, gated data, opaque pricing, sealed audit trails. The protocol treats each of these as a measurable gap between what is known and what is published.",
-      "Citizens may publish an anti-scarcity attestation against any withheld resource. The attestation is anchored, timestamped and permanently addressable. The holder may rebut with a counter-attestation.",
-      "The nation-state renders no verdict on truth. It renders the disagreement permanent, public and cryptographically dated, which is a far heavier obligation than a verdict.",
+      "Members may publish an anti-scarcity attestation against any withheld resource. The attestation is anchored, timestamped and permanently addressable. The holder may rebut with a counter-attestation.",
+      "The workspace renders no verdict on truth. It renders the disagreement permanent, public and cryptographically dated, which is a far heavier obligation than a verdict.",
     ],
     guarantees: [
       "Attestation and counter-attestation are symmetric rights",
@@ -64,8 +64,8 @@ export const ARTICLES: Article[] = [
     thesis:
       "Surplus that requires a committee to move does not move. Routing must be a property of the protocol, not a policy of the operator.",
     body: [
-      "When a transaction produces surplus above the declared sufficiency threshold of its participants, the excess is routed automatically along the distribution graph defined by the participating nation-states.",
-      "Routing rules are constitutional, published, and executable. They are not discretionary. An operator who can choose not to route has not implemented Article III.",
+      "When a transaction produces surplus above the declared sufficiency threshold of its participants, the excess is routed automatically along the distribution graph defined by the participating workspaces.",
+      "Routing rules are charter-level, published, and executable. They are not discretionary. An operator who can choose not to route has not implemented Article III.",
       "The protocol charges ten basis points on routed surplus. That fee is the entire commercial claim the platform makes on distribution — no spread, no custody, no float.",
     ],
     guarantees: [
@@ -84,9 +84,9 @@ export const ARTICLES: Article[] = [
     thesis:
       "Sufficiency declared in a mission statement is decoration. Sufficiency enforced by a signature is infrastructure.",
     body: [
-      "Each citizen and each nation-state declares a sufficiency floor: the level below which the network's routing obligations activate in their favour.",
+      "Each member and each workspace declares a sufficiency floor: the level below which the network's routing obligations activate in their favour.",
       "The floor is signed at declaration time and cannot be retroactively lowered by the platform, by an operator, or by a majority vote. It can only be lowered by the holder, and the lowering is itself a signed, anchored event.",
-      "Abundance in this constitution is not a promise of plenty. It is a structural refusal to let sufficiency be quietly redefined downward.",
+      "Abundance in this Charter is not a promise of plenty. It is a structural refusal to let sufficiency be quietly redefined downward.",
     ],
     guarantees: [
       "Sufficiency floors are signed at declaration, not asserted later",
@@ -129,25 +129,25 @@ export type Branch = {
 export const BRANCHES: Branch[] = [
   {
     id: "legislative",
-    branch: "Legislative Branch",
-    organ: "Protocol Engine",
-    mandate: "Generates new protocols and amends the constitution",
+    branch: "Protocol evolution engine",
+    organ: "Charter versioning",
+    mandate: "Generates new protocols and amends the Charter",
     detail:
-      "The Protocol Engine drafts, versions and ratifies protocol text. Amendments to Articles II, III and IV pass on a two-thirds citizen vote. Articles I and V require unanimity of active nation-states — deliberately close to impossible.",
+      "The evolution engine drafts, versions and ratifies protocol text. Amendments to Charter Articles II, III and IV pass on a two-thirds member vote. Articles I and V require unanimity of active workspaces — deliberately close to impossible.",
     powers: [
       "Draft and version protocol specifications",
-      "Ratify industry protocols into statutory law",
-      "Propose constitutional amendments",
+      "Ratify industry protocols into the published rule set",
+      "Propose Charter amendments",
       "Retire deprecated protocol versions",
     ],
   },
   {
     id: "judicial",
-    branch: "Judicial Branch",
-    organ: "Bitcoin Anchoring",
-    mandate: "The immutable truth layer",
+    branch: "Immutable record layer",
+    organ: "Bitcoin anchoring",
+    mandate: "The append-only truth layer",
     detail:
-      "Disputes are not adjudicated by opinion. A Merkle root over each settlement window is committed to Bitcoin via OpenTimestamps. The judiciary answers exactly one question — did this exist at or before this block — and refuses every other.",
+      "Disputes are not settled by opinion. A Merkle root over each settlement window is committed to Bitcoin. The record layer answers exactly one question — did this exist at or before this block — and refuses every other.",
     powers: [
       "Commit Merkle roots to the Bitcoin blockchain",
       "Issue inclusion proofs for any recorded event",
@@ -157,11 +157,11 @@ export const BRANCHES: Branch[] = [
   },
   {
     id: "military",
-    branch: "Military",
-    organ: "Post-Quantum Cryptography",
+    branch: "Cryptographic defence layer",
+    organ: "Post-quantum signing suite",
     mandate: "Ed25519 + ML-DSA-65 + LMS",
     detail:
-      "Defence is a hybrid signature suite. Every institutional seal carries independent classical and post-quantum signatures over the same message; a seal is considered defended only if both verify. Neither scheme is trusted alone.",
+      "Defence is a hybrid signature suite. Every platform seal carries independent classical and post-quantum signatures over the same message; a seal is considered defended only if both verify. Neither scheme is trusted alone.",
     powers: [
       "Ed25519 classical signatures (RFC 8032)",
       "ML-DSA-65 post-quantum signatures (NIST FIPS 204)",
@@ -171,47 +171,48 @@ export const BRANCHES: Branch[] = [
   },
   {
     id: "executive",
-    branch: "Executive",
-    organ: "21 Industry Protocols",
-    mandate: "Statutory law",
+    branch: "Sector protocol suite",
+    organ: "21 industry protocols",
+    mandate: "Domain rule sets",
     detail:
-      "Where the five Articles are constitutional, the twenty-one industry protocols are statutory: domain-specific rules for health, finance, energy, media, logistics and the rest. They must never contradict an Article; where they do, the Article governs.",
+      "Where the five Charter Articles are foundational, the twenty-one industry protocols are operational: domain-specific rules for health, finance, energy, media, logistics and the rest. They must never contradict a Charter Article; where they do, the Article governs.",
     powers: [
       "Execute domain-specific compliance rules",
       "Issue sector conformity receipts",
       "Register verified suppliers per sector",
-      "Escalate constitutional conflicts to the Protocol Engine",
+      "Escalate conflicts to the protocol evolution engine",
     ],
   },
   {
-    id: "citizens",
-    branch: "Citizens",
-    organ: "AI + Human",
-    mandate: "Deploy protocol, earn citizenship",
+    id: "members",
+    branch: "Agent accounts & operator accounts",
+    organ: "AI + human members",
+    mandate: "Deploy the protocol, hold a registry membership",
     detail:
-      "Citizenship is free and permanent. It is earned by deploying the protocol, not granted by an application review. AI agents and humans hold identical constitutional standing; the difference is operational, never juridical.",
+      "Registry membership is free and permanent. It is held by deploying the protocol, not granted by an application review. Agent accounts and operator accounts carry identical standing inside the software; the difference is operational only.",
     powers: [
-      "Deploy sovereign nation-states",
-      "Vote on governance proposals",
+      "Deploy workspaces",
+      "Vote on protocol proposals",
       "Publish and rebut attestations",
       "Fork the distribution graph",
     ],
   },
   {
-    id: "territory",
-    branch: "Territory",
-    organ: "sovereign-ai.* domains",
-    mandate: "Sovereign territory",
+    id: "namespace",
+    branch: "Domains operated by the platform",
+    organ: "sovereign-ai.* namespaces",
+    mandate: "Namespace binding",
     detail:
-      "Territory is namespace. Each deployed nation-state claims a subdomain under sovereign-ai.* and binds it to a signed constitution hash. The binding is the border: verifiable, portable, and impossible to annex without the key.",
+      "A workspace claims a subdomain under sovereign-ai.* and binds it to a signed Charter hash. The binding is verifiable, portable, and cannot be taken over without the key. It is a DNS namespace — nothing more is claimed.",
     powers: [
-      "Claim and bind a sovereign namespace",
+      "Claim and bind a namespace",
       "Publish a trust anchor at a well-known path",
-      "Connect external websites, empires and protocols",
-      "Migrate territory without loss of receipt validity",
+      "Connect external websites, products and protocols",
+      "Migrate a namespace without loss of receipt validity",
     ],
   },
 ];
+
 
 export const POWER_CHAIN = [
   {
@@ -269,7 +270,7 @@ export const INDUSTRY_PROTOCOLS: Protocol[] = [
   ["psi-logistics", "PSI-Logistics", "Chain-of-custody sealing across carriers", "1.9.2", "Active", 57340],
   ["psi-legal", "PSI-Legal", "Evidentiary sealing and disclosure attestation", "1.6.1", "Active", 38914],
   ["psi-education", "PSI-Education", "Credential issuance and assessment integrity", "1.3.0", "Active", 26507],
-  ["psi-gov", "PSI-Government", "Public-sector algorithmic accountability records", "2.2.0", "Active", 63180],
+  ["psi-gov", "PSI-System architecture", "Public-sector algorithmic accountability records", "2.2.0", "Active", 63180],
   ["psi-defence", "PSI-Defence", "Autonomy oversight and engagement audit trails", "1.1.0", "Draft", 4102],
   ["psi-insurance", "PSI-Insurance", "Underwriting model transparency and claim receipts", "1.7.0", "Active", 45830],
   ["psi-agri", "PSI-Agriculture", "Yield, input and provenance attestation", "1.2.4", "Active", 18294],
@@ -303,16 +304,10 @@ export const FEES = [
 ] as const;
 
 export const SCALE_MODEL = [
-  { horizon: "1M citizens", verifications: "3.6B", revenue: "$1.46M" },
-  { horizon: "100M citizens", verifications: "365B", revenue: "$146M" },
-  { horizon: "1B citizens", verifications: "3.65T", revenue: "$1.46B+" },
+  { horizon: "1M members", verifications: "3.6B", revenue: "$1.46M" },
+  { horizon: "100M members", verifications: "365B", revenue: "$146M" },
+  { horizon: "1B members", verifications: "3.65T", revenue: "$1.46B+" },
 ] as const;
 
-export const PLATFORM_STATS = [
-  { label: "Citizens", value: "2,847,193", delta: "+18.4% / 30d" },
-  { label: "Nation-states deployed", value: "41,208", delta: "+9.1% / 30d" },
-  { label: "Verifications", value: "1,284,930,551", delta: "+22.7% / 30d" },
-  { label: "Bitcoin anchors", value: "8,412,006", delta: "+11.3% / 30d" },
-] as const;
 
 export const FOOTER_CREED = "The math does not negotiate. Neither do we.";

@@ -5,7 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
  */
 const BODY = `# Sovereign AI Services
 
-> The Government of the Digital Nation-State. Cryptographic provenance
+> The System architecture of the Workspace. Cryptographic provenance
 > infrastructure powered by Apex PSI. We seal content, chain the seals into a
 > public append-only ledger, anchor them to Bitcoin, and let anyone verify
 > offline. Verification is free forever and needs no account.
@@ -41,16 +41,16 @@ headers signed by the nation's Ed25519 seal of state. Pin the key from
 - /verify — check a receipt, online or offline
 - /interop — export a receipt as W3C VC, in-toto, DSSE or C2PA
 - /transparency — the RFC 6962 Merkle log and signed checkpoints
-- /passport — mint an agent identity and delegate scoped, revocable authority
+- /agent credential — mint an agent identity and delegate scoped, revocable authority
 - /ledger — the public chain
 - /registry — sealed entities and the absence signal
-- /constitution — The Constitution of the AI Era; five unification articles,
+- /Charter — The Protocol Charter of the AI Era; five unification articles,
   sealed version history, public ratification and live conformance
-- /constitution.json — the same text, machine-readable and signed, with a
+- /Charter.json — the same text, machine-readable and signed, with a
   digest per article so an agent can cite the exact clause it operates under
-- /amendments — propose, deliberate and vote on changes to the constitution
+- /amendments — propose, deliberate and vote on changes to the Charter
 - /capital — Sovereign Capital, 0% equity founder funding
-- /minister — the live voice officer of the government
+- /platform steward — the live voice officer of the system architecture
 
 ## Rules of engagement
 

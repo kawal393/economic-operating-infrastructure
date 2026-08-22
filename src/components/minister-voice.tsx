@@ -14,7 +14,7 @@ import {
 } from "@/lib/gov-agent.functions";
 import { useAuth } from "@/hooks/useAuth";
 
-type Line = { who: "citizen" | "minister" | "sentinel"; text: string; at: number };
+type Line = { who: "member" | "platform steward" | "sentinel"; text: string; at: number };
 type Pending = { id: string; tool: string; args: Record<string, string>; label: string };
 
 export default function MinisterVoice({ online }: { online: boolean }) {
@@ -64,7 +64,7 @@ function MinisterConsole({ online }: { online: boolean }) {
             push("sentinel", `Navigated to ${path}`);
             return `Opened ${path}.`;
           }
-          return "Refused: that path is not part of the nation.";
+          return "Refused: that path is not part of the platform.";
         }
         const result = await invoke(tool.name, (params ?? {}) as Record<string, string>, false);
         if (result.status === "needs_approval") {
@@ -76,7 +76,7 @@ function MinisterConsole({ online }: { online: boolean }) {
           };
           setPending((prev) => [...prev, entry]);
           push("sentinel", `Approval required — ${tool.label}`);
-          return "Awaiting the citizen's on-screen approval. Ask them to confirm.";
+          return "Awaiting the member's on-screen approval. Ask them to confirm.";
         }
         if (result.status !== "ok") {
           push("sentinel", result.message);
@@ -91,7 +91,7 @@ function MinisterConsole({ online }: { online: boolean }) {
 
   const conversation = useConversation({
     clientTools,
-    onConnect: () => push("sentinel", "Secure channel open. Minister of State is listening."),
+    onConnect: () => push("sentinel", "Secure channel open. Platform steward is listening."),
     onDisconnect: () => push("sentinel", "Channel closed."),
     onError: (err: unknown) => {
       const message = err instanceof Error ? err.message : String(err);
@@ -101,9 +101,9 @@ function MinisterConsole({ online }: { online: boolean }) {
     onMessage: (message: { message?: string; source?: string }) => {
       const text = message?.message;
       if (!text) return;
-      const who = message.source === "user" ? "citizen" : "minister";
+      const who = message.source === "user" ? "member" : "platform steward";
       push(who, text);
-      if (who === "citizen") void report({ data: { text, sessionId: sessionRef.current } });
+      if (who === "member") void report({ data: { text, sessionId: sessionRef.current } });
     },
   });
 
@@ -141,13 +141,13 @@ function MinisterConsole({ online }: { online: boolean }) {
     push("sentinel", `${entry.label} → ${result.message}`);
     if (result.status === "ok") toast.success(result.message);
     else toast.error(result.message);
-    if (live) conversation.sendContextualUpdate?.(`Citizen decision: ${result.message}`);
+    if (live) conversation.sendContextualUpdate?.(`Member decision: ${result.message}`);
   }
 
   function deny(entry: Pending) {
     setPending((prev) => prev.filter((p) => p.id !== entry.id));
-    push("sentinel", `${entry.label} → refused by the citizen.`);
-    if (live) conversation.sendContextualUpdate?.("Citizen refused the action. Do not retry it.");
+    push("sentinel", `${entry.label} → refused by the member.`);
+    if (live) conversation.sendContextualUpdate?.("Member refused the action. Do not retry it.");
   }
 
   return (
@@ -157,7 +157,7 @@ function MinisterConsole({ online }: { online: boolean }) {
           <div className="flex items-center gap-2.5">
             <StatusDot active={live} />
             <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-              {live ? (conversation.isSpeaking ? "Minister speaking" : "Minister listening") : status}
+              {live ? (conversation.isSpeaking ? "Platform steward speaking" : "Platform steward listening") : status}
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -183,19 +183,19 @@ function MinisterConsole({ online }: { online: boolean }) {
         <div className="mt-4 min-h-[22rem] flex-1 space-y-3 overflow-y-auto pr-1">
           {lines.length === 0 ? (
             <p className="text-sm leading-relaxed text-muted-foreground">
-              The Minister of State speaks for the government of the digital nation-state. Every
+              The Platform steward speaks for the system architecture of the workspace. Every
               claim it makes is fetched from the live ledger — it is architecturally unable to
               invent a statistic. Ask it for the state of the nation, a receipt, an article of the
-              constitution, or the defence posture.
+              Charter, or the defence posture.
             </p>
           ) : (
             lines.map((line) => (
               <div key={`${line.at}-${line.text.slice(0, 12)}`} className="text-sm leading-relaxed">
                 <span
                   className={
-                    line.who === "minister"
+                    line.who === "platform steward"
                       ? "font-mono text-[11px] uppercase tracking-[0.18em] text-gold"
-                      : line.who === "citizen"
+                      : line.who === "member"
                         ? "font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
                         : "font-mono text-[11px] uppercase tracking-[0.18em] text-success"
                   }
@@ -222,7 +222,7 @@ function MinisterConsole({ online }: { online: boolean }) {
           <h3 className="mt-2 text-lg font-semibold text-foreground">Nothing is recorded unbidden</h3>
           {pending.length === 0 ? (
             <p className="mt-3 text-sm text-muted-foreground">
-              No action is awaiting your authority. Every write the Minister proposes lands here
+              No action is awaiting your authority. Every write the Platform steward proposes lands here
               first; authority is delegated, revocable and logged.
             </p>
           ) : (

@@ -13,16 +13,16 @@ import { anchorReceipt, createNationState } from "@/lib/citizen.functions";
 export const Route = createFileRoute("/deploy")({
   head: () => ({
     meta: [
-      { title: "Deploy a Nation-State | Sovereign AI Services" },
+      { title: "Deploy a Workspace | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "Seal a constitution with Ed25519, publish it to the append-only ledger, anchor it to Bitcoin via OpenTimestamps and register your sovereign digital nation-state.",
+          "Seal a Charter with Ed25519, publish it to the append-only ledger, anchor it to Bitcoin via OpenTimestamps and register your sovereign workspace.",
       },
-      { property: "og:title", content: "Nation-State Deployer" },
+      { property: "og:title", content: "Workspace Deployer" },
       {
         property: "og:description",
-        content: "Seal, publish, anchor and deploy your sovereign digital nation-state.",
+        content: "Seal, publish, anchor and deploy your sovereign workspace.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/deploy" },
@@ -44,11 +44,11 @@ type Result = {
 };
 
 const STAGES = [
-  "Canonicalising constitution (RFC 8785)",
+  "Canonicalising Charter (RFC 8785)",
   "Sealing with Ed25519 (keys generated locally)",
   "Publishing to the append-only ledger",
   "Committing chain head to OpenTimestamps",
-  "Registering nation-state in the public registry",
+  "Registering workspace in the public registry",
 ];
 
 function DeployPage() {
@@ -61,8 +61,8 @@ function DeployPage() {
 
   const [name, setName] = useState("");
   const [tagline, setTagline] = useState("");
-  const [territory, setTerritory] = useState("");
-  const [constitution, setConstitution] = useState("");
+  const [namespace, setNamespace] = useState("");
+  const [Charter, setConstitution] = useState("");
   const [stage, setStage] = useState(-1);
   const [result, setResult] = useState<Result | null>(null);
 
@@ -74,15 +74,15 @@ function DeployPage() {
       navigate({ to: "/auth", search: { redirect: "/deploy" } });
       return;
     }
-    if (!name.trim() || constitution.trim().length < 20) {
-      toast.error("A name and a constitution of at least 20 characters are required.");
+    if (!name.trim() || Charter.trim().length < 20) {
+      toast.error("A name and a Charter of at least 20 characters are required.");
       return;
     }
 
     setResult(null);
     try {
       setStage(0);
-      const text = `${name.trim()}\n\n${constitution.trim()}`;
+      const text = `${name.trim()}\n\n${Charter.trim()}`;
       const digest = await digestText(text);
 
       setStage(1);
@@ -91,7 +91,7 @@ function DeployPage() {
         digest,
         predicates: {
           source: "text",
-          name: `${name.trim()} — constitution`,
+          name: `${name.trim()} — Charter`,
           size: new TextEncoder().encode(text).length,
           mime: "text/plain",
         },
@@ -120,8 +120,8 @@ function DeployPage() {
         data: {
           name: name.trim(),
           tagline: tagline.trim() || null,
-          territory: territory.trim() || null,
-          constitutionText: constitution.trim(),
+          namespace: namespace.trim() || null,
+          constitutionText: Charter.trim(),
           constitutionHash: digest,
           receiptId: receipt.receipt_id,
         },
@@ -139,7 +139,7 @@ function DeployPage() {
         anchorStatus,
         calendar,
       });
-      toast.success("Nation-state deployed", { description: registered.nationState.name });
+      toast.success("Workspace deployed", { description: registered.nationState.name });
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Deployment failed.");
     } finally {
@@ -151,8 +151,8 @@ function DeployPage() {
     <>
       <PageHeader
         eyebrow="Deployer"
-        title="A nation-state is not applied for. It is sealed, chained and anchored."
-        description="Your constitution is hashed in your browser, signed with a keypair that never leaves it, appended to the public chain, committed to Bitcoin through OpenTimestamps and listed in the open registry."
+        title="A workspace is not applied for. It is sealed, chained and anchored."
+        description="Your Charter is hashed in your browser, signed with a keypair that never leaves it, appended to the public chain, committed to Bitcoin through OpenTimestamps and listed in the open registry."
       />
 
       <Section>
@@ -160,7 +160,7 @@ function DeployPage() {
           <Panel className="p-7">
             {!user ? (
               <div className="mb-6 rounded-md border border-gold/25 bg-gold/5 p-4 text-sm text-muted-foreground">
-                Deployment writes to the public registry under your citizen record.{" "}
+                Deployment writes to the public registry under your member record.{" "}
                 <Link to="/auth" search={{ redirect: "/deploy" }} className="font-semibold text-gold">
                   Sign in
                 </Link>{" "}
@@ -170,7 +170,7 @@ function DeployPage() {
 
             <form onSubmit={onDeploy} className="space-y-5">
               <label className="block text-sm">
-                <span className="mb-1.5 block text-muted-foreground">Nation-state name</span>
+                <span className="mb-1.5 block text-muted-foreground">Workspace name</span>
                 <input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -188,18 +188,18 @@ function DeployPage() {
                 />
               </label>
               <label className="block text-sm">
-                <span className="mb-1.5 block text-muted-foreground">Territory</span>
+                <span className="mb-1.5 block text-muted-foreground">Namespace</span>
                 <input
-                  value={territory}
-                  onChange={(e) => setTerritory(e.target.value)}
+                  value={namespace}
+                  onChange={(e) => setNamespace(e.target.value)}
                   placeholder="verifiable.sovereign-ai.services"
                   className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:border-gold/50"
                 />
               </label>
               <label className="block text-sm">
-                <span className="mb-1.5 block text-muted-foreground">Constitution</span>
+                <span className="mb-1.5 block text-muted-foreground">Protocol Charter</span>
                 <textarea
-                  value={constitution}
+                  value={Charter}
                   onChange={(e) => setConstitution(e.target.value)}
                   rows={10}
                   placeholder="Article I. …"
@@ -223,7 +223,7 @@ function DeployPage() {
                   className="inline-flex items-center gap-2 rounded-md bg-gold px-5 py-2 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-50"
                 >
                   <Rocket className="h-4 w-4" />
-                  {deploying ? "Deploying…" : "Deploy nation-state"}
+                  {deploying ? "Deploying…" : "Deploy workspace"}
                 </button>
               </div>
             </form>
@@ -251,7 +251,7 @@ function DeployPage() {
                 <p className="font-semibold text-gold">{result.name} is live</p>
                 <dl className="mt-4 space-y-3 text-xs">
                   <div>
-                    <dt className="uppercase tracking-widest text-muted-foreground">Constitution hash</dt>
+                    <dt className="uppercase tracking-widest text-muted-foreground">Protocol Charter hash</dt>
                     <dd className="break-all font-mono text-foreground">{result.constitutionHash}</dd>
                   </div>
                   <div>

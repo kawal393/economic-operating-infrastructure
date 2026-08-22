@@ -28,19 +28,19 @@ export const Route = createFileRoute("/pricing")({
 
 const TIERS = [
   {
-    name: "Citizen",
+    name: "Member",
     price: "Free",
     cadence: "forever",
     description:
-      "Full constitutional standing. Verify anything, vote on everything, pay only for metered actions.",
+      "Full charter-level standing. Verify anything, vote on everything, pay only for metered actions.",
     features: [
-      "Citizenship registration and voting rights",
+      "Registry membership registration and voting rights",
       "Unlimited permissionless local verification",
       "10,000 metered API verifications / month",
       "Public receipt explorer access",
       "Community support",
     ],
-    cta: "Register as citizen",
+    cta: "Register as member",
     to: "/citizenship" as const,
     highlight: false,
   },
@@ -49,16 +49,16 @@ const TIERS = [
     price: "$0.001",
     cadence: "per verification, metered",
     description:
-      "For nation-state founders running production infrastructure on the protocol. Pay only for what the world actually uses.",
+      "For workspace founders running production infrastructure on the protocol. Pay only for what the world actually uses.",
     features: [
-      "Everything in Citizen",
-      "Unlimited nation-state deployments",
+      "Everything in Member",
+      "Unlimited workspace deployments",
       "Bitcoin anchoring at $0.01 per anchor",
       "Compliance checks at $0.10 per check",
       "Surplus routing under Article III (0.1%)",
       "Priority settlement windows",
     ],
-    cta: "Deploy a nation-state",
+    cta: "Deploy a workspace",
     to: "/deploy" as const,
     highlight: true,
   },
@@ -97,7 +97,7 @@ const FAQ = [
   ],
   [
     "Can fees change?",
-    "Only by constitutional amendment, voted by citizens and anchored to Bitcoin. Prices cannot be raised quietly.",
+    "Only by charter-level amendment, voted by members and anchored to Bitcoin. Prices cannot be raised quietly.",
   ],
 ];
 
@@ -157,7 +157,7 @@ function PricingPage() {
         <SectionHeading
           eyebrow="Metered schedule"
           title="Every protocol action, priced in the open"
-          description="Identical for every citizen, from a single developer to a central bank."
+          description="Identical for every member, from a single developer to a central bank."
         />
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {FEES.map((fee) => (
@@ -179,7 +179,7 @@ function PricingPage() {
         <SectionHeading
           eyebrow="Scale model"
           title="What the arithmetic implies"
-          description="Assumes 300 verifications per citizen per month at the published rate."
+          description="Assumes 300 verifications per member per month at the published rate."
         />
         <Panel className="mt-10 overflow-x-auto p-7">
           <table className="w-full min-w-[520px] border-collapse text-left">

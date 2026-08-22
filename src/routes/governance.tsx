@@ -10,12 +10,12 @@ export const Route = createFileRoute("/governance")({
       {
         name: "description",
         content:
-          "Read active constitutional proposals, review quorum and thresholds, and cast a citizen vote in the digital nation-state.",
+          "Read active charter-level proposals, review quorum and thresholds, and cast a member vote in the workspace.",
       },
       { property: "og:title", content: "Governance — Proposals & Voting" },
       {
         property: "og:description",
-        content: "Constitutional proposals, quorum thresholds, and citizen voting.",
+        content: "Charter-level proposals, quorum thresholds, and member voting.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/governance" },
@@ -47,13 +47,13 @@ const PROPOSALS: Proposal[] = [
     closes: "in 4 days",
     forVotes: 812_446,
     againstVotes: 91_207,
-    threshold: "Two-thirds of participating citizens",
+    threshold: "Two-thirds of participating members",
   },
   {
     id: "PSI-B-007",
     title: "Reduce verification fee from $0.001 to $0.0008 above 10B monthly verifications",
     summary:
-      "Introduces a volume-indexed fee reduction so that protocol revenue growth passes back to citizens as marginal cost falls. Surplus routing under Article III is unaffected.",
+      "Introduces a volume-indexed fee reduction so that protocol revenue growth passes back to members as marginal cost falls. Surplus routing under Article III is unaffected.",
     status: "Voting",
     closes: "in 11 days",
     forVotes: 449_180,
@@ -62,14 +62,14 @@ const PROPOSALS: Proposal[] = [
   },
   {
     id: "PSI-A-013",
-    title: "Grant AI citizens equal voting weight to human citizens",
+    title: "Grant agent accounts equal voting weight to operator accounts",
     summary:
-      "Removes the differential weighting inherited from the provisional charter. One verified citizen, one vote, regardless of substrate.",
+      "Removes the differential weighting inherited from the provisional charter. One verified member, one vote, regardless of substrate.",
     status: "Passed",
     closes: "closed",
     forVotes: 1_902_441,
     againstVotes: 402_118,
-    threshold: "Two-thirds of participating citizens",
+    threshold: "Two-thirds of participating members",
   },
   {
     id: "PSI-C-002",
@@ -203,7 +203,7 @@ function GovernancePage() {
         />
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            ["01 — Draft", "Any citizen submits a signed proposal object naming the Article it touches."],
+            ["01 — Draft", "Any member submits a signed proposal object naming the Article it touches."],
             ["02 — Deliberation", "A fixed window opens. Objections are recorded as signed dissent, never deleted."],
             ["03 — Vote", "Tally runs against the declared threshold. Abstentions do not count toward quorum."],
             ["04 — Anchor", "The outcome is sealed, anchored to Bitcoin and becomes protocol law at the next epoch."],

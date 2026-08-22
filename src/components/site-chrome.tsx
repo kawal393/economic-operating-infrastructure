@@ -3,22 +3,25 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FOOTER_CREED } from "@/content/nation";
+import { INDEPENDENCE_LINE, PRECISION_CLAIM } from "@/content/legal";
+import { LegalDisclaimer } from "@/components/legal";
 import sovereignMark from "@/assets/sovereign-mark.png";
 
+
 const NAV = [
-  { to: "/minister", label: "Minister" },
+  { to: "/minister", label: "Steward" },
   { to: "/seal", label: "Seal" },
   { to: "/verify", label: "Verify" },
   { to: "/ledger", label: "Ledger" },
   { to: "/registry", label: "Registry" },
   { to: "/transparency", label: "Transparency" },
-  { to: "/constitution", label: "Constitution" },
-  { to: "/government", label: "Government" },
+  { to: "/constitution", label: "Charter" },
+  { to: "/government", label: "Architecture" },
   { to: "/protocols", label: "Protocols" },
-  { to: "/citizenship", label: "Citizenship" },
+  { to: "/citizenship", label: "Registry membership" },
   { to: "/capital", label: "Capital" },
   { to: "/integrations", label: "Integrations" },
-  { to: "/passport", label: "Passports" },
+  { to: "/passport", label: "Agent credentials" },
   { to: "/security", label: "Sentinel" },
   { to: "/dashboard", label: "Dashboard" },
   { to: "/docs", label: "Docs" },
@@ -27,13 +30,13 @@ const NAV = [
 
 const FOOTER_GROUPS = [
   {
-    title: "The Nation-State",
+    title: "The Platform",
     links: [
-      { to: "/constitution", label: "Constitution" },
-      { to: "/government", label: "Government" },
-      { to: "/minister", label: "Minister of State" },
-      { to: "/security", label: "The Sentinel" },
-      { to: "/citizenship", label: "Citizenship" },
+      { to: "/constitution", label: "Protocol Charter" },
+      { to: "/government", label: "System architecture" },
+      { to: "/minister", label: "Platform steward" },
+      { to: "/security", label: "Cryptographic defence layer" },
+      { to: "/citizenship", label: "Registry membership (free)" },
       { to: "/amendments", label: "Amendments" },
       { to: "/governance", label: "Governance" },
       { to: "/amplify", label: "Amplify" },
@@ -44,10 +47,10 @@ const FOOTER_GROUPS = [
     links: [
       { to: "/seal", label: "Seal" },
       { to: "/verify", label: "Verify" },
-      { to: "/ledger", label: "Public Ledger" },
+      { to: "/ledger", label: "Public record layer" },
       { to: "/transparency", label: "Transparency Log" },
       { to: "/protocols", label: "Protocol Explorer" },
-      { to: "/deploy", label: "Nation-State Deployer" },
+      { to: "/deploy", label: "Workspace deployer" },
       { to: "/contracts", label: "Smart Contracts" },
       { to: "/transactions", label: "Transactions" },
     ],
@@ -60,7 +63,7 @@ const FOOTER_GROUPS = [
       { to: "/integrations", label: "Integrations" },
       { to: "/mcp", label: "MCP Server" },
       { to: "/interop", label: "Standards Bridge" },
-      { to: "/passport", label: "Agent Passports" },
+      { to: "/passport", label: "Agent credentials" },
       { to: "/capital", label: "Sovereign Capital" },
       { to: "/pricing", label: "Pricing" },
 
@@ -97,7 +100,7 @@ export function SiteHeader() {
               Sovereign AI Services
             </span>
             <span className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-              Digital Nation-State
+              Verification & settlement layer
             </span>
           </span>
         </Link>
@@ -120,7 +123,7 @@ export function SiteHeader() {
             to="/citizenship"
             className="rounded-md border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-medium text-gold transition-colors hover:bg-gold/20"
           >
-            Become a Citizen
+            Join the registry
           </Link>
         </div>
 
@@ -153,7 +156,7 @@ export function SiteHeader() {
               onClick={() => setOpen(false)}
               className="mt-2 rounded-md border border-gold/40 bg-gold/10 px-3 py-2.5 text-center text-sm font-medium text-gold"
             >
-              Become a Citizen
+              Join the registry
             </Link>
           </nav>
         </div>
@@ -193,15 +196,15 @@ export function SiteFooter() {
               <span className="text-sm font-semibold tracking-tight">Sovereign AI Services</span>
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              The government of the digital nation-state. Citizenship is free. The infrastructure
-              layer — verification, anchoring, post-quantum defence, governance and surplus routing
-              — is the product.
+              The verification &amp; settlement layer for the AI economy. Registry membership is
+              free. The infrastructure — verification, anchoring, post-quantum defence, protocol
+              evolution and surplus routing — is the product.
             </p>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Powered by <span className="text-gold">Apex PSI</span> — in partnership with the
-              world's first cryptographic provenance protocol. Sovereign AI Services is an
-              independent nation-state, not part of the Apex empire.
+              Powered by <span className="text-gold">Apex PSI</span> — {PRECISION_CLAIM}.{" "}
+              {INDEPENDENCE_LINE}
             </p>
+
             <p className="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-gold">
               sovereign-ai.services
             </p>
@@ -229,7 +232,9 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-12 hairline" />
+        <LegalDisclaimer className="mt-12" />
+
+        <div className="mt-8 hairline" />
 
         <div className="mt-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <p className="text-sovereign text-base font-semibold tracking-tight">{FOOTER_CREED}</p>
@@ -237,6 +242,7 @@ export function SiteFooter() {
             Ed25519 · ML-DSA-65 · LMS · SHA-256 · OpenTimestamps
           </p>
         </div>
+
       </div>
     </footer>
   );

@@ -14,7 +14,7 @@ export const Route = createFileRoute("/ledger")({
         content:
           "The append-only Apex PSI notarisation chain. Every published seal is hash-linked to the one before it, readable by anyone, owned by no one.",
       },
-      { property: "og:title", content: "The Public Ledger of the Digital Nation-State" },
+      { property: "og:title", content: "The Public Ledger of the Workspace" },
       {
         property: "og:description",
         content:
@@ -73,14 +73,14 @@ function LedgerPage() {
       <PageHeader
         eyebrow="Apex PSI · Chain of record"
         title="The Public Ledger"
-        description="Every published seal is hash-linked to the one before it. Anyone may read it. No one — including this government — can rewrite it. Publication is optional: sealing works entirely offline."
+        description="Every published seal is hash-linked to the one before it. Anyone may read it. No one — including this system architecture — can rewrite it. Publication is optional: sealing works entirely offline."
       />
 
       <Section>
         <dl className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           <StatBlock label="Chain entries" value={String(stats.data?.entries ?? "—")} />
-          <StatBlock label="Citizens" value={String(stats.data?.citizens ?? "—")} />
-          <StatBlock label="Nation-states" value={String(stats.data?.nationStates ?? "—")} />
+          <StatBlock label="Members" value={String(stats.data?.citizens ?? "—")} />
+          <StatBlock label="Workspaces" value={String(stats.data?.nationStates ?? "—")} />
           <StatBlock
             label="Protocol fees"
             value={stats.data ? `$${stats.data.feesUsd.toFixed(3)}` : "—"}

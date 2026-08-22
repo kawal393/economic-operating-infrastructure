@@ -6,6 +6,7 @@ import { PageHeader, Panel, Section, SectionHeading, StatBlock } from "@/compone
 import { FieldRow, HonestyNote } from "@/components/seal-ui";
 import { CopyBlock } from "@/components/copy-block";
 import { getCheckpoint, getInclusionProof } from "@/lib/transparency.functions";
+import { AnchorHistoryPanel } from "@/components/anchor-history-panel";
 
 export const Route = createFileRoute("/transparency")({
   head: () => ({
@@ -57,6 +58,10 @@ function TransparencyPage() {
         title="The Transparency Log"
         description="Every ledger entry is a leaf in an RFC 6962 Merkle tree. We sign the root and publish it. If we ever rewrote history, we would have to sign two contradictory roots under the same key — and you would hold both."
       />
+
+      <Section>
+        <AnchorHistoryPanel />
+      </Section>
 
       <Section>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

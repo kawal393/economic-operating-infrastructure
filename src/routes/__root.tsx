@@ -23,6 +23,15 @@ function NotFoundComponent() {
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
+        <p className="mt-4 text-sm text-muted-foreground">
+          Looking for a sealed record?{" "}
+          <a
+            href="https://www.ai-governance-standard.com/verify"
+            className="text-gold hover:underline"
+          >
+            Verify on APEX PSI →
+          </a>
+        </p>
         <div className="mt-6">
           <Link
             to="/"
@@ -79,11 +88,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SOVEREIGNAI.SERVICES-THE DIGITAL CONSTITUTION OF AI SOCIETY" },
+      { title: "SOVEREIGNAI.SERVICES — THE OPERATING LAYER OF THE AI ECONOMY" },
       {
         name: "description",
         content:
-          "A digital nation-state at the protocol layer: constitutional AI protocols, post-quantum sealing, Bitcoin anchoring and verifiable governance.",
+          "The verification & settlement layer for the AI economy: post-quantum sealing, Bitcoin anchoring, public receipts and a machine-readable Protocol Charter.",
       },
       { name: "author", content: "Sovereign AI Services" },
       { property: "og:site_name", content: "Sovereign AI Services" },

@@ -12,7 +12,7 @@ export const Route = createFileRoute("/protocols")({
       {
         name: "description",
         content:
-          "Browse the five constitutional unification protocols and the twenty-one industry protocols that form the statutory law of the digital nation-state.",
+          "Browse the five charter-level unification protocols and the twenty-one industry protocols that form the statutory law of the workspace.",
       },
       { property: "og:title", content: "Protocol Explorer" },
       {
@@ -46,8 +46,8 @@ function ProtocolsPage() {
     <>
       <PageHeader
         eyebrow="Protocol Explorer"
-        title="Five constitutional protocols. Twenty-one statutory protocols."
-        description="The unification protocols are constitutional and may not be contradicted. The industry protocols are statutory: domain-specific, versioned, and subordinate to every Article."
+        title="Five charter-level protocols. Twenty-one statutory protocols."
+        description="The unification protocols are charter-level and may not be contradicted. The industry protocols are statutory: domain-specific, versioned, and subordinate to every Article."
       >
         <div className="flex flex-wrap items-center gap-3">
           <div className="relative">
@@ -64,7 +64,7 @@ function ProtocolsPage() {
             type="button"
             onClick={() =>
               toast("Protocol Engine queued", {
-                description: "Draft submitted to the Legislative Branch for versioning.",
+                description: "Draft submitted to the Protocol evolution engine for versioning.",
               })
             }
             className="rounded-md border border-gold/40 bg-gold/10 px-5 py-2.5 text-sm font-medium text-gold transition-colors hover:bg-gold/20"
@@ -76,9 +76,9 @@ function ProtocolsPage() {
 
       <Section>
         <SectionHeading
-          eyebrow="Constitutional"
+          eyebrow="Charter-level"
           title="Unification protocols"
-          description="Five articles. Amendable only under the thresholds set by the constitution."
+          description="Five articles. Amendable only under the thresholds set by the Charter."
         />
         <Grid protocols={unification} onSelect={setSelected} />
       </Section>
@@ -104,7 +104,7 @@ function ProtocolsPage() {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="eyebrow">
-                  {selected.kind === "unification" ? "Constitutional" : "Statutory"}
+                  {selected.kind === "unification" ? "Charter-level" : "Statutory"}
                 </p>
                 <h2 className="mt-2 text-xl font-semibold tracking-tight">{selected.name}</h2>
               </div>
