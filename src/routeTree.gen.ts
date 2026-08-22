@@ -36,11 +36,13 @@ import { Route as OnboardRouteImport } from './routes/onboard'
 import { Route as OpenapiDotjsonRouteImport } from './routes/openapi[.]json'
 import { Route as PassportRouteImport } from './routes/passport'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
 import { Route as SealRouteImport } from './routes/seal'
 import { Route as SealedMemoryRouteImport } from './routes/sealed-memory'
 import { Route as SecurityRouteImport } from './routes/security'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as TransparencyRouteImport } from './routes/transparency'
 import { Route as VerifyRouteImport } from './routes/verify'
@@ -194,6 +196,11 @@ const PricingRoute = PricingRouteImport.update({
   path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProtocolsRoute = ProtocolsRouteImport.update({
   id: '/protocols',
   path: '/protocols',
@@ -217,6 +224,11 @@ const SecurityRoute = SecurityRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TransactionsRoute = TransactionsRouteImport.update({
@@ -336,11 +348,13 @@ export interface FileRoutesByFullPath {
   '/openapi.json': typeof OpenapiDotjsonRoute
   '/passport': typeof PassportRoute
   '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
   '/sealed-memory': typeof SealedMemoryRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/transactions': typeof TransactionsRoute
   '/transparency': typeof TransparencyRoute
   '/verify': typeof VerifyRoute
@@ -387,11 +401,13 @@ export interface FileRoutesByTo {
   '/openapi.json': typeof OpenapiDotjsonRoute
   '/passport': typeof PassportRoute
   '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
   '/sealed-memory': typeof SealedMemoryRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/transactions': typeof TransactionsRoute
   '/transparency': typeof TransparencyRoute
   '/verify': typeof VerifyRoute
@@ -439,11 +455,13 @@ export interface FileRoutesById {
   '/openapi.json': typeof OpenapiDotjsonRoute
   '/passport': typeof PassportRoute
   '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
   '/protocols': typeof ProtocolsRoute
   '/seal': typeof SealRoute
   '/sealed-memory': typeof SealedMemoryRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/transactions': typeof TransactionsRoute
   '/transparency': typeof TransparencyRoute
   '/verify': typeof VerifyRoute
@@ -492,11 +510,13 @@ export interface FileRouteTypes {
     | '/openapi.json'
     | '/passport'
     | '/pricing'
+    | '/privacy'
     | '/protocols'
     | '/seal'
     | '/sealed-memory'
     | '/security'
     | '/sitemap.xml'
+    | '/terms'
     | '/transactions'
     | '/transparency'
     | '/verify'
@@ -543,11 +563,13 @@ export interface FileRouteTypes {
     | '/openapi.json'
     | '/passport'
     | '/pricing'
+    | '/privacy'
     | '/protocols'
     | '/seal'
     | '/sealed-memory'
     | '/security'
     | '/sitemap.xml'
+    | '/terms'
     | '/transactions'
     | '/transparency'
     | '/verify'
@@ -594,11 +616,13 @@ export interface FileRouteTypes {
     | '/openapi.json'
     | '/passport'
     | '/pricing'
+    | '/privacy'
     | '/protocols'
     | '/seal'
     | '/sealed-memory'
     | '/security'
     | '/sitemap.xml'
+    | '/terms'
     | '/transactions'
     | '/transparency'
     | '/verify'
@@ -646,11 +670,13 @@ export interface RootRouteChildren {
   OpenapiDotjsonRoute: typeof OpenapiDotjsonRoute
   PassportRoute: typeof PassportRoute
   PricingRoute: typeof PricingRoute
+  PrivacyRoute: typeof PrivacyRoute
   ProtocolsRoute: typeof ProtocolsRoute
   SealRoute: typeof SealRoute
   SealedMemoryRoute: typeof SealedMemoryRoute
   SecurityRoute: typeof SecurityRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermsRoute: typeof TermsRoute
   TransactionsRoute: typeof TransactionsRoute
   TransparencyRoute: typeof TransparencyRoute
   VerifyRoute: typeof VerifyRoute
@@ -861,6 +887,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/protocols': {
       id: '/protocols'
       path: '/protocols'
@@ -894,6 +927,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/transactions': {
@@ -1046,11 +1086,13 @@ const rootRouteChildren: RootRouteChildren = {
   OpenapiDotjsonRoute: OpenapiDotjsonRoute,
   PassportRoute: PassportRoute,
   PricingRoute: PricingRoute,
+  PrivacyRoute: PrivacyRoute,
   ProtocolsRoute: ProtocolsRoute,
   SealRoute: SealRoute,
   SealedMemoryRoute: SealedMemoryRoute,
   SecurityRoute: SecurityRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermsRoute: TermsRoute,
   TransactionsRoute: TransactionsRoute,
   TransparencyRoute: TransparencyRoute,
   VerifyRoute: VerifyRoute,
