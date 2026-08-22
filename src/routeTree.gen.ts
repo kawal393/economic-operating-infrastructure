@@ -11,11 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgentsDotjsonRouteImport } from './routes/agents[.]json'
+import { Route as AmendmentsRouteImport } from './routes/amendments'
 import { Route as AmplifyRouteImport } from './routes/amplify'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CapitalRouteImport } from './routes/capital'
 import { Route as CitizenshipRouteImport } from './routes/citizenship'
 import { Route as ConstitutionRouteImport } from './routes/constitution'
+import { Route as ConstitutionDotjsonRouteImport } from './routes/constitution[.]json'
 import { Route as ContractsRouteImport } from './routes/contracts'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DeployRouteImport } from './routes/deploy'
@@ -65,6 +67,11 @@ const AgentsDotjsonRoute = AgentsDotjsonRouteImport.update({
   path: '/agents.json',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AmendmentsRoute = AmendmentsRouteImport.update({
+  id: '/amendments',
+  path: '/amendments',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AmplifyRoute = AmplifyRouteImport.update({
   id: '/amplify',
   path: '/amplify',
@@ -88,6 +95,11 @@ const CitizenshipRoute = CitizenshipRouteImport.update({
 const ConstitutionRoute = ConstitutionRouteImport.update({
   id: '/constitution',
   path: '/constitution',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConstitutionDotjsonRoute = ConstitutionDotjsonRouteImport.update({
+  id: '/constitution.json',
+  path: '/constitution.json',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContractsRoute = ContractsRouteImport.update({
@@ -287,11 +299,13 @@ const ApiPublicV1ReceiptReceiptIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agents.json': typeof AgentsDotjsonRoute
+  '/amendments': typeof AmendmentsRoute
   '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
+  '/constitution.json': typeof ConstitutionDotjsonRoute
   '/contracts': typeof ContractsRoute
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
@@ -334,11 +348,13 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agents.json': typeof AgentsDotjsonRoute
+  '/amendments': typeof AmendmentsRoute
   '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
+  '/constitution.json': typeof ConstitutionDotjsonRoute
   '/contracts': typeof ContractsRoute
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
@@ -382,11 +398,13 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/agents.json': typeof AgentsDotjsonRoute
+  '/amendments': typeof AmendmentsRoute
   '/amplify': typeof AmplifyRoute
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
+  '/constitution.json': typeof ConstitutionDotjsonRoute
   '/contracts': typeof ContractsRoute
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
@@ -431,11 +449,13 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/agents.json'
+    | '/amendments'
     | '/amplify'
     | '/auth'
     | '/capital'
     | '/citizenship'
     | '/constitution'
+    | '/constitution.json'
     | '/contracts'
     | '/dashboard'
     | '/deploy'
@@ -478,11 +498,13 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/agents.json'
+    | '/amendments'
     | '/amplify'
     | '/auth'
     | '/capital'
     | '/citizenship'
     | '/constitution'
+    | '/constitution.json'
     | '/contracts'
     | '/dashboard'
     | '/deploy'
@@ -525,11 +547,13 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/agents.json'
+    | '/amendments'
     | '/amplify'
     | '/auth'
     | '/capital'
     | '/citizenship'
     | '/constitution'
+    | '/constitution.json'
     | '/contracts'
     | '/dashboard'
     | '/deploy'
@@ -573,11 +597,13 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgentsDotjsonRoute: typeof AgentsDotjsonRoute
+  AmendmentsRoute: typeof AmendmentsRoute
   AmplifyRoute: typeof AmplifyRoute
   AuthRoute: typeof AuthRoute
   CapitalRoute: typeof CapitalRoute
   CitizenshipRoute: typeof CitizenshipRoute
   ConstitutionRoute: typeof ConstitutionRoute
+  ConstitutionDotjsonRoute: typeof ConstitutionDotjsonRoute
   ContractsRoute: typeof ContractsRoute
   DashboardRoute: typeof DashboardRoute
   DeployRoute: typeof DeployRoute
@@ -634,6 +660,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgentsDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/amendments': {
+      id: '/amendments'
+      path: '/amendments'
+      fullPath: '/amendments'
+      preLoaderRoute: typeof AmendmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/amplify': {
       id: '/amplify'
       path: '/amplify'
@@ -667,6 +700,13 @@ declare module '@tanstack/react-router' {
       path: '/constitution'
       fullPath: '/constitution'
       preLoaderRoute: typeof ConstitutionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/constitution.json': {
+      id: '/constitution.json'
+      path: '/constitution.json'
+      fullPath: '/constitution.json'
+      preLoaderRoute: typeof ConstitutionDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contracts': {
@@ -941,11 +981,13 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgentsDotjsonRoute: AgentsDotjsonRoute,
+  AmendmentsRoute: AmendmentsRoute,
   AmplifyRoute: AmplifyRoute,
   AuthRoute: AuthRoute,
   CapitalRoute: CapitalRoute,
   CitizenshipRoute: CitizenshipRoute,
   ConstitutionRoute: ConstitutionRoute,
+  ConstitutionDotjsonRoute: ConstitutionDotjsonRoute,
   ContractsRoute: ContractsRoute,
   DashboardRoute: DashboardRoute,
   DeployRoute: DeployRoute,

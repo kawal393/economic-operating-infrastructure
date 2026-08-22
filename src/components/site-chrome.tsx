@@ -33,6 +33,7 @@ const FOOTER_GROUPS = [
       { to: "/minister", label: "Minister of State" },
       { to: "/security", label: "The Sentinel" },
       { to: "/citizenship", label: "Citizenship" },
+      { to: "/amendments", label: "Amendments" },
       { to: "/governance", label: "Governance" },
       { to: "/amplify", label: "Amplify" },
     ],
