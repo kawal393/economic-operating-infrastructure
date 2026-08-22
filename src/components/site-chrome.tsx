@@ -229,7 +229,9 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-12 hairline" />
+        <LegalDisclaimer className="mt-12" />
+
+        <div className="mt-8 hairline" />
 
         <div className="mt-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <p className="text-sovereign text-base font-semibold tracking-tight">{FOOTER_CREED}</p>
@@ -237,6 +239,7 @@ export function SiteFooter() {
             Ed25519 · ML-DSA-65 · LMS · SHA-256 · OpenTimestamps
           </p>
         </div>
+
       </div>
     </footer>
   );
