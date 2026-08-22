@@ -7,7 +7,7 @@ import { getThreatSummary } from "@/lib/security.functions";
 export const Route = createFileRoute("/security")({
   head: () => ({
     meta: [
-      { title: "The Sentinel — Live Defence of the Digital Nation | Sovereign AI Services" },
+      { title: "The Sentinel — Live Defence of the Platform | Sovereign AI Services" },
       {
         name: "description",
         content:

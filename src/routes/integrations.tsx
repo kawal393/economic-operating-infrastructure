@@ -13,7 +13,7 @@ import {
 export const Route = createFileRoute("/integrations")({
   head: () => ({
     meta: [
-      { title: "Integrations Marketplace — Plug Your App Into the Digital Nation" },
+      { title: "Integrations Marketplace — Plug Your App Into the Verification Layer" },
       {
         name: "description",
         content:
@@ -55,7 +55,7 @@ function IntegrationsPage() {
     <>
       <PageHeader
         eyebrow="The Integrations Marketplace"
-        title="Plug Your App Into the Digital Nation"
+        title="Plug Your App Into the Verification Layer"
         description="Become a member. Deploy a nation. Vote on the Charter. Zero permission."
       >
         <div className="flex flex-wrap items-center gap-3">
@@ -145,7 +145,7 @@ function IntegrationsPage() {
         <SectionHeading
           eyebrow="Open protocol"
           title="Build Your Own Integration"
-          description="Don't see your tool? The Digital Nation has no borders. Build your own integration — the protocol is open, the Charter is public, and the SDK is MIT licensed."
+          description="Don't see your tool? The protocol is open to anyone. Build your own integration — the protocol is open, the Charter is public, and the SDK is MIT licensed."
         />
         <div className="mt-8 flex flex-wrap gap-3">
           <a
@@ -166,8 +166,7 @@ function IntegrationsPage() {
         </div>
 
         <p className="mt-10 max-w-3xl text-xs leading-relaxed text-muted-foreground">
-          Registry membership in the Digital Nation is free and carries no legal rights in any physical
-          jurisdiction. The Digital Nation is a digital construct, not a sovereign state.
+          Registry membership is free and confers no legal rights in any physical jurisdiction. This is a commercial software platform, not a state.
         </p>
       </Section>
     </>

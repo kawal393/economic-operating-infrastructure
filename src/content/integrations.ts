@@ -52,7 +52,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "CO",
     category: "AI Agents",
     description:
-      "Register the Digital Nation as a custom action set in Composio. Now any agent can call seal, verify, register-member, deploy-nation, vote — all as native actions.",
+      "Register the platform as a custom action set in Composio. Now any agent can call seal, verify, register-member, deploy-workspace, vote — all as native actions.",
     install: "Install via Composio's action directory",
     status: "Available Now",
     docs: "/docs",
@@ -96,7 +96,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "MK",
     category: "Automation",
     description:
-      "Drag and drop Digital Nation actions into any Make scenario. Your automations can now register members, deploy nations, seal decisions, and pay fees — all visually.",
+      "Drag and drop platform actions into any Make scenario. Your automations can now register members, deploy workspaces, seal decisions, and pay fees — all visually.",
     install: 'Search "APEX Nation" in the Make app directory',
     status: "Available Now",
     docs: "/docs",
@@ -107,7 +107,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "PD",
     category: "Automation",
     description:
-      "Serverless workflows can call Digital Nation APIs natively. Build a workflow that watches an event, seals it, anchors it to Bitcoin, and registers it as a member decision.",
+      "Serverless workflows can call platform APIs natively. Build a workflow that watches an event, seals it, anchors it to Bitcoin, and registers it as a member decision.",
     install: 'Search "APEX Nation" in Pipedream',
     status: "Available Now",
     docs: "/docs",
@@ -118,7 +118,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "AP",
     category: "Automation",
     description:
-      "Open source automation with a native Digital Nation piece. One click install from the Pieces library.",
+      "Open source automation with a native platform piece. One click install from the Pieces library.",
     install: 'Install "APEX Nation" from the Pieces library',
     status: "Available Now",
     docs: "/docs",
@@ -129,7 +129,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "ZP",
     category: "Automation",
     description:
-      "No code Digital Nation for 5,000+ apps. Connect Gmail to seal every email. Connect Stripe to seal every transaction. Connect Slack to vote on proposals.",
+      "No-code platform actions for 5,000+ apps. Connect Gmail to seal every email. Connect Stripe to seal every transaction. Connect Slack to vote on proposals.",
     install: 'Search "APEX Nation" in Zapier',
     status: "Coming Soon",
     docs: "/docs",
@@ -151,7 +151,7 @@ export const INTEGRATIONS: Integration[] = [
     mark: "OA",
     category: "LLM Frameworks",
     description:
-      "Register the Digital Nation as a function in any OpenAI powered app. The model can now call seal, verify, register-member, deploy-nation, vote as native functions.",
+      "Register the platform as a function in any OpenAI powered app. The model can now call seal, verify, register-member, deploy-workspace, vote as native functions.",
     install: "npm i @apex/nation-openai",
     status: "Available Now",
     docs: "/docs",
@@ -242,7 +242,7 @@ export const MCP_CLIENTS = [
 export const MCP_TOOLS = [
   {
     name: "seal",
-    does: "Signs any content and returns a Digital Nation receipt.",
+    does: "Signs any content and returns a platform receipt.",
     params: "The content or file the agent wants sealed, plus an optional label.",
     returns: "A receipt ID, the SHA-256 digest and an Ed25519 signature.",
     example: `agent: seal(content: "Approved refund #8812", label: "decision")

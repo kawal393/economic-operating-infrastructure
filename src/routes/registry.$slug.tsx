@@ -61,7 +61,7 @@ function NationPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Nation-state"
+        eyebrow="Workspace"
         title={nation.name}
         description={nation.tagline ?? "A sovereign workspace on the Apex PSI protocol."}
       />

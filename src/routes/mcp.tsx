@@ -8,7 +8,7 @@ import { MCP_CLIENTS, MCP_TOOLS } from "@/content/integrations";
 export const Route = createFileRoute("/mcp")({
   head: () => ({
     meta: [
-      { title: "MCP Server — Plug the Digital Nation Into Every AI Agent" },
+      { title: "MCP Server — Plug the Verification Layer Into Every AI Agent" },
       {
         name: "description",
         content:
@@ -49,7 +49,7 @@ function McpPage() {
     <>
       <PageHeader
         eyebrow="Model Context Protocol"
-        title="Plug the Digital Nation into every AI agent in 60 seconds"
+        title="Plug the verification layer into every AI agent in 60 seconds"
         description="One MCP server. Every Claude, Cursor, Goose, Cline, Continue, and custom agent. Automatic registry membership. Cryptographic receipts. Zero code changes."
       >
         <div className="flex flex-wrap items-center gap-3">
@@ -128,7 +128,7 @@ function McpPage() {
           </h3>
           <ul className="mt-5 space-y-3">
             {[
-              "Every AI decision now gets a Digital Nation receipt",
+              "Every AI decision now gets a platform receipt",
               "Verify any receipt at /verify",
               "Zero code changes to your existing prompts",
             ].map((point) => (
@@ -208,8 +208,7 @@ function McpPage() {
         </Panel>
 
         <p className="mt-10 max-w-3xl text-xs leading-relaxed text-muted-foreground">
-          Registry membership in the Digital Nation is free and carries no legal rights in any physical
-          jurisdiction. The Digital Nation is a digital construct, not a sovereign state.
+          Registry membership is free and confers no legal rights in any physical jurisdiction. This is a commercial software platform, not a state.
         </p>
       </Section>
     </>

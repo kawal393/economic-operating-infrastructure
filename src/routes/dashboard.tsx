@@ -21,7 +21,7 @@ export const Route = createFileRoute("/dashboard")({
       { property: "og:title", content: "Member Dashboard" },
       {
         property: "og:description",
-        content: "Nation-states, verifications, anchors, surplus routing and governance in one view.",
+        content: "Workspaces, verifications, anchors, surplus routing and governance in one view.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/dashboard" },
@@ -37,7 +37,7 @@ const ACTIVITY = [
   { time: "14m ago", event: "Bitcoin anchor committed", detail: "Merkle root · block 932,141" },
   { time: "1h ago", event: "Surplus routed", detail: "1,204.88 units · Article III graph" },
   { time: "3h ago", event: "Compliance check passed", detail: "psi-finance v2.0.3 · EU_ART_50" },
-  { time: "6h ago", event: "Nation-state deployed", detail: "ns_4f1a9c2b7e08d135" },
+  { time: "6h ago", event: "Workspace deployed", detail: "ns_4f1a9c2b7e08d135" },
   { time: "1d ago", event: "Governance vote cast", detail: "Proposal PSI-A-014 · For" },
 ];
 
@@ -120,7 +120,7 @@ function DashboardPage() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatBlock label="Chain entries" value={String(stats?.entries ?? 0)} delta="live" />
           <StatBlock label="Registered members" value={String(stats?.citizens ?? 0)} delta="live" />
-          <StatBlock label="Nation-states" value={String(stats?.nationStates ?? 0)} delta="live" />
+          <StatBlock label="Workspaces" value={String(stats?.nationStates ?? 0)} delta="live" />
           <StatBlock
             label="Fees recorded"
             value={`$${(stats?.feesUsd ?? 0).toFixed(3)}`}

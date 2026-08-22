@@ -16,7 +16,7 @@ export const Route = createFileRoute("/minister")({
         content:
           "Hold a live voice audience with the Platform steward. A realtime system architecture agent that reads the public ledger, cites the Charter and cannot act without your authority.",
       },
-      { property: "og:title", content: "Platform steward — the live voice of the digital nation" },
+      { property: "og:title", content: "Platform steward — the live voice of the platform" },
       {
         property: "og:description",
         content:

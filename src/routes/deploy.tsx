@@ -139,7 +139,7 @@ function DeployPage() {
         anchorStatus,
         calendar,
       });
-      toast.success("Nation-state deployed", { description: registered.nationState.name });
+      toast.success("Workspace deployed", { description: registered.nationState.name });
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Deployment failed.");
     } finally {
@@ -170,7 +170,7 @@ function DeployPage() {
 
             <form onSubmit={onDeploy} className="space-y-5">
               <label className="block text-sm">
-                <span className="mb-1.5 block text-muted-foreground">Nation-state name</span>
+                <span className="mb-1.5 block text-muted-foreground">Workspace name</span>
                 <input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
