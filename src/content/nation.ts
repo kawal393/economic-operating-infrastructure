@@ -304,16 +304,10 @@ export const FEES = [
 ] as const;
 
 export const SCALE_MODEL = [
-  { horizon: "1M citizens", verifications: "3.6B", revenue: "$1.46M" },
-  { horizon: "100M citizens", verifications: "365B", revenue: "$146M" },
-  { horizon: "1B citizens", verifications: "3.65T", revenue: "$1.46B+" },
+  { horizon: "1M members", verifications: "3.6B", revenue: "$1.46M" },
+  { horizon: "100M members", verifications: "365B", revenue: "$146M" },
+  { horizon: "1B members", verifications: "3.65T", revenue: "$1.46B+" },
 ] as const;
 
-export const PLATFORM_STATS = [
-  { label: "Citizens", value: "2,847,193", delta: "+18.4% / 30d" },
-  { label: "Nation-states deployed", value: "41,208", delta: "+9.1% / 30d" },
-  { label: "Verifications", value: "1,284,930,551", delta: "+22.7% / 30d" },
-  { label: "Bitcoin anchors", value: "8,412,006", delta: "+11.3% / 30d" },
-] as const;
 
 export const FOOTER_CREED = "The math does not negotiate. Neither do we.";
