@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader, Panel, Section } from "@/components/primitives";
+import { DisclaimerGate } from "@/components/legal";
 import { listNationStates } from "@/lib/citizen.functions";
 import type { NationState } from "@/lib/nation-types";
 
@@ -11,12 +12,12 @@ export const Route = createFileRoute("/registry/")({
       {
         name: "description",
         content:
-          "The open registry of sovereign workspaces. Every entry carries a sealed Charter hash, a ledger receipt and a Bitcoin anchor. Public to read, impossible to forge.",
+          "The open registry of workspaces. Every entry carries a sealed Charter hash, a ledger receipt and a Bitcoin anchor. Public to read, impossible to forge.",
       },
       { property: "og:title", content: "The Registry of Workspaces" },
       {
         property: "og:description",
-        content: "Every sovereign workspace deployed on the protocol, with its Charter hash.",
+        content: "Every workspace deployed on the protocol, with its Charter hash.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/registry" },
@@ -32,6 +33,7 @@ function RegistryPage() {
 
   return (
     <>
+      <DisclaimerGate />
       <PageHeader
         eyebrow="Registry"
         title="Every workspace ever deployed, listed forever."
