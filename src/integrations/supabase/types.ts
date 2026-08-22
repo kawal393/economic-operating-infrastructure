@@ -88,6 +88,89 @@ export type Database = {
         }
         Relationships: []
       }
+      amendment_votes: {
+        Row: {
+          amendment_id: string
+          choice: string
+          created_at: string
+          id: string
+          user_id: string
+          voter_label: string
+        }
+        Insert: {
+          amendment_id: string
+          choice: string
+          created_at?: string
+          id?: string
+          user_id: string
+          voter_label?: string
+        }
+        Update: {
+          amendment_id?: string
+          choice?: string
+          created_at?: string
+          id?: string
+          user_id?: string
+          voter_label?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "amendment_votes_amendment_id_fkey"
+            columns: ["amendment_id"]
+            isOneToOne: false
+            referencedRelation: "amendments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      amendments: {
+        Row: {
+          article_numeral: string
+          closes_at: string
+          created_at: string
+          digest: string
+          id: string
+          opens_at: string
+          proposed_text: string
+          rationale: string
+          ref: string
+          status: string
+          threshold: string
+          title: string
+          user_id: string | null
+        }
+        Insert: {
+          article_numeral: string
+          closes_at?: string
+          created_at?: string
+          digest: string
+          id?: string
+          opens_at?: string
+          proposed_text: string
+          rationale: string
+          ref: string
+          status?: string
+          threshold?: string
+          title: string
+          user_id?: string | null
+        }
+        Update: {
+          article_numeral?: string
+          closes_at?: string
+          created_at?: string
+          digest?: string
+          id?: string
+          opens_at?: string
+          proposed_text?: string
+          rationale?: string
+          ref?: string
+          status?: string
+          threshold?: string
+          title?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       attestations: {
         Row: {
           citizen_id: string | null
@@ -199,6 +282,81 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      constitution_signatures: {
+        Row: {
+          created_at: string
+          id: string
+          signature: string
+          signer_did: string
+          signer_kind: string
+          signer_label: string
+          user_id: string
+          version_digest: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          signature: string
+          signer_did: string
+          signer_kind?: string
+          signer_label: string
+          user_id: string
+          version_digest: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          signature?: string
+          signer_did?: string
+          signer_kind?: string
+          signer_label?: string
+          user_id?: string
+          version_digest?: string
+        }
+        Relationships: []
+      }
+      constitution_versions: {
+        Row: {
+          anchor_status: string
+          body: Json | null
+          created_at: string
+          digest: string
+          effective_from: string
+          id: string
+          name: string
+          receipt_id: string | null
+          summary: string
+          tagline: string
+          version: number
+        }
+        Insert: {
+          anchor_status?: string
+          body?: Json | null
+          created_at?: string
+          digest: string
+          effective_from?: string
+          id?: string
+          name: string
+          receipt_id?: string | null
+          summary?: string
+          tagline: string
+          version: number
+        }
+        Update: {
+          anchor_status?: string
+          body?: Json | null
+          created_at?: string
+          digest?: string
+          effective_from?: string
+          id?: string
+          name?: string
+          receipt_id?: string | null
+          summary?: string
+          tagline?: string
+          version?: number
+        }
+        Relationships: []
       }
       entities: {
         Row: {
