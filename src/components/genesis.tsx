@@ -136,7 +136,7 @@ function Tile({
   label: string;
   value: string;
   note: string;
-  href?: string;
+  href?: string | undefined;
 }) {
   return (
     <div className="rounded-lg border border-border bg-background/40 p-4">
