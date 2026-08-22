@@ -15,7 +15,7 @@ import {
 
 export const Route = createFileRoute("/verify")({
   validateSearch: (search: Record<string, unknown>) => ({
-    hash: typeof search.hash === "string" ? search.hash : "",
+    hash: typeof search["hash"] === "string" ? (search["hash"] as string) : "",
   }),
   head: () => ({
     meta: [

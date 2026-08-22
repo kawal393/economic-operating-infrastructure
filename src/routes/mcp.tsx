@@ -138,8 +138,7 @@ function McpPage() {
               </li>
             ))}
           </ul>
-          <Link
-            to="/verify"
+          <Link to="/verify" search={{ hash: "" }}
             className="mt-6 inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold"
           >
             Open the verifier

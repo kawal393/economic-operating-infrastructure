@@ -143,8 +143,7 @@ function Hero() {
             Seal something now
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
-          <Link
-            to="/verify"
+          <Link to="/verify" search={{ hash: "" }}
             className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold"
           >
             Verify a receipt

@@ -274,8 +274,7 @@ function SealPage() {
                       Download signing key (optional)
                     </button>
                   ) : null}
-                  <Link
-                    to="/verify"
+                  <Link to="/verify" search={{ hash: "" }}
                     className="rounded-md border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Verify it now
