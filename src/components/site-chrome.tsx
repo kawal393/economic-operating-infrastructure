@@ -1,31 +1,51 @@
 import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FOOTER_CREED } from "@/content/nation";
 import { INDEPENDENCE_LINE, PRECISION_CLAIM } from "@/content/legal";
 import { LegalDisclaimer } from "@/components/legal";
 import sovereignMark from "@/assets/sovereign-mark.png";
 
-
-const NAV = [
-  { to: "/minister", label: "Steward" },
+/** Five primary destinations stay inline; everything else lives in two menus. */
+const NAV_PRIMARY = [
   { to: "/seal", label: "Seal" },
   { to: "/verify", label: "Verify" },
   { to: "/ledger", label: "Ledger" },
   { to: "/registry", label: "Registry" },
-  { to: "/transparency", label: "Transparency" },
-  { to: "/constitution", label: "Charter" },
-  { to: "/government", label: "Architecture" },
-  { to: "/protocols", label: "Protocols" },
-  { to: "/citizenship", label: "Registry membership" },
-  { to: "/capital", label: "Capital" },
-  { to: "/integrations", label: "Integrations" },
-  { to: "/passport", label: "Agent credentials" },
-  { to: "/security", label: "Sentinel" },
-  { to: "/dashboard", label: "Dashboard" },
   { to: "/docs", label: "Docs" },
 ] as const;
+
+const NAV_MENUS = [
+  {
+    title: "Platform",
+    links: [
+      { to: "/constitution", label: "Protocol Charter" },
+      { to: "/government", label: "Architecture" },
+      { to: "/protocols", label: "Protocols" },
+      { to: "/transparency", label: "Transparency Log" },
+      { to: "/minister", label: "Platform Steward" },
+      { to: "/security", label: "Sentinel" },
+    ],
+  },
+  {
+    title: "Build",
+    links: [
+      { to: "/integrations", label: "Integrations" },
+      { to: "/passport", label: "Agent credentials" },
+      { to: "/capital", label: "Sovereign Capital" },
+      { to: "/citizenship", label: "Registry membership" },
+      { to: "/pricing", label: "Pricing" },
+      { to: "/dashboard", label: "Dashboard" },
+    ],
+  },
+] as const;
+
+const NAV_ALL = [
+  ...NAV_PRIMARY.map((l) => ({ ...l })),
+  ...NAV_MENUS.flatMap((m) => m.links.map((l) => ({ ...l }))),
+];
+
 
 
 const FOOTER_GROUPS = [
@@ -74,7 +94,9 @@ const FOOTER_GROUPS = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [menu, setMenu] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const navRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -82,6 +104,22 @@ export function SiteHeader() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!menu) return;
+    const onDown = (e: MouseEvent) => {
+      if (!navRef.current?.contains(e.target as Node)) setMenu(null);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenu(null);
+    };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [menu]);
 
   return (
     <header
@@ -92,36 +130,85 @@ export function SiteHeader() {
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">
-        <Link to="/" className="group flex items-center gap-3" onClick={() => setOpen(false)}>
+      <div className="mx-auto grid h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 lg:grid-cols-[minmax(0,auto)_1fr_minmax(0,auto)] lg:gap-6 lg:px-8">
+        <Link
+          to="/"
+          className="group flex min-w-0 items-center gap-3"
+          onClick={() => {
+            setOpen(false);
+            setMenu(null);
+          }}
+        >
           <SovereignMark />
-          <span className="flex flex-col leading-none">
-            <span className="text-sm font-semibold tracking-tight text-foreground">
+          <span className="flex min-w-0 flex-col leading-none">
+            <span className="truncate text-sm font-semibold tracking-tight text-foreground">
               Sovereign AI Services
             </span>
-            <span className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-              Verification & settlement layer
+            <span className="mt-1 hidden truncate font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground sm:block">
+              Verification &amp; settlement layer
             </span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              activeProps={{ className: "text-gold bg-secondary" }}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <div ref={navRef} className="hidden justify-center lg:flex">
+          <nav className="flex items-center gap-0.5">
+            {NAV_PRIMARY.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                onClick={() => setMenu(null)}
+                className="whitespace-nowrap rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                activeProps={{ className: "text-gold bg-secondary" }}
+              >
+                {item.label}
+              </Link>
+            ))}
 
-        <div className="hidden items-center gap-3 lg:flex">
+            {NAV_MENUS.map((group) => (
+              <div key={group.title} className="relative">
+                <button
+                  type="button"
+                  aria-expanded={menu === group.title}
+                  aria-haspopup="true"
+                  onClick={() => setMenu((m) => (m === group.title ? null : group.title))}
+                  className={cn(
+                    "inline-flex items-center gap-1 whitespace-nowrap rounded-md px-3 py-2 text-sm transition-colors hover:bg-secondary hover:text-foreground",
+                    menu === group.title ? "bg-secondary text-foreground" : "text-muted-foreground",
+                  )}
+                >
+                  {group.title}
+                  <ChevronDown
+                    className={cn(
+                      "h-3.5 w-3.5 transition-transform",
+                      menu === group.title && "rotate-180",
+                    )}
+                  />
+                </button>
+
+                {menu === group.title ? (
+                  <div className="absolute left-1/2 top-full z-50 mt-2 w-60 -translate-x-1/2 rounded-lg border border-border bg-background/95 p-1.5 shadow-xl backdrop-blur-xl">
+                    {group.links.map((link) => (
+                      <Link
+                        key={link.to}
+                        to={link.to}
+                        onClick={() => setMenu(null)}
+                        className="block rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                        activeProps={{ className: "text-gold bg-secondary" }}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            ))}
+          </nav>
+        </div>
+
+        <div className="hidden shrink-0 items-center justify-end gap-3 lg:flex">
           <Link
             to="/citizenship"
-            className="rounded-md border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-medium text-gold transition-colors hover:bg-gold/20"
+            className="whitespace-nowrap rounded-md border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-medium text-gold transition-colors hover:bg-gold/20"
           >
             Join the registry
           </Link>
@@ -131,16 +218,16 @@ export function SiteHeader() {
           type="button"
           aria-label={open ? "Close navigation" : "Open navigation"}
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border text-foreground lg:hidden"
+          className="inline-flex h-10 w-10 shrink-0 items-center justify-center justify-self-end rounded-md border border-border text-foreground lg:hidden"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {open ? (
-        <div className="border-t border-border bg-background lg:hidden">
-          <nav className="mx-auto grid max-w-7xl gap-1 px-5 py-4">
-            {NAV.map((item) => (
+        <div className="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-border bg-background lg:hidden">
+          <nav className="mx-auto grid max-w-7xl gap-1 px-5 py-4 sm:grid-cols-2">
+            {NAV_ALL.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
@@ -154,7 +241,7 @@ export function SiteHeader() {
             <Link
               to="/citizenship"
               onClick={() => setOpen(false)}
-              className="mt-2 rounded-md border border-gold/40 bg-gold/10 px-3 py-2.5 text-center text-sm font-medium text-gold"
+              className="mt-2 rounded-md border border-gold/40 bg-gold/10 px-3 py-2.5 text-center text-sm font-medium text-gold sm:col-span-2"
             >
               Join the registry
             </Link>
@@ -163,6 +250,7 @@ export function SiteHeader() {
       ) : null}
     </header>
   );
+
 }
 
 export function SovereignMark({ className }: { className?: string }) {
