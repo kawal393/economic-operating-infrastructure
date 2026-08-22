@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { Panel, Section, SectionHeading } from "@/components/primitives";
 import { FoundingSeals } from "@/components/founding-seals";
-import { LiveLedgerLine } from "@/components/live-ledger-line";
+import { ActivityFeed, GenesisCounters, SealsSparkline } from "@/components/genesis";
 import { HOMEPAGE_INTEGRATION_LINKS } from "@/content/integrations";
 import { INDEPENDENCE_LINE, PRECISION_CLAIM } from "@/content/legal";
 import { ARTICLES, BRANCHES, FEES, POWER_CHAIN, SCALE_MODEL } from "@/content/nation";
@@ -68,6 +68,7 @@ function LandingPage() {
   return (
     <>
       <Hero />
+      <GenesisSection />
       <FoundingSeals />
       <CharterPreview />
       <ArchitecturePreview />
@@ -202,11 +203,27 @@ function Hero() {
           </a>
         </div>
 
-        <div className="animate-rise mt-12 max-w-3xl" style={{ animationDelay: "340ms" }}>
-          <LiveLedgerLine />
+        <div className="animate-rise mt-12 max-w-4xl" style={{ animationDelay: "340ms" }}>
+          <GenesisCounters />
         </div>
       </div>
     </section>
+  );
+}
+
+function GenesisSection() {
+  return (
+    <Section>
+      <SectionHeading
+        eyebrow="Day 1, in public"
+        title="A machine that cannot lie, with the doors open."
+        description="Two live views of the same record: every event as it lands, and the cumulative curve it draws. Both are built from real timestamps — nothing is seeded, smoothed or projected."
+      />
+      <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+        <ActivityFeed />
+        <SealsSparkline />
+      </div>
+    </Section>
   );
 }
 

@@ -57,6 +57,7 @@ import { Route as ApiPublicBadgeDigestRouteImport } from './routes/api/public/ba
 import { Route as ApiPublicV1CheckpointRouteImport } from './routes/api/public/v1/checkpoint'
 import { Route as ApiPublicV1JwksDotjsonRouteImport } from './routes/api/public/v1/jwks[.]json'
 import { Route as ApiPublicV1LedgerRouteImport } from './routes/api/public/v1/ledger'
+import { Route as ApiPublicV1LedgerStatsRouteImport } from './routes/api/public/v1/ledger-stats'
 import { Route as ApiPublicV1VerifyRouteImport } from './routes/api/public/v1/verify'
 import { Route as ApiPublicV1ProofReceiptIdRouteImport } from './routes/api/public/v1/proof.$receiptId'
 import { Route as ApiPublicV1ReceiptReceiptIdRouteImport } from './routes/api/public/v1/receipt.$receiptId'
@@ -302,6 +303,11 @@ const ApiPublicV1LedgerRoute = ApiPublicV1LedgerRouteImport.update({
   path: '/api/public/v1/ledger',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicV1LedgerStatsRoute = ApiPublicV1LedgerStatsRouteImport.update({
+  id: '/api/public/v1/ledger-stats',
+  path: '/api/public/v1/ledger-stats',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicV1VerifyRoute = ApiPublicV1VerifyRouteImport.update({
   id: '/api/public/v1/verify',
   path: '/api/public/v1/verify',
@@ -369,6 +375,7 @@ export interface FileRoutesByFullPath {
   '/api/public/v1/checkpoint': typeof ApiPublicV1CheckpointRoute
   '/api/public/v1/jwks.json': typeof ApiPublicV1JwksDotjsonRoute
   '/api/public/v1/ledger': typeof ApiPublicV1LedgerRoute
+  '/api/public/v1/ledger-stats': typeof ApiPublicV1LedgerStatsRoute
   '/api/public/v1/verify': typeof ApiPublicV1VerifyRoute
   '/api/public/v1/proof/$receiptId': typeof ApiPublicV1ProofReceiptIdRoute
   '/api/public/v1/receipt/$receiptId': typeof ApiPublicV1ReceiptReceiptIdRoute
@@ -422,6 +429,7 @@ export interface FileRoutesByTo {
   '/api/public/v1/checkpoint': typeof ApiPublicV1CheckpointRoute
   '/api/public/v1/jwks.json': typeof ApiPublicV1JwksDotjsonRoute
   '/api/public/v1/ledger': typeof ApiPublicV1LedgerRoute
+  '/api/public/v1/ledger-stats': typeof ApiPublicV1LedgerStatsRoute
   '/api/public/v1/verify': typeof ApiPublicV1VerifyRoute
   '/api/public/v1/proof/$receiptId': typeof ApiPublicV1ProofReceiptIdRoute
   '/api/public/v1/receipt/$receiptId': typeof ApiPublicV1ReceiptReceiptIdRoute
@@ -476,6 +484,7 @@ export interface FileRoutesById {
   '/api/public/v1/checkpoint': typeof ApiPublicV1CheckpointRoute
   '/api/public/v1/jwks.json': typeof ApiPublicV1JwksDotjsonRoute
   '/api/public/v1/ledger': typeof ApiPublicV1LedgerRoute
+  '/api/public/v1/ledger-stats': typeof ApiPublicV1LedgerStatsRoute
   '/api/public/v1/verify': typeof ApiPublicV1VerifyRoute
   '/api/public/v1/proof/$receiptId': typeof ApiPublicV1ProofReceiptIdRoute
   '/api/public/v1/receipt/$receiptId': typeof ApiPublicV1ReceiptReceiptIdRoute
@@ -531,6 +540,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/checkpoint'
     | '/api/public/v1/jwks.json'
     | '/api/public/v1/ledger'
+    | '/api/public/v1/ledger-stats'
     | '/api/public/v1/verify'
     | '/api/public/v1/proof/$receiptId'
     | '/api/public/v1/receipt/$receiptId'
@@ -584,6 +594,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/checkpoint'
     | '/api/public/v1/jwks.json'
     | '/api/public/v1/ledger'
+    | '/api/public/v1/ledger-stats'
     | '/api/public/v1/verify'
     | '/api/public/v1/proof/$receiptId'
     | '/api/public/v1/receipt/$receiptId'
@@ -637,6 +648,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/checkpoint'
     | '/api/public/v1/jwks.json'
     | '/api/public/v1/ledger'
+    | '/api/public/v1/ledger-stats'
     | '/api/public/v1/verify'
     | '/api/public/v1/proof/$receiptId'
     | '/api/public/v1/receipt/$receiptId'
@@ -691,6 +703,7 @@ export interface RootRouteChildren {
   ApiPublicV1CheckpointRoute: typeof ApiPublicV1CheckpointRoute
   ApiPublicV1JwksDotjsonRoute: typeof ApiPublicV1JwksDotjsonRoute
   ApiPublicV1LedgerRoute: typeof ApiPublicV1LedgerRoute
+  ApiPublicV1LedgerStatsRoute: typeof ApiPublicV1LedgerStatsRoute
   ApiPublicV1VerifyRoute: typeof ApiPublicV1VerifyRoute
   ApiPublicV1ProofReceiptIdRoute: typeof ApiPublicV1ProofReceiptIdRoute
   ApiPublicV1ReceiptReceiptIdRoute: typeof ApiPublicV1ReceiptReceiptIdRoute
@@ -1034,6 +1047,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicV1LedgerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/ledger-stats': {
+      id: '/api/public/v1/ledger-stats'
+      path: '/api/public/v1/ledger-stats'
+      fullPath: '/api/public/v1/ledger-stats'
+      preLoaderRoute: typeof ApiPublicV1LedgerStatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/verify': {
       id: '/api/public/v1/verify'
       path: '/api/public/v1/verify'
@@ -1107,6 +1127,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicV1CheckpointRoute: ApiPublicV1CheckpointRoute,
   ApiPublicV1JwksDotjsonRoute: ApiPublicV1JwksDotjsonRoute,
   ApiPublicV1LedgerRoute: ApiPublicV1LedgerRoute,
+  ApiPublicV1LedgerStatsRoute: ApiPublicV1LedgerStatsRoute,
   ApiPublicV1VerifyRoute: ApiPublicV1VerifyRoute,
   ApiPublicV1ProofReceiptIdRoute: ApiPublicV1ProofReceiptIdRoute,
   ApiPublicV1ReceiptReceiptIdRoute: ApiPublicV1ReceiptReceiptIdRoute,
