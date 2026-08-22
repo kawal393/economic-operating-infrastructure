@@ -294,6 +294,12 @@ function VersionLedger() {
         <p className="mt-3 break-all font-mono text-xs text-gold/80">
           {data?.current?.digest ?? data?.liveDigest ?? "…"}
         </p>
+        <p className="mt-3 text-xs text-muted-foreground">
+          This text, this hash — any divergence is visible.{" "}
+          <Link to="/seal" className="text-gold underline-offset-4 hover:underline">
+            Seal it into the ledger →
+          </Link>
+        </p>
       </Panel>
 
       <div className="mt-4 space-y-3">
