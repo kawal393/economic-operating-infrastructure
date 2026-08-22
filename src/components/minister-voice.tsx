@@ -64,7 +64,7 @@ function MinisterConsole({ online }: { online: boolean }) {
             push("sentinel", `Navigated to ${path}`);
             return `Opened ${path}.`;
           }
-          return "Refused: that path is not part of the nation.";
+          return "Refused: that path is not part of the platform.";
         }
         const result = await invoke(tool.name, (params ?? {}) as Record<string, string>, false);
         if (result.status === "needs_approval") {
