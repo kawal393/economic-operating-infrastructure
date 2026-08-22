@@ -236,9 +236,9 @@ function ConstitutionPreview() {
   return (
     <Section>
       <SectionHeading
-        eyebrow="The Constitution · Five Unification Protocols"
-        title="Five rights. Enforced by mathematics, not by goodwill."
-        description="The constitution is not a values statement. Each article is a protocol with a verifiable failure condition — if the guarantee is not cryptographically demonstrable, the article is not implemented."
+        eyebrow="The Constitution of the AI Era"
+        title="A constitution is only written once — but it can be updated forever."
+        description="Five rights, enforced by mathematics rather than goodwill. Each article is a protocol with a verifiable failure condition — and every version of the text is sealed, anchored and recomputable, so an update can never be a silent one."
       />
 
       <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -279,8 +279,9 @@ function ConstitutionPreview() {
               The full constitution
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Complete text of the five unification protocols, their guarantees, and the amendment
-              thresholds that make Articles I and V effectively immutable.
+              Complete text of the five unification protocols, the sealed version history, public
+              ratification, live conformance checks and the amendment thresholds that make Articles
+              I and V effectively immutable.
             </p>
           </div>
           <Link
