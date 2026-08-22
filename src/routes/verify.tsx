@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { PageHeader, Panel, Section } from "@/components/primitives";
+import { LedgerVerifyPanel } from "@/components/ledger-verify-panel";
 import { DropZone, FieldRow, HonestyNote, TabSwitch } from "@/components/seal-ui";
 import {
   digestFile,
@@ -13,6 +14,9 @@ import {
 } from "@/lib/apex-psi";
 
 export const Route = createFileRoute("/verify")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    hash: typeof search.hash === "string" ? search.hash : "",
+  }),
   head: () => ({
     meta: [
       { title: "Verify a Receipt — Apex PSI | Sovereign AI Services" },
@@ -52,6 +56,7 @@ type Result = {
 };
 
 function VerifyPage() {
+  const { hash } = Route.useSearch();
   const [receiptFile, setReceiptFile] = useState<File | null>(null);
   const [receiptJson, setReceiptJson] = useState("");
   const [mode, setMode] = useState<Mode>("file");
@@ -107,6 +112,10 @@ function VerifyPage() {
         title="Verify"
         description="Check any receipt against the artefact it describes. Every check runs in your browser. If this site ever disappears, the offline verifier below does exactly the same job with no network at all."
       />
+
+      <Section>
+        <LedgerVerifyPanel initialHash={hash} />
+      </Section>
 
       <Section>
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">

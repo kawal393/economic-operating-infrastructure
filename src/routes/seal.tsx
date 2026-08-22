@@ -5,6 +5,7 @@ import { publishReceipt } from "@/lib/ledger.functions";
 
 import { toast } from "sonner";
 import { PageHeader, Panel, Section } from "@/components/primitives";
+import { LedgerSealPanel } from "@/components/ledger-seal-panel";
 import { DropZone, FieldRow, HonestyNote, TabSwitch } from "@/components/seal-ui";
 import {
   buildReceipt,
@@ -296,6 +297,25 @@ function SealPage() {
                 predicates, the verify URL and the Ed25519 signature.
               </p>
             )}
+          </Panel>
+        </div>
+      </Section>
+
+      <Section className="bg-surface/30">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+          <LedgerSealPanel />
+          <Panel>
+            <h2 className="text-lg font-semibold tracking-tight">Local seal vs ledger seal</h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              The panel above your left seals in your browser: nothing is uploaded and the receipt
+              verifies offline forever. The ledger seal writes a public entry to the APEX PSI
+              ledger, which is what you want when a third party — a regulator, a counterparty, a
+              court — has to be able to find the record without you.
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              Ledger entries are Merkle-batched and anchored to Bitcoin. Once anchored, no one,
+              including us, can alter or withdraw them.
+            </p>
           </Panel>
         </div>
       </Section>
