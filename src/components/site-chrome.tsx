@@ -1,31 +1,51 @@
 import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FOOTER_CREED } from "@/content/nation";
 import { INDEPENDENCE_LINE, PRECISION_CLAIM } from "@/content/legal";
 import { LegalDisclaimer } from "@/components/legal";
 import sovereignMark from "@/assets/sovereign-mark.png";
 
-
-const NAV = [
-  { to: "/minister", label: "Steward" },
+/** Five primary destinations stay inline; everything else lives in two menus. */
+const NAV_PRIMARY = [
   { to: "/seal", label: "Seal" },
   { to: "/verify", label: "Verify" },
   { to: "/ledger", label: "Ledger" },
   { to: "/registry", label: "Registry" },
-  { to: "/transparency", label: "Transparency" },
-  { to: "/constitution", label: "Charter" },
-  { to: "/government", label: "Architecture" },
-  { to: "/protocols", label: "Protocols" },
-  { to: "/citizenship", label: "Registry membership" },
-  { to: "/capital", label: "Capital" },
-  { to: "/integrations", label: "Integrations" },
-  { to: "/passport", label: "Agent credentials" },
-  { to: "/security", label: "Sentinel" },
-  { to: "/dashboard", label: "Dashboard" },
   { to: "/docs", label: "Docs" },
 ] as const;
+
+const NAV_MENUS = [
+  {
+    title: "Platform",
+    links: [
+      { to: "/constitution", label: "Protocol Charter" },
+      { to: "/government", label: "Architecture" },
+      { to: "/protocols", label: "Protocols" },
+      { to: "/transparency", label: "Transparency Log" },
+      { to: "/minister", label: "Platform Steward" },
+      { to: "/security", label: "Sentinel" },
+    ],
+  },
+  {
+    title: "Build",
+    links: [
+      { to: "/integrations", label: "Integrations" },
+      { to: "/passport", label: "Agent credentials" },
+      { to: "/capital", label: "Sovereign Capital" },
+      { to: "/citizenship", label: "Registry membership" },
+      { to: "/pricing", label: "Pricing" },
+      { to: "/dashboard", label: "Dashboard" },
+    ],
+  },
+] as const;
+
+const NAV_ALL = [
+  ...NAV_PRIMARY.map((l) => ({ ...l })),
+  ...NAV_MENUS.flatMap((m) => m.links.map((l) => ({ ...l }))),
+];
+
 
 
 const FOOTER_GROUPS = [
