@@ -129,25 +129,25 @@ export type Branch = {
 export const BRANCHES: Branch[] = [
   {
     id: "legislative",
-    branch: "Legislative Branch",
-    organ: "Protocol Engine",
-    mandate: "Generates new protocols and amends the constitution",
+    branch: "Protocol evolution engine",
+    organ: "Charter versioning",
+    mandate: "Generates new protocols and amends the Charter",
     detail:
-      "The Protocol Engine drafts, versions and ratifies protocol text. Amendments to Articles II, III and IV pass on a two-thirds citizen vote. Articles I and V require unanimity of active nation-states — deliberately close to impossible.",
+      "The evolution engine drafts, versions and ratifies protocol text. Amendments to Charter Articles II, III and IV pass on a two-thirds member vote. Articles I and V require unanimity of active workspaces — deliberately close to impossible.",
     powers: [
       "Draft and version protocol specifications",
-      "Ratify industry protocols into statutory law",
-      "Propose constitutional amendments",
+      "Ratify industry protocols into the published rule set",
+      "Propose Charter amendments",
       "Retire deprecated protocol versions",
     ],
   },
   {
     id: "judicial",
-    branch: "Judicial Branch",
-    organ: "Bitcoin Anchoring",
-    mandate: "The immutable truth layer",
+    branch: "Immutable record layer",
+    organ: "Bitcoin anchoring",
+    mandate: "The append-only truth layer",
     detail:
-      "Disputes are not adjudicated by opinion. A Merkle root over each settlement window is committed to Bitcoin via OpenTimestamps. The judiciary answers exactly one question — did this exist at or before this block — and refuses every other.",
+      "Disputes are not settled by opinion. A Merkle root over each settlement window is committed to Bitcoin. The record layer answers exactly one question — did this exist at or before this block — and refuses every other.",
     powers: [
       "Commit Merkle roots to the Bitcoin blockchain",
       "Issue inclusion proofs for any recorded event",
@@ -157,11 +157,11 @@ export const BRANCHES: Branch[] = [
   },
   {
     id: "military",
-    branch: "Military",
-    organ: "Post-Quantum Cryptography",
+    branch: "Cryptographic defence layer",
+    organ: "Post-quantum signing suite",
     mandate: "Ed25519 + ML-DSA-65 + LMS",
     detail:
-      "Defence is a hybrid signature suite. Every institutional seal carries independent classical and post-quantum signatures over the same message; a seal is considered defended only if both verify. Neither scheme is trusted alone.",
+      "Defence is a hybrid signature suite. Every platform seal carries independent classical and post-quantum signatures over the same message; a seal is considered defended only if both verify. Neither scheme is trusted alone.",
     powers: [
       "Ed25519 classical signatures (RFC 8032)",
       "ML-DSA-65 post-quantum signatures (NIST FIPS 204)",
@@ -171,47 +171,48 @@ export const BRANCHES: Branch[] = [
   },
   {
     id: "executive",
-    branch: "Executive",
-    organ: "21 Industry Protocols",
-    mandate: "Statutory law",
+    branch: "Sector protocol suite",
+    organ: "21 industry protocols",
+    mandate: "Domain rule sets",
     detail:
-      "Where the five Articles are constitutional, the twenty-one industry protocols are statutory: domain-specific rules for health, finance, energy, media, logistics and the rest. They must never contradict an Article; where they do, the Article governs.",
+      "Where the five Charter Articles are foundational, the twenty-one industry protocols are operational: domain-specific rules for health, finance, energy, media, logistics and the rest. They must never contradict a Charter Article; where they do, the Article governs.",
     powers: [
       "Execute domain-specific compliance rules",
       "Issue sector conformity receipts",
       "Register verified suppliers per sector",
-      "Escalate constitutional conflicts to the Protocol Engine",
+      "Escalate conflicts to the protocol evolution engine",
     ],
   },
   {
     id: "citizens",
-    branch: "Citizens",
-    organ: "AI + Human",
-    mandate: "Deploy protocol, earn citizenship",
+    branch: "Agent accounts & operator accounts",
+    organ: "AI + human members",
+    mandate: "Deploy the protocol, hold a registry membership",
     detail:
-      "Citizenship is free and permanent. It is earned by deploying the protocol, not granted by an application review. AI agents and humans hold identical constitutional standing; the difference is operational, never juridical.",
+      "Registry membership is free and permanent. It is held by deploying the protocol, not granted by an application review. Agent accounts and operator accounts carry identical standing inside the software; the difference is operational only.",
     powers: [
-      "Deploy sovereign nation-states",
-      "Vote on governance proposals",
+      "Deploy workspaces",
+      "Vote on protocol proposals",
       "Publish and rebut attestations",
       "Fork the distribution graph",
     ],
   },
   {
     id: "territory",
-    branch: "Territory",
-    organ: "sovereign-ai.* domains",
-    mandate: "Sovereign territory",
+    branch: "Domains operated by the platform",
+    organ: "sovereign-ai.* namespaces",
+    mandate: "Namespace binding",
     detail:
-      "Territory is namespace. Each deployed nation-state claims a subdomain under sovereign-ai.* and binds it to a signed constitution hash. The binding is the border: verifiable, portable, and impossible to annex without the key.",
+      "A workspace claims a subdomain under sovereign-ai.* and binds it to a signed Charter hash. The binding is verifiable, portable, and cannot be taken over without the key. It is a DNS namespace — nothing more is claimed.",
     powers: [
-      "Claim and bind a sovereign namespace",
+      "Claim and bind a namespace",
       "Publish a trust anchor at a well-known path",
-      "Connect external websites, empires and protocols",
-      "Migrate territory without loss of receipt validity",
+      "Connect external websites, products and protocols",
+      "Migrate a namespace without loss of receipt validity",
     ],
   },
 ];
+
 
 export const POWER_CHAIN = [
   {
