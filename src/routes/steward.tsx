@@ -83,7 +83,7 @@ function MinisterPage() {
             fallback={
               <Panel>
                 <p className="font-mono text-xs text-muted-foreground">
-                  Opening the ministry…
+                  Opening the steward console…
                 </p>
               </Panel>
             }
@@ -92,7 +92,7 @@ function MinisterPage() {
           </Suspense>
         ) : (
           <Panel>
-            <p className="font-mono text-xs text-muted-foreground">Opening the ministry…</p>
+            <p className="font-mono text-xs text-muted-foreground">Opening the steward console…</p>
           </Panel>
         )}
       </Section>

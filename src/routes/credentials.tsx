@@ -23,7 +23,7 @@ export const Route = createFileRoute("/credentials")({
       {
         name: "description",
         content:
-          "Issue UCAN-style capability passports so autonomous agents can act for a member within strict bounds — signed in your browser, verifiable offline, revocable on the ledger.",
+          "Issue UCAN-style capability credentials so autonomous agents can act for a member within strict bounds — signed in your browser, verifiable offline, revocable on the ledger.",
       },
       { property: "og:title", content: "Agent credentials — Bounded Delegation" },
       {
@@ -73,9 +73,9 @@ function PassportPage() {
         delegable,
       });
       setPassport(issued);
-      toast.success("Passport issued and signed locally.");
+      toast.success("Credential issued and signed locally.");
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Could not issue the passport.");
+      toast.error(error instanceof Error ? error.message : "Could not issue the credential.");
     }
   };
 
@@ -89,7 +89,7 @@ function PassportPage() {
       }
       setCheck(await verifyPassport(parsed, key.toLowerCase()));
     } catch {
-      toast.error("That is not a passport document.");
+      toast.error("That is not a credential document.");
     }
   };
 
@@ -97,8 +97,8 @@ function PassportPage() {
     <>
       <PageHeader
         eyebrow="Article III · Delegated Authority"
-        title="Agent Passports"
-        description="An autonomous agent should never hold a member's key. It should hold a signed, expiring, itemised licence to do a few specific things. Passports are issued in your browser, verify against your public key alone, and expire whether or not this nation still exists."
+        title="Agent Credentials"
+        description="An autonomous agent should never hold a member's key. It should hold a signed, expiring, itemised licence to do a few specific things. Credentials are issued in your browser, verify against your public key alone, and expire on schedule, with or without us."
       />
 
       <Section>
@@ -221,7 +221,7 @@ function PassportPage() {
               onClick={issue}
               className="mt-6 w-full rounded-md border border-gold/40 bg-gold/10 px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.16em] text-gold transition-colors hover:bg-gold/20"
             >
-              Issue passport
+              Issue credential
             </button>
           </Panel>
         </div>
@@ -252,13 +252,13 @@ function PassportPage() {
               }
               className="mt-4 rounded-md border border-border px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-foreground"
             >
-              Download passport
+              Download credential
             </button>
           </Panel>
         ) : null}
 
         <HonestyNote>
-          A passport is a licence, not a leash. It proves the member authorised those powers; it
+          A credential is a licence, not a leash. It proves the member authorised those powers; it
           cannot force the agent to behave. Bound the window, cap the invocations, and revoke by
           sealing a revocation notice to the ledger.
         </HonestyNote>
@@ -267,8 +267,8 @@ function PassportPage() {
       <Section>
         <SectionHeading
           eyebrow="Verification"
-          title="Check a passport"
-          description="Anyone holding the issuer's public key can validate a passport offline. No account, no call to us."
+          title="Check a credential"
+          description="Anyone holding the issuer's public key can validate a credential offline. No account, no call to us."
         />
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
           <Panel>
@@ -276,7 +276,7 @@ function PassportPage() {
               value={checkRaw}
               onChange={(e) => setCheckRaw(e.target.value)}
               rows={10}
-              placeholder="Paste passport JSON"
+              placeholder="Paste credential JSON"
               className="w-full rounded-md border border-border bg-secondary/40 p-3 font-mono text-[11px] text-foreground outline-none focus:border-gold/50"
             />
             <input
@@ -290,7 +290,7 @@ function PassportPage() {
               onClick={runCheck}
               className="mt-4 rounded-md border border-gold/40 bg-gold/10 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-gold transition-colors hover:bg-gold/20"
             >
-              Verify passport
+              Verify credential
             </button>
           </Panel>
           <Panel>
@@ -308,7 +308,7 @@ function PassportPage() {
               </div>
             ) : (
               <p className="font-mono text-xs text-muted-foreground">
-                No passport checked yet.
+                No credential checked yet.
               </p>
             )}
           </Panel>

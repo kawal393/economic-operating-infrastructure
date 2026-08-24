@@ -9,8 +9,8 @@ import { PageHeader, Panel, Section, SectionHeading } from "@/components/primiti
 import { ARTICLES, POWER_CHAIN } from "@/content/nation";
 import {
   AMENDMENT_THRESHOLDS,
-  CONSTITUTION_NAME,
-  CONSTITUTION_TAGLINE,
+  CHARTER_DISPLAY_NAME,
+  CHARTER_DISPLAY_TAGLINE,
   articleDigest,
   canonicalArticles,
 } from "@/lib/constitution";
@@ -57,8 +57,8 @@ function ConstitutionPage() {
     <>
       <PageHeader
         eyebrow={`Founding Document · Version ${version}`} 
-        title={CONSTITUTION_NAME}
-        description={`${CONSTITUTION_TAGLINE} Five unification protocols. Each article states a right, the mechanism that enforces it, and the condition under which the article must be considered unimplemented.`}
+        title={CHARTER_DISPLAY_NAME}
+        description={`${CHARTER_DISPLAY_TAGLINE} Five unification protocols. Each article states a right, the mechanism that enforces it, and the condition under which the article must be considered unimplemented.`}
       >
         <div className="flex flex-wrap gap-3">
           <button
