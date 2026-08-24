@@ -18,6 +18,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CapitalRouteImport } from './routes/capital'
 import { Route as CharterRouteImport } from './routes/charter'
 import { Route as CitizenshipRouteImport } from './routes/citizenship'
+import { Route as ConstitutionRouteImport } from './routes/constitution'
 import { Route as ConstitutionDotjsonRouteImport } from './routes/constitution[.]json'
 import { Route as ContractsRouteImport } from './routes/contracts'
 import { Route as CredentialsRouteImport } from './routes/credentials'
@@ -27,13 +28,16 @@ import { Route as DocsRouteImport } from './routes/docs'
 import { Route as EnforcementWatchRouteImport } from './routes/enforcement-watch'
 import { Route as FeedDotxmlRouteImport } from './routes/feed[.]xml'
 import { Route as GovernanceRouteImport } from './routes/governance'
+import { Route as GovernmentRouteImport } from './routes/government'
 import { Route as IntegrationsRouteImport } from './routes/integrations'
 import { Route as InteropRouteImport } from './routes/interop'
 import { Route as LedgerRouteImport } from './routes/ledger'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as MinisterRouteImport } from './routes/minister'
 import { Route as OnboardRouteImport } from './routes/onboard'
 import { Route as OpenapiDotjsonRouteImport } from './routes/openapi[.]json'
+import { Route as PassportRouteImport } from './routes/passport'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
@@ -108,6 +112,11 @@ const CitizenshipRoute = CitizenshipRouteImport.update({
   path: '/citizenship',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConstitutionRoute = ConstitutionRouteImport.update({
+  id: '/constitution',
+  path: '/constitution',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ConstitutionDotjsonRoute = ConstitutionDotjsonRouteImport.update({
   id: '/constitution.json',
   path: '/constitution.json',
@@ -153,6 +162,11 @@ const GovernanceRoute = GovernanceRouteImport.update({
   path: '/governance',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GovernmentRoute = GovernmentRouteImport.update({
+  id: '/government',
+  path: '/government',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IntegrationsRoute = IntegrationsRouteImport.update({
   id: '/integrations',
   path: '/integrations',
@@ -178,6 +192,11 @@ const McpRoute = McpRouteImport.update({
   path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MinisterRoute = MinisterRouteImport.update({
+  id: '/minister',
+  path: '/minister',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OnboardRoute = OnboardRouteImport.update({
   id: '/onboard',
   path: '/onboard',
@@ -186,6 +205,11 @@ const OnboardRoute = OnboardRouteImport.update({
 const OpenapiDotjsonRoute = OpenapiDotjsonRouteImport.update({
   id: '/openapi.json',
   path: '/openapi.json',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PassportRoute = PassportRouteImport.update({
+  id: '/passport',
+  path: '/passport',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricingRoute = PricingRouteImport.update({
@@ -342,6 +366,7 @@ export interface FileRoutesByFullPath {
   '/capital': typeof CapitalRoute
   '/charter': typeof CharterRoute
   '/citizenship': typeof CitizenshipRoute
+  '/constitution': typeof ConstitutionRoute
   '/constitution.json': typeof ConstitutionDotjsonRoute
   '/contracts': typeof ContractsRoute
   '/credentials': typeof CredentialsRoute
@@ -351,13 +376,16 @@ export interface FileRoutesByFullPath {
   '/enforcement-watch': typeof EnforcementWatchRoute
   '/feed.xml': typeof FeedDotxmlRoute
   '/governance': typeof GovernanceRoute
+  '/government': typeof GovernmentRoute
   '/integrations': typeof IntegrationsRoute
   '/interop': typeof InteropRoute
   '/ledger': typeof LedgerRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/mcp': typeof McpRoute
+  '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
+  '/passport': typeof PassportRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/protocols': typeof ProtocolsRoute
@@ -397,6 +425,7 @@ export interface FileRoutesByTo {
   '/capital': typeof CapitalRoute
   '/charter': typeof CharterRoute
   '/citizenship': typeof CitizenshipRoute
+  '/constitution': typeof ConstitutionRoute
   '/constitution.json': typeof ConstitutionDotjsonRoute
   '/contracts': typeof ContractsRoute
   '/credentials': typeof CredentialsRoute
@@ -406,13 +435,16 @@ export interface FileRoutesByTo {
   '/enforcement-watch': typeof EnforcementWatchRoute
   '/feed.xml': typeof FeedDotxmlRoute
   '/governance': typeof GovernanceRoute
+  '/government': typeof GovernmentRoute
   '/integrations': typeof IntegrationsRoute
   '/interop': typeof InteropRoute
   '/ledger': typeof LedgerRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/mcp': typeof McpRoute
+  '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
+  '/passport': typeof PassportRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/protocols': typeof ProtocolsRoute
@@ -453,6 +485,7 @@ export interface FileRoutesById {
   '/capital': typeof CapitalRoute
   '/charter': typeof CharterRoute
   '/citizenship': typeof CitizenshipRoute
+  '/constitution': typeof ConstitutionRoute
   '/constitution.json': typeof ConstitutionDotjsonRoute
   '/contracts': typeof ContractsRoute
   '/credentials': typeof CredentialsRoute
@@ -462,13 +495,16 @@ export interface FileRoutesById {
   '/enforcement-watch': typeof EnforcementWatchRoute
   '/feed.xml': typeof FeedDotxmlRoute
   '/governance': typeof GovernanceRoute
+  '/government': typeof GovernmentRoute
   '/integrations': typeof IntegrationsRoute
   '/interop': typeof InteropRoute
   '/ledger': typeof LedgerRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/mcp': typeof McpRoute
+  '/minister': typeof MinisterRoute
   '/onboard': typeof OnboardRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
+  '/passport': typeof PassportRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/protocols': typeof ProtocolsRoute
@@ -510,6 +546,7 @@ export interface FileRouteTypes {
     | '/capital'
     | '/charter'
     | '/citizenship'
+    | '/constitution'
     | '/constitution.json'
     | '/contracts'
     | '/credentials'
@@ -519,13 +556,16 @@ export interface FileRouteTypes {
     | '/enforcement-watch'
     | '/feed.xml'
     | '/governance'
+    | '/government'
     | '/integrations'
     | '/interop'
     | '/ledger'
     | '/llms.txt'
     | '/mcp'
+    | '/minister'
     | '/onboard'
     | '/openapi.json'
+    | '/passport'
     | '/pricing'
     | '/privacy'
     | '/protocols'
@@ -565,6 +605,7 @@ export interface FileRouteTypes {
     | '/capital'
     | '/charter'
     | '/citizenship'
+    | '/constitution'
     | '/constitution.json'
     | '/contracts'
     | '/credentials'
@@ -574,13 +615,16 @@ export interface FileRouteTypes {
     | '/enforcement-watch'
     | '/feed.xml'
     | '/governance'
+    | '/government'
     | '/integrations'
     | '/interop'
     | '/ledger'
     | '/llms.txt'
     | '/mcp'
+    | '/minister'
     | '/onboard'
     | '/openapi.json'
+    | '/passport'
     | '/pricing'
     | '/privacy'
     | '/protocols'
@@ -620,6 +664,7 @@ export interface FileRouteTypes {
     | '/capital'
     | '/charter'
     | '/citizenship'
+    | '/constitution'
     | '/constitution.json'
     | '/contracts'
     | '/credentials'
@@ -629,13 +674,16 @@ export interface FileRouteTypes {
     | '/enforcement-watch'
     | '/feed.xml'
     | '/governance'
+    | '/government'
     | '/integrations'
     | '/interop'
     | '/ledger'
     | '/llms.txt'
     | '/mcp'
+    | '/minister'
     | '/onboard'
     | '/openapi.json'
+    | '/passport'
     | '/pricing'
     | '/privacy'
     | '/protocols'
@@ -676,6 +724,7 @@ export interface RootRouteChildren {
   CapitalRoute: typeof CapitalRoute
   CharterRoute: typeof CharterRoute
   CitizenshipRoute: typeof CitizenshipRoute
+  ConstitutionRoute: typeof ConstitutionRoute
   ConstitutionDotjsonRoute: typeof ConstitutionDotjsonRoute
   ContractsRoute: typeof ContractsRoute
   CredentialsRoute: typeof CredentialsRoute
@@ -685,13 +734,16 @@ export interface RootRouteChildren {
   EnforcementWatchRoute: typeof EnforcementWatchRoute
   FeedDotxmlRoute: typeof FeedDotxmlRoute
   GovernanceRoute: typeof GovernanceRoute
+  GovernmentRoute: typeof GovernmentRoute
   IntegrationsRoute: typeof IntegrationsRoute
   InteropRoute: typeof InteropRoute
   LedgerRoute: typeof LedgerRoute
   LlmsDottxtRoute: typeof LlmsDottxtRoute
   McpRoute: typeof McpRoute
+  MinisterRoute: typeof MinisterRoute
   OnboardRoute: typeof OnboardRoute
   OpenapiDotjsonRoute: typeof OpenapiDotjsonRoute
+  PassportRoute: typeof PassportRoute
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   ProtocolsRoute: typeof ProtocolsRoute
@@ -787,6 +839,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CitizenshipRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/constitution': {
+      id: '/constitution'
+      path: '/constitution'
+      fullPath: '/constitution'
+      preLoaderRoute: typeof ConstitutionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/constitution.json': {
       id: '/constitution.json'
       path: '/constitution.json'
@@ -850,6 +909,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GovernanceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/government': {
+      id: '/government'
+      path: '/government'
+      fullPath: '/government'
+      preLoaderRoute: typeof GovernmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/integrations': {
       id: '/integrations'
       path: '/integrations'
@@ -885,6 +951,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/minister': {
+      id: '/minister'
+      path: '/minister'
+      fullPath: '/minister'
+      preLoaderRoute: typeof MinisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/onboard': {
       id: '/onboard'
       path: '/onboard'
@@ -897,6 +970,13 @@ declare module '@tanstack/react-router' {
       path: '/openapi.json'
       fullPath: '/openapi.json'
       preLoaderRoute: typeof OpenapiDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/passport': {
+      id: '/passport'
+      path: '/passport'
+      fullPath: '/passport'
+      preLoaderRoute: typeof PassportRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pricing': {
@@ -1108,6 +1188,7 @@ const rootRouteChildren: RootRouteChildren = {
   CapitalRoute: CapitalRoute,
   CharterRoute: CharterRoute,
   CitizenshipRoute: CitizenshipRoute,
+  ConstitutionRoute: ConstitutionRoute,
   ConstitutionDotjsonRoute: ConstitutionDotjsonRoute,
   ContractsRoute: ContractsRoute,
   CredentialsRoute: CredentialsRoute,
@@ -1117,13 +1198,16 @@ const rootRouteChildren: RootRouteChildren = {
   EnforcementWatchRoute: EnforcementWatchRoute,
   FeedDotxmlRoute: FeedDotxmlRoute,
   GovernanceRoute: GovernanceRoute,
+  GovernmentRoute: GovernmentRoute,
   IntegrationsRoute: IntegrationsRoute,
   InteropRoute: InteropRoute,
   LedgerRoute: LedgerRoute,
   LlmsDottxtRoute: LlmsDottxtRoute,
   McpRoute: McpRoute,
+  MinisterRoute: MinisterRoute,
   OnboardRoute: OnboardRoute,
   OpenapiDotjsonRoute: OpenapiDotjsonRoute,
+  PassportRoute: PassportRoute,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   ProtocolsRoute: ProtocolsRoute,
