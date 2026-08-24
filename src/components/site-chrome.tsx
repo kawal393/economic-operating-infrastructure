@@ -202,8 +202,14 @@ export function SiteHeader() {
                         activeProps={{ className: "text-gold bg-secondary" }}
                       >
                         {link.label}
+                        {"note" in link && link.note ? (
+                          <span className="mt-0.5 block font-mono text-[9px] uppercase tracking-[0.14em] text-warning">
+                            {link.note}
+                          </span>
+                        ) : null}
                       </Link>
                     ))}
+
                   </div>
                 ) : null}
               </div>
