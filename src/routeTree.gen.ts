@@ -17,6 +17,7 @@ import { Route as ArchitectureRouteImport } from './routes/architecture'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CapitalRouteImport } from './routes/capital'
 import { Route as CharterRouteImport } from './routes/charter'
+import { Route as CharterDotjsonRouteImport } from './routes/charter[.]json'
 import { Route as CitizenshipRouteImport } from './routes/citizenship'
 import { Route as ConstitutionRouteImport } from './routes/constitution'
 import { Route as ConstitutionDotjsonRouteImport } from './routes/constitution[.]json'
@@ -105,6 +106,11 @@ const CapitalRoute = CapitalRouteImport.update({
 const CharterRoute = CharterRouteImport.update({
   id: '/charter',
   path: '/charter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CharterDotjsonRoute = CharterDotjsonRouteImport.update({
+  id: '/charter.json',
+  path: '/charter.json',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CitizenshipRoute = CitizenshipRouteImport.update({
@@ -365,6 +371,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
   '/charter': typeof CharterRoute
+  '/charter.json': typeof CharterDotjsonRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
   '/constitution.json': typeof ConstitutionDotjsonRoute
@@ -424,6 +431,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
   '/charter': typeof CharterRoute
+  '/charter.json': typeof CharterDotjsonRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
   '/constitution.json': typeof ConstitutionDotjsonRoute
@@ -484,6 +492,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
   '/charter': typeof CharterRoute
+  '/charter.json': typeof CharterDotjsonRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
   '/constitution.json': typeof ConstitutionDotjsonRoute
@@ -545,6 +554,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/capital'
     | '/charter'
+    | '/charter.json'
     | '/citizenship'
     | '/constitution'
     | '/constitution.json'
@@ -604,6 +614,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/capital'
     | '/charter'
+    | '/charter.json'
     | '/citizenship'
     | '/constitution'
     | '/constitution.json'
@@ -663,6 +674,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/capital'
     | '/charter'
+    | '/charter.json'
     | '/citizenship'
     | '/constitution'
     | '/constitution.json'
@@ -723,6 +735,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   CapitalRoute: typeof CapitalRoute
   CharterRoute: typeof CharterRoute
+  CharterDotjsonRoute: typeof CharterDotjsonRoute
   CitizenshipRoute: typeof CitizenshipRoute
   ConstitutionRoute: typeof ConstitutionRoute
   ConstitutionDotjsonRoute: typeof ConstitutionDotjsonRoute
@@ -830,6 +843,13 @@ declare module '@tanstack/react-router' {
       path: '/charter'
       fullPath: '/charter'
       preLoaderRoute: typeof CharterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/charter.json': {
+      id: '/charter.json'
+      path: '/charter.json'
+      fullPath: '/charter.json'
+      preLoaderRoute: typeof CharterDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/citizenship': {
@@ -1187,6 +1207,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   CapitalRoute: CapitalRoute,
   CharterRoute: CharterRoute,
+  CharterDotjsonRoute: CharterDotjsonRoute,
   CitizenshipRoute: CitizenshipRoute,
   ConstitutionRoute: ConstitutionRoute,
   ConstitutionDotjsonRoute: ConstitutionDotjsonRoute,
