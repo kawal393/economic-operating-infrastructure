@@ -7,7 +7,7 @@ import { getMinisterStatus } from "@/lib/gov-agent.functions";
 
 const MinisterVoice = lazy(() => import("@/components/minister-voice"));
 
-export const Route = createFileRoute("/minister")({
+export const Route = createFileRoute("/steward")({
   head: () => ({
     meta: [
       { title: "Platform steward — The Live Voice of the Nation | Sovereign AI Services" },

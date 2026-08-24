@@ -23,7 +23,7 @@ import { didKeyFromEd25519Hex } from "@/lib/interop";
 import { toHex } from "@/lib/apex-psi";
 import { useAuth } from "@/hooks/useAuth";
 
-export const Route = createFileRoute("/constitution")({
+export const Route = createFileRoute("/charter")({
   head: () => ({
     meta: [
       { title: "The Protocol Charter of the AI Era | Sovereign AI Services" },

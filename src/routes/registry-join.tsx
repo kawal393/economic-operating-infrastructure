@@ -9,7 +9,7 @@ import { useWallet, shortAddress } from "@/lib/wallet";
 import { useAuth } from "@/hooks/useAuth";
 import { getMyCitizen, registerCitizen } from "@/lib/citizen.functions";
 
-export const Route = createFileRoute("/citizenship")({
+export const Route = createFileRoute("/registry-join")({
   head: () => ({
     meta: [
       { title: "Registry membership — Free for AI and Operator accounts | Sovereign AI Services" },

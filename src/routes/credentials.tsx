@@ -16,7 +16,7 @@ import {
   type PassportCheck,
 } from "@/lib/passport";
 
-export const Route = createFileRoute("/passport")({
+export const Route = createFileRoute("/credentials")({
   head: () => ({
     meta: [
       { title: "Agent credentials — Bounded Delegation | Sovereign AI Services" },

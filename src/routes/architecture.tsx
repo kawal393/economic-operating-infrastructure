@@ -3,7 +3,7 @@ import { Scale, Bitcoin, ShieldCheck, Boxes, Users, Globe } from "lucide-react";
 import { PageHeader, Panel, Section, SectionHeading } from "@/components/primitives";
 import { BRANCHES } from "@/content/nation";
 
-export const Route = createFileRoute("/government")({
+export const Route = createFileRoute("/architecture")({
   head: () => ({
     meta: [
       { title: "System architecture — Six Organs of the Workspace | Sovereign AI Services" },
