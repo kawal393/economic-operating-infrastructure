@@ -28,6 +28,14 @@ export type VerifyResult = {
   signed_payload?: string | null;
   post_quantum?: boolean | null;
   pq_verified?: boolean | null;
+  pq_algorithm?: string | null;
+  pq_standard?: string | null;
+  created_at?: string | null;
+  action_summary?: string | null;
+  algorithm?: string | null;
+  eu_ai_act_compliance?: boolean | null;
+  queried_hash?: string | null;
+  message?: string | null;
 };
 
 export type AnchorRecord = {
