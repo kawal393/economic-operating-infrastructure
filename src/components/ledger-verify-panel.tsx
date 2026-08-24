@@ -60,41 +60,59 @@ export function LedgerVerifyPanel({ initialHash = "" }: { initialHash?: string }
       {result ? (
         result.found ? (
           <div className="mt-6">
-            <FieldRow label="Ledger entry" value="Found" tone="success" />
-            <FieldRow label="Status" value={result.status ?? "—"} tone="success" />
-            <FieldRow label="Phase" value={result.phase ?? "—"} />
-            <FieldRow label="Commit id" value={result.commit_id ?? "—"} />
-            <FieldRow label="Predicate" value={result.predicate_id ?? "—"} />
-            <FieldRow label="Merkle root" value={result.merkle_root ?? "—"} />
-            <FieldRow
-              label="Merkle verified"
-              value={
-                result.merkle_verified === null || result.merkle_verified === undefined
-                  ? "not reported"
-                  : result.merkle_verified
-                    ? "yes"
-                    : "no"
-              }
-              tone={result.merkle_verified ? "success" : "warning"}
-            />
-            <FieldRow
-              label="Post-quantum"
-              value={
-                result.post_quantum
-                  ? result.pq_verified
-                    ? "present and verified"
-                    : "present, not verified"
-                  : "not present"
-              }
-              tone={result.post_quantum && result.pq_verified ? "success" : "warning"}
-            />
-            <FieldRow label="Ed25519 signature" value={result.ed25519_signature ?? "—"} />
-            <FieldRow label="Signed payload" value={result.signed_payload ?? "—"} />
+            <div className="inline-flex items-center gap-2 rounded-full border border-success/35 bg-success/10 px-3.5 py-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-success" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-success">
+                {result.phase === "VERIFIED" || result.verified ? "Verified" : (result.phase ?? "On ledger")}
+              </span>
+            </div>
+            <div className="mt-5">
+              <FieldRow label="Ledger entry" value="Found" tone="success" />
+              <FieldRow label="Status" value={result.status ?? "—"} tone="success" />
+              <FieldRow label="Phase" value={result.phase ?? "—"} tone="success" />
+              <FieldRow label="Commit id" value={result.commit_id ?? "—"} />
+              <FieldRow label="Predicate" value={result.predicate_id ?? "—"} />
+              <FieldRow label="Sealed at (UTC)" value={result.created_at ?? "—"} />
+              <FieldRow label="Merkle root" value={result.merkle_root ?? "—"} />
+              <FieldRow
+                label="Merkle verified"
+                value={
+                  result.merkle_verified === null || result.merkle_verified === undefined
+                    ? "not reported"
+                    : result.merkle_verified
+                      ? "yes"
+                      : "no"
+                }
+                tone={result.merkle_verified ? "success" : "warning"}
+              />
+              <FieldRow
+                label="PQ signature valid"
+                value={
+                  result.post_quantum
+                    ? result.pq_verified
+                      ? `Valid · ${result.pq_algorithm ?? "post-quantum"}`
+                      : "Present, not verified"
+                    : "Not present"
+                }
+                tone={result.post_quantum && result.pq_verified ? "success" : "warning"}
+              />
+              <FieldRow label="Ed25519 signature" value={result.ed25519_signature ?? "—"} />
+              <FieldRow label="Signed payload" value={result.signed_payload ?? "—"} />
+            </div>
           </div>
         ) : (
-          <p className="mt-6 text-sm text-warning">
-            No ledger entry — seal it for free.
-          </p>
+          <div className="mt-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-warning/35 bg-warning/10 px-3.5 py-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-warning" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-warning">
+                Not found in ledger
+              </span>
+            </div>
+            <p className="mt-4 text-sm text-muted-foreground">
+              These bytes have no seal on record. Absence of a seal is not evidence of alteration —
+              seal it for free.
+            </p>
+          </div>
         )
       ) : null}
     </Panel>
