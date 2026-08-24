@@ -13,12 +13,16 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgentsDotjsonRouteImport } from './routes/agents[.]json'
 import { Route as AmendmentsRouteImport } from './routes/amendments'
 import { Route as AmplifyRouteImport } from './routes/amplify'
+import { Route as ArchitectureRouteImport } from './routes/architecture'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CapitalRouteImport } from './routes/capital'
+import { Route as CharterRouteImport } from './routes/charter'
+import { Route as CharterDotjsonRouteImport } from './routes/charter[.]json'
 import { Route as CitizenshipRouteImport } from './routes/citizenship'
 import { Route as ConstitutionRouteImport } from './routes/constitution'
 import { Route as ConstitutionDotjsonRouteImport } from './routes/constitution[.]json'
 import { Route as ContractsRouteImport } from './routes/contracts'
+import { Route as CredentialsRouteImport } from './routes/credentials'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DeployRouteImport } from './routes/deploy'
 import { Route as DocsRouteImport } from './routes/docs'
@@ -38,10 +42,12 @@ import { Route as PassportRouteImport } from './routes/passport'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProtocolsRouteImport } from './routes/protocols'
+import { Route as RegistryJoinRouteImport } from './routes/registry-join'
 import { Route as SealRouteImport } from './routes/seal'
 import { Route as SealedMemoryRouteImport } from './routes/sealed-memory'
 import { Route as SecurityRouteImport } from './routes/security'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as StewardRouteImport } from './routes/steward'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as TransparencyRouteImport } from './routes/transparency'
@@ -82,6 +88,11 @@ const AmplifyRoute = AmplifyRouteImport.update({
   path: '/amplify',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArchitectureRoute = ArchitectureRouteImport.update({
+  id: '/architecture',
+  path: '/architecture',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -90,6 +101,16 @@ const AuthRoute = AuthRouteImport.update({
 const CapitalRoute = CapitalRouteImport.update({
   id: '/capital',
   path: '/capital',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CharterRoute = CharterRouteImport.update({
+  id: '/charter',
+  path: '/charter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CharterDotjsonRoute = CharterDotjsonRouteImport.update({
+  id: '/charter.json',
+  path: '/charter.json',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CitizenshipRoute = CitizenshipRouteImport.update({
@@ -110,6 +131,11 @@ const ConstitutionDotjsonRoute = ConstitutionDotjsonRouteImport.update({
 const ContractsRoute = ContractsRouteImport.update({
   id: '/contracts',
   path: '/contracts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CredentialsRoute = CredentialsRouteImport.update({
+  id: '/credentials',
+  path: '/credentials',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -207,6 +233,11 @@ const ProtocolsRoute = ProtocolsRouteImport.update({
   path: '/protocols',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RegistryJoinRoute = RegistryJoinRouteImport.update({
+  id: '/registry-join',
+  path: '/registry-join',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SealRoute = SealRouteImport.update({
   id: '/seal',
   path: '/seal',
@@ -225,6 +256,11 @@ const SecurityRoute = SecurityRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StewardRoute = StewardRouteImport.update({
+  id: '/steward',
+  path: '/steward',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -331,12 +367,16 @@ export interface FileRoutesByFullPath {
   '/agents.json': typeof AgentsDotjsonRoute
   '/amendments': typeof AmendmentsRoute
   '/amplify': typeof AmplifyRoute
+  '/architecture': typeof ArchitectureRoute
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
+  '/charter': typeof CharterRoute
+  '/charter.json': typeof CharterDotjsonRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
   '/constitution.json': typeof ConstitutionDotjsonRoute
   '/contracts': typeof ContractsRoute
+  '/credentials': typeof CredentialsRoute
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
   '/docs': typeof DocsRoute
@@ -356,10 +396,12 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/protocols': typeof ProtocolsRoute
+  '/registry-join': typeof RegistryJoinRoute
   '/seal': typeof SealRoute
   '/sealed-memory': typeof SealedMemoryRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/steward': typeof StewardRoute
   '/terms': typeof TermsRoute
   '/transactions': typeof TransactionsRoute
   '/transparency': typeof TransparencyRoute
@@ -385,12 +427,16 @@ export interface FileRoutesByTo {
   '/agents.json': typeof AgentsDotjsonRoute
   '/amendments': typeof AmendmentsRoute
   '/amplify': typeof AmplifyRoute
+  '/architecture': typeof ArchitectureRoute
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
+  '/charter': typeof CharterRoute
+  '/charter.json': typeof CharterDotjsonRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
   '/constitution.json': typeof ConstitutionDotjsonRoute
   '/contracts': typeof ContractsRoute
+  '/credentials': typeof CredentialsRoute
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
   '/docs': typeof DocsRoute
@@ -410,10 +456,12 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/protocols': typeof ProtocolsRoute
+  '/registry-join': typeof RegistryJoinRoute
   '/seal': typeof SealRoute
   '/sealed-memory': typeof SealedMemoryRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/steward': typeof StewardRoute
   '/terms': typeof TermsRoute
   '/transactions': typeof TransactionsRoute
   '/transparency': typeof TransparencyRoute
@@ -440,12 +488,16 @@ export interface FileRoutesById {
   '/agents.json': typeof AgentsDotjsonRoute
   '/amendments': typeof AmendmentsRoute
   '/amplify': typeof AmplifyRoute
+  '/architecture': typeof ArchitectureRoute
   '/auth': typeof AuthRoute
   '/capital': typeof CapitalRoute
+  '/charter': typeof CharterRoute
+  '/charter.json': typeof CharterDotjsonRoute
   '/citizenship': typeof CitizenshipRoute
   '/constitution': typeof ConstitutionRoute
   '/constitution.json': typeof ConstitutionDotjsonRoute
   '/contracts': typeof ContractsRoute
+  '/credentials': typeof CredentialsRoute
   '/dashboard': typeof DashboardRoute
   '/deploy': typeof DeployRoute
   '/docs': typeof DocsRoute
@@ -465,10 +517,12 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/protocols': typeof ProtocolsRoute
+  '/registry-join': typeof RegistryJoinRoute
   '/seal': typeof SealRoute
   '/sealed-memory': typeof SealedMemoryRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/steward': typeof StewardRoute
   '/terms': typeof TermsRoute
   '/transactions': typeof TransactionsRoute
   '/transparency': typeof TransparencyRoute
@@ -496,12 +550,16 @@ export interface FileRouteTypes {
     | '/agents.json'
     | '/amendments'
     | '/amplify'
+    | '/architecture'
     | '/auth'
     | '/capital'
+    | '/charter'
+    | '/charter.json'
     | '/citizenship'
     | '/constitution'
     | '/constitution.json'
     | '/contracts'
+    | '/credentials'
     | '/dashboard'
     | '/deploy'
     | '/docs'
@@ -521,10 +579,12 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/privacy'
     | '/protocols'
+    | '/registry-join'
     | '/seal'
     | '/sealed-memory'
     | '/security'
     | '/sitemap.xml'
+    | '/steward'
     | '/terms'
     | '/transactions'
     | '/transparency'
@@ -550,12 +610,16 @@ export interface FileRouteTypes {
     | '/agents.json'
     | '/amendments'
     | '/amplify'
+    | '/architecture'
     | '/auth'
     | '/capital'
+    | '/charter'
+    | '/charter.json'
     | '/citizenship'
     | '/constitution'
     | '/constitution.json'
     | '/contracts'
+    | '/credentials'
     | '/dashboard'
     | '/deploy'
     | '/docs'
@@ -575,10 +639,12 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/privacy'
     | '/protocols'
+    | '/registry-join'
     | '/seal'
     | '/sealed-memory'
     | '/security'
     | '/sitemap.xml'
+    | '/steward'
     | '/terms'
     | '/transactions'
     | '/transparency'
@@ -604,12 +670,16 @@ export interface FileRouteTypes {
     | '/agents.json'
     | '/amendments'
     | '/amplify'
+    | '/architecture'
     | '/auth'
     | '/capital'
+    | '/charter'
+    | '/charter.json'
     | '/citizenship'
     | '/constitution'
     | '/constitution.json'
     | '/contracts'
+    | '/credentials'
     | '/dashboard'
     | '/deploy'
     | '/docs'
@@ -629,10 +699,12 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/privacy'
     | '/protocols'
+    | '/registry-join'
     | '/seal'
     | '/sealed-memory'
     | '/security'
     | '/sitemap.xml'
+    | '/steward'
     | '/terms'
     | '/transactions'
     | '/transparency'
@@ -659,12 +731,16 @@ export interface RootRouteChildren {
   AgentsDotjsonRoute: typeof AgentsDotjsonRoute
   AmendmentsRoute: typeof AmendmentsRoute
   AmplifyRoute: typeof AmplifyRoute
+  ArchitectureRoute: typeof ArchitectureRoute
   AuthRoute: typeof AuthRoute
   CapitalRoute: typeof CapitalRoute
+  CharterRoute: typeof CharterRoute
+  CharterDotjsonRoute: typeof CharterDotjsonRoute
   CitizenshipRoute: typeof CitizenshipRoute
   ConstitutionRoute: typeof ConstitutionRoute
   ConstitutionDotjsonRoute: typeof ConstitutionDotjsonRoute
   ContractsRoute: typeof ContractsRoute
+  CredentialsRoute: typeof CredentialsRoute
   DashboardRoute: typeof DashboardRoute
   DeployRoute: typeof DeployRoute
   DocsRoute: typeof DocsRoute
@@ -684,10 +760,12 @@ export interface RootRouteChildren {
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   ProtocolsRoute: typeof ProtocolsRoute
+  RegistryJoinRoute: typeof RegistryJoinRoute
   SealRoute: typeof SealRoute
   SealedMemoryRoute: typeof SealedMemoryRoute
   SecurityRoute: typeof SecurityRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  StewardRoute: typeof StewardRoute
   TermsRoute: typeof TermsRoute
   TransactionsRoute: typeof TransactionsRoute
   TransparencyRoute: typeof TransparencyRoute
@@ -739,6 +817,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AmplifyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/architecture': {
+      id: '/architecture'
+      path: '/architecture'
+      fullPath: '/architecture'
+      preLoaderRoute: typeof ArchitectureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -751,6 +836,20 @@ declare module '@tanstack/react-router' {
       path: '/capital'
       fullPath: '/capital'
       preLoaderRoute: typeof CapitalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/charter': {
+      id: '/charter'
+      path: '/charter'
+      fullPath: '/charter'
+      preLoaderRoute: typeof CharterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/charter.json': {
+      id: '/charter.json'
+      path: '/charter.json'
+      fullPath: '/charter.json'
+      preLoaderRoute: typeof CharterDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/citizenship': {
@@ -779,6 +878,13 @@ declare module '@tanstack/react-router' {
       path: '/contracts'
       fullPath: '/contracts'
       preLoaderRoute: typeof ContractsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/credentials': {
+      id: '/credentials'
+      path: '/credentials'
+      fullPath: '/credentials'
+      preLoaderRoute: typeof CredentialsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -914,6 +1020,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtocolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/registry-join': {
+      id: '/registry-join'
+      path: '/registry-join'
+      fullPath: '/registry-join'
+      preLoaderRoute: typeof RegistryJoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/seal': {
       id: '/seal'
       path: '/seal'
@@ -940,6 +1053,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/steward': {
+      id: '/steward'
+      path: '/steward'
+      fullPath: '/steward'
+      preLoaderRoute: typeof StewardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -1083,12 +1203,16 @@ const rootRouteChildren: RootRouteChildren = {
   AgentsDotjsonRoute: AgentsDotjsonRoute,
   AmendmentsRoute: AmendmentsRoute,
   AmplifyRoute: AmplifyRoute,
+  ArchitectureRoute: ArchitectureRoute,
   AuthRoute: AuthRoute,
   CapitalRoute: CapitalRoute,
+  CharterRoute: CharterRoute,
+  CharterDotjsonRoute: CharterDotjsonRoute,
   CitizenshipRoute: CitizenshipRoute,
   ConstitutionRoute: ConstitutionRoute,
   ConstitutionDotjsonRoute: ConstitutionDotjsonRoute,
   ContractsRoute: ContractsRoute,
+  CredentialsRoute: CredentialsRoute,
   DashboardRoute: DashboardRoute,
   DeployRoute: DeployRoute,
   DocsRoute: DocsRoute,
@@ -1108,10 +1232,12 @@ const rootRouteChildren: RootRouteChildren = {
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   ProtocolsRoute: ProtocolsRoute,
+  RegistryJoinRoute: RegistryJoinRoute,
   SealRoute: SealRoute,
   SealedMemoryRoute: SealedMemoryRoute,
   SecurityRoute: SecurityRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  StewardRoute: StewardRoute,
   TermsRoute: TermsRoute,
   TransactionsRoute: TransactionsRoute,
   TransparencyRoute: TransparencyRoute,

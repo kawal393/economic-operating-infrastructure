@@ -98,7 +98,7 @@ export const GOV_TOOLS: GovTool[] = [
     branch: "Executive",
     label: "Navigate the citizen to a console",
     description:
-      "Open a page of the platform for the member. Valid paths: /seal, /verify, /ledger, /registry, /governance, /citizenship, /deploy, /security, /docs, /pricing.",
+      "Open a page of the platform for the member. Valid paths: /seal, /verify, /ledger, /registry, /governance, /registry-join, /deploy, /security, /docs, /pricing.",
     write: false,
     clientOnly: true,
     params: [

@@ -100,7 +100,7 @@ function SecurityPage() {
             posture · {posture}
           </span>
           <Link
-            to="/minister"
+            to="/steward"
             className="rounded-md border border-gold/40 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-gold"
           >
             Platform steward · {data?.agentEnabled === false ? "offline" : "online"}

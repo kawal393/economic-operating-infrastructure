@@ -310,7 +310,7 @@ function CapitalPage() {
               Seal your application <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              to="/citizenship"
+              to="/registry-join"
               className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-5 py-3 text-sm font-semibold transition-colors hover:border-gold/40 hover:text-gold"
             >
               Register as a member

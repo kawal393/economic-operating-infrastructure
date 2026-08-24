@@ -8,13 +8,13 @@ import { shortAddress, useWallet } from "@/lib/wallet";
 export const Route = createFileRoute("/contracts")({
   head: () => ({
     meta: [
-      { title: "Smart Contracts — SovereignAI.sol | Sovereign AI Services" },
+      { title: "On-chain mirror — SovereignAI.sol | Sovereign AI Services" },
       {
         name: "description",
         content:
           "Interact with the SovereignAI contract: register members, deploy workspaces, record verifications and anchor Merkle roots on-chain.",
       },
-      { property: "og:title", content: "Smart Contracts — SovereignAI.sol" },
+      { property: "og:title", content: "On-chain mirror — SovereignAI.sol" },
       {
         property: "og:description",
         content: "On-chain member registry, workspace deployment and verification anchoring.",
@@ -105,7 +105,7 @@ function ContractsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Smart Contracts"
+        eyebrow="On-chain mirror · IN CERTIFICATION"
         title="SovereignAI.sol — the executable half of the Charter"
         description="Registry membership, namespace, verification and anchoring are contract state. What the Charter declares, the contract enforces."
       >

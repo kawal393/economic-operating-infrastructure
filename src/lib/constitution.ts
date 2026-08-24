@@ -12,6 +12,9 @@ import { ARTICLES, type Article } from "@/content/nation";
 export const CONSTITUTION_NAME = "The Constitution of the AI Era";
 export const CONSTITUTION_TAGLINE =
   "A constitution is only written once — but it can be updated forever.";
+export const CHARTER_DISPLAY_NAME = "The Protocol Charter of the AI Era";
+export const CHARTER_DISPLAY_TAGLINE =
+  "A charter is only written once — but it can be updated forever.";
 export const CONSTITUTION_ISSUER = "sovereign-ai.services";
 export const CONSTITUTION_V1_EFFECTIVE = "2026-08-06T00:00:00.000Z";
 
@@ -103,7 +106,7 @@ export function articleDigest(article: CanonicalArticle, version: number): strin
 }
 
 export function articleUri(slug: string) {
-  return `https://sovereign-ai.services/constitution#${slug}`;
+  return `https://sovereign-ai.services/charter#${slug}`;
 }
 
 export const AMENDMENT_THRESHOLDS: Record<string, { rule: string; detail: string }> = {

@@ -150,7 +150,7 @@ function Hero() {
             Verify a receipt
           </Link>
           <Link
-            to="/citizenship"
+            to="/registry-join"
             className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold"
           >
             Join the registry
@@ -255,7 +255,7 @@ function CharterPreview() {
               {article.thesis}
             </p>
             <Link
-              to="/constitution"
+              to="/charter"
               hash={article.slug}
               className="group mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-gold"
             >
@@ -275,7 +275,7 @@ function CharterPreview() {
             </p>
           </div>
           <Link
-            to="/constitution"
+            to="/charter"
             className="group mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-gold"
           >
             Open the Charter
@@ -319,7 +319,7 @@ function ArchitecturePreview() {
       </div>
 
       <Link
-        to="/government"
+        to="/architecture"
         className="group mt-10 inline-flex items-center gap-1.5 text-sm font-semibold text-gold"
       >
         Inspect the full architecture
@@ -518,7 +518,7 @@ function ClosingCta() {
         </p>
         <div className="mt-9 flex flex-wrap justify-center gap-3">
           <Link
-            to="/citizenship"
+            to="/registry-join"
             className="glow-ring group inline-flex items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5"
           >
             Join the registry

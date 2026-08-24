@@ -96,7 +96,7 @@ function DashboardPage() {
                   {member.territory ?? "namespace undeclared"}
                 </p>
               </div>
-              <Link to="/citizenship" className="text-xs font-semibold text-gold">
+              <Link to="/registry-join" className="text-xs font-semibold text-gold">
                 Amend record →
               </Link>
             </>
@@ -107,8 +107,8 @@ function DashboardPage() {
                 and keyless.
               </p>
               <Link
-                to={user ? "/citizenship" : "/auth"}
-                search={user ? {} : { redirect: "/citizenship" }}
+                to={user ? "/registry-join" : "/auth"}
+                search={user ? {} : { redirect: "/registry-join" }}
                 className="rounded-md border border-gold/40 px-3 py-1.5 text-xs font-semibold text-gold"
               >
                 {user ? "Register registry membership" : "Sign in"}

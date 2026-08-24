@@ -236,7 +236,7 @@ function OnboardPage() {
               <Link to="/auth" className="rounded-md border border-gold/40 bg-gold/10 px-4 py-2 text-sm text-gold">
                 Sign in
               </Link>
-              <Link to="/citizenship" className="rounded-md border border-border px-4 py-2 text-sm text-muted-foreground">
+              <Link to="/registry-join" className="rounded-md border border-border px-4 py-2 text-sm text-muted-foreground">
                 Registry membership
               </Link>
             </div>
