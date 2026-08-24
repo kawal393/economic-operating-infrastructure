@@ -33,10 +33,16 @@ const NAV_MENUS = [
     links: [
       { to: "/integrations", label: "Integrations" },
       { to: "/credentials", label: "Agent credentials" },
+      {
+        to: "/contracts",
+        label: "On-chain mirror",
+        note: "IN CERTIFICATION — nothing published until deployed",
+      },
       { to: "/capital", label: "Sovereign Capital" },
       { to: "/registry-join", label: "Registry membership" },
       { to: "/pricing", label: "Pricing" },
       { to: "/dashboard", label: "Dashboard" },
+
     ],
   },
 ] as const;
