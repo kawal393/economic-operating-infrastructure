@@ -87,7 +87,7 @@ function AmendmentsPage() {
         description={`Anyone may draft an amendment. It is sealed the moment it is submitted, deliberated for ${DELIBERATION_DAYS} days, and either merged into a new sealed version or recorded as failed. Failed amendments are never deleted.`}
       >
         <Link
-          to="/constitution"
+          to="/charter"
           className="inline-flex items-center gap-2 rounded-md border border-gold/40 bg-gold/10 px-5 py-2.5 text-sm font-medium text-gold transition-colors hover:bg-gold/20"
         >
           Read the current text

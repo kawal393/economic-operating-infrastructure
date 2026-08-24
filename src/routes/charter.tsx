@@ -39,10 +39,10 @@ export const Route = createFileRoute("/charter")({
           "A Charter is only written once — but it can be updated forever. Every version sealed, anchored and independently verifiable.",
       },
       { property: "og:type", content: "article" },
-      { property: "og:url", content: "/constitution" },
+      { property: "og:url", content: "/charter" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/constitution" }],
+    links: [{ rel: "canonical", href: "/charter" }],
   }),
   component: ConstitutionPage,
 });

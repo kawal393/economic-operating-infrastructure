@@ -25,7 +25,7 @@ export const Route = createFileRoute("/steward")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/minister" }],
+    links: [{ rel: "canonical", href: "/steward" }],
   }),
   component: MinisterPage,
 });

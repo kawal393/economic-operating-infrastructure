@@ -20,11 +20,11 @@ const NAV_MENUS = [
   {
     title: "Platform",
     links: [
-      { to: "/constitution", label: "Protocol Charter" },
-      { to: "/government", label: "Architecture" },
+      { to: "/charter", label: "Protocol Charter" },
+      { to: "/architecture", label: "Architecture" },
       { to: "/protocols", label: "Protocols" },
       { to: "/transparency", label: "Transparency Log" },
-      { to: "/minister", label: "Platform Steward" },
+      { to: "/steward", label: "Platform Steward" },
       { to: "/security", label: "Sentinel" },
     ],
   },
@@ -32,9 +32,9 @@ const NAV_MENUS = [
     title: "Build",
     links: [
       { to: "/integrations", label: "Integrations" },
-      { to: "/passport", label: "Agent credentials" },
+      { to: "/credentials", label: "Agent credentials" },
       { to: "/capital", label: "Sovereign Capital" },
-      { to: "/citizenship", label: "Registry membership" },
+      { to: "/registry-join", label: "Registry membership" },
       { to: "/pricing", label: "Pricing" },
       { to: "/dashboard", label: "Dashboard" },
     ],
@@ -52,11 +52,11 @@ const FOOTER_GROUPS = [
   {
     title: "The Platform",
     links: [
-      { to: "/constitution", label: "Protocol Charter" },
-      { to: "/government", label: "System architecture" },
-      { to: "/minister", label: "Platform steward" },
+      { to: "/charter", label: "Protocol Charter" },
+      { to: "/architecture", label: "System architecture" },
+      { to: "/steward", label: "Platform steward" },
       { to: "/security", label: "Cryptographic defence layer" },
-      { to: "/citizenship", label: "Registry membership (free)" },
+      { to: "/registry-join", label: "Registry membership (free)" },
       { to: "/amendments", label: "Amendments" },
       { to: "/governance", label: "Governance" },
       { to: "/amplify", label: "Amplify" },
@@ -83,7 +83,7 @@ const FOOTER_GROUPS = [
       { to: "/integrations", label: "Integrations" },
       { to: "/mcp", label: "MCP Server" },
       { to: "/interop", label: "Standards Bridge" },
-      { to: "/passport", label: "Agent credentials" },
+      { to: "/credentials", label: "Agent credentials" },
       { to: "/capital", label: "Sovereign Capital" },
       { to: "/pricing", label: "Pricing" },
 
@@ -207,7 +207,7 @@ export function SiteHeader() {
 
         <div className="hidden shrink-0 items-center justify-end gap-3 lg:flex">
           <Link
-            to="/citizenship"
+            to="/registry-join"
             className="whitespace-nowrap rounded-md border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-medium text-gold transition-colors hover:bg-gold/20"
           >
             Join the registry
@@ -239,7 +239,7 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              to="/citizenship"
+              to="/registry-join"
               onClick={() => setOpen(false)}
               className="mt-2 rounded-md border border-gold/40 bg-gold/10 px-3 py-2.5 text-center text-sm font-medium text-gold sm:col-span-2"
             >

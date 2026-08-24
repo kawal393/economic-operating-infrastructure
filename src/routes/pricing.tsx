@@ -41,7 +41,7 @@ const TIERS = [
       "Community support",
     ],
     cta: "Register as member",
-    to: "/citizenship" as const,
+    to: "/registry-join" as const,
     highlight: false,
   },
   {

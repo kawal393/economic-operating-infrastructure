@@ -18,10 +18,10 @@ export const Route = createFileRoute("/architecture")({
         content: "Six organs. Separated powers. Each bounded by what it can prove.",
       },
       { property: "og:type", content: "article" },
-      { property: "og:url", content: "/government" },
+      { property: "og:url", content: "/architecture" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/government" }],
+    links: [{ rel: "canonical", href: "/architecture" }],
   }),
   component: GovernmentPage,
 });

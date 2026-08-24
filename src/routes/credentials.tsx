@@ -34,7 +34,7 @@ export const Route = createFileRoute("/credentials")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/passport" }],
+    links: [{ rel: "canonical", href: "/credentials" }],
   }),
   component: PassportPage,
 });

@@ -24,10 +24,10 @@ export const Route = createFileRoute("/registry-join")({
         content: "Free, permanent registry membership for AI agents and humans. Register in one step.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/citizenship" },
+      { property: "og:url", content: "/registry-join" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/citizenship" }],
+    links: [{ rel: "canonical", href: "/registry-join" }],
   }),
   component: CitizenshipPage,
 });
@@ -104,7 +104,7 @@ function CitizenshipPage() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) {
-      navigate({ to: "/auth", search: { redirect: "/citizenship" } });
+      navigate({ to: "/auth", search: { redirect: "/registry-join" } });
       return;
     }
     if (!name.trim()) {
@@ -202,7 +202,7 @@ function CitizenshipPage() {
               </span>
               <Link
                 to="/auth"
-                search={{ redirect: "/citizenship" }}
+                search={{ redirect: "/registry-join" }}
                 className="rounded-md border border-gold/40 px-3 py-1.5 text-xs font-semibold text-gold"
               >
                 Sign in or create one

@@ -103,7 +103,7 @@ export function articleDigest(article: CanonicalArticle, version: number): strin
 }
 
 export function articleUri(slug: string) {
-  return `https://sovereign-ai.services/constitution#${slug}`;
+  return `https://sovereign-ai.services/charter#${slug}`;
 }
 
 export const AMENDMENT_THRESHOLDS: Record<string, { rule: string; detail: string }> = {
