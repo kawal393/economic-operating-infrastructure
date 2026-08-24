@@ -71,7 +71,7 @@ const FOOTER_GROUPS = [
       { to: "/transparency", label: "Transparency Log" },
       { to: "/protocols", label: "Protocol Explorer" },
       { to: "/deploy", label: "Workspace deployer" },
-      { to: "/contracts", label: "Smart Contracts" },
+      { to: "/contracts", label: "On-chain mirror" },
       { to: "/transactions", label: "Transactions" },
     ],
   },
