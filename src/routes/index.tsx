@@ -189,7 +189,7 @@ function Hero() {
               Powered by APEX PSI
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
-              Hybrid post-quantum sealing protocol — IETF draft-singh-psi-00
+              Hybrid post-quantum sealing protocol — IETF draft-singh-psi (rev 01)
             </p>
           </div>
           <a
@@ -340,7 +340,7 @@ function MembershipPreview() {
         "Anchor model outputs to Bitcoin",
         "Emit Compliance-Receipt headers on every decision",
       ],
-      fee: "$0.01 per verification",
+      fee: "$0.001 per verification",
     },
     {
       kind: "Operator accounts",
@@ -490,8 +490,9 @@ function RevenueModel() {
 
       <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted-foreground">
         Scale figures are modelled projections from the published fee schedule, not realised
-        revenue. They assume steady-state usage per member and are stated so they can be checked
-        rather than believed.
+        revenue. Formula: 300 metered verifications per member per month × 12 × $0.001 — for
+        example, 1M members × 3,600 verifications/year × $0.001 = $3.6M/year. They are stated so
+        they can be checked rather than believed.
       </p>
     </Section>
   );

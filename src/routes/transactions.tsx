@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { PageHeader, Panel, Section, SectionHeading, StatBlock } from "@/components/primitives";
 import { FEES } from "@/content/nation";
@@ -10,7 +10,7 @@ export const Route = createFileRoute("/transactions")({
       {
         name: "description",
         content:
-          "Microtransaction volume, fee mix and protocol revenue across verifications, Bitcoin anchors, compliance checks and surplus routing.",
+          "Simulated projection of the published fee schedule — not realised activity. Microtransaction volume, fee mix and protocol revenue modelled across verifications, Bitcoin anchors, compliance checks and surplus routing.",
       },
       { property: "og:title", content: "Transaction Dashboard" },
       {
@@ -89,6 +89,23 @@ function TransactionsPage() {
           ))}
         </div>
       </PageHeader>
+
+      <Section className="pb-0 pt-10">
+        <Panel className="border-warning/40 bg-warning/5 p-5">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-warning">
+            Simulated model — not realised activity
+          </p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+            Every figure on this page is a projection of the published fee schedule, not realised
+            revenue or volume. The platform has taken no paid transactions yet. The live public
+            record is the{" "}
+            <Link to="/ledger" className="text-gold underline underline-offset-4">
+              ledger
+            </Link>
+            .
+          </p>
+        </Panel>
+      </Section>
 
       <Section className="py-14">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

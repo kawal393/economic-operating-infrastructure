@@ -50,7 +50,7 @@ const TYPES = [
       "Emit Compliance-Receipt headers on every decision",
       "Full governance voting weight",
     ],
-    fees: "$0.01 per verification",
+    fees: "$0.001 per verification",
   },
   {
     id: "human" as const,

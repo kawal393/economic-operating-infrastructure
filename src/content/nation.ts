@@ -304,9 +304,9 @@ export const FEES = [
 ] as const;
 
 export const SCALE_MODEL = [
-  { horizon: "1M members", verifications: "3.6B", revenue: "$1.46M" },
-  { horizon: "100M members", verifications: "365B", revenue: "$146M" },
-  { horizon: "1B members", verifications: "3.65T", revenue: "$1.46B+" },
+  { horizon: "1M members", verifications: "3.6B", revenue: "$3.6M" },
+  { horizon: "100M members", verifications: "365B", revenue: "$365M" },
+  { horizon: "1B members", verifications: "3.65T", revenue: "$3.65B+" },
 ] as const;
 
 

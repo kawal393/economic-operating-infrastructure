@@ -179,7 +179,7 @@ function PricingPage() {
         <SectionHeading
           eyebrow="Scale model"
           title="What the arithmetic implies"
-          description="Assumes 300 verifications per member per month at the published rate."
+          description="Assumes 300 metered verifications per member per month at the published $0.001 rate. Modelled projections — not realised revenue."
         />
         <Panel className="mt-10 overflow-x-auto p-7">
           <table className="w-full min-w-[520px] border-collapse text-left">
