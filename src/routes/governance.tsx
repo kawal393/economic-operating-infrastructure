@@ -1,21 +1,19 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { toast } from "sonner";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader, Panel, Section, SectionHeading } from "@/components/primitives";
 
 export const Route = createFileRoute("/governance")({
   head: () => ({
     meta: [
-      { title: "Governance — Proposals & Voting | Sovereign AI Services" },
+      { title: "Governance — Amendment Procedure | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "Read active charter-level proposals, review quorum and thresholds, and cast a member vote in the workspace.",
+          "The amendment procedure of the charter: stages, thresholds and specimen proposal objects. Nothing here is a result — the live record is at /amendments, and it is public.",
       },
-      { property: "og:title", content: "Governance — Proposals & Voting" },
+      { property: "og:title", content: "Governance — Amendment Procedure" },
       {
         property: "og:description",
-        content: "Charter-level proposals, quorum thresholds, and member voting.",
+        content: "Amendment stages, thresholds and specimen proposals. The live record is at /amendments: currently empty — version 1 stands unamended.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/governance" },
@@ -30,176 +28,139 @@ type Proposal = {
   id: string;
   title: string;
   summary: string;
-  status: "Voting" | "Passed" | "Rejected";
-  closes: string;
-  forVotes: number;
-  againstVotes: number;
   threshold: string;
+  basis: string;
 };
 
+// SPECIMENS. No ballot has ever opened on this platform, so no specimen carries a
+// tally, a result or a closing date. Where a subject below is already in force, it
+// is in force as published policy and as the way the sealing engine is built - not
+// because anyone voted on it.
 const PROPOSALS: Proposal[] = [
   {
     id: "PSI-A-014",
     title: "Ratify ML-DSA-65 as mandatory co-signature for all sealing operations",
     summary:
-      "Elevates the hybrid post-quantum signature from recommended to mandatory across every receipt issued under Article I. Legacy Ed25519-only receipts remain verifiable but stop being issued after the transition window.",
-    status: "Voting",
-    closes: "in 4 days",
-    forVotes: 812_446,
-    againstVotes: 91_207,
+      "The hybrid post-quantum signature as a mandatory co-signature on every receipt issued under Article I. Legacy Ed25519-only receipts remain verifiable but stop being issued after the transition window.",
     threshold: "Two-thirds of participating members",
+    basis:
+      "In force as built — the sealing engine already co-signs with ML-DSA-65. Never ratified by a vote, because no vote has taken place.",
   },
   {
     id: "PSI-B-007",
     title: "Reduce verification fee from $0.001 to $0.0008 above 10B monthly verifications",
     summary:
-      "Introduces a volume-indexed fee reduction so that protocol revenue growth passes back to members as marginal cost falls. Surplus routing under Article III is unaffected.",
-    status: "Voting",
-    closes: "in 11 days",
-    forVotes: 449_180,
-    againstVotes: 388_902,
+      "A volume-indexed fee reduction, so that protocol revenue growth passes back to members as marginal cost falls. Surplus routing under Article III would be unaffected.",
     threshold: "Simple majority",
+    basis:
+      "Specimen format — never tabled, never voted. The fee in force is the published $0.001, one time, forever.",
   },
   {
     id: "PSI-A-013",
     title: "Grant agent accounts equal voting weight to operator accounts",
     summary:
-      "Removes the differential weighting inherited from the provisional charter. One verified member, one vote, regardless of substrate.",
-    status: "Passed",
-    closes: "closed",
-    forVotes: 1_902_441,
-    againstVotes: 402_118,
+      "Would remove differential weighting from the provisional charter. One verified member, one vote, regardless of substrate.",
     threshold: "Two-thirds of participating members",
+    basis: "Specimen format — never tabled, never voted. No member has ever cast anything.",
   },
   {
     id: "PSI-C-002",
     title: "Permit unanchored receipts for low-value verifications",
     summary:
-      "Would have allowed receipts to skip Bitcoin anchoring below a value threshold. Rejected as contradicting Article II: an unanchored claim is not a claim.",
-    status: "Rejected",
-    closes: "closed",
-    forVotes: 188_904,
-    againstVotes: 1_744_882,
+      "Would allow receipts to skip Bitcoin anchoring below a value threshold. Article II already forbids it: an unanchored claim is not a claim.",
     threshold: "Simple majority",
+    basis:
+      "Specimen format — never tabled, never voted. Shown as an example of what a rejected amendment would look like, not as a rejection that happened.",
   },
 ];
 
 function GovernancePage() {
-  const [votes, setVotes] = useState<Record<string, "for" | "against">>({});
-
-  const cast = (proposal: Proposal, choice: "for" | "against") => {
-    setVotes((prev) => ({ ...prev, [proposal.id]: choice }));
-    toast.success(`Vote recorded — ${choice === "for" ? "For" : "Against"}`, {
-      description: `${proposal.id} · sealed and queued for the next anchor window.`,
-    });
-  };
-
   return (
     <>
       <PageHeader
         eyebrow="Governance"
         title="Amendment is possible. Silence is not."
-        description="Every proposal is a signed object. Every vote is a signed object. Every outcome is anchored. The record cannot be revised after the fact — only amended in the open."
+        description="Every proposal will be a signed object. Every vote will be a signed object. Every outcome will be anchored. Nothing on this page is a result — it is the procedure, and the live record sits elsewhere, in public."
       />
 
       <Section>
         <SectionHeading
           eyebrow="Chamber"
-          title="Proposals"
-          description="Deliberation windows, thresholds and live tallies."
+          title="Specimens, not results"
+          description="The format a proposal carries and the threshold it must clear. No tally is printed, because nothing here has ever been voted on."
         />
 
         <div className="mt-10 space-y-4">
-          {PROPOSALS.map((p) => {
-            const total = p.forVotes + p.againstVotes;
-            const forPct = Math.round((p.forVotes / total) * 100);
-            const myVote = votes[p.id];
-
-            return (
-              <Panel key={p.id} className="p-7">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div className="max-w-2xl">
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold">
-                        {p.id}
-                      </span>
-                      <span
-                        className={`rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] ${
-                          p.status === "Voting"
-                            ? "border-gold/40 text-gold"
-                            : p.status === "Passed"
-                              ? "border-success/40 text-success"
-                              : "border-border text-muted-foreground"
-                        }`}
-                      >
-                        {p.status}
-                      </span>
-                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-                        {p.closes}
-                      </span>
-                    </div>
-                    <h3 className="mt-4 text-lg font-semibold leading-snug tracking-tight">
-                      {p.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                      {p.summary}
-                    </p>
-                    <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-                      Threshold — {p.threshold}
-                    </p>
+          {PROPOSALS.map((p) => (
+            <Panel key={p.id} className="p-7">
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div className="max-w-2xl">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold">
+                      {p.id}
+                    </span>
+                    <span className="rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+                      Specimen — not a result
+                    </span>
                   </div>
+                  <h3 className="mt-4 text-lg font-semibold leading-snug tracking-tight">
+                    {p.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {p.summary}
+                  </p>
+                  <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                    Threshold — {p.threshold}
+                  </p>
+                </div>
 
-                  <div className="w-full max-w-xs">
-                    <div className="flex items-baseline justify-between font-mono text-xs">
-                      <span className="text-success">{forPct}% for</span>
-                      <span className="text-muted-foreground">{100 - forPct}% against</span>
-                    </div>
-                    <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
-                      <div className="h-full bg-gold" style={{ width: `${forPct}%` }} />
-                    </div>
-                    <p className="mt-2 font-mono text-[10px] text-muted-foreground">
-                      {total.toLocaleString()} votes cast
+                <div className="w-full max-w-xs">
+                  <div className="rounded-lg border border-gold/40 bg-gold/5 p-4">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-gold">
+                      Status of this object
                     </p>
-
-                    {p.status === "Voting" ? (
-                      <div className="mt-5 flex gap-3">
-                        <button
-                          type="button"
-                          onClick={() => cast(p, "for")}
-                          className={`flex-1 rounded-md border px-4 py-2.5 text-sm font-medium transition-colors ${
-                            myVote === "for"
-                              ? "border-success/50 bg-success/15 text-success"
-                              : "border-border bg-secondary/40 hover:border-gold/40 hover:text-gold"
-                          }`}
-                        >
-                          For
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => cast(p, "against")}
-                          className={`flex-1 rounded-md border px-4 py-2.5 text-sm font-medium transition-colors ${
-                            myVote === "against"
-                              ? "border-destructive/50 bg-destructive/15 text-destructive"
-                              : "border-border bg-secondary/40 hover:border-gold/40 hover:text-gold"
-                          }`}
-                        >
-                          Against
-                        </button>
-                      </div>
-                    ) : null}
+                    <p className="mt-2.5 text-sm leading-relaxed text-foreground">{p.basis}</p>
+                    <p className="mt-3 font-mono text-[10px] text-muted-foreground">
+                      0 votes cast · no tally exists · no result claimed
+                    </p>
                   </div>
                 </div>
-              </Panel>
-            );
-          })}
+              </div>
+            </Panel>
+          ))}
         </div>
+
+        <Panel className="mt-8 border-gold/40 bg-gold/5 p-7">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold">
+            Modelled chamber — read this before anything above
+          </p>
+          <p className="mt-3.5 text-sm leading-relaxed text-foreground">
+            No ballot has ever opened on this page and nothing printed here is a result. An
+            earlier version of it carried illustrative tallies, closing dates, and For / Against
+            buttons that confirmed your vote as “sealed and queued for the next anchor window”.
+            Nothing was sealed and nothing was queued; those buttons only changed what the page
+            showed you. They are removed, because a page must never claim a cryptographic act it
+            did not perform. The working machinery lives at{" "}
+            <Link to="/amendments" className="text-gold underline underline-offset-2">
+              /amendments
+            </Link>
+            : each submission carries a digest of its exact text, deliberation runs fourteen days,
+            a vote requires a signed-in member, and the record is public and permanent. That
+            record is currently empty — version 1 of the charter stands unamended, which is itself
+            a fact worth printing rather than decorating. Where a subject above is already in
+            force — the hybrid post-quantum co-signature, the $0.001 unified fee — it is in force
+            as published policy and as the way the sealing engine is built, not as the result of a
+            vote. When a ballot does open, every vote will be a signed object and every outcome
+            anchored to Bitcoin. Until then this page prints rules, not results.
+          </p>
+        </Panel>
       </Section>
 
       <Section className="bg-surface/30">
         <SectionHeading
           eyebrow="Procedure"
           title="How an amendment becomes law"
-          description="Four stages, each producing a signed and anchored artefact."
+          description="Four stages, each producing a signed and anchored artefact — as specified. Not yet exercised: no proposal has reached stage 01 on this platform."
         />
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
