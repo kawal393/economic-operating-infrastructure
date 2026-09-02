@@ -120,6 +120,28 @@ export function articleDigest(article: CanonicalArticle, version: number): strin
   return hex(sha256(new TextEncoder().encode(canonical)));
 }
 
+/**
+ * Digest of an Article's TEXT alone, with no version number in the input.
+ *
+ * articleDigest() is version-scoped, so the same words hash differently at v1
+ * and v2 by construction. This digest is what a reader uses to prove that an
+ * Article was carried forward unchanged across an amendment.
+ */
+export function articleTextDigest(article: CanonicalArticle): string {
+  const canonical = JSON.stringify({
+    body: article.body,
+    guarantees: article.guarantees,
+    issuer: CONSTITUTION_ISSUER,
+    name: article.name,
+    numeral: article.numeral,
+    right: article.right,
+    slug: article.slug,
+    thesis: article.thesis,
+  });
+  return hex(sha256(new TextEncoder().encode(canonical)));
+}
+
+
 export function articleUri(slug: string) {
   return `https://sovereign-ai.services/charter#${slug}`;
 }
