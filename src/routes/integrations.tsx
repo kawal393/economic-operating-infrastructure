@@ -44,9 +44,7 @@ function IntegrationsPage() {
 
   const visible = useMemo(
     () =>
-      category === "All"
-        ? INTEGRATIONS
-        : INTEGRATIONS.filter((item) => item.category === category),
+      category === "All" ? INTEGRATIONS : INTEGRATIONS.filter((item) => item.category === category),
     [category],
   );
 
@@ -58,7 +56,9 @@ function IntegrationsPage() {
         description="The public HTTP paths below are served by this deployment and can be read with no account, no key and no permission from us. The entries marked as written notes are documentation only: no package, no directory listing and no deployment exists behind them."
       >
         <Panel className="max-w-3xl">
-          <h2 className="text-sm font-semibold tracking-tight">No integration count is published</h2>
+          <h2 className="text-sm font-semibold tracking-tight">
+            No integration count is published
+          </h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
             This platform runs no telemetry for third-party clients, so no figure for apps, agents
             or deployments is printed here. The only counters on this site are the ledger figures,
@@ -83,7 +83,6 @@ function IntegrationsPage() {
           </p>
         </Panel>
       </Section>
-
 
       <Section>
         <div className="flex flex-wrap gap-2">
@@ -182,7 +181,6 @@ function IntegrationsPage() {
           descriptively; naming them is not a claim of endorsement, partnership or a working
           connector, and none of them has reviewed or approved anything published here.
         </p>
-
       </Section>
     </>
   );

@@ -56,7 +56,12 @@ export const GOV_TOOLS: GovTool[] = [
       "Search registered companies, AI systems and agents in the public registry and report whether each is sealed.",
     write: false,
     params: [
-      { name: "query", type: "string", description: "Name or domain to search for.", required: true },
+      {
+        name: "query",
+        type: "string",
+        description: "Name or domain to search for.",
+        required: true,
+      },
     ],
   },
   {
@@ -102,7 +107,12 @@ export const GOV_TOOLS: GovTool[] = [
     write: false,
     clientOnly: true,
     params: [
-      { name: "path", type: "string", description: "The path to open, starting with /.", required: true },
+      {
+        name: "path",
+        type: "string",
+        description: "The path to open, starting with /.",
+        required: true,
+      },
     ],
   },
   {
@@ -130,7 +140,12 @@ export const GOV_TOOLS: GovTool[] = [
       "Cast the signed-in citizen's vote on an active proposal. Requires explicit approval before it is recorded.",
     write: true,
     params: [
-      { name: "proposal_id", type: "string", description: "The proposal identifier.", required: true },
+      {
+        name: "proposal_id",
+        type: "string",
+        description: "The proposal identifier.",
+        required: true,
+      },
       { name: "vote", type: "string", description: "Either 'for' or 'against'.", required: true },
     ],
   },

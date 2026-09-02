@@ -30,7 +30,6 @@ export const INDEPENDENCE_LINE =
 export const PRECISION_CLAIM =
   "a hybrid post-quantum PSI sealing protocol with regulator-shaped public receipts (Ed25519 + ML-DSA-65 + LMS, RFC 8785 canonicalisation, Bitcoin-anchored)";
 
-
 export const APEX_PORTAL = "https://www.ai-governance-standard.com";
 
 export const FOUNDING_SEALS = [

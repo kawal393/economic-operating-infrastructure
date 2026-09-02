@@ -30,7 +30,6 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content:
           "Verification and record-keeping infrastructure for AI agents and their operators. Seal, anchor and verify — free, with no account.",
-
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },

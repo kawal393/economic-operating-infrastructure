@@ -41,7 +41,6 @@ const NAV_MENUS = [
       { to: "/registry-join", label: "Registry membership" },
       { to: "/pricing", label: "Pricing" },
       { to: "/dashboard", label: "Dashboard" },
-
     ],
   },
 ] as const;
@@ -50,8 +49,6 @@ const NAV_ALL = [
   ...NAV_PRIMARY.map((l) => ({ ...l })),
   ...NAV_MENUS.flatMap((m) => m.links.map((l) => ({ ...l }))),
 ];
-
-
 
 const FOOTER_GROUPS = [
   {
@@ -207,7 +204,6 @@ export function SiteHeader() {
                         ) : null}
                       </Link>
                     ))}
-
                   </div>
                 ) : null}
               </div>
@@ -260,7 +256,6 @@ export function SiteHeader() {
       ) : null}
     </header>
   );
-
 }
 
 export function SovereignMark({ className }: { className?: string }) {
@@ -309,7 +304,6 @@ export function SiteFooter() {
             </p>
           </div>
 
-
           {FOOTER_GROUPS.map((group) => (
             <div key={group.title}>
               <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
@@ -341,7 +335,6 @@ export function SiteFooter() {
             Ed25519 · ML-DSA-65 · LMS · SHA-256 · OpenTimestamps
           </p>
         </div>
-
       </div>
     </footer>
   );

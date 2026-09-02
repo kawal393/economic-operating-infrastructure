@@ -74,7 +74,6 @@ headers signed by the platform's Ed25519 seal of state. Pin the key from
    sovereign-ai.services.
 `;
 
-
 export const Route = createFileRoute("/llms.txt")({
   server: {
     handlers: {
