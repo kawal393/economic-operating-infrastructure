@@ -96,6 +96,41 @@ export const ARTICLES: Article[] = [
     ],
   },
   {
+    id: "psi-non-capture",
+    numeral: "V",
+    slug: "psi-non-capture",
+    name: "PSI-Non-Capture",
+    right: "The right to a record that cannot be altered privately",
+    thesis:
+      "A record whose integrity depends on the continuing good behaviour of its operator is not a record. Integrity has to survive a change of ownership.",
+    body: [
+      "Control of this platform will change hands. A founder, an acquirer, or any successor will end up holding the keys. Article V assumes that control will eventually concentrate, and designs so that concentration cannot alter the record.",
+      "Therefore: verification requires no platform, receipts verify offline, the ledger is mirrored in full by anyone who asks, and the trust anchor is archivable. Control of the operator changes who runs the service. It does not change what the record says.",
+      "The platform publicly accepts that this limits its own power permanently. That limit is the point of the design.",
+      "Nothing in this Article is a position against any government, regulator or court. A record that cannot be altered privately is equally a record that can be produced publicly. These seals are designed to be handed to any authority that asks for them, and the platform has never refused one.",
+    ],
+    guarantees: [
+      "Full ledger mirror available for public replication",
+      "Receipts remain verifiable if the platform ceases to exist",
+      "No single key can invalidate an issued receipt",
+      "Governance cannot amend Articles I and V by simple majority",
+      "Records are producible to any authority on request",
+    ],
+  },
+];
+
+/**
+ * VERSION 1 OF THE CHARTER, FROZEN.
+ *
+ * Version 1 was effective 6 August 2026 and remains retrievable so a reader can
+ * compare it with the current version. Article V was amended in version 2; the
+ * other four Articles are carried forward byte-identical, so their digests do not
+ * move between versions. Nothing in this array may be edited: it is the historical
+ * record against which v1 digests are recomputed.
+ */
+export const ARTICLES_V1: Article[] = [
+  ...ARTICLES.slice(0, 4),
+  {
     id: "psi-anti-archon",
     numeral: "V",
     slug: "psi-anti-archon",
@@ -116,6 +151,7 @@ export const ARTICLES: Article[] = [
     ],
   },
 ];
+
 
 export type Branch = {
   id: string;
