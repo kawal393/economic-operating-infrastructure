@@ -1,0 +1,39 @@
+Sovereign AI Services
+Operated by Apex Intelligence Empire (ABN 71 672 237 795), Victoria, Australia.
+
+This product includes third-party open-source software. Each component remains
+the property of its authors and is used under its own licence. The list below
+is maintained by hand and is accurate at 3 September 2026; the authoritative
+licence text for each package is the one shipped inside that package.
+
+MIT LICENCE
+  @noble/ed25519, @noble/hashes            (c) Paul Miller
+    - noble-ed25519 is additionally INLINED, in full and with its copyright
+      header intact, into public/offline-verifier.html so that verification
+      works with no network. The MIT notice travels with that file.
+  react, react-dom                         (c) Meta Platforms, Inc. and affiliates
+  @tanstack/react-router, @tanstack/react-start, @tanstack/router-plugin,
+  @tanstack/react-query                    (c) Tanner Linsley
+  @radix-ui/* (all packages)               (c) WorkOS
+  @supabase/supabase-js                    (c) Supabase Inc.
+  @elevenlabs/react                        (c) ElevenLabs Inc.
+  tailwindcss, @tailwindcss/vite           (c) Tailwind Labs, Inc.
+  lucide-react                             (c) Lucide Contributors
+  zod, clsx, tailwind-merge, cva, cmdk, sonner, vaul, recharts, date-fns,
+  react-hook-form, @hookform/resolvers, embla-carousel-react, input-otp,
+  react-day-picker, react-resizable-panels, hash-wasm, tw-animate-css,
+  vite-tsconfig-paths                      (c) their respective authors
+
+ISC LICENCE
+  lucide (upstream icon data), and other transitive ISC-licensed packages.
+
+Full licence texts are distributed inside node_modules/<package>/LICENSE.
+
+TRADE MARKS
+Names such as Bitcoin, OpenTimestamps, Ed25519, Supabase, ElevenLabs, Vercel,
+LangChain and the EU AI Act appear only to describe interoperability, standards
+or context. No endorsement, partnership, certification or review by any of them
+is claimed, and none has approved anything published on this site.
+
+APEX PSI is a protocol developed by Apex Intelligence Empire. This platform is a
+separate commercial implementation of it.
