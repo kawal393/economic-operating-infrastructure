@@ -68,9 +68,10 @@ export function canonicalArticles(articles: readonly Article[] = ARTICLES): Cano
 }
 
 export function canonicalConstitution(
-  version = 1,
-  articles: readonly Article[] = ARTICLES,
+  version = CHARTER_CURRENT_VERSION,
+  articles: readonly Article[] = articlesForVersion(version),
 ): CanonicalConstitution {
+
   return {
     name: CONSTITUTION_NAME,
     tagline: CONSTITUTION_TAGLINE,
