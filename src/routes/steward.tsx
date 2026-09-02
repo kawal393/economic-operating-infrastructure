@@ -45,7 +45,7 @@ const DOCTRINE = [
   },
   {
     title: "It can be switched off",
-    body: "A charter-level kill switch suspends the Platform steward, or its write powers alone, from the Sentinel console. A system architecture that cannot be stopped is not a system architecture — it is an archon.",
+    body: "A charter-level kill switch suspends the Platform steward, or its write powers alone, from the Sentinel console. A system that cannot be stopped is not accountable infrastructure.",
   },
 ];
 

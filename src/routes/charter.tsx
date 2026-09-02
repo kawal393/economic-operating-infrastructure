@@ -88,7 +88,7 @@ const IMPLEMENTATION_STATUS = [
   },
   {
     article: "V",
-    name: "PSI-Anti-Archon",
+    name: "PSI-Non-Capture",
     state: "Partly live",
     detail:
       "Member receipts are signed with the member's own key and verify offline with no dependency on this platform; the ledger is publicly readable and mirrorable through the API; a signed transparency-log checkpoint is published. What is not yet true: the platform's own seal-of-state key derives from a single secret seed in one environment — one head. Until it is sharded under a published ceremony, our checkpoints and inclusion proofs rest on one secret. That is printed as a failed check below rather than buried.",
@@ -288,8 +288,8 @@ function ConstitutionPage() {
               <p className="text-sm font-semibold text-foreground">Articles I and V</p>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 Require unanimity of all active workspaces. This is deliberately close to
-                impossible. The right to verified reality and the right to an uncapturable network
-                are not subject to majority preference.
+                impossible. The right to verified reality and the right to a record that cannot be
+                altered privately are not subject to majority preference.
               </p>
             </div>
           </div>

@@ -112,7 +112,7 @@ function PricingPage() {
       <PageHeader
         eyebrow="Pricing"
         title="Fractions of a cent. Multiplied by the whole world."
-        description="The old system charges rent for access. This one publishes a metered fee for a mathematical service — in the open, before it is ever charged."
+        description="Every fee is published here before it is ever charged, with the unit it is charged on stated beside it."
       />
 
       <Section className="pb-0 pt-10">
