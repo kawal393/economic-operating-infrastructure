@@ -54,7 +54,6 @@ const AVAILABLE_TODAY = [
   },
 ];
 
-
 const FAQ = [
   [
     "Is verification free?",
@@ -144,7 +143,6 @@ function PricingPage() {
           rather than relabelled.
         </p>
       </Section>
-
 
       <Section className="bg-surface/30">
         <SectionHeading
