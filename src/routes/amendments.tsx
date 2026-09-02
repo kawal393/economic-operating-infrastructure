@@ -49,7 +49,8 @@ function AmendmentsPage() {
   const amendments = useQuery({ queryKey: ["amendments"], queryFn: () => listFn() });
 
   const propose = useMutation({
-    mutationFn: () => proposeFn({ data: { title, articleNumeral: numeral, rationale, proposedText } }),
+    mutationFn: () =>
+      proposeFn({ data: { title, articleNumeral: numeral, rationale, proposedText } }),
     onSuccess: (result) => {
       toast.success(`Amendment ${result.ref} sealed`, {
         description: `Deliberation closes ${new Date(result.closesAt).toLocaleDateString()}. Threshold: ${result.threshold}.`,
@@ -129,6 +130,48 @@ function AmendmentsPage() {
           description="Sealed on submission. Tallies computed from public votes. Nothing here can be withdrawn."
         />
 
+        <Panel className="mt-8 p-7">
+          <p className="eyebrow">Standing note · AM-ART5-V2 · Article V · 3 September 2026</p>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            One amendment exists, and it was made on the same day this procedure was published. A
+            reader is entitled to check that against the rules above, so the reasoning is printed
+            here rather than left to be inferred.
+          </p>
+          <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm leading-relaxed text-muted-foreground">
+            <li>
+              AM-ART5-V2 was made by the operator on 3 September 2026, before any workspace had
+              ratified any version of the Charter.
+            </li>
+            <li>
+              The public ledger reports 0 platform seals, so at the time of the amendment there were
+              no other active workspaces. Unanimity of all active workspaces was satisfied by the
+              operator alone. No member&rsquo;s ratification was overridden, because none existed.
+            </li>
+            <li>
+              The {DELIBERATION_DAYS}-day deliberation window governs proposals put forward by
+              members. It does not apply to a version change made by the operator before the first
+              ratification.
+            </li>
+            <li>
+              Version 1 remains retrievable with its own digests and its own date. The amendment
+              changed the text of Article V and recomputed the digest. It did not rewrite history —
+              Articles I to IV carry digests identical to version 1, and both versions are printed
+              side by side on the{" "}
+              <Link to="/charter" className="text-gold hover:underline">
+                Charter
+              </Link>
+              .
+            </li>
+          </ol>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            No Article V digest has ever been Bitcoin-anchored. The three confirmed anchors are the
+            three APEX PSI founding records — the Article 50 Enforcement Watch founding record, the
+            Dutch AP v Uber equivalence note and the sealed AI memory demo — and the platform record
+            layer holds 0 seals of its own. That is the reason the amendment could be made at all:
+            no anchored commitment to the old text existed to contradict.
+          </p>
+        </Panel>
+
         <div className="mt-10 space-y-4">
           {amendments.isLoading ? (
             <Panel className="p-7 text-sm text-muted-foreground">Reading the record…</Panel>
@@ -156,7 +199,9 @@ function AmendmentsPage() {
                           Article {a.article_numeral} · {a.threshold}
                         </span>
                         <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-                          {closed ? "Deliberation closed" : `Closes ${new Date(a.closes_at).toLocaleDateString()}`}
+                          {closed
+                            ? "Deliberation closed"
+                            : `Closes ${new Date(a.closes_at).toLocaleDateString()}`}
                         </span>
                       </div>
                       <h3 className="mt-3 text-lg font-semibold tracking-tight text-foreground">
@@ -226,7 +271,7 @@ function AmendmentsPage() {
         <SectionHeading
           eyebrow="Draft"
           title="Propose an amendment"
-          description="Your draft is hashed on submission. The digest is what the nation deliberates on — the text cannot change underneath the vote."
+          description="Your draft is hashed on submission. The digest is what members deliberate on — the text cannot change underneath the vote."
         />
 
         <Panel className="mt-10 max-w-3xl p-7">

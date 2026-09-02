@@ -274,8 +274,8 @@ function CharterPreview() {
             <h3 className="text-lg font-semibold tracking-tight text-gold">The full Charter</h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               Complete text of the five protocol commitments, the sealed version history, public
-              ratification, live conformance checks and the amendment thresholds that make Articles
-              I and V effectively immutable.
+              ratification, live conformance checks and the amendment thresholds that require
+              unanimous ratification before Articles I and V can change.
             </p>
           </div>
           <Link

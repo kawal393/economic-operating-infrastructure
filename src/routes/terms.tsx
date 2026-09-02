@@ -75,9 +75,9 @@ const CLAUSES: { heading: string; body: string[] }[] = [
     ],
   },
   {
-    heading: "8. Immutability and publication",
+    heading: "8. Append-only records and publication",
     body: [
-      "Records committed to the record layer and anchored to Bitcoin cannot be edited or deleted by us or by you. Do not seal content you may later need removed. Where required by law we may annotate a record, but we cannot rewrite history.",
+      "The record layer is append-only and hash-chained, and its Merkle roots are anchored to Bitcoin. In practice that means an edit or deletion cannot be made silently: it would break the chain for every mirror holding the earlier state, and anyone may mirror the record layer in full. Do not seal content you may later need removed. Where required by law we may annotate a record, and we will publish the annotation as a new entry rather than rewriting an old one.",
     ],
   },
   {
@@ -113,7 +113,6 @@ const CLAUSES: { heading: string; body: string[] }[] = [
     ],
   },
 ];
-
 
 function TermsPage() {
   return (
