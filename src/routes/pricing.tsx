@@ -27,71 +27,43 @@ export const Route = createFileRoute("/pricing")({
   component: PricingPage,
 });
 
-const TIERS = [
+// There are no plans, tiers, seats or entitlements on this platform. Earlier
+// versions of this page listed three tiers ("Member", "Sovereign", "Institution")
+// with features such as priority settlement windows, dedicated anchor windows,
+// volume-indexed reductions and a named liaison. None of those existed: there is
+// no payment processor, no quota meter, no settlement queue and no liaison role.
+// They are deleted rather than relabelled.
+
+const AVAILABLE_TODAY = [
   {
-    name: "Member",
+    name: "Everything on this platform",
     price: "Free",
-    cadence: "forever",
+    cadence: "at the point of use, for everyone",
     description:
-      "Full charter-level standing. Verify anything, vote on everything, pay only for metered actions.",
+      "There are no plans and no accounts tiers. Every capability that actually runs today is available to anyone, at no charge, because no payment processor is connected.",
     features: [
-      "Registry membership registration and voting rights",
-      "Unlimited permissionless local verification",
-      "Public API verification — no quota is enforced today",
-      "Public receipt explorer access",
-      "Community support",
+      "Seal a digest and publish the receipt to the public record",
+      "Verify any receipt locally, offline, with no account",
+      "Submit an OpenTimestamps Bitcoin anchor",
+      "Read the full public ledger and the public API",
+      "Register a workspace in the public registry",
+      "Mirror the entire record layer",
     ],
-    cta: "Register as member",
-    to: "/registry-join" as const,
-    highlight: false,
-  },
-  {
-    name: "Sovereign",
-    price: "$0.001",
-    cadence: "per verification, metered",
-    description:
-      "For workspace founders running production infrastructure on the protocol. Pay only for what the world actually uses.",
-    features: [
-      "Everything in Member",
-      "Unlimited workspace deployments",
-      "Bitcoin anchoring at $0.01 per anchor",
-      "Compliance checks at $0.10 per check",
-      "Surplus routing under Article III (0.1%) — charter text, not operational",
-      "Priority settlement windows",
-    ],
-    cta: "Deploy a workspace",
+    cta: "Seal & register a workspace",
     to: "/deploy" as const,
-    highlight: true,
-  },
-  {
-    name: "Institution",
-    price: "Custom",
-    cadence: "volume-indexed",
-    description:
-      "For regulators, exchanges and platforms verifying at planetary volume with sector-specific conformity duties.",
-    features: [
-      "Everything in Sovereign",
-      "Volume-indexed fee reductions",
-      "Dedicated anchor windows",
-      "Sector protocol authoring rights",
-      "Structured audit exports (JSON and CSV)",
-      "Named protocol liaison",
-    ],
-    cta: "Read the API docs",
-    to: "/docs" as const,
-    highlight: false,
   },
 ];
 
 const FAQ = [
   [
-    "Why is verification not free?",
-    "Local, permissionless verification is free and always will be — the math is public. The fee covers metered API infrastructure and the anchoring that makes claims settlement-grade.",
+    "Is verification free?",
+    "Today, yes — all of it. Local, permissionless verification is free and always will be, because the maths is public and needs nothing from us. API verification is also free today because nothing on this platform is chargeable. The published rate below is what metered API verification would cost if and when charging begins.",
   ],
   [
     "Are there subscriptions or seats?",
-    "No. Seat-based pricing taxes access. The protocol taxes usage, which means an idle account costs nothing and a useful one pays proportionally.",
+    "No, and there are no plans or tiers either. Seat-based pricing taxes access. The published schedule prices usage, which means an idle account would cost nothing and a useful one would pay proportionally.",
   ],
+
   [
     "What does 0.1% surplus routing mean?",
     "It is what Article III says the protocol would charge if surplus were routed. It is charter text, not machinery: no value has ever been routed, no routing meter exists, and nothing is charged. No spread, no float, no custody.",
@@ -133,26 +105,21 @@ function PricingPage() {
       </Section>
 
       <Section>
-        <div className="grid gap-4 lg:grid-cols-3">
-          {TIERS.map((tier) => (
-            <Panel
-              key={tier.name}
-              className={`flex flex-col p-8 ${tier.highlight ? "glow-ring border-gold/40" : ""}`}
-            >
-              {tier.highlight ? (
-                <span className="mb-5 self-start rounded-full border border-gold/40 bg-gold/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-gold">
-                  Metered tier
-                </span>
-              ) : null}
+        <div className="grid gap-4">
+          {AVAILABLE_TODAY.map((tier) => (
+            <Panel key={tier.name} className="glow-ring flex flex-col border-gold/40 p-8">
+              <span className="mb-5 self-start rounded-full border border-gold/40 bg-gold/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-gold">
+                Available today
+              </span>
               <h2 className="text-lg font-semibold tracking-tight">{tier.name}</h2>
               <p className="mt-5 text-4xl font-semibold tracking-tight text-gold">{tier.price}</p>
               <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
                 {tier.cadence}
               </p>
-              <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-5 max-w-3xl text-sm leading-relaxed text-muted-foreground">
                 {tier.description}
               </p>
-              <ul className="mt-7 flex-1 space-y-3.5">
+              <ul className="mt-7 grid flex-1 gap-3.5 sm:grid-cols-2">
                 {tier.features.map((f) => (
                   <li key={f} className="flex gap-3 text-sm text-muted-foreground">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
@@ -162,17 +129,19 @@ function PricingPage() {
               </ul>
               <Link
                 to={tier.to}
-                className={`mt-8 inline-flex justify-center rounded-md px-5 py-3 text-sm font-semibold transition-colors ${
-                  tier.highlight
-                    ? "bg-gold text-primary-foreground hover:bg-gold/90"
-                    : "border border-border bg-secondary/40 hover:border-gold/40 hover:text-gold"
-                }`}
+                className="mt-8 inline-flex self-start justify-center rounded-md bg-gold px-5 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-gold/90"
               >
                 {tier.cta}
               </Link>
             </Panel>
           ))}
         </div>
+        <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted-foreground">
+          There are no plans, tiers, seats or entitlements. An earlier version of this page listed
+          three tiers with features — priority settlement windows, dedicated anchor windows,
+          volume-indexed reductions, a named liaison — that did not exist. They have been deleted
+          rather than relabelled.
+        </p>
       </Section>
 
       <Section className="bg-surface/30">
