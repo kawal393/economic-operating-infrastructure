@@ -92,7 +92,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "The verification & settlement layer for the AI economy: post-quantum sealing, Bitcoin anchoring, public receipts and a machine-readable Protocol Charter.",
+          "Verification and record-keeping infrastructure for AI agents and their operators: post-quantum sealing, Bitcoin anchoring, free public receipts and a machine-readable Protocol Charter.",
       },
       { name: "author", content: "Sovereign AI Services" },
       { property: "og:site_name", content: "Sovereign AI Services" },

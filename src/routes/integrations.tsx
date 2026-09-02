@@ -13,17 +13,17 @@ import {
 export const Route = createFileRoute("/integrations")({
   head: () => ({
     meta: [
-      { title: "Integrations Marketplace — Plug Your App Into the Verification Layer" },
+      { title: "Integration surface — what can be called and what is only written down" },
       {
         name: "description",
         content:
-          "Twelve ways to plug any app, AI agent or workflow into the workspace: MCP, LangChain, Composio, Nango, Hugging Face, Make, Pipedream, Zapier, Vercel and OpenAI.",
+          "Nine public HTTP paths served by this deployment, callable with no account and no key, plus the machine-readable OpenAPI document. Twelve further entries are written notes with no package or listing published behind them.",
       },
-      { property: "og:title", content: "The Integrations Marketplace — Sovereign AI Services" },
+      { property: "og:title", content: "Integration surface — Sovereign AI Services" },
       {
         property: "og:description",
         content:
-          "Become a member. Deploy a nation. Vote on the Charter. Zero permission.",
+          "Public read endpoints for the ledger, receipts and verification keys. No account, no key and no permission required to read the record.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/integrations" },
@@ -35,9 +35,8 @@ export const Route = createFileRoute("/integrations")({
 });
 
 const STATUS_STYLES: Record<IntegrationStatus, string> = {
-  "Available Now": "border-success/30 bg-success/10 text-success",
-  "In Development": "border-warning/30 bg-warning/10 text-warning",
-  "Coming Soon": "border-border bg-secondary/60 text-muted-foreground",
+  "Live API": "border-success/30 bg-success/10 text-success",
+  "Not published": "border-border bg-secondary/60 text-muted-foreground",
 };
 
 function IntegrationsPage() {
@@ -54,25 +53,37 @@ function IntegrationsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="The Integrations Marketplace"
-        title="Plug Your App Into the Verification Layer"
-        description="Become a member. Deploy a nation. Vote on the Charter. Zero permission."
+        eyebrow="Integration surface"
+        title="What can be called, and what is only written down"
+        description="The public HTTP paths below are served by this deployment and can be read with no account, no key and no permission from us. The entries marked as written notes are documentation only: no package, no directory listing and no deployment exists behind them."
       >
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="inline-flex flex-wrap items-center gap-3 rounded-md border border-gold/25 bg-gold/8 px-4 py-2.5">
-            <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-gold">
-              <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse-node" />
-              Live
-            </span>
-            <span className="font-mono text-xs text-foreground/85">
-              12+ apps integrated · 400+ agents as members · 60+ nations deployed via integrations
-            </span>
-          </div>
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
-            (updated weekly)
-          </span>
-        </div>
+        <Panel className="max-w-3xl">
+          <h2 className="text-sm font-semibold tracking-tight">No integration count is published</h2>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            This platform runs no telemetry for third-party clients, so no figure for apps, agents
+            or deployments is printed here. The only counters on this site are the ledger figures,
+            fetched live from <span className="font-mono text-xs">/api/public/v1/ledger-stats</span>{" "}
+            when the page loads.
+          </p>
+        </Panel>
       </PageHeader>
+
+      <Section>
+        <Panel className="border-warning/35 bg-warning/5">
+          <h2 className="text-base font-semibold tracking-tight">
+            Install commands removed on 3 September 2026
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+            This page previously listed twelve integrations, ten of them badged as available now,
+            each with a package name to install. Every one of those names was checked against the
+            npm registry and PyPI: none is registered. Publishing an instruction to install an
+            unregistered name is an open slot that anyone can fill with hostile code, and this
+            platform will not direct readers into one. Where a note describes an integration that
+            does not exist, it says so instead of offering a command.
+          </p>
+        </Panel>
+      </Section>
+
 
       <Section>
         <div className="flex flex-wrap gap-2">
@@ -126,7 +137,7 @@ function IntegrationsPage() {
               </p>
 
               <div className="mt-5">
-                <CopyBlock label="Install" value={item.install} />
+                <CopyBlock label="Access" value={item.access} />
               </div>
 
               <Link
@@ -144,30 +155,34 @@ function IntegrationsPage() {
       <Section className="bg-surface/30">
         <SectionHeading
           eyebrow="Open protocol"
-          title="Build Your Own Integration"
-          description="Don't see your tool? The protocol is open to anyone. Build your own integration — the protocol is open, the Charter is public, and the SDK is MIT licensed."
+          title="Build against the public paths"
+          description="No SDK is published and no client library is distributed by this platform. The OpenAPI document describes every public path, and any language with an HTTP client can call it directly. Nothing here requires an account, an API key or permission from us."
         />
         <div className="mt-8 flex flex-wrap gap-3">
-          <a
-            href="https://github.com/apex-psi/nation-sdk"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="glow-ring group inline-flex items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5"
-          >
-            Open the GitHub repo
-            <ExternalLink className="h-4 w-4" />
-          </a>
           <Link
             to="/docs"
-            className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold"
+            className="glow-ring group inline-flex items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5"
           >
             API documentation
           </Link>
+          <a
+            href="/openapi.json"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold"
+          >
+            Read the OpenAPI document
+            <ExternalLink className="h-4 w-4" />
+          </a>
         </div>
 
         <p className="mt-10 max-w-3xl text-xs leading-relaxed text-muted-foreground">
-          Registry membership is free and confers no legal rights in any physical jurisdiction. This is a commercial software platform, not a state.
+          Registry membership is free and confers no legal rights in any physical jurisdiction. This
+          is a commercial software platform, not a state. Third parties named on this page are named
+          descriptively; naming them is not a claim of endorsement, partnership or a working
+          connector, and none of them has reviewed or approved anything published here.
         </p>
+
       </Section>
     </>
   );

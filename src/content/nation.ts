@@ -143,7 +143,7 @@ export const BRANCHES: Branch[] = [
   },
   {
     id: "judicial",
-    branch: "Immutable record layer",
+    branch: "Append-only record layer",
     organ: "Bitcoin anchoring",
     mandate: "The append-only truth layer",
     detail:
@@ -172,7 +172,7 @@ export const BRANCHES: Branch[] = [
   {
     id: "executive",
     branch: "Sector protocol suite",
-    organ: "21 industry protocols",
+    organ: "21 industry protocol specifications",
     mandate: "Domain rule sets",
     detail:
       "Where the five Charter Articles are foundational, the twenty-one industry protocols are operational: domain-specific rules for health, finance, energy, media, logistics and the rest. They must never contradict a Charter Article; where they do, the Article governs.",
@@ -231,12 +231,12 @@ export const POWER_CHAIN = [
   },
   {
     step: "DISTRIBUTION",
-    detail: "Surplus routed automatically along the public graph.",
+    detail: "Specified only — no surplus has ever been routed and no routing meter exists.",
     article: "III",
   },
   {
     step: "ABUNDANCE",
-    detail: "Sufficiency floors enforced by signature, not by promise.",
+    detail: "Specified only — no sufficiency floor can be declared, signed or anchored yet.",
     article: "IV",
   },
 ] as const;
@@ -294,7 +294,7 @@ export const INDUSTRY_PROTOCOLS: Protocol[] = [
   ["psi-climate", "PSI-Climate", "Emissions accounting and offset verification"],
   ["psi-research", "PSI-Research", "Result reproducibility and dataset sealing"],
   ["psi-identity", "PSI-Identity", "Personhood and agent attribution without surveillance"],
-  ["psi-commerce", "PSI-Commerce", "Marketplace surplus routing and settlement"],
+  ["psi-commerce", "PSI-Commerce", "Marketplace transaction record-keeping and receipts"],
   ["psi-culture", "PSI-Culture", "Attribution and derivative lineage for creative work"],
 ].map(([id, name, description]) => ({
   id: id as string,
