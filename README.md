@@ -7,8 +7,11 @@ verification economy: the charter, the fee schedule, the surplus-routing rules, 
 amendment procedure and the membership registry rules, versioned in git so that trust
 in the rules becomes a diff anyone can read.
 
-It is not a state, and the site's own legal notice says so in plain words. It is not a
-bank: Article III forbids spread, float and custody, and the platform holds neither.
+Sovereign AI Services is a separate commercial platform, operated by Apex Intelligence
+Empire (ABN 71 672 237 795), built on the neutral APEX PSI protocol. It is not a nation,
+state, government or sovereign entity and confers no citizenship, nationality or legal
+status. It is not a bank: Article III forbids spread, float and custody, and the platform
+holds neither.
 
 ## What is live and what is modelled
 
