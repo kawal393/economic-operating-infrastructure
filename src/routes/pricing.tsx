@@ -105,26 +105,21 @@ function PricingPage() {
       </Section>
 
       <Section>
-        <div className="grid gap-4 lg:grid-cols-3">
-          {TIERS.map((tier) => (
-            <Panel
-              key={tier.name}
-              className={`flex flex-col p-8 ${tier.highlight ? "glow-ring border-gold/40" : ""}`}
-            >
-              {tier.highlight ? (
-                <span className="mb-5 self-start rounded-full border border-gold/40 bg-gold/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-gold">
-                  Metered tier
-                </span>
-              ) : null}
+        <div className="grid gap-4">
+          {AVAILABLE_TODAY.map((tier) => (
+            <Panel key={tier.name} className="glow-ring flex flex-col border-gold/40 p-8">
+              <span className="mb-5 self-start rounded-full border border-gold/40 bg-gold/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-gold">
+                Available today
+              </span>
               <h2 className="text-lg font-semibold tracking-tight">{tier.name}</h2>
               <p className="mt-5 text-4xl font-semibold tracking-tight text-gold">{tier.price}</p>
               <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
                 {tier.cadence}
               </p>
-              <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-5 max-w-3xl text-sm leading-relaxed text-muted-foreground">
                 {tier.description}
               </p>
-              <ul className="mt-7 flex-1 space-y-3.5">
+              <ul className="mt-7 grid flex-1 gap-3.5 sm:grid-cols-2">
                 {tier.features.map((f) => (
                   <li key={f} className="flex gap-3 text-sm text-muted-foreground">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
@@ -134,18 +129,21 @@ function PricingPage() {
               </ul>
               <Link
                 to={tier.to}
-                className={`mt-8 inline-flex justify-center rounded-md px-5 py-3 text-sm font-semibold transition-colors ${
-                  tier.highlight
-                    ? "bg-gold text-primary-foreground hover:bg-gold/90"
-                    : "border border-border bg-secondary/40 hover:border-gold/40 hover:text-gold"
-                }`}
+                className="mt-8 inline-flex self-start justify-center rounded-md bg-gold px-5 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-gold/90"
               >
                 {tier.cta}
               </Link>
             </Panel>
           ))}
         </div>
+        <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted-foreground">
+          There are no plans, tiers, seats or entitlements. An earlier version of this page listed
+          three tiers with features — priority settlement windows, dedicated anchor windows,
+          volume-indexed reductions, a named liaison — that did not exist. They have been deleted
+          rather than relabelled.
+        </p>
       </Section>
+
 
       <Section className="bg-surface/30">
         <SectionHeading
