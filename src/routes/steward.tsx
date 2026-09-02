@@ -10,7 +10,7 @@ const MinisterVoice = lazy(() => import("@/components/minister-voice"));
 export const Route = createFileRoute("/steward")({
   head: () => ({
     meta: [
-      { title: "Platform steward — The Live Voice of the Nation | Sovereign AI Services" },
+      { title: "Platform steward — the live voice of the platform | Sovereign AI Services" },
       {
         name: "description",
         content:
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/steward")({
 const DOCTRINE = [
   {
     title: "It cannot invent",
-    body: "Every number, digest, proposal and entity the Platform steward states is fetched live from the public ledger through an audited tool call. There is no free-form recall of facts about the nation.",
+    body: "Every number, digest, proposal and entity the Platform steward states is fetched live from the public ledger through an audited tool call. There is no free-form recall of facts about the platform.",
   },
   {
     title: "It cannot act alone",

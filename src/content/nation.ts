@@ -152,7 +152,6 @@ export const ARTICLES_V1: Article[] = [
   },
 ];
 
-
 export type Branch = {
   id: string;
   branch: string;
@@ -378,4 +377,4 @@ export const SCALE_MODEL = [
   { horizon: "1B members", verifications: "3.65T", revenue: "$3.65B+" },
 ] as const;
 
-export const FOOTER_CREED = "The math does not negotiate. Neither do we.";
+export const FOOTER_CREED = "A digest does not argue. It reproduces, or it does not.";

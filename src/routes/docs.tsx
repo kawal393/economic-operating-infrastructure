@@ -140,7 +140,7 @@ function DocsPage() {
     <>
       <PageHeader
         eyebrow="API Documentation"
-        title="Four verbs run the nation: seal, verify, anchor, comply"
+        title="Four verbs run the platform: seal, verify, anchor, comply"
         description="A REST surface over the protocol. Every response is a signed object; every signed object is independently recomputable without asking us for permission."
       />
 
@@ -153,7 +153,7 @@ function DocsPage() {
         <Panel className="mt-8 p-7">
           <div className="flex items-start justify-between gap-4">
             <pre className="overflow-x-auto font-mono text-xs leading-relaxed text-gold">
-{`curl https://api.sovereign-ai.services/v1/verify/rcpt_8fa10c \\
+              {`curl https://api.sovereign-ai.services/v1/verify/rcpt_8fa10c \\
   -H "Authorization: Bearer sk_live_..." \\
   -H "Content-Type: application/json"`}
             </pre>

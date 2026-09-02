@@ -7,7 +7,7 @@ const SPEC = {
     version: "1.0.0",
     summary: "Free, unauthenticated cryptographic verification infrastructure.",
     description:
-      "Every response is signed with the nation's Ed25519 seal of state (content-digest + signature-input + signature headers, RFC 9421 style). Verification endpoints are free and require no account.",
+      "Every response is signed with the platform's Ed25519 seal of state (content-digest + signature-input + signature headers, RFC 9421 style). Verification endpoints are free and require no account.",
     license: { name: "Public infrastructure — verification free in perpetuity" },
   },
   servers: [{ url: "https://sovereign-ai.services" }],
@@ -24,7 +24,10 @@ const SPEC = {
             schema: { type: "string", pattern: "^[0-9a-f]{64}$" },
           },
         ],
-        responses: { "200": { description: "Verification result" }, "400": { description: "Invalid digest" } },
+        responses: {
+          "200": { description: "Verification result" },
+          "400": { description: "Invalid digest" },
+        },
       },
       post: {
         summary: "Verify a full Apex PSI receipt",
@@ -47,7 +50,9 @@ const SPEC = {
       get: {
         summary: "Fetch a ledger record",
         operationId: "getReceipt",
-        parameters: [{ name: "receipt_id", in: "path", required: true, schema: { type: "string" } }],
+        parameters: [
+          { name: "receipt_id", in: "path", required: true, schema: { type: "string" } },
+        ],
         responses: { "200": { description: "Ledger entry" }, "404": { description: "Not found" } },
       },
     },
@@ -75,8 +80,13 @@ const SPEC = {
       get: {
         summary: "RFC 6962 inclusion proof",
         operationId: "getInclusionProof",
-        parameters: [{ name: "receipt_id", in: "path", required: true, schema: { type: "string" } }],
-        responses: { "200": { description: "Merkle inclusion proof" }, "404": { description: "Not found" } },
+        parameters: [
+          { name: "receipt_id", in: "path", required: true, schema: { type: "string" } },
+        ],
+        responses: {
+          "200": { description: "Merkle inclusion proof" },
+          "404": { description: "Not found" },
+        },
       },
     },
     "/api/public/v1/jwks.json": {

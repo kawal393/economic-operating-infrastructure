@@ -10,6 +10,7 @@ import { ARTICLE3_STATUS, CUSTODY_FENCE } from "@/content/legal";
 import { ARTICLES, POWER_CHAIN } from "@/content/nation";
 import {
   AMENDMENT_THRESHOLDS,
+  CHARTER_CURRENT_VERSION,
   CHARTER_DISPLAY_NAME,
   CHARTER_DISPLAY_TAGLINE,
   articleDigest,
@@ -139,7 +140,6 @@ function ConstitutionPage() {
       <VersionLedger />
 
       <VersionComparison />
-
 
       <Section className="py-14">
         <nav className="flex flex-wrap gap-2">
@@ -508,7 +508,7 @@ function Conformance() {
     <Section id="conformance">
       <SectionHeading
         eyebrow="Conformance"
-        title="The nation runs its own failure conditions first"
+        title="The platform runs its own failure conditions first"
         description="Each article is written as a test. These checks run against live infrastructure — not against a promise. Where a check fails, the failure and its evidence are printed rather than hidden: Article I applied to us first."
       />
 
@@ -635,7 +635,9 @@ function Ratify() {
             onClick={() => sign.mutate()}
             className="mt-6 w-full rounded-md border border-gold/40 bg-gold/10 px-5 py-2.5 text-sm font-medium text-gold transition-colors hover:bg-gold/20 disabled:opacity-40"
           >
-            {sign.isPending ? "Signing…" : `Ratify v${data?.current?.version ?? 1}`}
+            {sign.isPending
+              ? "Signing…"
+              : `Ratify v${data?.current?.version ?? CHARTER_CURRENT_VERSION}`}
           </button>
           {!user ? (
             <p className="mt-3 text-xs text-muted-foreground">

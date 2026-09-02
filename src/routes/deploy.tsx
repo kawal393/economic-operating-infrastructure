@@ -13,16 +13,17 @@ import { anchorReceipt, createNationState } from "@/lib/citizen.functions";
 export const Route = createFileRoute("/deploy")({
   head: () => ({
     meta: [
-      { title: "Deploy a Workspace | Sovereign AI Services" },
+      { title: "Seal & register a workspace | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "Seal a Charter with Ed25519, publish it to the append-only ledger, anchor it to Bitcoin via OpenTimestamps and register your sovereign workspace.",
+          "Hash a workspace charter in your browser, sign it with a local Ed25519 keypair, append the receipt to the public record layer, submit it to OpenTimestamps and list the workspace in the public registry. No code is deployed and no contract is published.",
       },
-      { property: "og:title", content: "Workspace Deployer" },
+      { property: "og:title", content: "Seal & register a workspace" },
       {
         property: "og:description",
-        content: "Seal, publish, anchor and deploy your sovereign workspace.",
+        content:
+          "Seal a workspace charter, publish the receipt, submit it for Bitcoin anchoring and list it in the public registry. Nothing is deployed to any chain.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/deploy" },
@@ -150,10 +151,35 @@ function DeployPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Deployer"
-        title="A workspace is not applied for. It is sealed, chained and anchored."
-        description="Your Charter is hashed in your browser, signed with a keypair that never leaves it, appended to the public chain, committed to Bitcoin through OpenTimestamps and listed in the open registry."
+        eyebrow="Seal & register"
+        title="A workspace is not applied for. It is sealed, recorded and listed."
+        description="Your workspace charter is hashed in your browser, signed with a keypair that never leaves it, appended to the public hash-chained record layer, submitted to OpenTimestamps for Bitcoin anchoring and listed in the public registry."
       />
+
+      <Section className="pb-0">
+        <div className="rounded-md border border-border bg-secondary/30 p-5 text-sm leading-relaxed text-muted-foreground">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            What this produces, and what it does not
+          </p>
+          <p className="mt-3">
+            <span className="text-foreground">Produces:</span> a SHA-256 digest of the text you
+            enter, an Ed25519-signed receipt file downloaded to your device, one entry in the public
+            record layer, an OpenTimestamps submission whose Bitcoin confirmation follows later, and
+            a public registry listing.
+          </p>
+          <p className="mt-2">
+            <span className="text-foreground">Does not:</span> deploy software, publish a package or
+            SDK, create a smart contract, write to any blockchain other than the OpenTimestamps
+            submission, transfer or hold any money, or create any legal entity, jurisdiction or
+            status. &ldquo;Workspace&rdquo; and &ldquo;charter&rdquo; are names for software
+            records. The on-chain mirror at{" "}
+            <Link to="/contracts" className="text-gold hover:underline">
+              /contracts
+            </Link>{" "}
+            remains specified and undeployed.
+          </p>
+        </div>
+      </Section>
 
       <Section>
         <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
@@ -161,7 +187,11 @@ function DeployPage() {
             {!user ? (
               <div className="mb-6 rounded-md border border-gold/25 bg-gold/5 p-4 text-sm text-muted-foreground">
                 Deployment writes to the public registry under your member record.{" "}
-                <Link to="/auth" search={{ redirect: "/deploy" }} className="font-semibold text-gold">
+                <Link
+                  to="/auth"
+                  search={{ redirect: "/deploy" }}
+                  className="font-semibold text-gold"
+                >
                   Sign in
                 </Link>{" "}
                 first.
@@ -215,7 +245,11 @@ function DeployPage() {
                   className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-gold/40 hover:text-foreground"
                 >
                   <Wallet className="h-4 w-4" />
-                  {address ? shortAddress(address) : connecting ? "Connecting…" : "Connect wallet (optional)"}
+                  {address
+                    ? shortAddress(address)
+                    : connecting
+                      ? "Connecting…"
+                      : "Connect wallet (optional)"}
                 </button>
                 <button
                   type="submit"
@@ -240,7 +274,9 @@ function DeployPage() {
                         stage > i ? "bg-gold" : stage === i ? "animate-pulse bg-gold" : "bg-border"
                       }`}
                     />
-                    <span className={stage >= i ? "text-foreground" : "text-muted-foreground"}>{label}</span>
+                    <span className={stage >= i ? "text-foreground" : "text-muted-foreground"}>
+                      {label}
+                    </span>
                   </li>
                 ))}
               </ol>
@@ -251,8 +287,12 @@ function DeployPage() {
                 <p className="font-semibold text-gold">{result.name} is live</p>
                 <dl className="mt-4 space-y-3 text-xs">
                   <div>
-                    <dt className="uppercase tracking-widest text-muted-foreground">Protocol Charter hash</dt>
-                    <dd className="break-all font-mono text-foreground">{result.constitutionHash}</dd>
+                    <dt className="uppercase tracking-widest text-muted-foreground">
+                      Protocol Charter hash
+                    </dt>
+                    <dd className="break-all font-mono text-foreground">
+                      {result.constitutionHash}
+                    </dd>
                   </div>
                   <div>
                     <dt className="uppercase tracking-widest text-muted-foreground">Receipt</dt>

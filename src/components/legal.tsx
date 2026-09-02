@@ -7,18 +7,11 @@ import { cn } from "@/lib/utils";
 /** Permanent, non-dismissible legal fence. Rendered in the footer of every page. */
 export function LegalDisclaimer({ className }: { className?: string }) {
   return (
-    <div
-      className={cn(
-        "rounded-md border border-border bg-secondary/30 px-4 py-4",
-        className,
-      )}
-    >
+    <div className={cn("rounded-md border border-border bg-secondary/30 px-4 py-4", className)}>
       <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
         Legal notice
       </p>
-      <p className="mt-2 max-w-4xl text-xs leading-relaxed text-muted-foreground">
-        {DISCLAIMER}
-      </p>
+      <p className="mt-2 max-w-4xl text-xs leading-relaxed text-muted-foreground">{DISCLAIMER}</p>
       <div className="mt-3 flex flex-wrap gap-4">
         <Link to="/terms" className="text-xs text-gold hover:underline">
           Terms of Service
@@ -26,7 +19,19 @@ export function LegalDisclaimer({ className }: { className?: string }) {
         <Link to="/privacy" className="text-xs text-gold hover:underline">
           Privacy Policy
         </Link>
+        <a href="/LICENSE.txt" className="text-xs text-gold hover:underline">
+          Licence (all rights reserved, two carve-outs)
+        </a>
+        <a href="/NOTICE.txt" className="text-xs text-gold hover:underline">
+          Third-party notices
+        </a>
       </div>
+      <p className="mt-3 max-w-4xl text-xs leading-relaxed text-muted-foreground">
+        The source code of this site is not open source. Everything under /api/public/, the
+        machine-readable documents and the offline verifier may be mirrored and redistributed
+        commercially with no account; the source code is not licensed to copy. Terms clauses 10 to
+        12 set this out in full.
+      </p>
     </div>
   );
 }

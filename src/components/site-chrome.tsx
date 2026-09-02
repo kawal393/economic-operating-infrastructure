@@ -72,7 +72,7 @@ const FOOTER_GROUPS = [
       { to: "/ledger", label: "Public record layer" },
       { to: "/transparency", label: "Transparency Log" },
       { to: "/protocols", label: "Protocol Explorer" },
-      { to: "/deploy", label: "Workspace deployer" },
+      { to: "/deploy", label: "Seal & register a workspace" },
       { to: "/contracts", label: "On-chain mirror (not deployed)" },
       { to: "/transactions", label: "Fee schedule" },
     ],

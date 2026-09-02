@@ -153,7 +153,7 @@ function IntegrationsPage() {
 
       <Section className="bg-surface/30">
         <SectionHeading
-          eyebrow="Open protocol"
+          eyebrow="Public paths"
           title="Build against the public paths"
           description="No SDK is published and no client library is distributed by this platform. The OpenAPI document describes every public path, and any language with an HTTP client can call it directly. Nothing here requires an account, an API key or permission from us."
         />

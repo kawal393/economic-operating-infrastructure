@@ -74,7 +74,7 @@ const TIERS = [
       "Volume-indexed fee reductions",
       "Dedicated anchor windows",
       "Sector protocol authoring rights",
-      "Regulator-grade audit exports",
+      "Structured audit exports (JSON and CSV)",
       "Named protocol liaison",
     ],
     cta: "Read the API docs",
