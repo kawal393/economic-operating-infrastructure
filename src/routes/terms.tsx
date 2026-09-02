@@ -87,12 +87,33 @@ const CLAUSES: { heading: string; body: string[] }[] = [
     ],
   },
   {
-    heading: "10. Governing law",
+    heading: "10. Intellectual property, and what you may freely take",
+    body: [
+      "The source code of this platform is proprietary and all rights are reserved. It is not open source, and no licence to copy, modify or redistribute it is granted by publishing it.",
+      "Two exceptions are deliberate, because our integrity claims would be worthless without them. First, everything served under /api/public/, together with /charter.json, /openapi.json, /llms.txt, /feed.xml, /sitemap.xml and the .well-known documents, may be fetched, cached, mirrored, republished and independently verified by anyone, for any purpose including commercial, with no permission and no account. Mirroring the record layer in full is expressly permitted. Second, the offline verifier may be copied, hosted and redistributed freely, so that receipts stay verifiable if this platform ever stops operating.",
+    ],
+  },
+  {
+    heading: "11. Third-party components and trade marks",
+    body: [
+      "This platform incorporates third-party open-source software, principally under the MIT and ISC licences, which remains the property of its authors and is used under those licences. The maintained list, including the noble-ed25519 notice carried inside the offline verifier, is published in the NOTICE file distributed with the source.",
+      "Names such as Bitcoin, OpenTimestamps, Supabase, ElevenLabs, LangChain and the EU AI Act appear on this site only to describe interoperability, standards or regulatory context. No endorsement, partnership, certification, review or approval by any of them is claimed, and none has approved anything published here.",
+    ],
+  },
+  {
+    heading: "12. Changes to these terms",
+    body: [
+      "These terms may change. The current version is always the one published at this address, and material changes will be summarised on the page rather than made silently. Continued use after a change is acceptance of it. Charter Articles are amended by the separate published procedure at /amendments, not by changing these terms.",
+    ],
+  },
+  {
+    heading: "13. Governing law",
     body: [
       `These terms are governed by the laws of ${OPERATOR.jurisdiction}, and the courts of that jurisdiction have exclusive jurisdiction.`,
     ],
   },
 ];
+
 
 function TermsPage() {
   return (

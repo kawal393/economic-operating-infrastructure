@@ -165,15 +165,30 @@ async function ownedEntity(db: DB, userId: string, entityId: string) {
   if (!citizen) return { citizen: null, entity: null };
   const { data } = await db
     .from("entities")
-    .select("id, owner_id, slug, verification_token, domain")
+    .select("id, owner_id, slug, domain")
     .eq("id", entityId)
     .maybeSingle();
   return {
     citizen,
     entity: data as
-      | { id: string; owner_id: string | null; slug: string; verification_token: string; domain: string | null }
+      | { id: string; owner_id: string | null; slug: string; domain: string | null }
       | null,
   };
+}
+
+/**
+ * The domain-claim token is never exposed through the Data API: no client role
+ * can select that column. It is read here, server-side, with elevated access,
+ * and only after ownership of the listing has been established as the user.
+ */
+async function tokenFor(entityId: string): Promise<string | null> {
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+  const { data } = await supabaseAdmin
+    .from("entities")
+    .select("verification_token")
+    .eq("id", entityId)
+    .maybeSingle();
+  return (data as { verification_token: string } | null)?.verification_token ?? null;
 }
 
 export async function readVerificationToken(
@@ -186,8 +201,11 @@ export async function readVerificationToken(
   if (entity.owner_id && entity.owner_id !== citizen.id) {
     return { ok: false, reason: "This listing is already claimed by another citizen." };
   }
-  return { ok: true, token: entity.verification_token, domain: entity.domain };
+  const token = await tokenFor(entity.id);
+  if (!token) return { ok: false, reason: "No claim token exists for this listing." };
+  return { ok: true, token, domain: entity.domain };
 }
+
 
 /**
  * Domain claim: control of the website is proved by publishing the token at
@@ -218,8 +236,9 @@ export async function verifyEntityDomain(
     return { ok: false, reason: "Could not fetch the claim file from that domain." };
   }
 
+  const expected = await tokenFor(entity.id);
   const token = (payload as { token?: unknown } | null)?.token;
-  if (typeof token !== "string" || token.trim() !== entity.verification_token) {
+  if (!expected || typeof token !== "string" || token.trim() !== expected) {
     return { ok: false, reason: "The claim file does not contain this listing's token." };
   }
 

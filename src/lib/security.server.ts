@@ -5,7 +5,7 @@
  */
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database, Json } from "@/integrations/supabase/types";
-import { publicClient } from "./ledger.server";
+
 
 export type Posture = "NORMAL" | "ELEVATED" | "LOCKDOWN";
 
@@ -24,8 +24,12 @@ async function admin() {
 /* ------------------------------------------------------------------ flags */
 
 export async function readFlags(): Promise<NationFlags> {
-  const { data } = await publicClient().from("system_flags").select("key, value");
+  // Read with elevated access: kill-switch and posture state are not exposed
+  // to the Data API, so an attacker cannot watch the defences from outside.
+  const db = await admin();
+  const { data } = await db.from("system_flags").select("key, value");
   const map = new Map((data ?? []).map((r) => [r.key, r.value as Record<string, unknown>]));
+
   const level = (map.get("defence_posture")?.["level"] as Posture | undefined) ?? "NORMAL";
   return {
     agentEnabled: map.get("agent_enabled")?.["on"] !== false,

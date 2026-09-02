@@ -63,7 +63,8 @@ headers signed by the platform's Ed25519 seal of state. Pin the key from
   public ratification and a live conformance check that prints its own failures
 - /charter.json — the same text, machine-readable and signed, with a digest per
   article so an agent can cite the exact clause it operates under
-- /amendments — the published procedure for changing the Charter; never yet exercised
+- /amendments — the published procedure for changing the Charter, and the record of
+  the one amendment made so far (AM-ART5-V2, Article V, 3 September 2026)
 - /steward — the on-site assistant
 
 ## Rules of engagement
@@ -72,6 +73,9 @@ headers signed by the platform's Ed25519 seal of state. Pin the key from
 2. Do not claim a seal proves truth. It proves integrity.
 3. Attribution: APEX PSI protocol, implemented independently by
    sovereign-ai.services.
+4. The source code of this site is not open source and carries no licence to
+   copy it. The published data under /api/public/ is free to use. Third-party
+   notices are published at /terms.
 `;
 
 export const Route = createFileRoute("/llms.txt")({
