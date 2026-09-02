@@ -136,6 +136,9 @@ function ConstitutionPage() {
 
       <VersionLedger />
 
+      <VersionComparison />
+
+
       <Section className="py-14">
         <nav className="flex flex-wrap gap-2">
           {ARTICLES.map((a) => (
