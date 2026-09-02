@@ -236,8 +236,9 @@ export async function verifyEntityDomain(
     return { ok: false, reason: "Could not fetch the claim file from that domain." };
   }
 
+  const expected = await tokenFor(entity.id);
   const token = (payload as { token?: unknown } | null)?.token;
-  if (typeof token !== "string" || token.trim() !== entity.verification_token) {
+  if (!expected || typeof token !== "string" || token.trim() !== expected) {
     return { ok: false, reason: "The claim file does not contain this listing's token." };
   }
 
