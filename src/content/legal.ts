@@ -44,5 +44,32 @@ export const FOUNDING_SEALS = [
   },
 ] as const;
 
+/**
+ * IMPLEMENTATION-STATUS FENCES.
+ *
+ * The charter text is sealed: /charter recomputes its SHA-256 digest and prints
+ * whether the live text still matches, so not one word of an Article may be edited
+ * to carry a disclaimer — that would silently break a sealed document and change a
+ * digest members have already signed. The truth about what is built and what is
+ * only specified therefore lives here, rendered BESIDE the charter text, never
+ * inside it. Amending an Article is a governance act under /amendments.
+ */
+
+/** Article III is specification, not machinery. Rendered wherever routing is mentioned. */
+export const ARTICLE3_STATUS =
+  "Article III is charter text: it specifies how surplus would route. It is not operational. No value has ever been routed by this platform, and no routing meter exists to route it.";
+
+/** The financial-services fence. Rendered wherever fees, surplus or value are mentioned. */
+export const CUSTODY_FENCE =
+  "The platform holds no client money, operates no float, takes no spread and provides no payment service. It is not a managed investment scheme and offers no financial product. No Australian Financial Services Licence is held, because the acts performed here — hashing, signing, timestamping and recording — are not financial services. Nothing on this site is financial advice.";
+
+/** No contract exists. Rendered on /contracts and anywhere an on-chain mirror is mentioned. */
+export const ONCHAIN_STATUS =
+  "No smart contract is deployed and no contract address is published, because publishing an address invites funds to a place nobody controls. This site sends no blockchain transaction. The only anchor in use is OpenTimestamps into Bitcoin, performed server-side over Merkle roots and independently verifiable from any receipt.";
+
+/** Why no counters are printed. Rendered on /protocols and any page listing protocols. */
+export const USAGE_STATUS =
+  "No invocation counters are printed for any protocol, because no meter exists to count them. Every number on this platform is either read live from the public ledger, or labelled as a model with its formula printed beside it.";
+
 export const FOUNDING_RECORDS_COUNT = 3;
 export const ENFORCEMENT_ACTIONS_RECORDED = 0;

@@ -271,18 +271,24 @@ export async function runConformance(): Promise<{
     {
       article: "III",
       name: "PSI-Distribution",
-      claim: "Every ratification and every vote is publicly countable.",
-      failureCondition: "Ratification counts are not derivable from public reads.",
-      status: "pass",
-      evidence: `${state.ratifications} ratifications on the current version, counted from the public table.`,
+      claim:
+        "Surplus above a declared sufficiency threshold is routed automatically, without human authorisation, along a published distribution graph.",
+      failureCondition:
+        "No routing executes, no distribution graph is published, or an operator can choose not to route.",
+      status: "fail",
+      evidence:
+        "Not implemented — and this platform fails the Article's own test, which says an operator who can choose not to route has not implemented Article III. No value has ever been routed, no distribution graph is published and no routing meter exists. The 0.1% line in the published fee schedule prices this unimplemented service and is labelled as such wherever it appears. The failure is printed rather than hidden, per Article I.",
     },
     {
       article: "IV",
       name: "PSI-Abundance",
-      claim: "The record is independently timestamped beyond this platform.",
-      failureCondition: "No entry carries an external anchor.",
-      status: (anchors.count ?? 0) > 0 ? "pass" : "fail",
-      evidence: `${anchors.count ?? 0} entries carry a confirmed external anchor.`,
+      claim:
+        "Each member and each workspace can declare a sufficiency floor, signed at declaration time, that no third party can lower.",
+      failureCondition:
+        "No floor can be declared, or a declared floor is not signed and anchored at the moment of declaration.",
+      status: "fail",
+      evidence:
+        "Not implemented. There is no declaration machinery, so no floor has ever been declared, signed or anchored. Article IV supplies the inputs to Article III routing and is unimplemented for the same reason. An earlier version of this check tested external timestamping instead and printed a pass beside an Article with no machinery behind it; that substitution is removed.",
     },
     {
       article: "V",
@@ -293,6 +299,26 @@ export async function runConformance(): Promise<{
       evidence: checkpoint
         ? `Signed checkpoint at size ${checkpoint.size}, root ${checkpoint.rootHash.slice(0, 16)}…`
         : "No signed checkpoint available.",
+    },
+    {
+      article: "V",
+      name: "PSI-Anti-Archon",
+      claim:
+        "The trust anchor is external and archivable: the record is timestamped beyond this platform's control.",
+      failureCondition: "No entry carries a confirmed external anchor.",
+      status: (anchors.count ?? 0) > 0 ? "pass" : "fail",
+      evidence: `${anchors.count ?? 0} entries carry a confirmed external anchor.`,
+    },
+    {
+      article: "V",
+      name: "PSI-Anti-Archon",
+      claim:
+        "Signing authority over the platform's own assertions is not concentrated in one secret held by one party.",
+      failureCondition:
+        "The seal-of-state key derives from a single seed in a single environment, so one holder can sign or stop signing checkpoints and proofs.",
+      status: "fail",
+      evidence:
+        "Not implemented. The seal-of-state key is derived from one secret seed in one environment, so checkpoints, inclusion proofs and signed API responses rest on a single head. Member receipts are unaffected: they are signed with the member's own key and verify offline with no dependency on us, so no single key of ours can invalidate an issued receipt. Sharding the seal-of-state key under a published ceremony is outstanding work, disclosed here rather than hidden.",
     },
   ];
 

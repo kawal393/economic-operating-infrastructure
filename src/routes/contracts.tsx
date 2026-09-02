@@ -1,23 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { toast } from "sonner";
-import { Copy, Wallet } from "lucide-react";
 import { PageHeader, Panel, Section, SectionHeading } from "@/components/primitives";
-import { shortAddress, useWallet } from "@/lib/wallet";
+import { ONCHAIN_STATUS } from "@/content/legal";
 
 export const Route = createFileRoute("/contracts")({
   head: () => ({
     meta: [
-      { title: "On-chain mirror — SovereignAI.sol | Sovereign AI Services" },
+      { title: "On-chain mirror — specified, not deployed | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "Interact with the SovereignAI contract: register members, deploy workspaces, record verifications and anchor Merkle roots on-chain.",
+          "The SovereignAI.sol interface as specified: member registration, workspace deployment, verification records and Merkle-root anchoring. No contract is deployed, no address is published, and this site sends no transaction.",
       },
-      { property: "og:title", content: "On-chain mirror — SovereignAI.sol" },
+      { property: "og:title", content: "On-chain mirror — specified, not deployed" },
       {
         property: "og:description",
-        content: "On-chain member registry, workspace deployment and verification anchoring.",
+        content: "A published interface design. No contract deployed. No transaction is sent.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/contracts" },
@@ -28,7 +25,8 @@ export const Route = createFileRoute("/contracts")({
   component: ContractsPage,
 });
 
-const CONTRACT_ADDRESS = "0x5f9a1c4e08b7d2361ac9be47f0d31528a6c40e9b";
+// No contract address is published on this page, on purpose. An address nobody
+// controls is a place real funds can be sent and never retrieved.
 
 const METHODS = [
   {
@@ -55,8 +53,7 @@ const METHODS = [
   {
     name: "anchorMerkleRoot",
     signature: "anchorMerkleRoot(bytes32 root)",
-    description:
-      "Commits a settlement-window Merkle root, mirrored to Bitcoin via OpenTimestamps.",
+    description: "Commits a settlement-window Merkle root, mirrored to Bitcoin via OpenTimestamps.",
     mutating: true,
   },
   {
@@ -82,62 +79,39 @@ const EVENTS = [
 ];
 
 function ContractsPage() {
-  const { address, connecting, connect } = useWallet();
-  const [pending, setPending] = useState<string | null>(null);
-
-  const call = async (method: (typeof METHODS)[number]) => {
-    if (method.mutating && !address) {
-      toast.error("Connect a wallet to send a transaction.");
-      return;
-    }
-    setPending(method.name);
-    await new Promise((r) => setTimeout(r, 800));
-    setPending(null);
-    if (method.mutating) {
-      toast.success(`${method.name} submitted`, {
-        description: "Awaiting inclusion in the next settlement window.",
-      });
-    } else {
-      toast(`${method.name} returned`, { description: "Read completed against the latest block." });
-    }
-  };
-
   return (
     <>
       <PageHeader
-        eyebrow="On-chain mirror · IN CERTIFICATION"
-        title="SovereignAI.sol — the executable half of the Charter"
-        description="Registry membership, namespace, verification and anchoring are contract state. What the Charter declares, the contract enforces."
-      >
-        <div className="flex flex-wrap items-center gap-3">
-          <button
-            type="button"
-            onClick={connect}
-            disabled={connecting}
-            className="inline-flex items-center gap-2 rounded-md border border-gold/40 bg-gold/10 px-5 py-2.5 text-sm font-medium text-gold transition-colors hover:bg-gold/20 disabled:opacity-60"
-          >
-            <Wallet className="h-4 w-4" />
-            {connecting ? "Connecting…" : shortAddress(address)}
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              void navigator.clipboard?.writeText(CONTRACT_ADDRESS);
-              toast("Contract address copied");
-            }}
-            className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-5 py-2.5 font-mono text-xs transition-colors hover:border-gold/40 hover:text-gold"
-          >
-            <Copy className="h-3.5 w-3.5" />
-            {CONTRACT_ADDRESS.slice(0, 10)}…{CONTRACT_ADDRESS.slice(-6)}
-          </button>
-        </div>
-      </PageHeader>
+        eyebrow="On-chain mirror — specification, not deployed"
+        title="SovereignAI.sol — the interface the Charter would execute against"
+        description="This page publishes a design. No contract is deployed at any address, this site sends no transaction, and nothing here enforces anything yet. What the Charter declares is checked today by mathematics anyone can run for free; the contract layer is the part that has not been built."
+      />
+
+      <Section className="py-14">
+        <Panel className="border-gold/40 bg-gold/5 p-7">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold">
+            Nothing on this page is live — read this first
+          </p>
+          <p className="mt-3.5 text-sm leading-relaxed text-foreground">
+            {ONCHAIN_STATUS} An earlier version of this page printed a contract address and a button
+            under every method which reported “submitted — awaiting inclusion in the next settlement
+            window” after waiting 800 milliseconds. No transaction was ever constructed, signed or
+            broadcast; the button only produced the sentence. Both are removed. A page that tells a
+            reader their transaction was submitted when nothing was sent is the most dangerous kind
+            of lie on a platform whose entire claim is verifiability — and an address nobody
+            controls invites real funds to a place nobody can retrieve them from. The machinery that
+            IS live needs no contract: sealing, hashing, signing and Bitcoin anchoring run
+            server-side and every receipt can be checked by a stranger with no key, no login and no
+            permission from us.
+          </p>
+        </Panel>
+      </Section>
 
       <Section>
         <SectionHeading
-          eyebrow="Interface"
+          eyebrow="Specified interface"
           title="Contract methods"
-          description="Write methods require a connected wallet. Read methods are open to anyone."
+          description="The interface as designed. Mutating methods would require a wallet signature; view methods would be open to anyone. Neither exists yet, so nothing below can be called."
         />
         <div className="mt-10 grid gap-4 lg:grid-cols-2">
           {METHODS.map((m) => (
@@ -158,14 +132,9 @@ function ContractsPage() {
               <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
                 {m.description}
               </p>
-              <button
-                type="button"
-                onClick={() => call(m)}
-                disabled={pending === m.name}
-                className="mt-6 self-start rounded-md border border-border bg-secondary/40 px-5 py-2.5 text-sm font-medium transition-colors hover:border-gold/40 hover:text-gold disabled:opacity-60"
-              >
-                {pending === m.name ? "Submitting…" : m.mutating ? "Send transaction" : "Call"}
-              </button>
+              <p className="mt-6 self-start font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                Not deployed — no call is possible
+              </p>
             </Panel>
           ))}
         </div>
@@ -173,9 +142,9 @@ function ContractsPage() {
 
       <Section className="bg-surface/30">
         <SectionHeading
-          eyebrow="Telemetry"
+          eyebrow="Specified telemetry"
           title="Events"
-          description="Every state change emits a typed event. Indexers reconstruct the nation from logs alone."
+          description="The events the interface would emit. None has ever been emitted, so there are no logs to index and nothing to reconstruct from them."
         />
         <Panel className="mt-10 overflow-x-auto p-7">
           <table className="w-full min-w-[560px] border-collapse text-left">

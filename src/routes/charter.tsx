@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import * as ed from "@noble/ed25519";
 import { CheckCircle2, Download, FileJson, PenLine, XCircle } from "lucide-react";
 import { PageHeader, Panel, Section, SectionHeading } from "@/components/primitives";
+import { ARTICLE3_STATUS, CUSTODY_FENCE } from "@/content/legal";
 import { ARTICLES, POWER_CHAIN } from "@/content/nation";
 import {
   AMENDMENT_THRESHOLDS,
@@ -47,6 +48,53 @@ export const Route = createFileRoute("/charter")({
   component: ConstitutionPage,
 });
 
+/**
+ * Implementation status, rendered BESIDE the sealed charter text.
+ *
+ * Each Article's digest covers its body, guarantees, name, numeral, right, slug and
+ * thesis, so a disclaimer cannot be inserted into an Article without changing a
+ * sealed document that members have already signed. What is built and what is only
+ * specified is therefore stated here and in the conformance checks below.
+ */
+const IMPLEMENTATION_STATUS = [
+  {
+    article: "I",
+    name: "PSI-Resource",
+    state: "Live",
+    detail:
+      "RFC 8785 canonicalisation, SHA-256 digests, permissionless verification with no account or key, and a hash-linked public ledger readable through the API. Live, and free at the point of use.",
+  },
+  {
+    article: "II",
+    name: "PSI-Anti-Scarcity",
+    state: "Partly live",
+    detail:
+      "Sealing any claim into a dated, anchored, permanently addressable record is live and permissionless, which is the permanence this Article describes. A dedicated counter-attestation pairing — an attestation against a withheld resource, with a symmetric right of rebuttal — is not built; attestations exist only inside entity records.",
+  },
+  {
+    article: "III",
+    name: "PSI-Distribution",
+    state: "Not implemented",
+    detail:
+      ARTICLE3_STATUS +
+      " By the Article's own test — an operator who can choose not to route has not implemented Article III — this platform has not implemented it.",
+  },
+  {
+    article: "IV",
+    name: "PSI-Abundance",
+    state: "Not implemented",
+    detail:
+      "No sufficiency floor can be declared, signed or anchored: there is no declaration machinery, and no floor has ever been declared. Article IV supplies the inputs to Article III routing, so it is unimplemented for the same reason.",
+  },
+  {
+    article: "V",
+    name: "PSI-Anti-Archon",
+    state: "Partly live",
+    detail:
+      "Member receipts are signed with the member's own key and verify offline with no dependency on this platform; the ledger is publicly readable and mirrorable through the API; a signed transparency-log checkpoint is published. What is not yet true: the platform's own seal-of-state key derives from a single secret seed in one environment — one head. Until it is sharded under a published ceremony, our checkpoints and inclusion proofs rest on one secret. That is printed as a failed check below rather than buried.",
+  },
+];
+
 function ConstitutionPage() {
   const stateFn = useServerFn(getConstitutionState);
   const state = useQuery({ queryKey: ["Charter-state"], queryFn: () => stateFn() });
@@ -56,7 +104,7 @@ function ConstitutionPage() {
   return (
     <>
       <PageHeader
-        eyebrow={`Founding Document · Version ${version}`} 
+        eyebrow={`Founding Document · Version ${version}`}
         title={CHARTER_DISPLAY_NAME}
         description={`${CHARTER_DISPLAY_TAGLINE} Five unification protocols. Each article states a right, the mechanism that enforces it, and the condition under which the article must be considered unimplemented.`}
       >
@@ -100,6 +148,36 @@ function ConstitutionPage() {
             </a>
           ))}
         </nav>
+
+        <Panel className="mt-8 border-gold/40 bg-gold/5 p-7">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold">
+            Implementation status — beside the sealed text, never inside it
+          </p>
+          <p className="mt-3.5 text-sm leading-relaxed text-foreground">
+            The Charter below is digest-sealed: this page recomputes the hash of the live text and
+            prints whether it still matches, and members ratify by signing that digest. Not one word
+            of an Article can therefore be edited to carry a disclaimer without silently changing a
+            sealed document. So the truth about what is built and what is only specified is stated
+            here, and again in the conformance checks at the foot of this page, which now report
+            Articles III and IV as failures instead of substituting an easier claim for them.
+          </p>
+          <dl className="mt-6 space-y-5">
+            {IMPLEMENTATION_STATUS.map((row) => (
+              <div
+                key={row.article}
+                className="border-t border-border pt-4 first:border-t-0 first:pt-0"
+              >
+                <dt className="font-mono text-[11px] uppercase tracking-[0.16em] text-gold">
+                  Article {row.article} · {row.name} — {row.state}
+                </dt>
+                <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{row.detail}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-6 border-t border-border pt-5 text-xs leading-relaxed text-muted-foreground">
+            {CUSTODY_FENCE}
+          </p>
+        </Panel>
       </Section>
 
       {ARTICLES.map((article, index) => (
@@ -140,9 +218,7 @@ function ConstitutionPage() {
 
               <p className="mt-8 break-all font-mono text-[11px] text-muted-foreground">
                 article digest v{version} ·{" "}
-                <span className="text-gold/70">
-                  {articleDigest(articles[index]!, version)}
-                </span>
+                <span className="text-gold/70">{articleDigest(articles[index]!, version)}</span>
               </p>
             </div>
 
@@ -252,9 +328,7 @@ function VersionLedger() {
           </p>
           <p className="mt-2 text-xs text-muted-foreground">
             Effective{" "}
-            {data?.current
-              ? new Date(data.current.effective_from).toLocaleDateString()
-              : "—"}
+            {data?.current ? new Date(data.current.effective_from).toLocaleDateString() : "—"}
           </p>
         </Panel>
         <Panel className="p-6">
@@ -306,7 +380,9 @@ function VersionLedger() {
         {(data?.versions ?? []).map((v) => (
           <Panel key={v.digest} className="flex flex-wrap items-center gap-x-6 gap-y-2 p-5">
             <span className="min-w-16 font-mono text-sm font-semibold text-gold">v{v.version}</span>
-            <span className="flex-1 text-sm leading-relaxed text-muted-foreground">{v.summary}</span>
+            <span className="flex-1 text-sm leading-relaxed text-muted-foreground">
+              {v.summary}
+            </span>
             <span className="font-mono text-[11px] text-muted-foreground">
               {new Date(v.effective_from).toLocaleDateString()}
             </span>
@@ -329,7 +405,7 @@ function Conformance() {
       <SectionHeading
         eyebrow="Conformance"
         title="The nation runs its own failure conditions first"
-        description="Each article is written as a test. These checks run against live infrastructure — not against a promise. Article V is applied to us before anyone else."
+        description="Each article is written as a test. These checks run against live infrastructure — not against a promise. Where a check fails, the failure and its evidence are printed rather than hidden: Article I applied to us first."
       />
 
       <div className="mt-10 space-y-3">
@@ -337,7 +413,7 @@ function Conformance() {
           <Panel className="p-6 text-sm text-muted-foreground">Running checks…</Panel>
         ) : (
           (data?.checks ?? []).map((c) => (
-            <Panel key={c.article} className="p-6">
+            <Panel key={`${c.article}-${c.claim}`} className="p-6">
               <div className="flex flex-wrap items-start gap-x-6 gap-y-3">
                 {c.status === "pass" ? (
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold" />

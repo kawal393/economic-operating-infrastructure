@@ -36,7 +36,8 @@ const SECTIONS: { heading: string; body: string[] }[] = [
   {
     heading: "2. What we collect",
     body: [
-      "Account data you provide (email, display name, organisation, domain claims). Usage and security telemetry (request metadata, IP address, rate-limit and threat-screening events). Payment records where you purchase metered capacity, handled by our payment processor.",
+      "Account data you provide (email, display name, organisation, domain claims). Usage and security telemetry (request metadata, IP address, rate-limit and threat-screening events).",
+      "No payment data is collected. No payment processor is connected to the platform and nothing on it is chargeable, so there are no purchase records to hold. If metered capacity is ever sold, this policy will be updated before the first transaction and payment records will be handled by that processor, not by us.",
       "We do not sell personal information and we do not use it to train models.",
     ],
   },

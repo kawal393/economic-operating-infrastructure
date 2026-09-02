@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 import { PageHeader, Panel, Section, SectionHeading } from "@/components/primitives";
+import { ARTICLE3_STATUS, CUSTODY_FENCE } from "@/content/legal";
 import { FEES, SCALE_MODEL } from "@/content/nation";
 
 export const Route = createFileRoute("/pricing")({
@@ -10,12 +11,12 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "Transparent microtransaction pricing: $0.001 per verification, $0.01 per Bitcoin anchor, $0.10 per compliance check, 0.1% of routed surplus.",
+          "Published microtransaction schedule: $0.001 per verification, $0.01 per Bitcoin anchor, $0.10 per compliance check. Nothing is chargeable yet: no payment processor is connected, so every action on the platform is currently free at the point of use.",
       },
       { property: "og:title", content: "Pricing — Sovereign AI Services" },
       {
         property: "og:description",
-        content: "No subscriptions. No rent. Metered protocol fees published in the open.",
+        content: "No subscriptions. No rent. A published fee schedule that is not yet chargeable.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/pricing" },
@@ -36,7 +37,7 @@ const TIERS = [
     features: [
       "Registry membership registration and voting rights",
       "Unlimited permissionless local verification",
-      "10,000 metered API verifications / month",
+      "Public API verification — no quota is enforced today",
       "Public receipt explorer access",
       "Community support",
     ],
@@ -55,7 +56,7 @@ const TIERS = [
       "Unlimited workspace deployments",
       "Bitcoin anchoring at $0.01 per anchor",
       "Compliance checks at $0.10 per check",
-      "Surplus routing under Article III (0.1%)",
+      "Surplus routing under Article III (0.1%) — charter text, not operational",
       "Priority settlement windows",
     ],
     cta: "Deploy a workspace",
@@ -93,11 +94,15 @@ const FAQ = [
   ],
   [
     "What does 0.1% surplus routing mean?",
-    "Article III routes surplus above a declared sufficiency floor. Ten basis points of routed value funds the protocol. No spread, no float, no custody.",
+    "It is what Article III says the protocol would charge if surplus were routed. It is charter text, not machinery: no value has ever been routed, no routing meter exists, and nothing is charged. No spread, no float, no custody.",
   ],
   [
     "Can fees change?",
-    "Only by charter-level amendment, voted by members and anchored to Bitcoin. Prices cannot be raised quietly.",
+    "Two different answers, because two different things are priced. The ten-basis-point figure in Article III is sealed charter text and can only change by amendment under /amendments. The metered prices on this page are published in the site source; today the operator can change them, and no fee has ever been put to a member ballot. This page is where any change would appear.",
+  ],
+  [
+    "Can I buy any of this right now?",
+    "No. No payment processor is connected to the platform, no plan is chargeable and no invoice can be issued from this site. Every action available today — sealing, verification, anchoring, reading the ledger — is free at the point of use. The schedule is published so the price is known before it is ever charged, not because it is being charged.",
   ],
 ];
 
@@ -107,8 +112,25 @@ function PricingPage() {
       <PageHeader
         eyebrow="Pricing"
         title="Fractions of a cent. Multiplied by the whole world."
-        description="The old system charges rent for access. This one charges a metered fee for a mathematical service, published in the open and changeable only by vote."
+        description="The old system charges rent for access. This one publishes a metered fee for a mathematical service — in the open, before it is ever charged."
       />
+
+      <Section className="pb-0 pt-10">
+        <Panel className="border-warning/40 bg-warning/5 p-7">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-warning">
+            Nothing on this page can be bought yet
+          </p>
+          <p className="mt-3.5 text-sm leading-relaxed text-foreground">
+            No payment processor is connected to this platform. No plan below is chargeable, no
+            quota is enforced, and no invoice can be issued from this site. Every action available
+            today — sealing, verification, Bitcoin anchoring, reading the public ledger — is free at
+            the point of use. The schedule is published so the price is known in advance rather than
+            discovered later, which is the only honest order to do it in.
+          </p>
+          <p className="mt-3.5 text-sm leading-relaxed text-foreground">{ARTICLE3_STATUS}</p>
+          <p className="mt-3.5 text-sm leading-relaxed text-foreground">{CUSTODY_FENCE}</p>
+        </Panel>
+      </Section>
 
       <Section>
         <div className="grid gap-4 lg:grid-cols-3">
@@ -119,7 +141,7 @@ function PricingPage() {
             >
               {tier.highlight ? (
                 <span className="mb-5 self-start rounded-full border border-gold/40 bg-gold/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-gold">
-                  Most deployed
+                  Metered tier
                 </span>
               ) : null}
               <h2 className="text-lg font-semibold tracking-tight">{tier.name}</h2>

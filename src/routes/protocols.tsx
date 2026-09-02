@@ -1,23 +1,27 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
-import { toast } from "sonner";
 import { PageHeader, Panel, Section, SectionHeading, StatusDot } from "@/components/primitives";
+import { USAGE_STATUS } from "@/content/legal";
 import { INDUSTRY_PROTOCOLS, UNIFICATION_PROTOCOLS, type Protocol } from "@/content/nation";
 
 export const Route = createFileRoute("/protocols")({
   head: () => ({
     meta: [
-      { title: "Protocol Explorer — 5 Unification + 21 Industry Protocols | Sovereign AI Services" },
+      {
+        title:
+          "Protocol Explorer — five charter Articles, twenty-one named domains | Sovereign AI Services",
+      },
       {
         name: "description",
         content:
-          "Browse the five charter-level unification protocols and the twenty-one industry protocols that form the statutory law of the workspace.",
+          "The five charter Articles are in force as published, digest-checked text. The twenty-one industry domains are named by the charter; no specification is published for any of them. No invocation counters are printed, because no meter exists to count them.",
       },
       { property: "og:title", content: "Protocol Explorer" },
       {
         property: "og:description",
-        content: "Five unification protocols. Twenty-one industry protocols. All versioned.",
+        content:
+          "Five Articles in force as published text. Twenty-one domains named, none yet specified.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/protocols" },
@@ -46,8 +50,8 @@ function ProtocolsPage() {
     <>
       <PageHeader
         eyebrow="Protocol Explorer"
-        title="Five charter-level protocols. Twenty-one statutory protocols."
-        description="The unification protocols are charter-level and may not be contradicted. The industry protocols are statutory: domain-specific, versioned, and subordinate to every Article."
+        title="Five charter Articles in force. Twenty-one domains named, none yet specified."
+        description="The five Articles are charter-level: published, digest-checked on every load, and amendable only under the thresholds the Charter sets. The twenty-one industry domains are the fields the charter names. Naming a domain is not publishing a specification, and this page does not claim otherwise."
       >
         <div className="flex flex-wrap items-center gap-3">
           <div className="relative">
@@ -60,34 +64,47 @@ function ProtocolsPage() {
               className="w-72 rounded-md border border-input bg-background py-2.5 pl-10 pr-4 text-sm outline-none transition-colors placeholder:text-muted-foreground/60 focus:border-gold/50"
             />
           </div>
-          <button
-            type="button"
-            onClick={() =>
-              toast("Protocol Engine queued", {
-                description: "Draft submitted to the Protocol evolution engine for versioning.",
-              })
-            }
+          <Link
+            to="/amendments"
             className="rounded-md border border-gold/40 bg-gold/10 px-5 py-2.5 text-sm font-medium text-gold transition-colors hover:bg-gold/20"
           >
-            Generate New Protocol
-          </button>
+            Propose an amendment
+          </Link>
         </div>
       </PageHeader>
 
       <Section>
+        <Panel className="mb-12 border-gold/40 bg-gold/5 p-7">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold">
+            No counters on this page — read this first
+          </p>
+          <p className="mt-3.5 text-sm leading-relaxed text-foreground">
+            {USAGE_STATUS} An earlier version of this page printed an invocation count for every
+            protocol, in gold, as though it had been metered: 418,293 for Article I, 209,771 for
+            PSI-Media, 71,203 for PSI-Commerce. Nothing was metered and no table anywhere counts
+            these events. The numbers are removed rather than relabelled, because a figure with no
+            source cannot be made honest by writing “modelled” beside it. The same reason removed
+            the version numbers from the twenty-one domains: an unpublished specification has no
+            version. Changing protocol law has one real path, and it is{" "}
+            <Link to="/amendments" className="text-gold underline underline-offset-2">
+              /amendments
+            </Link>{" "}
+            — signed, digested, fourteen days of deliberation, public record.
+          </p>
+        </Panel>
         <SectionHeading
           eyebrow="Charter-level"
-          title="Unification protocols"
-          description="Five articles. Amendable only under the thresholds set by the Charter."
+          title="The five Articles"
+          description="In force as published charter text, version 1. Amendable only under the thresholds the Charter sets."
         />
         <Grid protocols={unification} onSelect={setSelected} />
       </Section>
 
       <Section className="bg-surface/30">
         <SectionHeading
-          eyebrow="Statutory"
+          eyebrow="Named domains"
           title="Industry protocols"
-          description="Twenty-one domain protocols carrying sector-specific compliance rules and conformity receipts."
+          description="Twenty-one domains the charter names as the fields it covers. No specification is published for any of them yet, so no conformity receipt can be issued against one."
         />
         <Grid protocols={industry} onSelect={setSelected} />
       </Section>
@@ -104,7 +121,7 @@ function ProtocolsPage() {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="eyebrow">
-                  {selected.kind === "unification" ? "Charter-level" : "Statutory"}
+                  {selected.kind === "unification" ? "Charter-level" : "Named domain"}
                 </p>
                 <h2 className="mt-2 text-xl font-semibold tracking-tight">{selected.name}</h2>
               </div>
@@ -119,11 +136,13 @@ function ProtocolsPage() {
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               {selected.description}
             </p>
-            <dl className="mt-6 grid grid-cols-3 gap-4 border-t border-border pt-5">
+            <p className="mt-4 border-t border-border pt-5 text-sm leading-relaxed text-muted-foreground">
+              {selected.specification}
+            </p>
+            <dl className="mt-5 grid grid-cols-2 gap-4">
               {[
                 ["Version", selected.version],
                 ["Status", selected.status],
-                ["Usage", selected.usageCount.toLocaleString()],
               ].map(([k, v]) => (
                 <div key={k}>
                   <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
@@ -140,13 +159,7 @@ function ProtocolsPage() {
   );
 }
 
-function Grid({
-  protocols,
-  onSelect,
-}: {
-  protocols: Protocol[];
-  onSelect: (p: Protocol) => void;
-}) {
+function Grid({ protocols, onSelect }: { protocols: Protocol[]; onSelect: (p: Protocol) => void }) {
   if (protocols.length === 0) {
     return (
       <p className="mt-10 font-mono text-sm text-muted-foreground">
@@ -162,10 +175,10 @@ function Grid({
           <Panel interactive className="h-full">
             <div className="flex items-center justify-between gap-3">
               <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-                v{p.version}
+                {p.version === "—" ? "unversioned" : `v${p.version}`}
               </span>
               <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-                <StatusDot active={p.status === "Active"} />
+                <StatusDot active={p.status === "In force"} />
                 {p.status}
               </span>
             </div>
@@ -173,9 +186,7 @@ function Grid({
               {p.name}
             </h3>
             <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{p.description}</p>
-            <p className="mt-5 font-mono text-xs text-gold">
-              {p.usageCount.toLocaleString()} invocations
-            </p>
+            <p className="mt-5 font-mono text-xs text-muted-foreground">{p.specification}</p>
           </Panel>
         </button>
       ))}

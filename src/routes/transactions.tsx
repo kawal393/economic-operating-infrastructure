@@ -1,21 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { PageHeader, Panel, Section, SectionHeading, StatBlock } from "@/components/primitives";
-import { FEES } from "@/content/nation";
+import { PageHeader, Panel, Section, SectionHeading } from "@/components/primitives";
+import { ARTICLE3_STATUS, CUSTODY_FENCE } from "@/content/legal";
+import { FEES, SCALE_MODEL } from "@/content/nation";
 
 export const Route = createFileRoute("/transactions")({
   head: () => ({
     meta: [
-      { title: "Transaction Dashboard — Protocol Revenue | Sovereign AI Services" },
+      { title: "Transaction Model — What the Fee Schedule Would Produce | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "Simulated projection of the published fee schedule — not realised activity. Microtransaction volume, fee mix and protocol revenue modelled across verifications, Bitcoin anchors, compliance checks and surplus routing.",
+          "No transaction has ever been charged on this platform: no payment processor is connected. This page publishes the fee schedule and the arithmetic behind the scale model, with its formula printed, and points to the live public ledger for what has actually happened.",
       },
-      { property: "og:title", content: "Transaction Dashboard" },
+      { property: "og:title", content: "Transaction Model" },
       {
         property: "og:description",
-        content: "Microtransaction volume and protocol revenue at workspace scale.",
+        content:
+          "The published fee schedule and the scale model with its formula. No transaction has ever been charged.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/transactions" },
@@ -26,178 +27,60 @@ export const Route = createFileRoute("/transactions")({
   component: TransactionsPage,
 });
 
-const RANGES = ["24h", "7d", "30d", "12m"] as const;
-type Range = (typeof RANGES)[number];
-
-const SERIES: Record<Range, number[]> = {
-  "24h": [42, 55, 38, 61, 74, 58, 82, 69, 91, 77, 88, 96],
-  "7d": [58, 64, 51, 72, 80, 69, 94, 88, 76, 92, 99, 104],
-  "30d": [30, 41, 52, 48, 66, 71, 63, 84, 79, 95, 108, 121],
-  "12m": [12, 19, 27, 34, 45, 52, 68, 74, 89, 101, 128, 164],
-};
-
-const TOTALS: Record<Range, { volume: string; revenue: string; anchors: string; avg: string }> = {
-  "24h": { volume: "41,208,996", revenue: "$62,104", anchors: "18,442", avg: "$0.0015" },
-  "7d": { volume: "298,441,027", revenue: "$441,882", anchors: "129,004", avg: "$0.0015" },
-  "30d": { volume: "1,284,930,551", revenue: "$1,912,447", anchors: "552,118", avg: "$0.0015" },
-  "12m": { volume: "13,904,221,760", revenue: "$21,406,884", anchors: "6,201,884", avg: "$0.0015" },
-};
-
-const MIX = [
-  { label: "Verification", share: 62, revenue: "$1.19M" },
-  { label: "Bitcoin anchor", share: 18, revenue: "$344K" },
-  { label: "Compliance check", share: 13, revenue: "$249K" },
-  { label: "Surplus routing", share: 7, revenue: "$134K" },
-];
-
-const LEDGER = [
-  ["tx_c8f21a", "Verification", "psi-media", "$0.001", "2026-08-06 09:14"],
-  ["tx_c8f1e4", "Compliance", "psi-finance", "$0.100", "2026-08-06 09:13"],
-  ["tx_c8f0b9", "Anchor", "core-anchor", "$0.010", "2026-08-06 09:12"],
-  ["tx_c8ef77", "Surplus routing", "core-surplus", "$3.482", "2026-08-06 09:11"],
-  ["tx_c8ee02", "Verification", "psi-health", "$0.001", "2026-08-06 09:10"],
-  ["tx_c8ed55", "Verification", "psi-legal", "$0.001", "2026-08-06 09:09"],
-  ["tx_c8ec13", "Compliance", "psi-energy", "$0.100", "2026-08-06 09:08"],
-  ["tx_c8eb90", "Anchor", "core-anchor", "$0.010", "2026-08-06 09:07"],
-];
+// NOTHING ON THIS PAGE IS METERED, SIMULATED OR STREAMED.
+//
+// This route used to render a “Transaction Dashboard”: four headline counters
+// (41,208,996 transactions in 24h, 13,904,221,760 a year, $21,406,884 of revenue),
+// a twelve-bar revenue trend, a fee-mix split by percentage, and a table headed
+// “Live transaction stream” carrying eight rows with ids, protocols, dollar amounts
+// and timestamps. Every one of those numbers was typed into this file. There was no
+// meter, no payment processor and no formula that produced any of them, and the
+// page's own warning banner contradicted the table beneath it.
+//
+// What remains is what can be defended: the published fee schedule, the scale model
+// with its arithmetic printed beside it, and a pointer to the live ledger, which is
+// the only record of anything that has actually happened.
 
 function TransactionsPage() {
-  const [range, setRange] = useState<Range>("30d");
-  const series = SERIES[range];
-  const max = useMemo(() => Math.max(...series), [series]);
-  const totals = TOTALS[range];
-
   return (
     <>
       <PageHeader
-        eyebrow="Transaction Dashboard"
-        title="Revenue is a by-product of usefulness at scale"
-        description="No subscriptions, no rent, no spread. Fractions of a cent, multiplied by billions of verifications the world actually needs."
+        eyebrow="Transaction model"
+        title="No transaction has ever been charged on this platform"
+        description="No payment processor is connected, so nothing here is chargeable and no revenue has been collected. What is published below is the price list and the arithmetic — stated before a cent is ever taken, so it can be checked against what happens later."
       >
-        <div className="inline-flex rounded-md border border-border bg-secondary/40 p-1">
-          {RANGES.map((r) => (
-            <button
-              key={r}
-              type="button"
-              onClick={() => setRange(r)}
-              className={`rounded px-4 py-2 font-mono text-xs uppercase tracking-[0.14em] transition-colors ${
-                range === r ? "bg-gold/15 text-gold" : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {r}
-            </button>
-          ))}
-        </div>
+        <Link
+          to="/ledger"
+          className="inline-flex items-center gap-2 rounded-md border border-gold/40 bg-gold/10 px-5 py-2.5 text-sm font-medium text-gold transition-colors hover:bg-gold/20"
+        >
+          Open the live public ledger
+        </Link>
       </PageHeader>
 
       <Section className="pb-0 pt-10">
-        <Panel className="border-warning/40 bg-warning/5 p-5">
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-warning">
-            Simulated model — not realised activity
+        <Panel className="border-warning/40 bg-warning/5 p-7">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-warning">
+            What this page used to claim
           </p>
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-            Every figure on this page is a projection of the published fee schedule, not realised
-            revenue or volume. The platform has taken no paid transactions yet. The live public
-            record is the{" "}
-            <Link to="/ledger" className="text-gold underline underline-offset-4">
-              ledger
-            </Link>
-            .
+          <p className="mt-3.5 text-sm leading-relaxed text-foreground">
+            An earlier version of this route printed a transaction volume of 41,208,996 in
+            twenty-four hours and 13,904,221,760 a year, protocol revenue of $21,406,884, a
+            twelve-bar revenue trend, a fee mix split into percentages, and a table headed “Live
+            transaction stream” with eight settled rows carrying ids, dollar amounts and timestamps.
+            None of it came from a meter, a database or a payment. A banner at the top said the
+            figures were simulated while the table below presented them as live, which is worse than
+            either on its own. All of it is deleted rather than relabelled: a number with no source
+            and no formula cannot be made honest by writing “modelled” beside it.
           </p>
+          <p className="mt-3.5 text-sm leading-relaxed text-foreground">{CUSTODY_FENCE}</p>
         </Panel>
-      </Section>
-
-      <Section className="py-14">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatBlock label="Transaction volume" value={totals.volume} delta={`window ${range}`} />
-          <StatBlock label="Protocol revenue" value={totals.revenue} delta={`window ${range}`} />
-          <StatBlock label="Bitcoin anchors" value={totals.anchors} delta={`window ${range}`} />
-          <StatBlock label="Average fee" value={totals.avg} delta="per transaction" />
-        </div>
-      </Section>
-
-      <Section className="bg-surface/30">
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_380px]">
-          <Panel className="p-7">
-            <p className="eyebrow">Revenue trend — {range}</p>
-            <div className="mt-8 flex h-56 items-end gap-2">
-              {series.map((v, i) => (
-                <div key={i} className="group flex flex-1 flex-col items-center gap-2">
-                  <div
-                    className="w-full rounded-t-sm bg-gradient-to-t from-gold/25 to-gold transition-opacity group-hover:opacity-80"
-                    style={{ height: `${(v / max) * 100}%` }}
-                  />
-                  <span className="font-mono text-[9px] text-muted-foreground">{i + 1}</span>
-                </div>
-              ))}
-            </div>
-            <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-              Indexed protocol revenue per interval
-            </p>
-          </Panel>
-
-          <Panel className="p-7">
-            <p className="eyebrow">Fee mix</p>
-            <ul className="mt-6 space-y-6">
-              {MIX.map((m) => (
-                <li key={m.label}>
-                  <div className="flex items-baseline justify-between gap-4">
-                    <span className="text-sm text-foreground">{m.label}</span>
-                    <span className="font-mono text-xs text-gold">{m.revenue}</span>
-                  </div>
-                  <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
-                    <div className="h-full bg-gold" style={{ width: `${m.share}%` }} />
-                  </div>
-                  <span className="mt-1.5 block font-mono text-[10px] text-muted-foreground">
-                    {m.share}% of revenue
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </Panel>
-        </div>
       </Section>
 
       <Section>
         <SectionHeading
-          eyebrow="Ledger"
-          title="Live transaction stream"
-          description="Each row is a metered protocol action with a signed receipt behind it."
-        />
-        <Panel className="mt-10 overflow-x-auto p-7">
-          <table className="w-full min-w-[640px] border-collapse text-left">
-            <thead>
-              <tr className="border-b border-border">
-                {["ID", "Type", "Protocol", "Fee", "Timestamp"].map((h) => (
-                  <th
-                    key={h}
-                    className="py-3 pr-6 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground"
-                  >
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border">
-              {LEDGER.map((row) => (
-                <tr key={row[0]}>
-                  <td className="py-3.5 pr-6 font-mono text-xs text-gold">{row[0]}</td>
-                  <td className="py-3.5 pr-6 text-sm text-foreground">{row[1]}</td>
-                  <td className="py-3.5 pr-6 font-mono text-xs text-muted-foreground">{row[2]}</td>
-                  <td className="py-3.5 pr-6 font-mono text-sm text-foreground">{row[3]}</td>
-                  <td className="py-3.5 font-mono text-xs text-muted-foreground">{row[4]}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Panel>
-      </Section>
-
-      <Section className="bg-surface/30">
-        <SectionHeading
-          eyebrow="Schedule"
-          title="What each action costs"
-          description="Published, uniform, and identical for every member."
+          eyebrow="Published schedule"
+          title="What each action would cost"
+          description="Uniform, published, and identical for every member. These are the prices the platform commits to before charging them; the routing line is fenced because the service behind it does not run."
         />
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {FEES.map((fee) => (
@@ -212,6 +95,80 @@ function TransactionsPage() {
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{fee.note}</p>
             </Panel>
           ))}
+        </div>
+        <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted-foreground">
+          {ARTICLE3_STATUS}
+        </p>
+      </Section>
+
+      <Section className="bg-surface/30">
+        <SectionHeading
+          eyebrow="Scale model"
+          title="The arithmetic, with its assumptions printed"
+          description="A model is only honest if a stranger can redo it. These rows are projections from the published schedule at a stated usage assumption, not forecasts and not revenue."
+        />
+        <Panel className="mt-10 overflow-x-auto p-7">
+          <table className="w-full min-w-[520px] border-collapse text-left">
+            <thead>
+              <tr className="border-b border-border">
+                {["Horizon", "Annual verifications", "Annual protocol revenue"].map((h) => (
+                  <th
+                    key={h}
+                    className="py-3 pr-6 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground"
+                  >
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border">
+              {SCALE_MODEL.map((row) => (
+                <tr key={row.horizon}>
+                  <td className="py-4 pr-6 text-sm font-medium text-foreground">
+                    {row.horizon} <span className="text-warning">(modelled)</span>
+                  </td>
+                  <td className="py-4 pr-6 font-mono text-sm text-muted-foreground">
+                    {row.verifications}
+                  </td>
+                  <td className="py-4 font-mono text-sm text-gold">{row.revenue}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Panel>
+        <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted-foreground">
+          Formula: 300 metered verifications per member per month × 12 × $0.001 — for example, 1M
+          members × 3,600 verifications/year × $0.001 = $3.6M/year. Redo it yourself; the inputs are
+          the member count and the published price, nothing else. Realised revenue to date is zero,
+          because no payment processor is connected to this platform.
+        </p>
+      </Section>
+
+      <Section>
+        <SectionHeading
+          eyebrow="The real record"
+          title="What has actually happened"
+          description="Seals published to the hash-linked ledger, and the Bitcoin anchors that timestamp them. Read live, by anyone, with no account and no key."
+        />
+        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <Link to="/ledger">
+            <Panel interactive className="h-full">
+              <p className="eyebrow">Public ledger</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Every published seal, hash-linked to the one before it, with its receipt and its
+                anchor status. The counters on that page are read from the database at load.
+              </p>
+            </Panel>
+          </Link>
+          <Link to="/pricing">
+            <Panel interactive className="h-full">
+              <p className="eyebrow">Pricing</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                The same schedule with the membership tiers, and the statement of what can and
+                cannot be bought today.
+              </p>
+            </Panel>
+          </Link>
         </div>
       </Section>
     </>

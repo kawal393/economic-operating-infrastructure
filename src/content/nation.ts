@@ -213,7 +213,6 @@ export const BRANCHES: Branch[] = [
   },
 ];
 
-
 export const POWER_CHAIN = [
   {
     step: "SEAL",
@@ -242,65 +241,99 @@ export const POWER_CHAIN = [
   },
 ] as const;
 
+/**
+ * NO INVOCATION COUNTERS.
+ *
+ * An earlier version of this file carried a hardcoded `usageCount` for all 26
+ * protocols - 418,293 "invocations" for Article I, 132,904 for PSI-Finance,
+ * 71,203 for PSI-Commerce - which /protocols printed in gold as fact. No table
+ * in the database counts protocol invocations, so those numbers had no source
+ * and no formula: they could not honestly be labelled modelled, only removed.
+ * The industry version numbers (2.1.0, 3.0.0, 1.6.0 ...) went with them for the
+ * same reason - no specification is published for any of these domains, so no
+ * version of one exists to print. The five Articles keep version 1.0.0 because
+ * that is real: charter version 1, in force, digest recomputed live at /charter.
+ */
 export type Protocol = {
   id: string;
   name: string;
   description: string;
   kind: "unification" | "industry";
   version: string;
-  status: "Active" | "Draft";
-  usageCount: number;
+  status: "In force" | "Named domain";
+  specification: string;
 };
 
-export const UNIFICATION_PROTOCOLS: Protocol[] = ARTICLES.map((a, i) => ({
+export const UNIFICATION_PROTOCOLS: Protocol[] = ARTICLES.map((a) => ({
   id: a.id,
   name: `Article ${a.numeral}: ${a.name}`,
   description: a.right,
   kind: "unification" as const,
   version: "1.0.0",
-  status: "Active" as const,
-  usageCount: [418293, 297140, 186552, 121874, 96310][i] ?? 0,
+  status: "In force" as const,
+  specification: "Published charter text. Digest recomputed live at /charter.",
 }));
 
 export const INDUSTRY_PROTOCOLS: Protocol[] = [
-  ["psi-health", "PSI-Health", "Clinical decision provenance and consent receipts", "2.1.0", "Active", 84120],
-  ["psi-finance", "PSI-Finance", "Model-driven credit and trading decision attestation", "2.0.3", "Active", 132904],
-  ["psi-energy", "PSI-Energy", "Grid dispatch and carbon claim verification", "1.4.0", "Active", 41288],
-  ["psi-media", "PSI-Media", "Synthetic content marking and provenance chains", "3.0.0", "Active", 209771],
-  ["psi-logistics", "PSI-Logistics", "Chain-of-custody sealing across carriers", "1.9.2", "Active", 57340],
-  ["psi-legal", "PSI-Legal", "Evidentiary sealing and disclosure attestation", "1.6.1", "Active", 38914],
-  ["psi-education", "PSI-Education", "Credential issuance and assessment integrity", "1.3.0", "Active", 26507],
-  ["psi-gov", "PSI-System architecture", "Public-sector algorithmic accountability records", "2.2.0", "Active", 63180],
-  ["psi-defence", "PSI-Defence", "Autonomy oversight and engagement audit trails", "1.1.0", "Draft", 4102],
-  ["psi-insurance", "PSI-Insurance", "Underwriting model transparency and claim receipts", "1.7.0", "Active", 45830],
-  ["psi-agri", "PSI-Agriculture", "Yield, input and provenance attestation", "1.2.4", "Active", 18294],
-  ["psi-mfg", "PSI-Manufacturing", "Process telemetry and defect-chain sealing", "1.5.0", "Active", 31760],
-  ["psi-retail", "PSI-Retail", "Pricing transparency and anti-scarcity disclosure", "1.4.2", "Active", 52218],
-  ["psi-telco", "PSI-Telecom", "Traffic shaping and routing decision records", "1.0.9", "Active", 22405],
-  ["psi-realestate", "PSI-RealEstate", "Valuation model and title provenance", "1.1.5", "Active", 15982],
-  ["psi-labour", "PSI-Labour", "Algorithmic management and scheduling audit", "1.0.2", "Draft", 6740],
-  ["psi-climate", "PSI-Climate", "Emissions accounting and offset verification", "2.0.0", "Active", 48117],
-  ["psi-research", "PSI-Research", "Result reproducibility and dataset sealing", "1.8.0", "Active", 29653],
-  ["psi-identity", "PSI-Identity", "Personhood and agent attribution without surveillance", "2.3.1", "Active", 118460],
-  ["psi-commerce", "PSI-Commerce", "Marketplace surplus routing and settlement", "1.6.0", "Active", 71203],
-  ["psi-culture", "PSI-Culture", "Attribution and derivative lineage for creative work", "1.0.0", "Draft", 3891],
-].map(([id, name, description, version, status, usageCount]) => ({
+  ["psi-health", "PSI-Health", "Clinical decision provenance and consent receipts"],
+  ["psi-finance", "PSI-Finance", "Model-driven credit and trading decision attestation"],
+  ["psi-energy", "PSI-Energy", "Grid dispatch and carbon claim verification"],
+  ["psi-media", "PSI-Media", "Synthetic content marking and provenance chains"],
+  ["psi-logistics", "PSI-Logistics", "Chain-of-custody sealing across carriers"],
+  ["psi-legal", "PSI-Legal", "Evidentiary sealing and disclosure attestation"],
+  ["psi-education", "PSI-Education", "Credential issuance and assessment integrity"],
+  ["psi-gov", "PSI-System architecture", "Public-sector algorithmic accountability records"],
+  ["psi-defence", "PSI-Defence", "Autonomy oversight and engagement audit trails"],
+  ["psi-insurance", "PSI-Insurance", "Underwriting model transparency and claim receipts"],
+  ["psi-agri", "PSI-Agriculture", "Yield, input and provenance attestation"],
+  ["psi-mfg", "PSI-Manufacturing", "Process telemetry and defect-chain sealing"],
+  ["psi-retail", "PSI-Retail", "Pricing transparency and anti-scarcity disclosure"],
+  ["psi-telco", "PSI-Telecom", "Traffic shaping and routing decision records"],
+  ["psi-realestate", "PSI-RealEstate", "Valuation model and title provenance"],
+  ["psi-labour", "PSI-Labour", "Algorithmic management and scheduling audit"],
+  ["psi-climate", "PSI-Climate", "Emissions accounting and offset verification"],
+  ["psi-research", "PSI-Research", "Result reproducibility and dataset sealing"],
+  ["psi-identity", "PSI-Identity", "Personhood and agent attribution without surveillance"],
+  ["psi-commerce", "PSI-Commerce", "Marketplace surplus routing and settlement"],
+  ["psi-culture", "PSI-Culture", "Attribution and derivative lineage for creative work"],
+].map(([id, name, description]) => ({
   id: id as string,
   name: name as string,
   description: description as string,
   kind: "industry" as const,
-  version: version as string,
-  status: status as "Active" | "Draft",
-  usageCount: usageCount as number,
+  version: "—",
+  status: "Named domain" as const,
+  specification:
+    "Named by the charter. No specification published, so no conformance receipt can be issued against it.",
 }));
 
 export const ALL_PROTOCOLS = [...UNIFICATION_PROTOCOLS, ...INDUSTRY_PROTOCOLS];
 
 export const FEES = [
-  { label: "Verification", price: "$0.001", unit: "per verification", note: "Permissionless recompute is free; metered API verification carries the fee." },
-  { label: "Bitcoin anchor", price: "$0.01", unit: "per anchor", note: "Merkle inclusion in the next settlement window, OpenTimestamps proof included." },
-  { label: "Compliance check", price: "$0.10", unit: "per check", note: "Sector protocol evaluation with a signed conformity receipt." },
-  { label: "Surplus routing", price: "0.1%", unit: "of routed surplus", note: "Ten basis points on value routed under Article III. No spread, no float." },
+  {
+    label: "Verification",
+    price: "$0.001",
+    unit: "per verification",
+    note: "Permissionless recompute is free; metered API verification carries the fee.",
+  },
+  {
+    label: "Bitcoin anchor",
+    price: "$0.01",
+    unit: "per anchor",
+    note: "Merkle inclusion in the next settlement window, OpenTimestamps proof included.",
+  },
+  {
+    label: "Compliance check",
+    price: "$0.10",
+    unit: "per check",
+    note: "Sector protocol evaluation with a signed conformity receipt.",
+  },
+  {
+    label: "Surplus routing",
+    price: "0.1%",
+    unit: "of routed surplus — not operational",
+    note: "A published price for a service the platform does not run: Article III specifies routing, no value has ever been routed, and no routing meter exists. No spread, no float, no custody.",
+  },
 ] as const;
 
 export const SCALE_MODEL = [
@@ -308,6 +341,5 @@ export const SCALE_MODEL = [
   { horizon: "100M members", verifications: "365B", revenue: "$365M" },
   { horizon: "1B members", verifications: "3.65T", revenue: "$3.65B+" },
 ] as const;
-
 
 export const FOOTER_CREED = "The math does not negotiate. Neither do we.";

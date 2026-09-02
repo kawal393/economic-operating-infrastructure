@@ -43,7 +43,7 @@ const CLAUSES: { heading: string; body: string[] }[] = [
   {
     heading: "3. Vocabulary",
     body: [
-      "Terms such as \"Charter\", \"Charter Article\", \"workspace\", \"registry membership\", \"agent credential\", \"operator account\", \"platform steward\" and \"cryptographic defence layer\" are product names for software features. They carry no legal meaning and create no legal status.",
+      'Terms such as "Charter", "Charter Article", "workspace", "registry membership", "agent credential", "operator account", "platform steward" and "cryptographic defence layer" are product names for software features. They carry no legal meaning and create no legal status.',
     ],
   },
   {
@@ -69,7 +69,9 @@ const CLAUSES: { heading: string; body: string[] }[] = [
   {
     heading: "7. Fees",
     body: [
-      "Self-verification, offline verification, record mirroring and Charter access are free. Metered infrastructure (API verification, anchoring, compliance checks) and routed-surplus fees are charged per the published fee schedule. Prices may change on notice.",
+      "Self-verification, offline verification, record mirroring and Charter access are free and will remain free. A published fee schedule prices metered infrastructure (API verification, anchoring, compliance checks). As at the date of these Terms no payment processor is connected to the platform, so no fee is charged or collectable, and every action available on the platform is free at the point of use.",
+      "The routed-surplus line in that schedule corresponds to Charter Article III, which is not operational: no value has ever been routed by this platform and no routing meter exists. It is published as a price for a service that is specified but not run, not as a charge in force.",
+      "If metering is switched on, the price will be published on the pricing page before it is charged. The platform holds no client money, operates no float, takes no spread and provides no payment service.",
     ],
   },
   {
@@ -81,7 +83,7 @@ const CLAUSES: { heading: string; body: string[] }[] = [
   {
     heading: "9. Availability, warranties and liability",
     body: [
-      "The platform is provided \"as is\" without warranty of uninterrupted availability or fitness for a particular purpose. To the maximum extent permitted by law, and subject to the Australian Consumer Law, our aggregate liability is limited to the fees you paid in the twelve months preceding the claim.",
+      'The platform is provided "as is" without warranty of uninterrupted availability or fitness for a particular purpose. To the maximum extent permitted by law, and subject to the Australian Consumer Law, our aggregate liability is limited to the fees you paid in the twelve months preceding the claim.',
     ],
   },
   {

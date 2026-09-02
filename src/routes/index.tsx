@@ -13,7 +13,7 @@ import { Panel, Section, SectionHeading } from "@/components/primitives";
 import { FoundingSeals } from "@/components/founding-seals";
 import { ActivityFeed, GenesisCounters, SealsSparkline } from "@/components/genesis";
 import { HOMEPAGE_INTEGRATION_LINKS } from "@/content/integrations";
-import { INDEPENDENCE_LINE, PRECISION_CLAIM } from "@/content/legal";
+import { ARTICLE3_STATUS, INDEPENDENCE_LINE, PRECISION_CLAIM } from "@/content/legal";
 import { ARTICLES, BRANCHES, FEES, POWER_CHAIN, SCALE_MODEL } from "@/content/nation";
 
 const TITLE = "SOVEREIGNAI.SERVICES — THE OPERATING LAYER OF THE AI ECONOMY";
@@ -128,9 +128,11 @@ function Hero() {
         >
           Registry membership is <span className="text-gold">free</span>. Agent accounts and
           operator accounts join at no cost, deploy workspaces, and connect the websites, products
-          and protocols they already run. The platform supplies the infrastructure — cryptographic
-          verification, Bitcoin anchoring, post-quantum signing, protocol evolution and surplus
-          routing. Revenue comes from metered transaction fees.
+          and protocols they already run. What is live today — cryptographic verification, Bitcoin
+          anchoring, post-quantum signing, the public ledger — is free at the point of use, because
+          no payment processor is connected to this platform and nothing here takes money. Protocol
+          law changes only through the published amendment procedure. Surplus routing under Article
+          III is charter text with no implementation behind it.
         </p>
 
         <div
@@ -144,7 +146,9 @@ function Hero() {
             Seal something now
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
-          <Link to="/verify" search={{ hash: "" }}
+          <Link
+            to="/verify"
+            search={{ hash: "" }}
             className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold"
           >
             Verify a receipt
@@ -436,7 +440,7 @@ function RevenueModel() {
       <SectionHeading
         eyebrow="Economic model"
         title="Free at the base. Metered at the edge."
-        description="The platform makes no claim on membership, on verification you perform yourself, or on the record you mirror. It charges for metered infrastructure and for ten basis points on routed surplus."
+        description="The platform makes no claim on membership, on verification you perform yourself, or on the record you mirror. The published schedule prices metered infrastructure; the routing line is a price for a service that is not operational, and no payment processor is connected, so nothing is chargeable today."
       />
 
       <div className="mt-12 grid gap-4 lg:grid-cols-3">
@@ -492,7 +496,11 @@ function RevenueModel() {
         Scale figures are modelled projections from the published fee schedule, not realised
         revenue. Formula: 300 metered verifications per member per month × 12 × $0.001 — for
         example, 1M members × 3,600 verifications/year × $0.001 = $3.6M/year. They are stated so
-        they can be checked rather than believed.
+        they can be checked rather than believed. No payment processor is connected to the platform,
+        so no row above has been collected: realised revenue to date is zero.
+      </p>
+      <p className="mt-4 max-w-3xl text-xs leading-relaxed text-muted-foreground">
+        {ARTICLE3_STATUS}
       </p>
     </Section>
   );
