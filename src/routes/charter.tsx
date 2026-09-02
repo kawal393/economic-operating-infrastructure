@@ -13,6 +13,8 @@ import {
   CHARTER_DISPLAY_NAME,
   CHARTER_DISPLAY_TAGLINE,
   articleDigest,
+  articleTextDigest,
+  articlesForVersion,
   canonicalArticles,
 } from "@/lib/constitution";
 import {
@@ -99,7 +101,7 @@ function ConstitutionPage() {
   const stateFn = useServerFn(getConstitutionState);
   const state = useQuery({ queryKey: ["Charter-state"], queryFn: () => stateFn() });
   const version = state.data?.current?.version ?? 1;
-  const articles = canonicalArticles();
+  const articles = canonicalArticles(articlesForVersion(version));
 
   return (
     <>
@@ -305,6 +307,105 @@ function ConstitutionPage() {
         </Panel>
       </Section>
     </>
+  );
+}
+
+/**
+ * Version comparison. Article V was amended in version 2; Articles I-IV were
+ * carried forward byte-identical. The text digest below carries no version
+ * number in its input, so an identical digest across two versions is proof the
+ * words did not move; the versioned digest differs for every Article by
+ * construction, because the version number is part of what it hashes.
+ */
+function VersionComparison() {
+  const v1 = canonicalArticles(articlesForVersion(1));
+  const v2 = canonicalArticles(articlesForVersion(2));
+
+  return (
+    <Section id="versions" className="py-14">
+      <SectionHeading
+        eyebrow="Amendment · v1 → v2"
+        title="Article V was amended in public. The other four did not move."
+        description="Version 1 (effective 6 August 2026) remains retrievable. Version 2 (effective 3 September 2026) replaced Article V and carried Articles I to IV forward unchanged. The digests below are recomputable from the published JSON."
+      />
+
+      <div className="mt-10 overflow-x-auto">
+        <table className="w-full min-w-[720px] border-collapse text-left">
+          <thead>
+            <tr className="border-b border-border">
+              <th className="py-3 pr-4 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                Article
+              </th>
+              <th className="py-3 pr-4 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                Text digest v1
+              </th>
+              <th className="py-3 pr-4 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                Text digest v2
+              </th>
+              <th className="py-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                State
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {v2.map((article, i) => {
+              const d1 = articleTextDigest(v1[i]!);
+              const d2 = articleTextDigest(article);
+              const same = d1 === d2;
+              return (
+                <tr key={article.numeral} className="border-b border-border/60 align-top">
+                  <td className="py-4 pr-4 font-mono text-sm text-gold">{article.numeral}</td>
+                  <td className="py-4 pr-4 break-all font-mono text-[10px] text-muted-foreground">
+                    {d1}
+                  </td>
+                  <td className="py-4 pr-4 break-all font-mono text-[10px] text-muted-foreground">
+                    {d2}
+                  </td>
+                  <td className="py-4 font-mono text-[10px] uppercase tracking-[0.14em]">
+                    <span className={same ? "text-muted-foreground" : "text-gold"}>
+                      {same ? "unchanged" : "amended"}
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="mt-8 grid gap-4 lg:grid-cols-2">
+        <Panel className="p-6">
+          <p className="eyebrow">Article V — version 1 (superseded)</p>
+          <p className="mt-3 text-sm font-medium text-muted-foreground">{v1[4]!.name}</p>
+          <div className="mt-4 space-y-3">
+            {v1[4]!.body.map((para, i) => (
+              <p key={i} className="text-sm leading-relaxed text-muted-foreground/80">
+                {para}
+              </p>
+            ))}
+          </div>
+        </Panel>
+        <Panel className="border-gold/30 p-6">
+          <p className="eyebrow">Article V — version 2 (in force)</p>
+          <p className="mt-3 text-sm font-medium text-gold">{v2[4]!.name}</p>
+          <div className="mt-4 space-y-3">
+            {v2[4]!.body.map((para, i) => (
+              <p key={i} className="text-sm leading-relaxed text-foreground/85">
+                {para}
+              </p>
+            ))}
+          </div>
+        </Panel>
+      </div>
+
+      <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted-foreground">
+        The version 1 row stored in the ledger carries the digest recorded on 6 August 2026. Article
+        text was edited after that row was written and before version scoping existed, so that
+        stored digest no longer matches the version 1 text published here. The divergence is printed
+        rather than corrected: overwriting a stored digest to make it agree with later text is the
+        exact failure Article I exists to expose.
+      </p>
+    </Section>
   );
 }
 
