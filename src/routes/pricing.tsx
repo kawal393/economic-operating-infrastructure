@@ -27,61 +27,33 @@ export const Route = createFileRoute("/pricing")({
   component: PricingPage,
 });
 
-const TIERS = [
+// There are no plans, tiers, seats or entitlements on this platform. Earlier
+// versions of this page listed three tiers ("Member", "Sovereign", "Institution")
+// with features such as priority settlement windows, dedicated anchor windows,
+// volume-indexed reductions and a named liaison. None of those existed: there is
+// no payment processor, no quota meter, no settlement queue and no liaison role.
+// They are deleted rather than relabelled.
+
+const AVAILABLE_TODAY = [
   {
-    name: "Member",
+    name: "Everything on this platform",
     price: "Free",
-    cadence: "forever",
+    cadence: "at the point of use, for everyone",
     description:
-      "Full charter-level standing. Verify anything, vote on everything, pay only for metered actions.",
+      "There are no plans and no accounts tiers. Every capability that actually runs today is available to anyone, at no charge, because no payment processor is connected.",
     features: [
-      "Registry membership registration and voting rights",
-      "Unlimited permissionless local verification",
-      "Public API verification — no quota is enforced today",
-      "Public receipt explorer access",
-      "Community support",
+      "Seal a digest and publish the receipt to the public record",
+      "Verify any receipt locally, offline, with no account",
+      "Submit an OpenTimestamps Bitcoin anchor",
+      "Read the full public ledger and the public API",
+      "Register a workspace in the public registry",
+      "Mirror the entire record layer",
     ],
-    cta: "Register as member",
-    to: "/registry-join" as const,
-    highlight: false,
-  },
-  {
-    name: "Sovereign",
-    price: "$0.001",
-    cadence: "per verification, metered",
-    description:
-      "For workspace founders running production infrastructure on the protocol. Pay only for what the world actually uses.",
-    features: [
-      "Everything in Member",
-      "Unlimited workspace deployments",
-      "Bitcoin anchoring at $0.01 per anchor",
-      "Compliance checks at $0.10 per check",
-      "Surplus routing under Article III (0.1%) — charter text, not operational",
-      "Priority settlement windows",
-    ],
-    cta: "Deploy a workspace",
+    cta: "Seal & register a workspace",
     to: "/deploy" as const,
-    highlight: true,
-  },
-  {
-    name: "Institution",
-    price: "Custom",
-    cadence: "volume-indexed",
-    description:
-      "For regulators, exchanges and platforms verifying at planetary volume with sector-specific conformity duties.",
-    features: [
-      "Everything in Sovereign",
-      "Volume-indexed fee reductions",
-      "Dedicated anchor windows",
-      "Sector protocol authoring rights",
-      "Structured audit exports (JSON and CSV)",
-      "Named protocol liaison",
-    ],
-    cta: "Read the API docs",
-    to: "/docs" as const,
-    highlight: false,
   },
 ];
+
 
 const FAQ = [
   [
