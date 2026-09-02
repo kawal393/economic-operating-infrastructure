@@ -36,13 +36,11 @@ const NAV_MENUS = [
       {
         to: "/contracts",
         label: "On-chain mirror",
-        note: "IN CERTIFICATION — nothing published until deployed",
+        note: "SPECIFIED — not deployed",
       },
-      { to: "/capital", label: "Sovereign Capital" },
       { to: "/registry-join", label: "Registry membership" },
       { to: "/pricing", label: "Pricing" },
       { to: "/dashboard", label: "Dashboard" },
-
     ],
   },
 ] as const;
@@ -51,8 +49,6 @@ const NAV_ALL = [
   ...NAV_PRIMARY.map((l) => ({ ...l })),
   ...NAV_MENUS.flatMap((m) => m.links.map((l) => ({ ...l }))),
 ];
-
-
 
 const FOOTER_GROUPS = [
   {
@@ -77,8 +73,8 @@ const FOOTER_GROUPS = [
       { to: "/transparency", label: "Transparency Log" },
       { to: "/protocols", label: "Protocol Explorer" },
       { to: "/deploy", label: "Workspace deployer" },
-      { to: "/contracts", label: "On-chain mirror" },
-      { to: "/transactions", label: "Transactions" },
+      { to: "/contracts", label: "On-chain mirror (not deployed)" },
+      { to: "/transactions", label: "Fee schedule" },
     ],
   },
 
@@ -90,7 +86,6 @@ const FOOTER_GROUPS = [
       { to: "/mcp", label: "MCP Server" },
       { to: "/interop", label: "Standards Bridge" },
       { to: "/credentials", label: "Agent credentials" },
-      { to: "/capital", label: "Sovereign Capital" },
       { to: "/pricing", label: "Pricing" },
 
       { to: "/dashboard", label: "Dashboard" },
@@ -151,7 +146,7 @@ export function SiteHeader() {
               Sovereign AI Services
             </span>
             <span className="mt-1 hidden truncate font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground sm:block">
-              Verification &amp; settlement layer
+              Verification &amp; record-keeping layer
             </span>
           </span>
         </Link>
@@ -209,7 +204,6 @@ export function SiteHeader() {
                         ) : null}
                       </Link>
                     ))}
-
                   </div>
                 ) : null}
               </div>
@@ -262,7 +256,6 @@ export function SiteHeader() {
       ) : null}
     </header>
   );
-
 }
 
 export function SovereignMark({ className }: { className?: string }) {
@@ -296,9 +289,10 @@ export function SiteFooter() {
               <span className="text-sm font-semibold tracking-tight">Sovereign AI Services</span>
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              The verification &amp; settlement layer for the AI economy. Registry membership is
-              free. The infrastructure — verification, anchoring, post-quantum defence, protocol
-              evolution and surplus routing — is the product.
+              Verification and record-keeping infrastructure for AI agents and their operators.
+              Registry membership is free. What the platform does — verification, anchoring,
+              post-quantum signing and a public ledger — is free at the point of use, because no
+              payment processor is connected and nothing here takes money.
             </p>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
               Powered by <span className="text-gold">Apex PSI</span> — {PRECISION_CLAIM}.{" "}
@@ -309,7 +303,6 @@ export function SiteFooter() {
               sovereign-ai.services
             </p>
           </div>
-
 
           {FOOTER_GROUPS.map((group) => (
             <div key={group.title}>
@@ -342,7 +335,6 @@ export function SiteFooter() {
             Ed25519 · ML-DSA-65 · LMS · SHA-256 · OpenTimestamps
           </p>
         </div>
-
       </div>
     </footer>
   );

@@ -9,7 +9,7 @@ export const Route = createFileRoute("/terms")({
       {
         name: "description",
         content:
-          "Terms governing use of Sovereign AI Services, a commercial verification and settlement platform operated by Apex Intelligence Empire (ABN 71 672 237 795).",
+          "Terms governing use of Sovereign AI Services, a commercial verification and record-keeping platform operated by Apex Intelligence Empire (ABN 71 672 237 795).",
       },
       { property: "og:title", content: "Terms of Service — Sovereign AI Services" },
       {

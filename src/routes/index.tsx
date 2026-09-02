@@ -29,7 +29,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "The verification & settlement layer for the AI economy. Making the old system mathematically obsolete.",
+          "Verification and record-keeping infrastructure for AI agents and their operators. Seal, anchor and verify — free, with no account.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },

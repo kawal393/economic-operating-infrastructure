@@ -17,9 +17,18 @@ export const DISCLAIMER = `Sovereign AI Services is a commercial software platfo
 export const INDEPENDENCE_LINE =
   "Sovereign AI Services is a separate commercial platform, operated by Apex Intelligence Empire (ABN 71 672 237 795), built on the neutral APEX PSI protocol.";
 
-/** The single approved technical claim. Precise, checkable, not superlative. */
+/**
+ * The single approved technical claim. Precise and checkable.
+ *
+ * "First" was struck on 3 September 2026. A priority claim cannot be checked
+ * by a reader, cannot be substantiated against every protocol nobody has
+ * surveyed, and is the classic exposure under s18 of the Australian Consumer
+ * Law, which actionably catches representations that cannot be substantiated
+ * whether or not they turn out to be true. Everything that remains here can
+ * be independently recomputed by a stranger.
+ */
 export const PRECISION_CLAIM =
-  "the first hybrid post-quantum PSI sealing protocol with regulator-shaped public receipts (Ed25519 + ML-DSA-65 + LMS, RFC 8785 canonicalisation, Bitcoin-anchored)";
+  "a hybrid post-quantum PSI sealing protocol with regulator-shaped public receipts (Ed25519 + ML-DSA-65 + LMS, RFC 8785 canonicalisation, Bitcoin-anchored)";
 
 export const APEX_PORTAL = "https://www.ai-governance-standard.com";
 
