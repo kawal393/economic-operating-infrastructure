@@ -292,7 +292,7 @@ export async function runConformance(): Promise<{
     },
     {
       article: "V",
-      name: "PSI-Anti-Archon",
+      name: "PSI-Non-Capture",
       claim: "History cannot be rewritten without detection by a third party.",
       failureCondition: "No signed checkpoint is published for the transparency log.",
       status: checkpoint ? "pass" : "fail",
@@ -302,7 +302,7 @@ export async function runConformance(): Promise<{
     },
     {
       article: "V",
-      name: "PSI-Anti-Archon",
+      name: "PSI-Non-Capture",
       claim:
         "The trust anchor is external and archivable: the record is timestamped beyond this platform's control.",
       failureCondition: "No entry carries a confirmed external anchor.",
@@ -311,7 +311,7 @@ export async function runConformance(): Promise<{
     },
     {
       article: "V",
-      name: "PSI-Anti-Archon",
+      name: "PSI-Non-Capture",
       claim:
         "Signing authority over the platform's own assertions is not concentrated in one secret held by one party.",
       failureCondition:

@@ -7,7 +7,7 @@
  * and every update is provable because of this file.
  */
 import { sha256 } from "@noble/hashes/sha2.js";
-import { ARTICLES, type Article } from "@/content/nation";
+import { ARTICLES, ARTICLES_V1, type Article } from "@/content/nation";
 
 export const CONSTITUTION_NAME = "The Constitution of the AI Era";
 export const CONSTITUTION_TAGLINE =
@@ -17,6 +17,20 @@ export const CHARTER_DISPLAY_TAGLINE =
   "A charter is only written once — but it can be updated forever.";
 export const CONSTITUTION_ISSUER = "sovereign-ai.services";
 export const CONSTITUTION_V1_EFFECTIVE = "2026-08-06T00:00:00.000Z";
+export const CONSTITUTION_V2_EFFECTIVE = "2026-09-03T00:00:00.000Z";
+
+/** The version whose text this deployment serves. */
+export const CHARTER_CURRENT_VERSION = 2;
+
+/**
+ * Article text is version-scoped. A digest printed on the page is always the
+ * digest of the text of that version, so an amendment can never be published
+ * while an older digest is displayed as though it still matched.
+ */
+export function articlesForVersion(version: number): readonly Article[] {
+  return version <= 1 ? ARTICLES_V1 : ARTICLES;
+}
+
 
 export type CanonicalArticle = {
   numeral: string;
@@ -54,9 +68,10 @@ export function canonicalArticles(articles: readonly Article[] = ARTICLES): Cano
 }
 
 export function canonicalConstitution(
-  version = 1,
-  articles: readonly Article[] = ARTICLES,
+  version = CHARTER_CURRENT_VERSION,
+  articles: readonly Article[] = articlesForVersion(version),
 ): CanonicalConstitution {
+
   return {
     name: CONSTITUTION_NAME,
     tagline: CONSTITUTION_TAGLINE,
@@ -104,6 +119,28 @@ export function articleDigest(article: CanonicalArticle, version: number): strin
   });
   return hex(sha256(new TextEncoder().encode(canonical)));
 }
+
+/**
+ * Digest of an Article's TEXT alone, with no version number in the input.
+ *
+ * articleDigest() is version-scoped, so the same words hash differently at v1
+ * and v2 by construction. This digest is what a reader uses to prove that an
+ * Article was carried forward unchanged across an amendment.
+ */
+export function articleTextDigest(article: CanonicalArticle): string {
+  const canonical = JSON.stringify({
+    body: article.body,
+    guarantees: article.guarantees,
+    issuer: CONSTITUTION_ISSUER,
+    name: article.name,
+    numeral: article.numeral,
+    right: article.right,
+    slug: article.slug,
+    thesis: article.thesis,
+  });
+  return hex(sha256(new TextEncoder().encode(canonical)));
+}
+
 
 export function articleUri(slug: string) {
   return `https://sovereign-ai.services/charter#${slug}`;

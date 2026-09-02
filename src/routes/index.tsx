@@ -111,7 +111,7 @@ function Hero() {
           style={{ animationDelay: "150ms" }}
         >
           Verification, anchoring and settlement infrastructure for AI agents and their operators.
-          Making the old system mathematically obsolete.
+          Every record hashed, dated and independently checkable.
         </p>
 
         <p

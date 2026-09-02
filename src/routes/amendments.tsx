@@ -110,7 +110,7 @@ function AmendmentsPage() {
             {
               label: "Articles I and V",
               value: "Unanimity",
-              note: "Verified reality and an uncapturable network are not majority preferences.",
+              note: "Verified reality and a privately-unalterable record are not majority preferences.",
             },
           ].map((s) => (
             <Panel key={s.label} className="p-6">
