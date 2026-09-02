@@ -229,7 +229,7 @@ function ConstitutionPage() {
 
             <aside>
               <Panel className="sticky top-24">
-                <p className="eyebrow">Enforced guarantees</p>
+                <p className="eyebrow">Stated guarantees</p>
                 <ul className="mt-5 space-y-3.5">
                   {article.guarantees.map((g) => (
                     <li key={g} className="flex gap-3 text-sm leading-relaxed text-foreground/85">
