@@ -57,13 +57,14 @@ const AVAILABLE_TODAY = [
 
 const FAQ = [
   [
-    "Why is verification not free?",
-    "Local, permissionless verification is free and always will be — the math is public. The fee covers metered API infrastructure and the anchoring that makes claims settlement-grade.",
+    "Is verification free?",
+    "Today, yes — all of it. Local, permissionless verification is free and always will be, because the maths is public and needs nothing from us. API verification is also free today because nothing on this platform is chargeable. The published rate below is what metered API verification would cost if and when charging begins.",
   ],
   [
     "Are there subscriptions or seats?",
-    "No. Seat-based pricing taxes access. The protocol taxes usage, which means an idle account costs nothing and a useful one pays proportionally.",
+    "No, and there are no plans or tiers either. Seat-based pricing taxes access. The published schedule prices usage, which means an idle account would cost nothing and a useful one would pay proportionally.",
   ],
+
   [
     "What does 0.1% surplus routing mean?",
     "It is what Article III says the protocol would charge if surplus were routed. It is charter text, not machinery: no value has ever been routed, no routing meter exists, and nothing is charged. No spread, no float, no custody.",
