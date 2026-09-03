@@ -439,8 +439,8 @@ function RevenueModel() {
     <Section>
       <SectionHeading
         eyebrow="Economic model"
-        title="Free at the base. Metered at the edge."
-        description="The platform makes no claim on membership, on verification you perform yourself, or on the record you mirror. The published schedule prices metered infrastructure; the routing line is a price for a service that is not operational, and no payment processor is connected, so nothing is chargeable today."
+        title="Free, keyless, and without an account"
+        description="The platform charges nothing. Paid tiers and the published fee schedule were withdrawn on 3 September 2026; no payment processor is connected and nothing on this platform is chargeable."
       />
 
       <div className="mt-12 grid gap-4 lg:grid-cols-3">
@@ -457,49 +457,20 @@ function RevenueModel() {
         </Panel>
 
         <Panel className="lg:col-span-2">
-          <p className="eyebrow">Transaction fees</p>
-          <div className="mt-5 divide-y divide-border">
-            {FEES.map((fee) => (
-              <div key={fee.label} className="flex flex-wrap items-baseline gap-x-4 gap-y-1 py-4">
-                <span className="min-w-40 text-sm font-medium text-foreground">{fee.label}</span>
-                <span className="font-mono text-base font-semibold text-gold">{fee.price}</span>
-                <span className="font-mono text-xs text-muted-foreground">{fee.unit}</span>
-                <span className="w-full text-xs leading-relaxed text-muted-foreground">
-                  {fee.note}
-                </span>
-              </div>
-            ))}
-          </div>
+          <p className="eyebrow">Everything else</p>
+          <p className="mt-4 text-3xl font-semibold tracking-tight text-gold">
+            Also free, for everyone
+          </p>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            Sealing a digest, verifying a receipt locally or through the public API, submitting an
+            OpenTimestamps Bitcoin anchor and reading the public ledger are free at the point of
+            use, with no key and no account. There are no plans, tiers, seats, subscriptions or
+            entitlements, and no schedule of charges is published anywhere on this site.
+          </p>
         </Panel>
       </div>
 
-      <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.2em] text-warning">
-        Modelled projections — not realised revenue
-      </p>
-      <div className="mt-3 grid gap-4 lg:grid-cols-3">
-        {SCALE_MODEL.map((row) => (
-          <Panel key={row.horizon} interactive>
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              {row.horizon} <span className="text-warning">(modelled)</span>
-            </p>
-            <p className="mt-4 font-mono text-2xl font-semibold tracking-tight text-foreground">
-              {row.revenue}
-            </p>
-            <p className="mt-1.5 font-mono text-xs text-muted-foreground">
-              {row.verifications} verifications / year
-            </p>
-          </Panel>
-        ))}
-      </div>
-
       <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted-foreground">
-        Scale figures are modelled projections from the published fee schedule, not realised
-        revenue. Formula: 300 metered verifications per member per month × 12 × $0.001 — for
-        example, 1M members × 3,600 verifications/year × $0.001 = $3.6M/year. They are stated so
-        they can be checked rather than believed. No payment processor is connected to the platform,
-        so no row above has been collected: realised revenue to date is zero.
-      </p>
-      <p className="mt-4 max-w-3xl text-xs leading-relaxed text-muted-foreground">
         {ARTICLE3_STATUS}
       </p>
     </Section>
