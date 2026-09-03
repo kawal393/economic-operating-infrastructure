@@ -132,16 +132,16 @@ function DashboardPage() {
           )}
         </Panel>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <StatBlock label="Chain entries" value={String(stats?.entries ?? 0)} delta="live" />
           <StatBlock label="Registered members" value={String(stats?.citizens ?? 0)} delta="live" />
           <StatBlock label="Workspaces" value={String(stats?.nationStates ?? 0)} delta="live" />
-          <StatBlock
-            label="Fees recorded"
-            value={`$${(stats?.feesUsd ?? 0).toFixed(3)}`}
-            delta="live"
-          />
         </div>
+        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+          These three figures count this platform&rsquo;s own record layer, which is new. They are
+          read live from its own tables at load; no figure is imported from any other system, and
+          none is estimated. There is no fee counter, because the platform charges nothing.
+        </p>
 
         <div className="mt-4 grid gap-4 lg:grid-cols-3">
           {[

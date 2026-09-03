@@ -5,7 +5,7 @@
  */
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database, Json } from "@/integrations/supabase/types";
-import { ARTICLES, FEES } from "@/content/nation";
+import { ARTICLES } from "@/content/nation";
 import { GOV_TOOLS, MINISTER_SYSTEM_PROMPT, ministerFirstMessage } from "./gov-tools";
 import { publicClient, readStats } from "./ledger.server";
 import {
@@ -303,8 +303,7 @@ async function runTool(
         citizens: citizens.count ?? stats.citizens,
         nation_states: states.count ?? stats.nationStates,
         registered_entities: entities.count ?? 0,
-        fees_usd: stats.feesUsd,
-        fee_schedule: FEES,
+        pricing: "free — the platform charges nothing and has no fee schedule",
       };
       return {
         status: "ok",

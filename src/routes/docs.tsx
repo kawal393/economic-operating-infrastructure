@@ -55,8 +55,7 @@ const ENDPOINTS = [
     "ed25519": "base64...",
     "ml_dsa_65": "base64..."
   },
-  "anchor_status": "pending",
-  "fee": "0.001"
+  "anchor_status": "pending"
 }`,
   },
   {

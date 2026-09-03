@@ -2,21 +2,20 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 import { PageHeader, Panel, Section, SectionHeading } from "@/components/primitives";
 import { ARTICLE3_STATUS, CUSTODY_FENCE } from "@/content/legal";
-import { FEES, SCALE_MODEL } from "@/content/nation";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — Fractions of a Cent, at Planetary Scale | Sovereign AI Services" },
+      { title: "Pricing — Free, Keyless, No Account | Sovereign AI Services" },
       {
         name: "description",
         content:
-          "Published microtransaction schedule: $0.001 per verification, $0.01 per Bitcoin anchor, $0.10 per compliance check. Nothing is chargeable yet: no payment processor is connected, so every action on the platform is currently free at the point of use.",
+          "There is nothing to buy. Sealing, verification, Bitcoin anchoring and reading the public ledger are free, keyless and need no account. Paid tiers and the metered schedule were withdrawn on 3 September 2026.",
       },
       { property: "og:title", content: "Pricing — Sovereign AI Services" },
       {
         property: "og:description",
-        content: "No subscriptions. No rent. A published fee schedule that is not yet chargeable.",
+        content: "No plans, no tiers, no subscriptions, no charges. The platform is free to use.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/pricing" },
@@ -27,54 +26,39 @@ export const Route = createFileRoute("/pricing")({
   component: PricingPage,
 });
 
-// There are no plans, tiers, seats or entitlements on this platform. Earlier
-// versions of this page listed three tiers ("Member", "Sovereign", "Institution")
-// with features such as priority settlement windows, dedicated anchor windows,
-// volume-indexed reductions and a named liaison. None of those existed: there is
-// no payment processor, no quota meter, no settlement queue and no liaison role.
-// They are deleted rather than relabelled.
+// COMMERCE IS WITHDRAWN FROM THIS PLATFORM.
+//
+// Earlier versions of this page listed plans, a metered schedule and a revenue
+// scale model. None of it was ever chargeable: there is no payment processor, no
+// quota meter and no settlement queue. Rather than keep publishing prices for
+// things that are not sold, the whole commercial layer is withdrawn. The platform
+// is free.
 
-const AVAILABLE_TODAY = [
-  {
-    name: "Everything on this platform",
-    price: "Free",
-    cadence: "at the point of use, for everyone",
-    description:
-      "There are no plans and no accounts tiers. Every capability that actually runs today is available to anyone, at no charge, because no payment processor is connected.",
-    features: [
-      "Seal a digest and publish the receipt to the public record",
-      "Verify any receipt locally, offline, with no account",
-      "Submit an OpenTimestamps Bitcoin anchor",
-      "Read the full public ledger and the public API",
-      "Register a workspace in the public registry",
-      "Mirror the entire record layer",
-    ],
-    cta: "Seal & register a workspace",
-    to: "/deploy" as const,
-  },
+const FREE_CAPABILITIES = [
+  "Seal a digest and publish the receipt to the public record",
+  "Verify any receipt locally, offline, with no account",
+  "Submit an OpenTimestamps Bitcoin anchor",
+  "Read the full public ledger and the public API",
+  "Register a workspace in the public registry",
+  "Mirror the entire record layer",
 ];
 
 const FAQ = [
   [
-    "Is verification free?",
-    "Today, yes — all of it. Local, permissionless verification is free and always will be, because the maths is public and needs nothing from us. API verification is also free today because nothing on this platform is chargeable. The published rate below is what metered API verification would cost if and when charging begins.",
+    "What does it cost?",
+    "Nothing. Sealing, verification, anchoring and reading the ledger are free, keyless and need no account. Local verification is free permanently because the maths is public and needs nothing from us.",
   ],
   [
-    "Are there subscriptions or seats?",
-    "No, and there are no plans or tiers either. Seat-based pricing taxes access. The published schedule prices usage, which means an idle account would cost nothing and a useful one would pay proportionally.",
-  ],
-
-  [
-    "What does 0.1% surplus routing mean?",
-    "It is what Article III says the protocol would charge if surplus were routed. It is charter text, not machinery: no value has ever been routed, no routing meter exists, and nothing is charged. No spread, no float, no custody.",
+    "Are there subscriptions, seats, plans or tiers?",
+    "No. None exist, none are planned on this page, and nothing on this platform is chargeable. There is no payment processor connected to it.",
   ],
   [
-    "Can fees change?",
-    "Two different answers, because two different things are priced. The ten-basis-point figure in Article III is sealed charter text and can only change by amendment under /amendments. The metered prices on this page are published in the site source; today the operator can change them, and no fee has ever been put to a member ballot. This page is where any change would appear.",
+    "What happened to the published fee schedule?",
+    "It was withdrawn on 3 September 2026 and recorded as a correction on the amendments page. Publishing prices for a service nobody can buy told readers less than saying plainly that the platform is free.",
   ],
   [
-    "Can I buy any of this right now?",
-    "No. No payment processor is connected to the platform, no plan is chargeable and no invoice can be issued from this site. Every action available today — sealing, verification, anchoring, reading the ledger — is free at the point of use. The schedule is published so the price is known before it is ever charged, not because it is being charged.",
+    "What does Article III say, then?",
+    "Article III is sealed charter text describing routing of surplus. It is not machinery: no value has ever been routed, no routing meter exists, and nothing is charged. Changing sealed text requires an amendment under /amendments.",
   ],
 ];
 
@@ -83,21 +67,24 @@ function PricingPage() {
     <>
       <PageHeader
         eyebrow="Pricing"
-        title="Fractions of a cent. Multiplied by the whole world."
-        description="Every fee is published here before it is ever charged, with the unit it is charged on stated beside it."
+        title="There is nothing to buy"
+        description="Sealing, verification, Bitcoin anchoring and reading the public ledger are free, keyless and need no account."
       />
 
       <Section className="pb-0 pt-10">
         <Panel className="border-warning/40 bg-warning/5 p-7">
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-warning">
-            Nothing on this page can be bought yet
+            Paid tiers withdrawn · 3 September 2026
           </p>
           <p className="mt-3.5 text-sm leading-relaxed text-foreground">
-            No payment processor is connected to this platform. No plan below is chargeable, no
-            quota is enforced, and no invoice can be issued from this site. Every action available
-            today — sealing, verification, Bitcoin anchoring, reading the public ledger — is free at
-            the point of use. The schedule is published so the price is known in advance rather than
-            discovered later, which is the only honest order to do it in.
+            Every paid tier, subscription and published price has been withdrawn from this platform.
+            No payment processor is connected, no quota is enforced, and no invoice can be issued
+            from this site. Everything the platform does is free at the point of use, for everyone,
+            without an account or a key. The withdrawal is recorded as a correction on the{" "}
+            <Link to="/amendments" className="text-gold hover:underline">
+              amendments record
+            </Link>
+            .
           </p>
           <p className="mt-3.5 text-sm leading-relaxed text-foreground">{ARTICLE3_STATUS}</p>
           <p className="mt-3.5 text-sm leading-relaxed text-foreground">{CUSTODY_FENCE}</p>
@@ -105,100 +92,34 @@ function PricingPage() {
       </Section>
 
       <Section>
-        <div className="grid gap-4">
-          {AVAILABLE_TODAY.map((tier) => (
-            <Panel key={tier.name} className="glow-ring flex flex-col border-gold/40 p-8">
-              <span className="mb-5 self-start rounded-full border border-gold/40 bg-gold/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-gold">
-                Available today
-              </span>
-              <h2 className="text-lg font-semibold tracking-tight">{tier.name}</h2>
-              <p className="mt-5 text-4xl font-semibold tracking-tight text-gold">{tier.price}</p>
-              <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-                {tier.cadence}
-              </p>
-              <p className="mt-5 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-                {tier.description}
-              </p>
-              <ul className="mt-7 grid flex-1 gap-3.5 sm:grid-cols-2">
-                {tier.features.map((f) => (
-                  <li key={f} className="flex gap-3 text-sm text-muted-foreground">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-                    <span className="leading-relaxed">{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                to={tier.to}
-                className="mt-8 inline-flex self-start justify-center rounded-md bg-gold px-5 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-gold/90"
-              >
-                {tier.cta}
-              </Link>
-            </Panel>
-          ))}
-        </div>
-        <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted-foreground">
-          There are no plans, tiers, seats or entitlements. An earlier version of this page listed
-          three tiers with features — priority settlement windows, dedicated anchor windows,
-          volume-indexed reductions, a named liaison — that did not exist. They have been deleted
-          rather than relabelled.
-        </p>
-      </Section>
-
-      <Section className="bg-surface/30">
-        <SectionHeading
-          eyebrow="Metered schedule"
-          title="Every protocol action, priced in the open"
-          description="Identical for every member, from a single developer to a central bank."
-        />
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {FEES.map((fee) => (
-            <Panel key={fee.label}>
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                {fee.label}
-              </p>
-              <p className="mt-4 text-3xl font-semibold tracking-tight text-gold">{fee.price}</p>
-              <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-                {fee.unit}
-              </p>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{fee.note}</p>
-            </Panel>
-          ))}
-        </div>
-      </Section>
-
-      <Section>
-        <SectionHeading
-          eyebrow="Scale model"
-          title="What the arithmetic implies"
-          description="Assumes 300 metered verifications per member per month at the published $0.001 rate. Modelled projections — not realised revenue."
-        />
-        <Panel className="mt-10 overflow-x-auto p-7">
-          <table className="w-full min-w-[520px] border-collapse text-left">
-            <thead>
-              <tr className="border-b border-border">
-                {["Horizon", "Annual verifications", "Annual protocol revenue"].map((h) => (
-                  <th
-                    key={h}
-                    className="py-3 pr-6 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground"
-                  >
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border">
-              {SCALE_MODEL.map((row) => (
-                <tr key={row.horizon}>
-                  <td className="py-4 pr-6 text-sm font-medium text-foreground">{row.horizon}</td>
-                  <td className="py-4 pr-6 font-mono text-sm text-muted-foreground">
-                    {row.verifications}
-                  </td>
-                  <td className="py-4 font-mono text-sm text-gold">{row.revenue}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <Panel className="glow-ring flex flex-col border-gold/40 p-8">
+          <span className="mb-5 self-start rounded-full border border-gold/40 bg-gold/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-gold">
+            Available today
+          </span>
+          <h2 className="text-lg font-semibold tracking-tight">Everything on this platform</h2>
+          <p className="mt-5 text-4xl font-semibold tracking-tight text-gold">Free</p>
+          <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+            keyless, accountless, for everyone
+          </p>
+          <ul className="mt-7 grid flex-1 gap-3.5 sm:grid-cols-2">
+            {FREE_CAPABILITIES.map((f) => (
+              <li key={f} className="flex gap-3 text-sm text-muted-foreground">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                <span className="leading-relaxed">{f}</span>
+              </li>
+            ))}
+          </ul>
+          <Link
+            to="/deploy"
+            className="mt-8 inline-flex self-start justify-center rounded-md bg-gold px-5 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-gold/90"
+          >
+            Seal &amp; register a workspace
+          </Link>
         </Panel>
+        <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted-foreground">
+          There are no plans, tiers, seats or entitlements, and no schedule of charges. Earlier
+          versions of this page listed both. They are deleted rather than relabelled.
+        </p>
       </Section>
 
       <Section className="bg-surface/30">
