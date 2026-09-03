@@ -131,18 +131,16 @@ function AmendmentsPage() {
         />
 
         <Panel className="mt-8 border-gold/40 p-7">
-          <p className="eyebrow">
-            Correction · COR-FEES-WITHDRAWN · Pricing · 3 September 2026
-          </p>
+          <p className="eyebrow">Correction · COR-FEES-WITHDRAWN · Pricing · 3 September 2026</p>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            All paid tiers, subscriptions and the published metered fee schedule were withdrawn
-            from this platform on 3 September 2026, together with the revenue scale model derived
-            from them. No charge was ever made under any of them: no payment processor was ever
+            All paid tiers, subscriptions and the published metered fee schedule were withdrawn from
+            this platform on 3 September 2026, together with the revenue scale model derived from
+            them. No charge was ever made under any of them: no payment processor was ever
             connected. Sealing, verification, Bitcoin anchoring and reading the public ledger are
             free, keyless and need no account. No price is published anywhere on this site. This
             entry is appended, not substituted: no earlier amendment, charter version or ledger
-            entry has been altered or removed, and Article III remains sealed charter text
-            unchanged by this correction.
+            entry has been altered or removed, and Article III remains sealed charter text unchanged
+            by this correction.
           </p>
         </Panel>
 

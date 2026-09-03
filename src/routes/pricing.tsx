@@ -77,10 +77,10 @@ function PricingPage() {
             Paid tiers withdrawn · 3 September 2026
           </p>
           <p className="mt-3.5 text-sm leading-relaxed text-foreground">
-            Every paid tier, subscription and published price has been withdrawn from this
-            platform. No payment processor is connected, no quota is enforced, and no invoice can be
-            issued from this site. Everything the platform does is free at the point of use, for
-            everyone, without an account or a key. The withdrawal is recorded as a correction on the{" "}
+            Every paid tier, subscription and published price has been withdrawn from this platform.
+            No payment processor is connected, no quota is enforced, and no invoice can be issued
+            from this site. Everything the platform does is free at the point of use, for everyone,
+            without an account or a key. The withdrawal is recorded as a correction on the{" "}
             <Link to="/amendments" className="text-gold hover:underline">
               amendments record
             </Link>
