@@ -5,6 +5,7 @@ import { z } from "zod";
 import { KeyRound, LogIn, UserPlus } from "lucide-react";
 import { PageHeader, Panel, Section } from "@/components/primitives";
 import { supabase } from "@/integrations/supabase/client";
+import { supabaseAvailable } from "@/integrations/supabase/availability";
 import { useAuth } from "@/hooks/useAuth";
 
 const searchSchema = z.object({
@@ -42,8 +43,16 @@ function AuthPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
+  // Resolved after mount only. The server render may have Supabase variables
+  // that the published browser bundle lacks; deciding during render would make
+  // the two disagree and break hydration.
+  const [available, setAvailable] = useState(true);
 
   const destination = search.redirect && search.redirect.startsWith("/") ? search.redirect : "/dashboard";
+
+  useEffect(() => {
+    setAvailable(supabaseAvailable());
+  }, []);
 
   useEffect(() => {
     if (!loading && user) navigate({ to: destination });
@@ -51,6 +60,12 @@ function AuthPage() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!available) {
+      toast.error(
+        "Sign-in is unavailable in this deployment: the browser build was published without its Supabase configuration. Reading, sealing and verifying need no account.",
+      );
+      return;
+    }
     setBusy(true);
     try {
       if (mode === "signup") {
@@ -85,6 +100,14 @@ function AuthPage() {
       <Section>
         <div className="mx-auto max-w-md">
           <Panel className="p-7">
+            {!available && (
+              <p className="mb-5 rounded-md border border-gold/25 bg-gold/10 p-3 text-xs leading-relaxed text-muted-foreground">
+                Sign-in is unavailable in this deployment: the browser build was published
+                without its Supabase configuration. Everything on this site that can be read,
+                sealed or verified needs no account; membership functions return when the
+                configuration is restored.
+              </p>
+            )}
             <div className="mb-6 flex gap-2 rounded-md border border-border p-1">
               {(["signin", "signup"] as const).map((m) => (
                 <button
@@ -126,7 +149,7 @@ function AuthPage() {
               </label>
               <button
                 type="submit"
-                disabled={busy}
+                disabled={busy || !available}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-gold px-4 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-50"
               >
                 {mode === "signin" ? <LogIn className="h-4 w-4" /> : <UserPlus className="h-4 w-4" />}
