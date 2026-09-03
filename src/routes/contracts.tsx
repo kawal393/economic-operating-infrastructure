@@ -47,7 +47,7 @@ const METHODS = [
     name: "recordVerification",
     signature: "recordVerification(bytes32 contentHash, bytes32 protocolId)",
     description:
-      "Writes a verification receipt reference on-chain. Charges the $0.001 protocol fee equivalent.",
+      "Writes a verification receipt reference on-chain. No fee is charged: the platform is free.",
     mutating: true,
   },
   {

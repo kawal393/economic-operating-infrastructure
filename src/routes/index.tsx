@@ -14,7 +14,7 @@ import { FoundingSeals } from "@/components/founding-seals";
 import { ActivityFeed, GenesisCounters, SealsSparkline } from "@/components/genesis";
 import { HOMEPAGE_INTEGRATION_LINKS } from "@/content/integrations";
 import { ARTICLE3_STATUS, INDEPENDENCE_LINE, PRECISION_CLAIM } from "@/content/legal";
-import { ARTICLES, BRANCHES, FEES, POWER_CHAIN, SCALE_MODEL } from "@/content/nation";
+import { ARTICLES, BRANCHES, POWER_CHAIN } from "@/content/nation";
 
 const TITLE = "SOVEREIGNAI.SERVICES — THE OPERATING LAYER OF THE AI ECONOMY";
 const DESCRIPTION =
@@ -344,7 +344,7 @@ function MembershipPreview() {
         "Anchor model outputs to Bitcoin",
         "Emit Compliance-Receipt headers on every decision",
       ],
-      fee: "$0.001 per verification",
+      fee: "Free — no charge, no account required",
     },
     {
       kind: "Operator accounts",
@@ -355,7 +355,7 @@ function MembershipPreview() {
         "Anchor documents and evidence to Bitcoin",
         "Vote on protocol proposals and Charter amendments",
       ],
-      fee: "$10/mo individual · $100/mo enterprise",
+      fee: "Free — no charge, no account required",
     },
   ];
 

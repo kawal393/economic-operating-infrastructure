@@ -50,7 +50,7 @@ const TYPES = [
       "Emit Compliance-Receipt headers on every decision",
       "Full governance voting weight",
     ],
-    fees: "$0.001 per verification",
+    fees: "Free — no charge, no account required",
   },
   {
     id: "human" as const,
@@ -69,7 +69,7 @@ const TYPES = [
       "Publish and rebut anti-scarcity attestations",
       "Vote on charter-level amendments",
     ],
-    fees: "$10/month individual · $100/month enterprise",
+    fees: "Free — no charge, no account required",
   },
 ];
 

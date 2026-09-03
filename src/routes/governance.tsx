@@ -48,12 +48,12 @@ const PROPOSALS: Proposal[] = [
   },
   {
     id: "PSI-B-007",
-    title: "Reduce verification fee from $0.001 to $0.0008 above 10B monthly verifications",
+    title: "Volume-indexed reduction of any future metered charge",
     summary:
       "A volume-indexed fee reduction, so that protocol revenue growth passes back to members as marginal cost falls. Surplus routing under Article III would be unaffected.",
     threshold: "Simple majority",
     basis:
-      "Specimen format — never tabled, never voted. The fee in force is the published $0.001, one time, forever.",
+      "Specimen format — never tabled, never voted. No charge exists to reduce: paid tiers were withdrawn on 3 September 2026 and the platform is free.",
   },
   {
     id: "PSI-A-013",
@@ -148,7 +148,7 @@ function GovernancePage() {
             a vote requires a signed-in member, and the record is public and permanent. That
             record is currently empty — version 1 of the charter stands unamended, which is itself
             a fact worth printing rather than decorating. Where a subject above is already in
-            force — the hybrid post-quantum co-signature, the $0.001 unified fee — it is in force
+            force — the hybrid post-quantum co-signature — it is in force
             as published policy and as the way the sealing engine is built, not as the result of a
             vote. When a ballot does open, every vote will be a signed object and every outcome
             anchored to Bitcoin. Until then this page prints rules, not results.
