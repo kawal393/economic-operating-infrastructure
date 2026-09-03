@@ -344,37 +344,9 @@ export const INDUSTRY_PROTOCOLS: Protocol[] = [
 
 export const ALL_PROTOCOLS = [...UNIFICATION_PROTOCOLS, ...INDUSTRY_PROTOCOLS];
 
-export const FEES = [
-  {
-    label: "Verification",
-    price: "$0.001",
-    unit: "per verification",
-    note: "Permissionless recompute is free; metered API verification carries the fee.",
-  },
-  {
-    label: "Bitcoin anchor",
-    price: "$0.01",
-    unit: "per anchor",
-    note: "Merkle inclusion in the next settlement window, OpenTimestamps proof included.",
-  },
-  {
-    label: "Compliance check",
-    price: "$0.10",
-    unit: "per check",
-    note: "Sector protocol evaluation with a signed conformity receipt.",
-  },
-  {
-    label: "Surplus routing",
-    price: "0.1%",
-    unit: "of routed surplus — not operational",
-    note: "A published price for a service the platform does not run: Article III specifies routing, no value has ever been routed, and no routing meter exists. No spread, no float, no custody.",
-  },
-] as const;
-
-export const SCALE_MODEL = [
-  { horizon: "1M members", verifications: "3.6B", revenue: "$3.6M" },
-  { horizon: "100M members", verifications: "365B", revenue: "$365M" },
-  { horizon: "1B members", verifications: "3.65T", revenue: "$3.65B+" },
-] as const;
+// The platform charges nothing. Paid tiers, the metered fee schedule and the
+// revenue scale model were withdrawn on 3 September 2026: sealing, verification,
+// anchoring and reading the ledger are free, keyless and need no account. No
+// price is published anywhere on this site.
 
 export const FOOTER_CREED = "A digest does not argue. It reproduces, or it does not.";
