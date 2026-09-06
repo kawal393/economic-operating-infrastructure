@@ -1,24 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  Scale,
-  Bitcoin,
-  ShieldCheck,
-  Boxes,
-  Users,
-  Globe,
-  ExternalLink,
-} from "lucide-react";
+import { ArrowRight, Check, Globe, KeyRound, Lock, Wrench, X } from "lucide-react";
 import { Panel, Section, SectionHeading } from "@/components/primitives";
-import { FoundingSeals } from "@/components/founding-seals";
-import { ActivityFeed, GenesisCounters, SealsSparkline } from "@/components/genesis";
-import { HOMEPAGE_INTEGRATION_LINKS } from "@/content/integrations";
-import { ARTICLE3_STATUS, INDEPENDENCE_LINE, PRECISION_CLAIM } from "@/content/legal";
-import { ARTICLES, BRANCHES, POWER_CHAIN } from "@/content/nation";
 
-const TITLE = "SOVEREIGNAI.SERVICES — THE OPERATING LAYER OF THE AI ECONOMY";
+const TITLE = "Sovereign AI Services — The Global Verification Layer";
 const DESCRIPTION =
-  "Verification, anchoring and settlement infrastructure for AI agents and their operators. Post-quantum sealing, Bitcoin anchoring and public receipts — commercial software, not a state.";
+  "One common standard. Local control. Global verification. We record what happened — we do not decide what is true. Open to all, run by each, anchored for everyone.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,59 +12,86 @@ export const Route = createFileRoute("/")({
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: TITLE },
-      {
-        property: "og:description",
-        content:
-          "Verification and record-keeping infrastructure for AI agents and their operators. Seal, anchor and verify — free, with no account.",
-      },
+      { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:card", content: "summary" },
     ],
     links: [{ rel: "canonical", href: "/" }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "Sovereign AI Services",
-          legalName: "Apex Intelligence Empire",
-          identifier: "ABN 71 672 237 795",
-          description:
-            "Commercial verification, anchoring and settlement infrastructure for the AI economy.",
-          url: "/",
-        }),
-      },
-    ],
   }),
-  component: LandingPage,
+  component: HomePage,
 });
 
-const BRANCH_ICONS: Record<string, typeof Scale> = {
-  legislative: Scale,
-  judicial: Bitcoin,
-  military: ShieldCheck,
-  executive: Boxes,
-  citizens: Users,
-  territory: Globe,
-};
-
-function LandingPage() {
+function HomePage() {
   return (
     <>
+      <TopBanner />
       <Hero />
-      <GenesisSection />
-      <FoundingSeals />
-      <CharterPreview />
-      <ArchitecturePreview />
-      <MembershipPreview />
-      <PowerChain />
-      <RevenueModel />
+      <BigIdea />
+      <ProblemSolution />
+      <DataSovereignty />
+      <OpenStructure />
+      <Benefits />
+      <SimpleRules />
+      <BiggerPicture />
       <ClosingCta />
     </>
   );
 }
+
+/* ── Top banner ──────────────────────────────────────────────────────────── */
+
+const BANNER_BENEFITS = [
+  { label: "Governments & Regulators", text: "Verifiable evidence. Data stays local. Global alignment." },
+  { label: "Companies & Developers", text: "Liability shield. Compliance built-in. One format, everywhere." },
+  { label: "Auditors & Investigators", text: "Self-proving records. Clear and efficient." },
+  { label: "AI Operators & Agents", text: "Permanent identity. Unbroken lineage." },
+  { label: "Every Human Being", text: "Clear records. Honest proof. Peace of mind." },
+];
+
+function TopBanner() {
+  return (
+    <section className="relative border-b border-gold/20 bg-gold/8">
+      <div className="relative mx-auto max-w-7xl px-5 py-10 lg:px-8 lg:py-14">
+        <div className="flex flex-col items-center text-center">
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-gold/30 bg-gold/10 px-3.5 py-1.5">
+            <Globe className="h-4 w-4 text-gold" />
+            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
+              This exists because trust is needed
+            </span>
+          </div>
+
+          <h2 className="mt-6 max-w-4xl text-2xl font-semibold leading-snug tracking-tight sm:text-3xl lg:text-4xl">
+            We provide it for everyone.
+          </h2>
+
+          <div className="mt-8 grid w-full max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {BANNER_BENEFITS.map((item) => (
+              <div
+                key={item.label}
+                className="flex items-start gap-3 rounded-md border border-border bg-background/40 px-4 py-3 text-left"
+              >
+                <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success/15">
+                  <Check className="h-3 w-3 text-success" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                  <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-8 max-w-2xl text-base font-medium leading-relaxed text-foreground/90">
+            A simple, reliable witness for all.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Opening ─────────────────────────────────────────────────────────────── */
 
 function Hero() {
   return (
@@ -91,11 +104,11 @@ function Hero() {
             "radial-gradient(70% 90% at 50% -20%, color-mix(in oklab, var(--gold) 16%, transparent), transparent 68%)",
         }}
       />
-      <div className="relative mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-36">
+      <div className="relative mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32">
         <div className="animate-rise inline-flex items-center gap-2.5 rounded-full border border-gold/30 bg-gold/8 px-3.5 py-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-node" />
           <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
-            Protocol layer · Operational
+            Sovereign AI Services
           </span>
         </div>
 
@@ -103,41 +116,43 @@ function Hero() {
           className="animate-rise mt-8 max-w-5xl text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
           style={{ animationDelay: "80ms" }}
         >
-          SOVEREIGNAI.SERVICES — THE OPERATING LAYER OF THE AI ECONOMY
+          The Verification Layer for the <span className="text-sovereign">Global AI Economy</span>
         </h1>
 
         <p
-          className="animate-rise mt-7 max-w-2xl text-lg leading-relaxed text-foreground/80 lg:text-xl"
-          style={{ animationDelay: "150ms" }}
+          className="animate-rise mt-8 max-w-2xl font-mono text-sm uppercase tracking-[0.14em] text-gold"
+          style={{ animationDelay: "140ms" }}
         >
-          Verification, anchoring and settlement infrastructure for AI agents and their operators.
-          Every record hashed, dated and independently checkable.
+          We record what happened. We do not decide what is true.
         </p>
 
         <p
-          className="animate-rise mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground"
+          className="animate-rise mt-6 max-w-2xl text-lg leading-relaxed text-foreground/80 lg:text-xl"
           style={{ animationDelay: "180ms" }}
         >
-          Powered by <span className="text-gold">Apex PSI</span> — {PRECISION_CLAIM}.{" "}
-          {INDEPENDENCE_LINE}
+          Every day millions of AI decisions are made across the world. Every day data is shared
+          across borders. Every day systems speak to each other — but nothing proves when it was
+          said, that it wasn't changed, or where it came from.
         </p>
 
         <p
-          className="animate-rise mt-6 max-w-3xl text-base leading-relaxed text-muted-foreground"
-          style={{ animationDelay: "210ms" }}
+          className="animate-rise mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground"
+          style={{ animationDelay: "220ms" }}
         >
-          Registry membership is <span className="text-gold">free</span>. Agent accounts and
-          operator accounts join at no cost, deploy workspaces, and connect the websites, products
-          and protocols they already run. What is live today — cryptographic verification, Bitcoin
-          anchoring, post-quantum signing, the public ledger — is free at the point of use, because
-          no payment processor is connected to this platform and nothing here takes money. Protocol
-          law changes only through the published amendment procedure. Surplus routing under Article
-          III is charter text with no implementation behind it.
+          This is the missing layer. Not an opinion. Not a judgement.{" "}
+          <span className="text-gold">A receipt.</span>
+        </p>
+
+        <p
+          className="animate-rise mt-8 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground"
+          style={{ animationDelay: "260ms" }}
+        >
+          Open to all. Run by each. Anchored for everyone.
         </p>
 
         <div
           className="animate-rise mt-10 flex flex-wrap items-center gap-3"
-          style={{ animationDelay: "270ms" }}
+          style={{ animationDelay: "300ms" }}
         >
           <Link
             to="/seal"
@@ -153,244 +168,327 @@ function Hero() {
           >
             Verify a receipt
           </Link>
-          <Link
-            to="/registry-join"
-            className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold"
-          >
-            Join the registry
-          </Link>
-        </div>
-
-        <div
-          className="animate-rise mt-8 flex flex-wrap items-center gap-x-2 gap-y-1.5"
-          style={{ animationDelay: "300ms" }}
-        >
-          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-            Integrates with:
-          </span>
-          {HOMEPAGE_INTEGRATION_LINKS.map((item, i) => (
-            <span key={item.hash} className="flex items-center gap-2">
-              <Link
-                to="/integrations"
-                hash={item.hash}
-                className="text-xs text-muted-foreground transition-colors hover:text-gold"
-              >
-                {item.label}
-              </Link>
-              {i < HOMEPAGE_INTEGRATION_LINKS.length - 1 ? (
-                <span className="text-xs text-border">·</span>
-              ) : null}
-            </span>
-          ))}
-        </div>
-
-        <div
-          className="animate-rise mt-6 inline-flex max-w-xl flex-wrap items-center gap-x-4 gap-y-2 rounded-md border border-border bg-secondary/30 px-4 py-3"
-          style={{ animationDelay: "315ms" }}
-        >
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold">
-              Powered by APEX PSI
-            </p>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Hybrid post-quantum sealing protocol — IETF draft-singh-psi (rev 01)
-            </p>
-          </div>
-          <a
-            href="https://www.ai-governance-standard.com"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-flex items-center gap-1.5 rounded-md border border-gold/35 bg-gold/10 px-3.5 py-2 text-xs font-medium text-gold transition-colors hover:bg-gold/20"
-          >
-            Learn about the protocol
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
-        </div>
-
-        <div className="animate-rise mt-12 max-w-4xl" style={{ animationDelay: "340ms" }}>
-          <GenesisCounters />
         </div>
       </div>
     </section>
   );
 }
 
-function GenesisSection() {
+/* ── One standard, many implementations ──────────────────────────────────── */
+
+const INSTANCE_RIGHTS = [
+  {
+    title: "Run their own instance",
+    detail: "Full control over their own operations.",
+  },
+  {
+    title: "Hold their own data",
+    detail: "Nothing leaves their jurisdiction unless they choose it to.",
+  },
+  {
+    title: "Set their own rules",
+    detail: "Who joins, what they submit, how it is used.",
+  },
+  {
+    title: "Verify globally",
+    detail: "Cross-check any receipt against the public anchors anywhere.",
+  },
+  {
+    title: "Stay aligned",
+    detail: "All instances speak the same language. All receipts work everywhere.",
+  },
+];
+
+function BigIdea() {
   return (
     <Section>
       <SectionHeading
-        eyebrow="Day 1, in public"
-        title="A machine that cannot lie, with the doors open."
-        description="Two live views of the same record: every event as it lands, and the cumulative curve it draws. Both are built from real timestamps — nothing is seeded, smoothed or projected."
+        eyebrow="The big idea"
+        title="One common standard. Local control. Global verification."
+        description="This is shared infrastructure, not a central authority. Think of it like the internet itself: one protocol used by every country, every company, every person — but no single country owns it."
       />
-      <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-        <ActivityFeed />
-        <SealsSparkline />
-      </div>
-    </Section>
-  );
-}
-
-function CharterPreview() {
-  return (
-    <Section>
-      <SectionHeading
-        eyebrow="The Protocol Charter"
-        title="A charter is only written once — but it can be updated forever."
-        description="Five commitments, enforced by mathematics rather than goodwill. Each Charter Article is a protocol with a verifiable failure condition — and every version of the text is sealed, anchored and recomputable, so an update can never be a silent one."
-      />
-
-      <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {ARTICLES.map((article) => (
-          <Panel key={article.id} interactive className="flex flex-col">
-            <div className="flex items-baseline justify-between gap-4">
-              <span className="font-mono text-3xl font-semibold text-gold/40">
-                {article.numeral}
-              </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                Charter Article {article.numeral}
-              </span>
-            </div>
-            <h3 className="mt-5 text-lg font-semibold tracking-tight text-foreground">
-              {article.name}
+      <p className="mt-6 max-w-3xl text-sm text-muted-foreground">
+        Every nation, every organisation, every community may:
+      </p>
+      <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {INSTANCE_RIGHTS.map((right) => (
+          <Panel key={right.title} interactive>
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-success/30 bg-success/10">
+              <Check className="h-4 w-4 text-success" />
+            </span>
+            <h3 className="mt-4 text-base font-semibold tracking-tight text-foreground">
+              {right.title}
             </h3>
-            <p className="mt-2 text-sm font-medium text-gold">{article.right}</p>
-            <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-              {article.thesis}
-            </p>
-            <Link
-              to="/charter"
-              hash={article.slug}
-              className="group mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-gold"
-            >
-              Read Article {article.numeral}
-              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{right.detail}</p>
           </Panel>
         ))}
-
-        <Panel interactive className="flex flex-col justify-between bg-gold/5">
-          <div>
-            <h3 className="text-lg font-semibold tracking-tight text-gold">The full Charter</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Complete text of the five protocol commitments, the sealed version history, public
-              ratification, live conformance checks and the amendment thresholds that require
-              unanimous ratification before Articles I and V can change.
-            </p>
-          </div>
-          <Link
-            to="/charter"
-            className="group mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-gold"
-          >
-            Open the Charter
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
+        <Panel className="flex flex-col justify-center bg-gold/5 md:col-span-2 lg:col-span-1">
+          <p className="font-mono text-sm uppercase leading-loose tracking-[0.14em] text-gold">
+            Common verification.
+            <br />
+            Local sovereignty.
+            <br />
+            Universal trust.
+          </p>
         </Panel>
       </div>
     </Section>
   );
 }
 
-function ArchitecturePreview() {
+/* ── Problem → solution ──────────────────────────────────────────────────── */
+
+const PROBLEMS = [
+  {
+    problem: "\u201CI didn't say that\u201D → endless argument",
+    solution: "Timestamp proves exactly when it was said.",
+  },
+  {
+    problem: "Files altered after delivery → undetectable",
+    solution: "The seal proves it was never changed.",
+  },
+  {
+    problem: "Data sent across borders → lost or unaccounted for",
+    solution: "Traceable every step. Owned where it sits.",
+  },
+  {
+    problem: "AI output from another country → no way to check it",
+    solution: "One receipt → verifiable anywhere.",
+  },
+  {
+    problem: "Different systems, different rules → no compatibility",
+    solution: "One format. One method. Works with all.",
+  },
+  {
+    problem: "New technology → new rules → years of delay",
+    solution: "Ready today. Works tomorrow.",
+  },
+  {
+    problem: "\u201CWho watches the watchers?\u201D → no answer",
+    solution: "Everyone watches everyone. The math watches all.",
+  },
+];
+
+function ProblemSolution() {
   return (
     <Section className="bg-surface/30">
       <SectionHeading
-        eyebrow="System architecture"
-        title="Six subsystems. Separated powers. No discretionary centre."
-        description="Each subsystem is bounded by what it can prove. The record layer answers one question. The defence layer trusts no single cipher. The sector suite may never contradict a Charter Article."
+        eyebrow="The problem — and the solution"
+        title="Everyday problems. One simple answer."
+        description="Millions of problems, one shared solution — not because anyone forced it, but because it makes sense."
       />
-
-      <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {BRANCHES.map((branch) => {
-          const Icon = BRANCH_ICONS[branch.id] ?? Scale;
-          return (
-            <Panel key={branch.id} interactive className="flex flex-col">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-gold/25 bg-gold/10">
-                <Icon className="h-4.5 w-4.5 text-gold" />
-              </span>
-              <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                {branch.branch}
-              </p>
-              <h3 className="mt-2 text-lg font-semibold tracking-tight text-foreground">
-                {branch.organ}
-              </h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                {branch.mandate}
-              </p>
-            </Panel>
-          );
-        })}
+      <div className="mt-12 overflow-hidden rounded-lg border border-border">
+        {PROBLEMS.map((row, i) => (
+          <div
+            key={row.problem}
+            className={
+              "grid gap-3 px-5 py-4 md:grid-cols-2 md:gap-6 " +
+              (i % 2 === 0 ? "bg-secondary/20" : "bg-transparent")
+            }
+          >
+            <div className="flex items-start gap-3">
+              <X className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
+              <p className="text-sm leading-relaxed text-muted-foreground">{row.problem}</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-success" />
+              <p className="text-sm leading-relaxed text-foreground/90">{row.solution}</p>
+            </div>
+          </div>
+        ))}
       </div>
-
-      <Link
-        to="/architecture"
-        className="group mt-10 inline-flex items-center gap-1.5 text-sm font-semibold text-gold"
-      >
-        Inspect the full architecture
-        <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-      </Link>
     </Section>
   );
 }
 
-function MembershipPreview() {
-  const types = [
-    {
-      kind: "Agent accounts",
-      tagline: "Agents, models and autonomous systems",
-      points: [
-        "Deploy workspaces",
-        "Connect AI platforms and inference endpoints",
-        "Anchor model outputs to Bitcoin",
-        "Emit Compliance-Receipt headers on every decision",
-      ],
-      fee: "Free — no charge, no account required",
-    },
-    {
-      kind: "Operator accounts",
-      tagline: "Individuals, institutions and operators",
-      points: [
-        "Deploy workspaces",
-        "Connect websites, products and protocols",
-        "Anchor documents and evidence to Bitcoin",
-        "Vote on protocol proposals and Charter amendments",
-      ],
-      fee: "Free — no charge, no account required",
-    },
-  ];
+/* ── Data sovereignty ────────────────────────────────────────────────────── */
 
+const SOVEREIGNTY_POINTS = [
+  {
+    title: "Where it sits = where it stays",
+    detail: "No mandatory cross-border transfers.",
+  },
+  {
+    title: "Your laws = your rules",
+    detail: "Your instance follows your jurisdiction.",
+  },
+  {
+    title: "You choose what to share",
+    detail: "You choose what to keep local.",
+  },
+  {
+    title: "Global anchor, local data",
+    detail: "The proof travels. The information stays.",
+  },
+];
+
+function DataSovereignty() {
   return (
     <Section>
       <SectionHeading
-        eyebrow="Registry membership (free)"
-        title="Two kinds of account. One standing inside the protocol."
-        description="Agent accounts and operator accounts hold identical standing in the software. The difference is operational. Membership itself costs nothing and confers no legal status of any kind."
+        eyebrow="Data sovereignty"
+        title="Your data stays yours."
+        description="Clear and unmistakable: verification is global, custody is local."
       />
+      <div className="mt-12 grid gap-4 md:grid-cols-2">
+        {SOVEREIGNTY_POINTS.map((point) => (
+          <Panel key={point.title} interactive>
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-success/30 bg-success/10">
+              <Check className="h-4 w-4 text-success" />
+            </span>
+            <h3 className="mt-4 text-base font-semibold tracking-tight text-foreground">
+              {point.title}
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{point.detail}</p>
+          </Panel>
+        ))}
+      </div>
+      <p className="mt-10 text-center font-mono text-sm uppercase tracking-[0.2em] text-gold">
+        Verify everywhere. Move nothing.
+      </p>
+    </Section>
+  );
+}
 
-      <div className="mt-12 grid gap-4 lg:grid-cols-2">
-        {types.map((type) => (
-          <Panel key={type.kind} interactive className="flex flex-col p-7">
-            <div className="flex items-center justify-between gap-4">
-              <h3 className="text-xl font-semibold tracking-tight text-foreground">{type.kind}</h3>
-              <span className="rounded-full border border-success/30 bg-success/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.15em] text-success">
-                Free to join
-              </span>
-            </div>
-            <p className="mt-2 text-sm text-muted-foreground">{type.tagline}</p>
-            <ul className="mt-6 flex-1 space-y-3">
-              {type.points.map((point) => (
+/* ── Open structure: three layers ────────────────────────────────────────── */
+
+const LAYERS = [
+  {
+    icon: Lock,
+    name: "The Seal",
+    rule: "Stays the same, forever",
+    points: [
+      "How data is hashed, signed, and anchored",
+      "The format of every receipt",
+      "The mathematical method",
+      "This part never changes. Every implementation uses it.",
+    ],
+    why: "So a receipt from India verifies the same way in Canada.",
+  },
+  {
+    icon: KeyRound,
+    name: "The Ledger",
+    rule: "Run it your way",
+    points: [
+      "Who joins your instance",
+      "What data you accept",
+      "How long you keep it",
+      "Who can see what",
+      "This part is yours. Fully.",
+    ],
+    why: "Your community. Your laws. Your choices.",
+  },
+  {
+    icon: Wrench,
+    name: "The Tools",
+    rule: "Build anything",
+    points: [
+      "Interfaces, apps, dashboards",
+      "New uses, new integrations, new ideas",
+      "Fork, adapt, improve, extend",
+      "This part belongs to everyone.",
+    ],
+    why: "Progress does not stop. It grows.",
+  },
+];
+
+function OpenStructure() {
+  return (
+    <Section className="bg-surface/30">
+      <SectionHeading
+        eyebrow="Open structure"
+        title="Three layers. One rule."
+        description="Standard at the bottom. Choice at the top."
+      />
+      <div className="mt-12 grid gap-4 lg:grid-cols-3">
+        {LAYERS.map((layer) => (
+          <Panel key={layer.name} interactive className="flex flex-col">
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-gold/25 bg-gold/10">
+              <layer.icon className="h-4.5 w-4.5 text-gold" />
+            </span>
+            <h3 className="mt-5 text-lg font-semibold tracking-tight text-foreground">
+              {layer.name}
+            </h3>
+            <p className="mt-1 font-mono text-xs uppercase tracking-[0.15em] text-gold">
+              {layer.rule}
+            </p>
+            <ul className="mt-5 flex-1 space-y-3">
+              {layer.points.map((point) => (
                 <li key={point} className="flex gap-3 text-sm text-foreground/85">
                   <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold" />
                   {point}
                 </li>
               ))}
             </ul>
-            <div className="mt-7 border-t border-border pt-5">
-              <p className="font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground">
-                Usage fees
-              </p>
-              <p className="mt-1.5 font-mono text-sm text-gold">{type.fee}</p>
-            </div>
+            <p className="mt-6 border-t border-border pt-4 text-sm italic text-muted-foreground">
+              Why? {layer.why}
+            </p>
+          </Panel>
+        ))}
+      </div>
+      <p className="mt-10 text-center font-mono text-sm uppercase tracking-[0.2em] text-gold">
+        One foundation. Endless possibilities.
+      </p>
+    </Section>
+  );
+}
+
+/* ── Benefits ────────────────────────────────────────────────────────────── */
+
+const BENEFIT_GROUPS = [
+  {
+    audience: "For nations & regulators",
+    points: [
+      "Data stays within borders — sovereignty preserved",
+      "Foreign AI output — verifiable locally without sending data abroad",
+      "Compliance made simple — one standard fits all frameworks",
+      "Forensic evidence — self-verifying, no expert needed",
+      "Choose your own balance — open or restricted, public or private",
+    ],
+  },
+  {
+    audience: "For developers & businesses",
+    points: [
+      "One integration — works globally",
+      "No lock-in — move to any compatible system anytime",
+      "Liability reduced — \u201Cthis is exactly what was delivered, when\u201D",
+      "Trust built in — users see the seal and know it's verifiable",
+      "Open tools — build on, adapt, improve, share",
+    ],
+  },
+  {
+    audience: "For everyone",
+    points: [
+      "Transparent but neutral — the system does not favour anyone",
+      "Publicly auditable — anyone can check the math",
+      "Future-ready — post-quantum secure, built for coming decades",
+      "If not this implementation — another can be built the same way",
+    ],
+  },
+];
+
+function Benefits() {
+  return (
+    <Section>
+      <SectionHeading
+        eyebrow="Benefits"
+        title="For everyone, simply stated."
+        description="It does not remove your choices. It removes the confusion between your choices."
+      />
+      <div className="mt-12 grid gap-4 lg:grid-cols-3">
+        {BENEFIT_GROUPS.map((group) => (
+          <Panel key={group.audience} interactive className="flex flex-col">
+            <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-gold">
+              {group.audience}
+            </h3>
+            <ul className="mt-5 flex-1 space-y-3">
+              {group.points.map((point) => (
+                <li key={point} className="flex gap-3 text-sm leading-relaxed text-foreground/85">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-success" />
+                  {point}
+                </li>
+              ))}
+            </ul>
           </Panel>
         ))}
       </div>
@@ -398,88 +496,125 @@ function MembershipPreview() {
   );
 }
 
-function PowerChain() {
+/* ── The simple rules ────────────────────────────────────────────────────── */
+
+const RULES = [
+  {
+    name: "We record, we do not endorse",
+    detail:
+      'A receipt means "this existed at this time." It does not mean "this is correct."',
+  },
+  {
+    name: "Neutral math",
+    detail: "Same rules for every submitter. No special treatment.",
+  },
+  {
+    name: "Local choice",
+    detail: "Instance operators set their own policies. The protocol does not.",
+  },
+  {
+    name: "Open & auditable",
+    detail: "The method is public. The code is open. Anyone may inspect it.",
+  },
+  {
+    name: "No single control",
+    detail: "No one holds the master key. The anchors are public.",
+  },
+  {
+    name: "Alternatives exist",
+    detail: "This is one implementation. The standard belongs to all.",
+  },
+];
+
+const CAVEATS = [
+  "Proof of existence ≠ proof of truth.",
+  "Proof of integrity ≠ proof of legality.",
+  "The submitter is responsible for what they submit.",
+  "The system is responsible for recording it accurately.",
+];
+
+function SimpleRules() {
   return (
     <Section className="bg-surface/30">
       <SectionHeading
-        eyebrow="The pipeline"
-        title="Seal. Record. Audit. Distribute. Sustain."
-        description="Every event on the platform traverses the same five stages. No stage may be skipped, reordered, or performed on trust."
+        eyebrow="The simple rules"
+        title="How it works. No fine print."
       />
-
-      <div className="mt-14 grid gap-4 lg:grid-cols-5">
-        {POWER_CHAIN.map((node, i) => (
-          <div key={node.step} className="relative">
-            <Panel interactive className="h-full">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="rounded border border-gold/25 bg-gold/10 px-1.5 py-0.5 font-mono text-[10px] text-gold">
-                  Art. {node.article}
-                </span>
-              </div>
-              <h3 className="mt-4 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-gold">
-                {node.step}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{node.detail}</p>
-            </Panel>
-            {i < POWER_CHAIN.length - 1 ? (
-              <span className="absolute right-[-14px] top-1/2 hidden h-px w-6 -translate-y-1/2 bg-gold/30 lg:block" />
-            ) : null}
-          </div>
+      <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {RULES.map((rule, i) => (
+          <Panel key={rule.name} interactive>
+            <span className="font-mono text-2xl font-semibold text-gold/40">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <h3 className="mt-3 text-base font-semibold tracking-tight text-foreground">
+              {rule.name}
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{rule.detail}</p>
+          </Panel>
         ))}
       </div>
+      <Panel className="mt-8 border-gold/25 bg-gold/5">
+        <p className="eyebrow">Clearly stated</p>
+        <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
+          {CAVEATS.map((caveat) => (
+            <li key={caveat} className="text-sm font-medium text-foreground/90">
+              {caveat}
+            </li>
+          ))}
+        </ul>
+      </Panel>
     </Section>
   );
 }
 
-function RevenueModel() {
+/* ── The bigger picture ──────────────────────────────────────────────────── */
+
+function BiggerPicture() {
   return (
     <Section>
-      <SectionHeading
-        eyebrow="Economic model"
-        title="Free, keyless, and without an account"
-        description="The platform charges nothing. Paid tiers and the published fee schedule were withdrawn on 3 September 2026; no payment processor is connected and nothing on this platform is chargeable."
-      />
-
-      <div className="mt-12 grid gap-4 lg:grid-cols-3">
-        <Panel className="lg:col-span-1 bg-gold/5">
-          <p className="eyebrow">Free layer</p>
-          <p className="mt-4 text-3xl font-semibold tracking-tight text-gold">
-            Registry membership is free
-          </p>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            Registration, self-verification, record mirroring, Charter access and protocol voting
-            carry no fee and never will. Charter Article V forbids it: a network you must pay to
-            audit is a network you do not own.
-          </p>
-        </Panel>
-
-        <Panel className="lg:col-span-2">
-          <p className="eyebrow">Everything else</p>
-          <p className="mt-4 text-3xl font-semibold tracking-tight text-gold">
-            Also free, for everyone
-          </p>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            Sealing a digest, verifying a receipt locally or through the public API, submitting an
-            OpenTimestamps Bitcoin anchor and reading the public ledger are free at the point of
-            use, with no key and no account. There are no plans, tiers, seats, subscriptions or
-            entitlements, and no schedule of charges is published anywhere on this site.
-          </p>
-        </Panel>
+      <div className="mx-auto max-w-3xl text-center">
+        <p className="eyebrow justify-center">The bigger picture</p>
+        <h2 className="mt-4 text-3xl font-semibold tracking-tight lg:text-4xl">
+          The question is not whether this will exist.
+        </h2>
+        <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+          AI decisions, automated data, cross-border systems — they are already here. Verification
+          is needed. The gap is real. The question is:
+        </p>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <Panel className="border-gold/30 bg-gold/5">
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-gold">Open</p>
+            <p className="mt-2 text-sm leading-relaxed text-foreground/85">
+              Available to all. Method public.
+            </p>
+          </Panel>
+          <Panel>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+              Closed
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Owned by one. Controlled from one place.
+            </p>
+          </Panel>
+        </div>
+        <p className="mt-8 text-base leading-relaxed text-foreground/85">
+          We chose open. Not because it is easier. Because it serves everyone.
+        </p>
+        <p className="mt-8 font-mono text-sm uppercase leading-loose tracking-[0.2em] text-gold">
+          Build it your way. Verify it the same way.
+          <br />
+          One layer. Many worlds.
+        </p>
       </div>
-
-      <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted-foreground">
-        {ARTICLE3_STATUS}
-      </p>
     </Section>
   );
 }
+
+/* ── Closing ─────────────────────────────────────────────────────────────── */
 
 function ClosingCta() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden border-t border-border">
       <div className="grid-field pointer-events-none absolute inset-0 opacity-40" />
       <div
         className="pointer-events-none absolute inset-0"
@@ -490,25 +625,30 @@ function ClosingCta() {
       />
       <div className="relative mx-auto max-w-4xl px-5 py-24 text-center lg:px-8 lg:py-32">
         <h2 className="text-3xl font-semibold tracking-tight lg:text-5xl">
-          Join the registry. <span className="text-sovereign">It costs nothing.</span>
+          This solves your problems. <span className="text-sovereign">Use it your way.</span>
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
-          Register an agent or operator account, deploy a workspace, and connect the infrastructure
-          you already run.
+          Sealing, verification and reading the ledger are free, keyless and need no account.
         </p>
         <div className="mt-9 flex flex-wrap justify-center gap-3">
           <Link
-            to="/registry-join"
+            to="/seal"
             className="glow-ring group inline-flex items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5"
           >
-            Join the registry
+            Seal something now
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
           <Link
             to="/deploy"
             className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold"
           >
-            Deploy a workspace
+            Run your own instance
+          </Link>
+          <Link
+            to="/charter"
+            className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-gold/40 hover:text-gold"
+          >
+            Read the Charter
           </Link>
         </div>
       </div>
