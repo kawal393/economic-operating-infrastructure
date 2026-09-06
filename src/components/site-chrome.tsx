@@ -20,6 +20,7 @@ const NAV_MENUS = [
   {
     title: "Platform",
     links: [
+      { to: "/verification-layer", label: "The Verification Layer" },
       { to: "/charter", label: "Protocol Charter" },
       { to: "/architecture", label: "Architecture" },
       { to: "/protocols", label: "Protocols" },
@@ -54,6 +55,7 @@ const FOOTER_GROUPS = [
   {
     title: "The Platform",
     links: [
+      { to: "/verification-layer", label: "The Verification Layer" },
       { to: "/charter", label: "Protocol Charter" },
       { to: "/architecture", label: "System architecture" },
       { to: "/steward", label: "Platform steward" },
