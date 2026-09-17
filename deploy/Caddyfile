@@ -1,0 +1,53 @@
+# Caddyfile — sovereign-ai.services, served from our own host.
+#
+# Caddy is here for one reason: automatic TLS. It obtains and renews Let's
+# Encrypt certificates for BOTH names below, which closes the §15(h) gap where
+# www.sovereign-ai.services resolved but failed TLS. No vendor edge, no vendor
+# certificate, no dashboard.
+#
+# Install:  apt install -y caddy   (or the official static binary)
+# Place:    /etc/caddy/Caddyfile
+# Reload:   systemctl reload caddy
+#
+# DNS prerequisite (GoDaddy, the registrar for this domain):
+#   A     @    -> the VPS address
+#   A     www  -> the VPS address
+# Certificates are only issued once both names point here.
+
+{
+	email apexinfrastructure369@gmail.com
+	# One certificate covering both names.
+}
+
+sovereign-ai.services, www.sovereign-ai.services {
+	encode zstd gzip
+
+	# The Node SSR process binds loopback only; nothing else on this box is
+	# reachable from the internet, and the app never terminates TLS itself.
+	reverse_proxy 127.0.0.1:3100 {
+		header_up X-Forwarded-Proto https
+		header_up X-Forwarded-Host {host}
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		# Do not advertise the origin server. The vendor edge used to answer as
+		# "cloudflare"; this box answers as nothing.
+		-Server
+	}
+
+	# The signed checkpoint and JWKS endpoints are the machine-readable surface
+	# of the estate. They must never be cached by an intermediary we do not run.
+	@api path /api/public/* /.well-known/*
+	header @api Cache-Control "no-store"
+
+	log {
+		output file /var/log/caddy/sovereign-ai.access.log {
+			roll_size 10MiB
+			roll_keep 5
+		}
+	}
+}

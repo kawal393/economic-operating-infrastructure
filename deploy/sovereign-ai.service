@@ -1,0 +1,52 @@
+# systemd unit — sovereign-ai.services on our own VPS.
+#
+# Place at /etc/systemd/system/sovereign-ai.service then:
+#   systemctl daemon-reload
+#   systemctl enable --now sovereign-ai
+#   journalctl -u sovereign-ai -f
+#
+# The process binds 127.0.0.1:3100 and is fronted by Caddy (deploy/Caddyfile).
+# It is deliberately NOT exposed on a public interface: the only way in is
+# through our own TLS terminator, so access logs and headers stay ours.
+
+[Unit]
+Description=Sovereign AI Services (TanStack Start, nitro node-server)
+Documentation=https://sovereign-ai.services/charter
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/sovereign-ai
+
+# Every secret lives in this one file, chmod 600, never committed.
+# See .env.example for the full contract, including the NATION_SIGNING_SEED
+# migration rule — a wrong or missing seed silently breaks every signed
+# checkpoint this platform has issued.
+EnvironmentFile=/root/sovereign-ai/.env
+
+Environment=NODE_ENV=production
+Environment=NITRO_HOST=127.0.0.1
+Environment=NITRO_PORT=3100
+# 1 GB VPS shared with apex-spine: cap the heap so a traffic spike degrades this
+# service instead of taking the whole box down with the OOM killer.
+Environment=NODE_OPTIONS=--max-old-space-size=384
+
+ExecStart=/usr/bin/node /root/sovereign-ai/.output/server/index.mjs
+
+Restart=always
+RestartSec=3
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+# Hardening that costs nothing on a single-purpose box.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target

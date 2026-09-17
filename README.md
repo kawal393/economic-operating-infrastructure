@@ -20,8 +20,7 @@ The distinction is printed on the site itself, not hidden in this file:
 - **Live:** the charter text, the published fee schedule ($0.001, one time, forever),
   the membership tiers, and the sealing and anchoring machinery behind the Apex PSI
   ledger.
-- **Modelled:** the scale projections on `/treasury` (labelled as a model with its
-  formula printed), the activity on `/transactions` (a simulated model — no paid
+- **Modelled:** the activity on `/transactions` (a simulated model — no paid
   transaction has ever occurred), and the chamber on `/governance` (rules and specimen
   proposal objects only — no ballot has ever opened and no vote has ever been cast).
 
@@ -44,11 +43,11 @@ licence added here is a steward decision, and this line will be replaced the day
 ## Development
 
 ```sh
-bun install
-bun run dev
+npm install
+npm run dev
 ```
 
 ## Stack
 
-TanStack Start (React 19, Vite 7), Tailwind CSS v4, PostgreSQL backend,
+TanStack Start (React 19, Vite 8), Tailwind CSS v4, PostgreSQL backend,
 Ed25519 / ML-DSA-65 / LMS sealing, OpenTimestamps anchoring.

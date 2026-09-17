@@ -10,7 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
+import { reportClientError } from "../lib/error-reporting";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -49,7 +49,11 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    reportClientError(error, { boundary: "tanstack_root_error_component" }, {
+      mechanism: "react_error_boundary",
+      handled: false,
+      severity: "error",
+    });
   }, [error]);
 
   return (
@@ -95,9 +99,38 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Verification and record-keeping infrastructure for AI agents and their operators: post-quantum sealing, Bitcoin anchoring, free public receipts and a machine-readable Protocol Charter.",
       },
       { name: "author", content: "Sovereign AI Services" },
+      // Social card. The og:image/twitter:image URLs are absolute on purpose:
+      // crawlers (LinkedIn, X, WhatsApp, iMessage) resolve relative URLs against
+      // nothing and drop the preview. This is our own asset in /public — the
+      // vendor used to inject an og:image from its own storage bucket; it no
+      // longer does, and no share of this estate loads a byte we do not host.
       { property: "og:site_name", content: "Sovereign AI Services" },
       { property: "og:type", content: "website" },
+      {
+        property: "og:title",
+        content: "SOVEREIGNAI.SERVICES — The Operating Layer of the AI Economy",
+      },
+      {
+        property: "og:description",
+        content:
+          "Verification and record-keeping infrastructure for AI agents and their operators: post-quantum sealing, Bitcoin anchoring, free public receipts and a machine-readable Protocol Charter.",
+      },
+      { property: "og:url", content: "https://sovereign-ai.services/" },
+      { property: "og:image", content: "https://sovereign-ai.services/og-image.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Sovereign AI Services — Seal of State" },
       { name: "twitter:card", content: "summary_large_image" },
+      {
+        name: "twitter:title",
+        content: "SOVEREIGNAI.SERVICES — The Operating Layer of the AI Economy",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Verification and record-keeping infrastructure for AI agents and their operators: post-quantum sealing, Bitcoin anchoring, free public receipts and a machine-readable Protocol Charter.",
+      },
+      { name: "twitter:image", content: "https://sovereign-ai.services/og-image.jpg" },
     ],
     links: [
       {
