@@ -23,6 +23,28 @@ accusation; an *independent verification service*, never an audit.
 
 ---
 
+## Japan — mapped 18 September 2026
+
+The FSA published **Strategic Priorities: July 2026 – June 2027** on 15 September 2026
+(fsa.go.jp), committing to stricter enforcement against unregistered operators and to
+using generative AI inside the agency for policy, supervision, monitoring and market
+surveillance. The surface that creates is the same everywhere: a finding produced by
+an AI system needs a trail no party controls, or the finding is challengeable. Rows
+6–10 map that surface. Japan adopting any standard is its own future process and
+nothing here presumes it; this mapping only makes the specification findable when the
+question is asked. Japanese act titles are given without article citations on purpose:
+the mapping names surfaces, not legal conclusions.
+
+| # | Obligation surface | What it asks for | Which primitive answers it | What the receipt actually supplies | Status |
+|---|---|---|---|---|---|
+| 6 | **FSA Strategic Priorities FY2026–27 — AI-enabled supervision** | A finding produced by the authority's own generative AI must withstand "prove what your system did, when, on which inputs" | `SEAL` + `CITE` | Prompt digests, outputs and timestamps sealed at creation; the bytes and the time recompute for anyone — including the authority that issued the finding | **Live.** The receipt proves integrity and time; supervision itself is the FSA's mandate |
+| 7 | **FIEA — supervision of algorithmic and AI-assisted systems** | Firms must evidence how an algorithmic system behaved at decision time when examiners ask | `SEAL` + `ANCHOR` | Per-decision receipts with a timestamp anchored to the Bitcoin chain tip — outside our custody, outside anyone's ability to revise | **Live for anchoring.** Books, records and reporting duties remain the firm's |
+| 8 | **APPI — third-party provision and cross-border transfer records** | Prove what personal information left, to whom, under what instructions, and when | `SEAL` + `CITE` | Transfer manifests and processor instructions sealed as data; cited digests cannot be silently re-dated after the fact | **Live.** Evidence of integrity and time — not a lawful-transfer determination |
+| 9 | **APPI — leakage and breach reporting** | Report incidents with evidence whose timestamp the reporting party does not control | `ANCHOR` | An OpenTimestamps proof against the Bitcoin chain tip, verifiable independently by the PPC and by any affected person | **Live for anchoring.** Thresholds, deadlines and assessment remain the operator's |
+| 10 | **Act on Promotion of R&D and Utilization of AI-Related Technologies (2025)** | AI businesses may be asked to provide information to the government; records must be producible on demand | `AUDIT` | Any counterparty — including an authority — re-derives the digest and re-checks the signature without trusting us at any point | **Live.** Cooperation duties sit with the business; receipts make production instant and verifiable |
+
+---
+
 ## How to read the five primitives
 
 The five primitives are profiles on one engine. There are five verbs underneath, and the
