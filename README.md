@@ -32,13 +32,44 @@ The distinction is printed on the site itself, not hidden in this file:
 - Specification: IETF `draft-singh-psi` (individual submission), on the IETF datatracker.
 - Verifier: MIT-licensed, at <https://github.com/kawal393/APEX-PSI>
   (`packages/psi-verifier`). Verification is free forever.
+- This repository's own publication record: [`seals/`](seals) holds the ledger receipt
+  for the five-primitives demonstration as pushed — receipt `APEX-NTR-B1F104711BB46D6F`,
+  ledger hash `d559e76f…8738e024`, phase VERIFIED, post-quantum signature checked. It is
+  verifiable by anyone at either door above, with no account.
 
 ## Licence
 
-No `LICENCE` file has been added to this repository yet, so under copyright law its
-contents are all rights reserved despite being public. The sealing engine is separately
-licensed (`LICENSE-ENGINE.txt` in the APEX-PSI repository); the verifiers are MIT. Any
-licence added here is a steward decision, and this line will be replaced the day it is.
+Split deliberately, because a verification platform that hid its own rules would be
+worth nothing:
+
+- **Platform source — proprietary.** See `LICENSE` in this repository. Copyright
+  (c) 2026 Apex Intelligence Empire (ABN 71 672 237 795), Victoria, Australia. All
+  rights reserved; no licence to copy, modify, redistribute or sublicense the site code.
+- **Published records — free.** Everything under `/api/public/`, plus `/charter.json`,
+  the `.well-known` documents, `/openapi.json`, `/llms.txt`, `/feed.xml` and
+  `/sitemap.xml`, may be fetched, cached, mirrored, republished and independently
+  verified by anyone, for any purpose, including commercially, with no permission and
+  no account. Mirroring the ledger in full is expressly permitted and encouraged.
+- **Verification — free forever.** `public/offline-verifier.html` may be copied, hosted
+  and redistributed so receipts stay checkable without this platform, and the verifier
+  SDKs are MIT-licensed at <https://github.com/kawal393/APEX-PSI> (`packages/psi-verifier`,
+  `packages/psi-verifier-py`). The sealing engine carries its own terms
+  (`LICENSE-ENGINE.txt`, same repository).
+- **Marks — reserved.** "APEX PSI", "PSI-SEAL" and the seal device are trade marks of
+  Apex Intelligence Empire. Nothing here grants any right in them.
+
+Verification is free. The protocol is open. The marks are not.
+
+## Documents
+
+- [`compliance-mapping.md`](compliance-mapping.md) — which primitive answers which
+  obligation surface. Technical reference; not legal advice.
+- [`procurement-language.md`](procurement-language.md) — clauses a buyer's procurement
+  team can paste into a supplier contract.
+- [`primitives-demo.mts`](primitives-demo.mts) — the five primitives run end to end on
+  the real engine: `node --experimental-strip-types primitives-demo.mts`.
+- Enterprise conformance listing and jurisdiction packs:
+  apexinfrastructure369@gmail.com — <https://apex-infrastructure.com>
 
 ## Development
 
