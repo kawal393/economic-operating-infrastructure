@@ -3,8 +3,8 @@
 **The published rulebook of the verification economy** — sovereign-ai.services
 
 This repository is the constitutional text and the reference site for the Apex PSI
-verification economy: the charter, the fee schedule, the surplus-routing rules, the
-amendment procedure and the membership registry rules, versioned in git so that trust
+verification economy: the charter, the amendment procedure, the publication and
+verification records and the membership registry rules, versioned in git so that trust
 in the rules becomes a diff anyone can read.
 
 Sovereign AI Services is a separate commercial platform, operated by Apex Intelligence
@@ -32,11 +32,9 @@ The distinction is printed on the site itself, not hidden in this file:
 > **Apex PSI is not a tool and not a product. It is the verification substrate — the
 > layer beneath proof. It does not judge. It does not certify. It only remembers.**
 
-This sentence is protocol defence, not marketing, and it is printed in this site's
-footer and at the head of every verifier. The full framing statement — the DNS test,
-the invitation rule, the diagram, the correction script — is canonical in
-[`FRAMING.md`](FRAMING.md). Services, including ours, are built *on* the layer; the
-layer itself judges nothing.
+This sentence is printed in this site's footer and at the head of every verifier.
+The canonical framing statement is [`FRAMING.md`](FRAMING.md). Services, including
+ours, are built *on* the layer; the layer itself judges nothing.
 
 ## Where the proof lives
 

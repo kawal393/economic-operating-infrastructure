@@ -1,15 +1,14 @@
 // SOVEREIGN BUILD CONFIG.
 //
-// This file used to be a one-line hand-off to `@lovable.dev/vite-tanstack-config`,
-// which meant a vendor package decided our plugins, our CSS transformer, our env
-// injection and our deploy target. Nothing outside this repository decides those
-// things any more. Every plugin is declared here explicitly, so a clean clone plus
-// `npm install` reproduces the production byte-for-byte with no editor account,
-// no sandbox flag and no vendor deploy pipeline.
+// Every plugin is declared here explicitly: a clean clone plus `npm install`
+// reproduces the production build with no third-party editor account, no
+// sandbox flag and no external deploy pipeline. Nothing outside this
+// repository decides our plugins, CSS transformer, env injection or deploy
+// target.
 //
 // Deploy target is ours to choose at build time:
 //   NITRO_PRESET=node-server        (default) -> .output/server/index.mjs, Node 20+,
-//                                                run under systemd behind Caddy on our own VPS
+//                                                run behind a TLS terminator on our own host
 //   NITRO_PRESET=cloudflare-module  -> .output/server, wrangler deploy (fallback mirror)
 import { defineConfig, loadEnv, type UserConfig } from "vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";

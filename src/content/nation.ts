@@ -352,10 +352,7 @@ export const ALL_PROTOCOLS = [...UNIFICATION_PROTOCOLS, ...INDUSTRY_PROTOCOLS];
 export const FOOTER_CREED = "A digest does not argue. It reproduces, or it does not.";
 
 // THE LAYER LOCK — printed in the footer of every door and at the head of every
-// specification. Protocol defence, not marketing: the moment the world files the
-// protocol under "tools", it is compared to tools and replaced by one. The word
-// "service" is deliberately absent from the lock — the legal fence names the
-// business an independent verification service, and services are built ON the
-// layer; the protocol itself is not the business. Canonical text: FRAMING.md.
+// specification. Services are built ON the layer; the layer itself judges nothing.
+// Canonical framing statement: FRAMING.md.
 export const LAYER_LOCK =
   "Apex PSI is not a tool and not a product. It is the verification substrate — the layer beneath proof. It does not judge. It does not certify. It only remembers.";

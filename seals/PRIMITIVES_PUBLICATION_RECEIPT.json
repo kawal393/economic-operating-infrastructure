@@ -1,4 +1,5 @@
 {
+  "_annotation_2026_09_18": "This file is a verbatim record of the notary API responses at seal time and is kept unaltered. The field 'eu_ai_act_compliance' inside public_verify_response is an annotation emitted by the external notary endpoint. Neither this repository nor Apex Intelligence Empire certifies compliance with the EU AI Act or any other regulation; this platform expresses no opinion on the lawfulness of any record it seals. The field's presence in the API response is recorded as a known defect of the external endpoint.",
   "title": "Five Primitives Published - Apex PSI",
   "predicate": "PRIMITIVES_PUBLICATION",
   "sealed_at_utc": "2026-09-17T20:40:15.559538+00:00",
