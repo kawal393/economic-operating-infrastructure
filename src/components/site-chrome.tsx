@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { FOOTER_CREED } from "@/content/nation";
+import { FOOTER_CREED, LAYER_LOCK } from "@/content/nation";
 import { INDEPENDENCE_LINE, PRECISION_CLAIM } from "@/content/legal";
 import { LegalDisclaimer } from "@/components/legal";
 import sovereignMark from "@/assets/sovereign-mark.png";
@@ -330,6 +330,10 @@ export function SiteFooter() {
         <LegalDisclaimer className="mt-12" />
 
         <div className="mt-8 hairline" />
+
+        <p className="mt-8 text-center font-serif text-sm leading-relaxed text-muted-foreground">
+          {LAYER_LOCK}
+        </p>
 
         <div className="mt-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <p className="text-sovereign text-base font-semibold tracking-tight">{FOOTER_CREED}</p>

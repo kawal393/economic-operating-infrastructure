@@ -17,12 +17,26 @@ holds neither.
 
 The distinction is printed on the site itself, not hidden in this file:
 
-- **Live:** the charter text, the published fee schedule ($0.001, one time, forever),
-  the membership tiers, and the sealing and anchoring machinery behind the Apex PSI
-  ledger.
+- **Live:** the charter text, the membership tiers, and the sealing and anchoring
+  machinery behind the Apex PSI ledger.
+- **Withdrawn on 3 September 2026:** the published fee schedule and the revenue scale
+  model. The platform charges nothing, no payment processor is connected, and sealing,
+  verification, anchoring and reading the ledger are free, keyless and need no account.
+  The withdrawal is recorded as a correction on the amendments page and in the terms.
 - **Modelled:** the activity on `/transactions` (a simulated model — no paid
   transaction has ever occurred), and the chamber on `/governance` (rules and specimen
   proposal objects only — no ballot has ever opened and no vote has ever been cast).
+
+## The layer lock
+
+> **Apex PSI is not a tool and not a product. It is the verification substrate — the
+> layer beneath proof. It does not judge. It does not certify. It only remembers.**
+
+This sentence is protocol defence, not marketing, and it is printed in this site's
+footer and at the head of every verifier. The full framing statement — the DNS test,
+the invitation rule, the diagram, the correction script — is canonical in
+[`FRAMING.md`](FRAMING.md). Services, including ours, are built *on* the layer; the
+layer itself judges nothing.
 
 ## Where the proof lives
 
