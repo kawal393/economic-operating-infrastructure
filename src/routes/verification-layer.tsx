@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, Globe, KeyRound, Lock, Wrench, X } from "lucide-react";
+import { ArrowRight, Check, Lock, KeyRound, Wrench, X } from "lucide-react";
 import { Panel, Section, SectionHeading } from "@/components/primitives";
 
-const TITLE = "Sovereign AI Services — The Global Verification Layer";
+const TITLE = "The Verification Layer for the Global AI Economy — Sovereign AI Services";
 const DESCRIPTION =
   "One common standard. Local control. Global verification. We record what happened — we do not decide what is true. Open to all, run by each, anchored for everyone.";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/verification-layer")({
   head: () => ({
     meta: [
       { title: TITLE },
@@ -14,18 +14,17 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: "/verification-layer" },
       { name: "twitter:card", content: "summary" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "/verification-layer" }],
   }),
-  component: HomePage,
+  component: VerificationLayerPage,
 });
 
-function HomePage() {
+function VerificationLayerPage() {
   return (
     <>
-      <TopBanner />
       <Hero />
       <BigIdea />
       <ProblemSolution />
@@ -36,58 +35,6 @@ function HomePage() {
       <BiggerPicture />
       <ClosingCta />
     </>
-  );
-}
-
-/* ── Top banner ──────────────────────────────────────────────────────────── */
-
-const BANNER_BENEFITS = [
-  { label: "Governments & Regulators", text: "Verifiable evidence. Data stays local. Global alignment." },
-  { label: "Companies & Developers", text: "Liability shield. Compliance built-in. One format, everywhere." },
-  { label: "Auditors & Investigators", text: "Self-proving records. Clear and efficient." },
-  { label: "AI Operators & Agents", text: "Permanent identity. Unbroken lineage." },
-  { label: "Every Human Being", text: "Clear records. Honest proof. Peace of mind." },
-];
-
-function TopBanner() {
-  return (
-    <section className="relative border-b border-gold/20 bg-gold/8">
-      <div className="relative mx-auto max-w-7xl px-5 py-10 lg:px-8 lg:py-14">
-        <div className="flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-gold/30 bg-gold/10 px-3.5 py-1.5">
-            <Globe className="h-4 w-4 text-gold" />
-            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
-              This exists because trust is needed
-            </span>
-          </div>
-
-          <h2 className="mt-6 max-w-4xl text-2xl font-semibold leading-snug tracking-tight sm:text-3xl lg:text-4xl">
-            We provide it for everyone.
-          </h2>
-
-          <div className="mt-8 grid w-full max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {BANNER_BENEFITS.map((item) => (
-              <div
-                key={item.label}
-                className="flex items-start gap-3 rounded-md border border-border bg-background/40 px-4 py-3 text-left"
-              >
-                <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success/15">
-                  <Check className="h-3 w-3 text-success" />
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">{item.label}</p>
-                  <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <p className="mt-8 max-w-2xl text-base font-medium leading-relaxed text-foreground/90">
-            A simple, reliable witness for all.
-          </p>
-        </div>
-      </div>
-    </section>
   );
 }
 

@@ -51,6 +51,7 @@ import { Route as StewardRouteImport } from './routes/steward'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as TransparencyRouteImport } from './routes/transparency'
+import { Route as VerificationLayerRouteImport } from './routes/verification-layer'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as DotwellKnownDidDotjsonRouteImport } from './routes/[.]well-known.did[.]json'
 import { Route as DotwellKnownSovereignAiDotjsonRouteImport } from './routes/[.]well-known.sovereign-ai[.]json'
@@ -278,6 +279,11 @@ const TransparencyRoute = TransparencyRouteImport.update({
   path: '/transparency',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VerificationLayerRoute = VerificationLayerRouteImport.update({
+  id: '/verification-layer',
+  path: '/verification-layer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VerifyRoute = VerifyRouteImport.update({
   id: '/verify',
   path: '/verify',
@@ -405,6 +411,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/transactions': typeof TransactionsRoute
   '/transparency': typeof TransparencyRoute
+  '/verification-layer': typeof VerificationLayerRoute
   '/verify': typeof VerifyRoute
   '/.well-known/did.json': typeof DotwellKnownDidDotjsonRoute
   '/.well-known/sovereign-ai.json': typeof DotwellKnownSovereignAiDotjsonRoute
@@ -465,6 +472,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/transactions': typeof TransactionsRoute
   '/transparency': typeof TransparencyRoute
+  '/verification-layer': typeof VerificationLayerRoute
   '/verify': typeof VerifyRoute
   '/.well-known/did.json': typeof DotwellKnownDidDotjsonRoute
   '/.well-known/sovereign-ai.json': typeof DotwellKnownSovereignAiDotjsonRoute
@@ -526,6 +534,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/transactions': typeof TransactionsRoute
   '/transparency': typeof TransparencyRoute
+  '/verification-layer': typeof VerificationLayerRoute
   '/verify': typeof VerifyRoute
   '/.well-known/did.json': typeof DotwellKnownDidDotjsonRoute
   '/.well-known/sovereign-ai.json': typeof DotwellKnownSovereignAiDotjsonRoute
@@ -588,6 +597,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/transactions'
     | '/transparency'
+    | '/verification-layer'
     | '/verify'
     | '/.well-known/did.json'
     | '/.well-known/sovereign-ai.json'
@@ -648,6 +658,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/transactions'
     | '/transparency'
+    | '/verification-layer'
     | '/verify'
     | '/.well-known/did.json'
     | '/.well-known/sovereign-ai.json'
@@ -708,6 +719,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/transactions'
     | '/transparency'
+    | '/verification-layer'
     | '/verify'
     | '/.well-known/did.json'
     | '/.well-known/sovereign-ai.json'
@@ -769,6 +781,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   TransactionsRoute: typeof TransactionsRoute
   TransparencyRoute: typeof TransparencyRoute
+  VerificationLayerRoute: typeof VerificationLayerRoute
   VerifyRoute: typeof VerifyRoute
   DotwellKnownDidDotjsonRoute: typeof DotwellKnownDidDotjsonRoute
   DotwellKnownSovereignAiDotjsonRoute: typeof DotwellKnownSovereignAiDotjsonRoute
@@ -1083,6 +1096,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TransparencyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/verification-layer': {
+      id: '/verification-layer'
+      path: '/verification-layer'
+      fullPath: '/verification-layer'
+      preLoaderRoute: typeof VerificationLayerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/verify': {
       id: '/verify'
       path: '/verify'
@@ -1241,6 +1261,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   TransactionsRoute: TransactionsRoute,
   TransparencyRoute: TransparencyRoute,
+  VerificationLayerRoute: VerificationLayerRoute,
   VerifyRoute: VerifyRoute,
   DotwellKnownDidDotjsonRoute: DotwellKnownDidDotjsonRoute,
   DotwellKnownSovereignAiDotjsonRoute: DotwellKnownSovereignAiDotjsonRoute,
