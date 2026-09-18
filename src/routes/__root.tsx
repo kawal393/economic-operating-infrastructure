@@ -46,11 +46,11 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset?: () => void }) {
+function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
-    reportClientError(error, { boundary: "tanstack_root_error_component" }, {
+    reportClientError(error instanceof Error ? error : new Error(String(error)), { boundary: "tanstack_root_error_component" }, {
       mechanism: "react_error_boundary",
       handled: false,
       severity: "error",
