@@ -75,7 +75,9 @@ export default defineConfig(({ command, mode }) => {
         server: { entry: "server" },
       }),
       // Nitro is a build-time concern only; dev is served by Vite.
-      ...(command === "build" ? [nitro({ preset: NITRO_PRESET })] : []),
+      // Output goes to dist/ — the deploy pipeline expects build artefacts there,
+      // not nitro's default .output/.
+      ...(command === "build" ? [nitro({ preset: NITRO_PRESET, output: { dir: "dist" } })] : []),
       viteReact(),
     ],
   };
