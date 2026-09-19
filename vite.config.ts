@@ -17,7 +17,11 @@ import tailwindcss from "@tailwindcss/vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 import { nitro } from "nitro/vite";
 
-const NITRO_PRESET = process.env["NITRO_PRESET"] || "node-server";
+// Default preset must match the hosting runtime: this project deploys to an
+// edge worker environment, which cannot boot a node-server bundle (that
+// mismatch is what produced the 502 "loader error" on the published site).
+// Override with NITRO_PRESET=node-server only for self-hosting builds.
+const NITRO_PRESET = process.env["NITRO_PRESET"] || "cloudflare-module";
 
 export default defineConfig(({ command, mode }) => {
   // Vite replaces `import.meta.env.VITE_*` on the client by default; the editor
