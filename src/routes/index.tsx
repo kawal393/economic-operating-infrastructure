@@ -116,7 +116,7 @@ function Hero() {
           className="animate-rise mt-8 max-w-5xl text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
           style={{ animationDelay: "80ms" }}
         >
-          The Verification Layer for the <span className="text-sovereign">Global AI Economy</span>
+          The Proof Layer of the <span className="text-sovereign">AI Economy</span>
         </h1>
 
         <p
