@@ -658,6 +658,39 @@ export type Database = {
           },
         ]
       }
+      pilot_requests: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          ip_fingerprint: string | null
+          name: string
+          notes: string | null
+          organisation: string | null
+          tier: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          ip_fingerprint?: string | null
+          name: string
+          notes?: string | null
+          organisation?: string | null
+          tier: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          ip_fingerprint?: string | null
+          name?: string
+          notes?: string | null
+          organisation?: string | null
+          tier?: string
+        }
+        Relationships: []
+      }
       rate_limits: {
         Row: {
           bucket: string

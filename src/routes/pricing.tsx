@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { Check } from "lucide-react";
 import { PageHeader, Panel, Section, SectionHeading } from "@/components/primitives";
 import { ARTICLE3_STATUS, CUSTODY_FENCE } from "@/content/legal";
+import { submitPilotRequest } from "@/lib/pilot.functions";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
@@ -50,7 +52,7 @@ const FAQ = [
   ],
   [
     "Are there subscriptions, seats, plans or tiers?",
-    "No. None exist, none are planned on this page, and nothing on this platform is chargeable. There is no payment processor connected to it.",
+    "Not today. Nothing on this platform is chargeable and no payment processor is connected. Workspace features for teams are in design — see the roadmap below — and no price has been set.",
   ],
   [
     "What happened to the published fee schedule?",
@@ -61,6 +63,190 @@ const FAQ = [
     "Article III is sealed charter text describing routing of surplus. It is not machinery: no value has ever been routed, no routing meter exists, and nothing is charged. Changing sealed text requires an amendment under /amendments.",
   ],
 ];
+
+const ROADMAP = [
+  {
+    status: "Available today",
+    title: "Free workspace",
+    audience: "Single operators and small teams",
+    items: [
+      "Local, in-browser sealing for one operator",
+      "Offline verification with no account",
+      "Read the public commons ledger",
+      "Basic entry in the public registry",
+    ],
+    note: "Free, keyless, accountless — and permanent.",
+  },
+  {
+    status: "In design — not available yet",
+    title: "Team & agent workspace",
+    audience: "Organisations running AI agents",
+    items: [
+      "Deploy and manage multiple autonomous AI agent identities",
+      "Webhook pipelines for continuous sealing of model decisions",
+      "Exportable compliance vaults for audits",
+    ],
+    note: "No price published. No payment taken. Nothing to buy today.",
+  },
+  {
+    status: "In design — not available yet",
+    title: "Dedicated organisational node",
+    audience: "Regulated and multi-team institutions",
+    items: [
+      "Dedicated namespace on this platform",
+      "Custom governance charters with multi-signature controls",
+      "Unlimited team seats and high-frequency agent event pipelines",
+    ],
+    note: "No price published. No payment taken. Nothing to buy today.",
+  },
+];
+
+function PilotRequestForm() {
+  const [tier, setTier] = useState<"team" | "enterprise" | "notify">("team");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [organisation, setOrganisation] = useState("");
+  const [notes, setNotes] = useState("");
+  const [website, setWebsite] = useState("");
+  const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [error, setError] = useState("");
+
+  const inputClass =
+    "w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:border-gold/50";
+
+  async function onSubmit(event: React.FormEvent) {
+    event.preventDefault();
+    if (state === "sending") return;
+    setState("sending");
+    setError("");
+    try {
+      const result = await submitPilotRequest({
+        data: {
+          email,
+          name,
+          organisation: organisation || null,
+          tier,
+          notes: notes || null,
+          website: website || null,
+        },
+      });
+      if (result.ok) {
+        setState("done");
+      } else {
+        setError(result.error);
+        setState("error");
+      }
+    } catch {
+      setError("Your request could not be sent. Please check the fields and try again.");
+      setState("error");
+    }
+  }
+
+  if (state === "done") {
+    return (
+      <div className="rounded-md border border-gold/25 bg-gold/5 p-5 text-sm">
+        <p className="font-medium text-foreground">Request received.</p>
+        <p className="mt-2 leading-relaxed text-muted-foreground">
+          Your interest is recorded privately. We will be in touch when pilot places open. In the
+          meantime, everything on this platform remains free to use.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="grid gap-4">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className="block text-xs text-muted-foreground">
+          Your name
+          <input
+            type="text"
+            required
+            minLength={2}
+            maxLength={120}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className={`mt-1.5 ${inputClass}`}
+          />
+        </label>
+        <label className="block text-xs text-muted-foreground">
+          Work email
+          <input
+            type="email"
+            required
+            maxLength={200}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={`mt-1.5 ${inputClass}`}
+          />
+        </label>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className="block text-xs text-muted-foreground">
+          Organisation (optional)
+          <input
+            type="text"
+            maxLength={160}
+            value={organisation}
+            onChange={(e) => setOrganisation(e.target.value)}
+            className={`mt-1.5 ${inputClass}`}
+          />
+        </label>
+        <label className="block text-xs text-muted-foreground">
+          Interest
+          <select
+            value={tier}
+            onChange={(e) => setTier(e.target.value as typeof tier)}
+            className={`mt-1.5 ${inputClass}`}
+          >
+            <option value="team">Team &amp; agent workspace</option>
+            <option value="enterprise">Dedicated organisational node</option>
+            <option value="notify">Just notify me when places open</option>
+          </select>
+        </label>
+      </div>
+      <label className="block text-xs text-muted-foreground">
+        What would your workspace need? (optional)
+        <textarea
+          rows={3}
+          maxLength={2000}
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          className={`mt-1.5 resize-none ${inputClass}`}
+        />
+      </label>
+      {/* Honeypot — hidden from humans, irresistible to bots. */}
+      <input
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={website}
+        onChange={(e) => setWebsite(e.target.value)}
+        className="pointer-events-none absolute h-0 w-0 opacity-0"
+      />
+      {state === "error" ? (
+        <p className="rounded-md border border-destructive/40 bg-destructive/10 px-4 py-3 text-xs text-destructive">
+          {error}
+        </p>
+      ) : null}
+      <button
+        type="submit"
+        disabled={state === "sending"}
+        className="inline-flex justify-self-start rounded-md bg-gold px-5 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-gold/90 disabled:opacity-60"
+      >
+        {state === "sending" ? "Sending…" : "Register interest"}
+      </button>
+      <p className="text-xs leading-relaxed text-muted-foreground">
+        Non-binding. Your details are stored privately and handled under the{" "}
+        <Link to="/privacy" className="text-gold hover:underline">
+          Privacy Policy
+        </Link>
+        . No payment is requested and none can be taken.
+      </p>
+    </form>
+  );
+}
 
 function PricingPage() {
   return (
@@ -156,6 +342,79 @@ function PricingPage() {
               <li>Ledger reading, verification and audit views</li>
               <li>Free, keyless, no account — nothing is sold here</li>
             </ul>
+          </Panel>
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeading
+          eyebrow="Roadmap"
+          title="Workspace tiers are in design"
+          description="The free platform stays free. These planned workspaces are under active design — no price is published and nothing can be bought, because no features are delivered yet. Organisations may register non-binding interest below."
+        />
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          {ROADMAP.map((tier) => (
+            <Panel key={tier.title} className="flex flex-col p-7">
+              <span
+                className={
+                  tier.status === "Available today"
+                    ? "self-start rounded-full border border-gold/40 bg-gold/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-gold"
+                    : "self-start rounded-full border border-border bg-secondary/40 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground"
+                }
+              >
+                {tier.status}
+              </span>
+              <h3 className="mt-5 text-lg font-semibold tracking-tight text-foreground">{tier.title}</h3>
+              <p className="mt-1 text-xs text-muted-foreground">{tier.audience}</p>
+              <ul className="mt-5 flex-1 space-y-2.5">
+                {tier.items.map((item) => (
+                  <li key={item} className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground">
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 border-t border-border/60 pt-4 text-xs leading-relaxed text-muted-foreground">
+                {tier.note}
+              </p>
+            </Panel>
+          ))}
+        </div>
+        <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted-foreground">
+          These tiers are plans, not products. They are listed so you can see where the platform is
+          heading, not to sell anything. No price has been set, no payment processor is connected,
+          and no delivery date is promised. Anything published here becomes chargeable only when the
+          features exist and the commercial terms are final.
+        </p>
+      </Section>
+
+      <Section className="bg-surface/30">
+        <SectionHeading
+          eyebrow="Pilot interest"
+          title="Request a design pilot"
+          description="For organisations that want to help shape the team and organisational workspaces. Non-binding: no payment, no contract, no commitment."
+        />
+        <div className="mt-10 grid gap-4 lg:grid-cols-5">
+          <Panel className="p-7 lg:col-span-3">
+            <PilotRequestForm />
+          </Panel>
+          <Panel className="p-7 lg:col-span-2">
+            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-gold">
+              What to expect
+            </p>
+            <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
+              <li>Your request is stored privately — it is never published to the public record.</li>
+              <li>We reply when pilot places open. There is no queue position to lose.</li>
+              <li>Raw sealing capacity at higher volume is served by the protocol site.</li>
+            </ul>
+            <a
+              href="https://ai-governance-standard.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-block text-sm text-gold hover:underline"
+            >
+              High-volume API capacity at APEX PSI →
+            </a>
           </Panel>
         </div>
       </Section>
