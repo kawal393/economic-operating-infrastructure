@@ -79,10 +79,10 @@ export async function readStats(): Promise<LedgerStats> {
   const db = publicClient();
   const [entries, citizens, nations, head, fees] = await Promise.all([
     db.from("notarizations").select("*", { count: "exact", head: true }),
-    db.from("citizens").select("*", { count: "exact", head: true }),
+    db.rpc("public_member_count"),
     db.from("nation_states").select("*", { count: "exact", head: true }),
     db.from("notarizations").select("chain_hash").order("sequence", { ascending: false }).limit(1),
-    db.from("transactions").select("amount_usd").limit(1000),
+    Promise.resolve({ data: [] as { amount_usd: number }[] }),
   ]);
   const feesUsd = (fees.data ?? []).reduce(
     (sum, row) => sum + Number((row as { amount_usd: number }).amount_usd ?? 0),
@@ -90,7 +90,7 @@ export async function readStats(): Promise<LedgerStats> {
   );
   return {
     entries: entries.count ?? 0,
-    citizens: citizens.count ?? 0,
+    citizens: Number(citizens.data ?? 0),
     nationStates: nations.count ?? 0,
     feesUsd,
     head: (head.data?.[0] as { chain_hash: string } | undefined)?.chain_hash ?? null,

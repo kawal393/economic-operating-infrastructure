@@ -293,14 +293,14 @@ async function runTool(
       const stats = await readStats();
       const pub = publicClient();
       const [citizens, states, entities] = await Promise.all([
-        pub.from("citizens").select("id", { count: "exact", head: true }),
+        pub.rpc("public_member_count"),
         pub.from("nation_states").select("id", { count: "exact", head: true }),
         pub.from("entities").select("id", { count: "exact", head: true }),
       ]);
       const data = {
         notarizations: stats.entries,
         chain_head: stats.head?.slice(0, 12) ?? null,
-        citizens: citizens.count ?? stats.citizens,
+        citizens: Number(citizens.data ?? stats.citizens),
         nation_states: states.count ?? stats.nationStates,
         registered_entities: entities.count ?? 0,
         pricing: "free — the platform charges nothing and has no fee schedule",
