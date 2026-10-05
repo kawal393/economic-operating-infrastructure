@@ -916,6 +916,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      public_member_count: { Args: never; Returns: number }
     }
     Enums: {
       app_role: "admin" | "prover" | "citizen"
