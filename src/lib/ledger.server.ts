@@ -90,7 +90,7 @@ export async function readStats(): Promise<LedgerStats> {
   );
   return {
     entries: entries.count ?? 0,
-    citizens: citizens.count ?? 0,
+    citizens: Number(citizens.data ?? 0),
     nationStates: nations.count ?? 0,
     feesUsd,
     head: (head.data?.[0] as { chain_hash: string } | undefined)?.chain_hash ?? null,

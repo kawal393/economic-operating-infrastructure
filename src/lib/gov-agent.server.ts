@@ -300,7 +300,7 @@ async function runTool(
       const data = {
         notarizations: stats.entries,
         chain_head: stats.head?.slice(0, 12) ?? null,
-        citizens: citizens.count ?? stats.citizens,
+        citizens: Number(citizens.data ?? stats.citizens),
         nation_states: states.count ?? stats.nationStates,
         registered_entities: entities.count ?? 0,
         pricing: "free — the platform charges nothing and has no fee schedule",
