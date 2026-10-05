@@ -293,7 +293,7 @@ async function runTool(
       const stats = await readStats();
       const pub = publicClient();
       const [citizens, states, entities] = await Promise.all([
-        pub.from("citizens").select("id", { count: "exact", head: true }),
+        pub.rpc("public_member_count"),
         pub.from("nation_states").select("id", { count: "exact", head: true }),
         pub.from("entities").select("id", { count: "exact", head: true }),
       ]);
