@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { Check } from "lucide-react";
 import { PageHeader, Panel, Section, SectionHeading } from "@/components/primitives";
 import { ARTICLE3_STATUS, CUSTODY_FENCE } from "@/content/legal";
+import { submitPilotRequest } from "@/lib/pilot.functions";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
@@ -50,7 +52,7 @@ const FAQ = [
   ],
   [
     "Are there subscriptions, seats, plans or tiers?",
-    "No. None exist, none are planned on this page, and nothing on this platform is chargeable. There is no payment processor connected to it.",
+    "Not today. Nothing on this platform is chargeable and no payment processor is connected. Workspace features for teams are in design — see the roadmap below — and no price has been set.",
   ],
   [
     "What happened to the published fee schedule?",
@@ -60,6 +62,43 @@ const FAQ = [
     "What does Article III say, then?",
     "Article III is sealed charter text describing routing of surplus. It is not machinery: no value has ever been routed, no routing meter exists, and nothing is charged. Changing sealed text requires an amendment under /amendments.",
   ],
+];
+
+const ROADMAP = [
+  {
+    status: "Available today",
+    title: "Free workspace",
+    audience: "Single operators and small teams",
+    items: [
+      "Local, in-browser sealing for one operator",
+      "Offline verification with no account",
+      "Read the public commons ledger",
+      "Basic entry in the public registry",
+    ],
+    note: "Free, keyless, accountless — and permanent.",
+  },
+  {
+    status: "In design — not available yet",
+    title: "Team & agent workspace",
+    audience: "Organisations running AI agents",
+    items: [
+      "Deploy and manage multiple autonomous AI agent identities",
+      "Webhook pipelines for continuous sealing of model decisions",
+      "Exportable compliance vaults for audits",
+    ],
+    note: "No price published. No payment taken. Nothing to buy today.",
+  },
+  {
+    status: "In design — not available yet",
+    title: "Dedicated organisational node",
+    audience: "Regulated and multi-team institutions",
+    items: [
+      "Dedicated namespace on this platform",
+      "Custom governance charters with multi-signature controls",
+      "Unlimited team seats and high-frequency agent event pipelines",
+    ],
+    note: "No price published. No payment taken. Nothing to buy today.",
+  },
 ];
 
 function PricingPage() {
