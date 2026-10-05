@@ -304,6 +304,14 @@ export function SiteFooter() {
             <p className="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-gold">
               sovereign-ai.services
             </p>
+            <a
+              href="https://ai-governance-standard.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-block text-xs text-muted-foreground hover:text-gold"
+            >
+              Canonical protocol spec: ai-governance-standard.com →
+            </a>
           </div>
 
           {FOOTER_GROUPS.map((group) => (
