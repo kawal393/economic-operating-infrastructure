@@ -122,6 +122,44 @@ function PricingPage() {
         </p>
       </Section>
 
+      <Section>
+        <SectionHeading
+          eyebrow="Protocol vs platform"
+          title="Two sites, two different jobs"
+          description="APEX PSI is the open standard and its high-volume sealing service. Sovereign AI Services is the free workspace, registry and audit layer built on top of it."
+        />
+        <div className="mt-10 grid gap-4 lg:grid-cols-2">
+          <Panel className="p-7">
+            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-gold">
+              APEX PSI · ai-governance-standard.com
+            </p>
+            <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
+              <li>Canonical protocol specification and receipt format</li>
+              <li>High-volume API sealing for developers</li>
+              <li>Paid API plans are offered there, by that service, under its own terms</li>
+            </ul>
+            <a
+              href="https://ai-governance-standard.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-block text-sm text-gold hover:underline"
+            >
+              Visit the protocol site →
+            </a>
+          </Panel>
+          <Panel className="p-7">
+            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-gold">
+              Sovereign AI Services · this site
+            </p>
+            <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
+              <li>Workspaces, public registry and agent credentials</li>
+              <li>Ledger reading, verification and audit views</li>
+              <li>Free, keyless, no account — nothing is sold here</li>
+            </ul>
+          </Panel>
+        </div>
+      </Section>
+
       <Section className="bg-surface/30">
         <SectionHeading eyebrow="Questions" title="Frequently asked" />
         <div className="mt-10 grid gap-4 lg:grid-cols-2">
