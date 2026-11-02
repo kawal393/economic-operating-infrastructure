@@ -33,7 +33,7 @@ export const submitPilotRequest = createServerFn({ method: "POST" })
   .validator((input: unknown) => pilotInput.parse(input))
   .handler(async ({ data }) => {
     // Honeypot hit: silently accept so bots cannot probe the endpoint.
-    if (data.website) return { ok: true as const };
+    if (data.website) return { ok: true as const, seal: null };
 
     const parsed = pilotInput.parse(data);
     return createPilotRequest(

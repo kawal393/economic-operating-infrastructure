@@ -1,9 +1,93 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Check } from "lucide-react";
+import { Check, Download, ShieldCheck } from "lucide-react";
 import { PageHeader, Panel, Section, SectionHeading } from "@/components/primitives";
 import { ARTICLE3_STATUS, CUSTODY_FENCE } from "@/content/legal";
 import { submitPilotRequest } from "@/lib/pilot.functions";
+import type { PilotSealResult } from "@/lib/pilot-seal";
+import { downloadText } from "@/lib/apex-psi";
+
+const ANCHOR_LABEL: Record<PilotSealResult["anchor"], string> = {
+  confirmed: "Confirmed in a Bitcoin block",
+  anchored: "Submitted for Bitcoin anchoring — confirms within a few hours",
+  pending: "Bitcoin anchoring queued",
+};
+
+function PilotSealedPanel({ seal }: { seal: PilotSealResult | null }) {
+  if (!seal) {
+    return (
+      <div className="rounded-md border border-gold/25 bg-gold/5 p-5 text-sm">
+        <p className="font-medium text-foreground">Request received.</p>
+        <p className="mt-2 leading-relaxed text-muted-foreground">
+          Your interest is recorded privately. We will be in touch when pilot places open. In the
+          meantime, everything on this platform remains free to use.
+        </p>
+      </div>
+    );
+  }
+  return (
+    <div className="rounded-md border border-gold/25 bg-gold/5 p-5 text-sm">
+      <p className="flex items-center gap-2 font-medium text-foreground">
+        <ShieldCheck className="h-4 w-4 text-gold" aria-hidden="true" />
+        Request received — and sealed.
+      </p>
+      <p className="mt-2 leading-relaxed text-muted-foreground">
+        Your request is stored privately. A fingerprint of it has been signed and added to the
+        public ledger, so you can prove exactly what you sent and when. Your name, email and notes
+        are not public — only the fingerprint is.
+      </p>
+      <dl className="mt-4 grid gap-2 text-xs">
+        <div className="grid gap-1 sm:grid-cols-[8rem_1fr]">
+          <dt className="text-muted-foreground">Receipt</dt>
+          <dd className="break-all font-mono text-foreground">{seal.receiptId}</dd>
+        </div>
+        <div className="grid gap-1 sm:grid-cols-[8rem_1fr]">
+          <dt className="text-muted-foreground">Fingerprint</dt>
+          <dd className="break-all font-mono text-foreground">{seal.digest}</dd>
+        </div>
+        <div className="grid gap-1 sm:grid-cols-[8rem_1fr]">
+          <dt className="text-muted-foreground">Ledger position</dt>
+          <dd className="font-mono text-foreground">#{seal.sequence}</dd>
+        </div>
+        <div className="grid gap-1 sm:grid-cols-[8rem_1fr]">
+          <dt className="text-muted-foreground">Bitcoin</dt>
+          <dd className="text-foreground">{ANCHOR_LABEL[seal.anchor]}</dd>
+        </div>
+      </dl>
+      <div className="mt-5 flex flex-wrap gap-3">
+        <Link
+          to="/ledger"
+          search={{ digest: seal.digest }}
+          className="inline-flex items-center rounded-md bg-gold px-4 py-2 text-xs font-semibold text-primary-foreground hover:bg-gold/90"
+        >
+          View on the public ledger
+        </Link>
+        <button
+          type="button"
+          onClick={() => downloadText(`${seal.receiptId}.receipt.json`, seal.receipt)}
+          className="inline-flex items-center gap-1.5 rounded-md border border-border px-4 py-2 text-xs text-foreground hover:border-gold/50"
+        >
+          <Download className="h-3.5 w-3.5" aria-hidden="true" />
+          Download receipt
+        </button>
+        <button
+          type="button"
+          onClick={() => downloadText(`${seal.receiptId}.private-proof.json`, seal.opening)}
+          className="inline-flex items-center gap-1.5 rounded-md border border-border px-4 py-2 text-xs text-foreground hover:border-gold/50"
+        >
+          <Download className="h-3.5 w-3.5" aria-hidden="true" />
+          Download private proof
+        </button>
+      </div>
+      <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+        Keep the private proof safe: it contains your details and the secret that links them to the
+        public fingerprint. Hashing it with SHA-256 gives the fingerprint above. A receipt proves
+        this request existed at this time — it is not a contract, an offer or a commitment by either
+        side.
+      </p>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
@@ -110,6 +194,7 @@ function PilotRequestForm() {
   const [website, setWebsite] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [error, setError] = useState("");
+  const [seal, setSeal] = useState<PilotSealResult | null>(null);
 
   const inputClass =
     "w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:border-gold/50";
@@ -131,6 +216,7 @@ function PilotRequestForm() {
         },
       });
       if (result.ok) {
+        setSeal(result.seal);
         setState("done");
       } else {
         setError(result.error);
@@ -143,15 +229,7 @@ function PilotRequestForm() {
   }
 
   if (state === "done") {
-    return (
-      <div className="rounded-md border border-gold/25 bg-gold/5 p-5 text-sm">
-        <p className="font-medium text-foreground">Request received.</p>
-        <p className="mt-2 leading-relaxed text-muted-foreground">
-          Your interest is recorded privately. We will be in touch when pilot places open. In the
-          meantime, everything on this platform remains free to use.
-        </p>
-      </div>
-    );
+    return <PilotSealedPanel seal={seal} />;
   }
 
   return (

@@ -667,6 +667,9 @@ export type Database = {
           name: string
           notes: string | null
           organisation: string | null
+          receipt_id: string | null
+          seal_salt: string | null
+          sealed_at: string | null
           tier: string
         }
         Insert: {
@@ -677,6 +680,9 @@ export type Database = {
           name: string
           notes?: string | null
           organisation?: string | null
+          receipt_id?: string | null
+          seal_salt?: string | null
+          sealed_at?: string | null
           tier: string
         }
         Update: {
@@ -687,6 +693,9 @@ export type Database = {
           name?: string
           notes?: string | null
           organisation?: string | null
+          receipt_id?: string | null
+          seal_salt?: string | null
+          sealed_at?: string | null
           tier?: string
         }
         Relationships: []
