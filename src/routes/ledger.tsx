@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { z } from "zod";
 import { PageHeader, Panel, Section, StatBlock } from "@/components/primitives";
 import { getLedger, getLedgerStats, lookupDigest } from "@/lib/ledger.functions";
 
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/ledger")({
     ],
     links: [{ rel: "canonical", href: "/ledger" }],
   }),
+  validateSearch: z.object({ digest: z.string().optional() }),
   component: LedgerPage,
 });
 
@@ -49,11 +51,17 @@ function LedgerPage() {
     refetchInterval: 20_000,
   });
 
-  const [digest, setDigest] = useState("");
+  const search = Route.useSearch();
+  const [digest, setDigest] = useState(search.digest ?? "");
   const [found, setFound] = useState<null | Awaited<ReturnType<typeof lookupFn>>>(null);
   const [lookupError, setLookupError] = useState<string | null>(null);
 
-  async function runLookup() {
+  useEffect(() => {
+    if (search.digest) void runLookup(search.digest);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search.digest]);
+
+  async function runLookup(initial?: string) {
     setLookupError(null);
     setFound(null);
     const value = digest.trim().toLowerCase();
@@ -81,10 +89,7 @@ function LedgerPage() {
           <StatBlock label="Chain entries" value={String(stats.data?.entries ?? "—")} />
           <StatBlock label="Members" value={String(stats.data?.citizens ?? "—")} />
           <StatBlock label="Workspaces" value={String(stats.data?.nationStates ?? "—")} />
-          <StatBlock
-            label="Protocol fees"
-            value={stats.data ? `$${stats.data.feesUsd.toFixed(3)}` : "—"}
-          />
+          <StatBlock label="Charges" value="None" />
         </dl>
 
         <Panel className="mt-8">
@@ -113,7 +118,7 @@ function LedgerPage() {
             />
             <button
               type="button"
-              onClick={runLookup}
+              onClick={() => void runLookup()}
               className="rounded-md bg-gold px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
             >
               Look up
