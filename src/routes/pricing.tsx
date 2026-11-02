@@ -110,6 +110,7 @@ function PilotRequestForm() {
   const [website, setWebsite] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [error, setError] = useState("");
+  const [seal, setSeal] = useState<PilotSealResult | null>(null);
 
   const inputClass =
     "w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:border-gold/50";
@@ -131,6 +132,7 @@ function PilotRequestForm() {
         },
       });
       if (result.ok) {
+        setSeal(result.seal);
         setState("done");
       } else {
         setError(result.error);
@@ -143,15 +145,7 @@ function PilotRequestForm() {
   }
 
   if (state === "done") {
-    return (
-      <div className="rounded-md border border-gold/25 bg-gold/5 p-5 text-sm">
-        <p className="font-medium text-foreground">Request received.</p>
-        <p className="mt-2 leading-relaxed text-muted-foreground">
-          Your interest is recorded privately. We will be in touch when pilot places open. In the
-          meantime, everything on this platform remains free to use.
-        </p>
-      </div>
-    );
+    return <PilotSealedPanel seal={seal} />;
   }
 
   return (
