@@ -1,5 +1,8 @@
 import { consumeRateLimit, inspect, logSecurityEvent, sanitiseText } from "./security.server";
 import { sealPilotRequest } from "./pilot-seal.server";
+import type { PilotSealResult } from "./pilot-seal";
+
+export type { PilotSealResult };
 
 export type PilotRequest = {
   email: string;
@@ -7,17 +10,6 @@ export type PilotRequest = {
   organisation: string | null;
   tier: "team" | "enterprise" | "notify";
   notes: string | null;
-};
-
-export type PilotSealResult = {
-  receiptId: string;
-  digest: string;
-  sequence: number;
-  anchor: "anchored" | "confirmed" | "pending";
-  /** Public receipt, pretty-printed JSON. */
-  receipt: string;
-  /** Private opening document (canonical JSON) — only for the submitter. */
-  opening: string;
 };
 
 export type PilotResult =

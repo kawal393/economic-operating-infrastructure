@@ -4,7 +4,7 @@ import { Check, Download, ShieldCheck } from "lucide-react";
 import { PageHeader, Panel, Section, SectionHeading } from "@/components/primitives";
 import { ARTICLE3_STATUS, CUSTODY_FENCE } from "@/content/legal";
 import { submitPilotRequest } from "@/lib/pilot.functions";
-import type { PilotSealResult } from "@/lib/pilot.server";
+import type { PilotSealResult } from "@/lib/pilot-seal";
 import { downloadText } from "@/lib/apex-psi";
 
 const ANCHOR_LABEL: Record<PilotSealResult["anchor"], string> = {

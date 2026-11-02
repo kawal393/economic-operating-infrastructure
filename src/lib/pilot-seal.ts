@@ -56,6 +56,17 @@ export function digestCanonical(canonical: string): string {
   return toHex(sha256(new TextEncoder().encode(canonical)));
 }
 
+export type PilotSealResult = {
+  receiptId: string;
+  digest: string;
+  sequence: number;
+  anchor: "anchored" | "confirmed" | "pending";
+  /** Public receipt, pretty-printed JSON. */
+  receipt: string;
+  /** Private opening document (canonical JSON) — only for the submitter. */
+  opening: string;
+};
+
 /** 32 random bytes, hex encoded. */
 export function randomSalt(): string {
   const bytes = new Uint8Array(32);
