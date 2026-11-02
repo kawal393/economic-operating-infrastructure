@@ -51,6 +51,7 @@ const SECTIONS: { heading: string; body: string[] }[] = [
     heading: "4. Public and permanent records",
     body: [
       "Anything you publish to the public record layer (digests, receipt identifiers, registry profiles, attestations) is public by design and is anchored to Bitcoin. Anchored records cannot be edited or erased by us or by you. Do not publish personal information you may later need withdrawn.",
+      "Pilot and waitlist requests are stored privately. To give you proof of what you sent, we also publish a SHA-256 fingerprint of your request mixed with a random secret. Only the fingerprint is public — never your name, email or notes — and without the secret it cannot be traced back to you. If you ask us to delete your request, we delete the stored details and the secret, after which the public fingerprint links to nothing.",
     ],
   },
   {
