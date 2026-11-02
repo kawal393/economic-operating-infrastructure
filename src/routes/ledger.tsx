@@ -64,7 +64,7 @@ function LedgerPage() {
   async function runLookup(initial?: string) {
     setLookupError(null);
     setFound(null);
-    const value = digest.trim().toLowerCase();
+    const value = (initial ?? digest).trim().toLowerCase();
     if (!/^[0-9a-f]{64}$/.test(value)) {
       setLookupError("Paste a full 64-character SHA-256 digest.");
       return;

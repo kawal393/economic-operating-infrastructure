@@ -56,8 +56,8 @@ function PilotSealedPanel({ seal }: { seal: PilotSealResult | null }) {
       </dl>
       <div className="mt-5 flex flex-wrap gap-3">
         <Link
-          to="/r/$receiptId"
-          params={{ receiptId: seal.receiptId }}
+          to="/ledger"
+          search={{ digest: seal.digest }}
           className="inline-flex items-center rounded-md bg-gold px-4 py-2 text-xs font-semibold text-primary-foreground hover:bg-gold/90"
         >
           View on the public ledger
